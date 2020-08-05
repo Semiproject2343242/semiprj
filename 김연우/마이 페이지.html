@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style>
+#head {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#logo {
+	float: right;
+}
+
+.loginbutton {
+	float: right;
+	margin-top: 10px;
+	border-top-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+	border-top-right-radius: 12px;
+	border-bottom-left-radius: 12px;
+}
+
+#loginbutton1 {
+	border: none;
+	padding: 10px;
+}
+
+#loginbutton2 {
+	padding: 10px;
+	background-color: gray;
+	border: none;
+}
+
+input[id^=quickmenubtn] {
+	margin-bottom: -8px;
+	margin-right: -6px;
+	border: 1px;
+	padding: 20px;
+	font-family: "굴림체";
+	font-weight: bold;
+}
+
+footer {
+	width: 100%;
+	height: 100px;
+	padding-top: 3%;
+	background-color: skyblue;
+}
+</style>
+</head>
+<body>
+
+	<header>
+		<p id="head">
+			<font size="7">정</font>부 지원금<font size="7">바</font>로 지금
+		</p>
+		<img id="logo" src="../media/logo.PNG" width="90px" height="90px">
+
+		<form class="loginbutton">
+			<input class="loginbutton" id="loginbutton2" type="button"
+				name="my_menu" value="마이페이지"> <input class="loginbutton"
+				id="loginbutton1" type="button" name="login" value="로그인 ">
+
+		</form>
+
+		<br> <br> <br>
+
+		<form class="quickmenubtn">
+			<input id="quickmenubtn1" type="button" name="" value="공지사항">
+			<input id="quickmenubtn2" type="button" name="" value="지원정책">
+			<input id="quickmenubtn3" type="button" name="" value="자유게시판">
+			<input id="quickmenubtn4" type="button" name="" value="Q / A">
+		</form>
+
+		<hr>
+
+	</header>
+	
+	<h2>마이페이지</h2>
+	<hr>
+	
+	<ul>
+		<li><a href=#>회원정보</a></li>
+		<li><a href=#>나의 게시글</a>
+			<ul>
+				<li><a href=#>정보 게시판</a></li>
+				<li><a href=#>자유 게시판</a></li>
+				<li><a href=#>Q/A</a></li>
+			</ul>
+		<li><a href=#>회원 탈퇴</a></li>
+	</ul>
+	
+	<h1>내가 쓴 글</h1>
+	<hr>
+	<table>
+		<tr>
+			<td>정보게시판</td>
+			<td>자유게시판</td>
+		</tr>
+		<tr>
+			<td>
+				<table border="1">
+					<tr>
+						<th>No.</th>
+						<th>제목</th>
+						<th>날짜</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>최신글1</td>
+						<td>2020.07.30</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>최신글2</td>
+						<td>2020.07.29</td>	
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>최신글3</td>
+						<td>2020.07.29</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table border="1">
+					<tr>
+						<th>No.</th>
+						<th>제목</th>
+						<th>날짜</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>제목1</td>
+						<td>2020.07.30</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>제목2</td>
+						<td>2020.07.29</td>	
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>제목3</td>
+						<td>2020.07.29</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+	<footer>
+		<p align=center>
+			Copyrightⓒ2020 Flower than java Project All Rights Reserved. <br>주소
+			: 서울시 강남구 논현동 99-9번지 政바
+	</footer>
+</body>
+</html>
+
+
