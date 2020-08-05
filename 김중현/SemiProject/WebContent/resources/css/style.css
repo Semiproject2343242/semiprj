@@ -1,10 +1,9 @@
 @charset "utf-8";
 
-    header{
-        margin-left: 5%; 
-        margin-right: 5%; 
-        margin-top: 3%;
-        background-color:snow;
+    /* header{
+        margin-left: 10%; 
+        margin-right: 10%; 
+        margin-top: 2%;
     }
 
     #headTitle{display: inline-block; font-weight:bold;}
@@ -18,23 +17,14 @@
         padding:10px;
     }
     #memberBtnMyPage{background-color: silver;}
-    #memberBtnLogin{background-color: gray;}
+    #memberBtnLogin{background-color: gray;} */
 
-    input[id ^= quickmenubtn]{
-        margin-bottom:-8px;
-        margin-right:-6px;
-        border:1px; 
-        padding:20px;
-        font-family:"굴림체";
-        font-weight:bold;
-    }
 
     footer{
-    width:100%;
+    width:90%;
     height:80px;
     padding-top:3%;
+    margin-left: 5%; 
+    margin-right: 5%; 
     background-color:snow;
-    }
-    .quickmenubtn input:hover{
-        background: gray;
     }

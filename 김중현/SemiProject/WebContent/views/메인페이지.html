@@ -3,6 +3,30 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 <style>
+
+    header{
+        margin-top: 2%;
+    }
+
+    #headTitle{display: inline-block; font-weight:bold; margin-left: 820px;}
+
+    #logo{float:right; margin-right: 300px;}
+
+    .memberBtn{
+        float:right;
+        border-radius: 12px;
+        border: none; 
+        padding:10px;
+    }
+    #memberBtnMyPage{background-color: silver;}
+    #memberBtnLogin{background-color: gray;}
+
+    #navul {  list-style-type: none; margin: 0; padding-left: 300px; overflow: hidden; }
+    #navli { float: left;  border-right: solid 1px whitesmoke;}
+    #nava { display: block; color: black; padding: 10px; text-decoration: none;
+    text-align: center; font-weight: bold; }
+    #nava:hover { background-color: silver; color: white; }
+
     #mySerach{
         margin-left: 20%;
         width:60%;
@@ -17,22 +41,24 @@
 </style>
 </head>
 <body>
-    <header style="margin-left: 5%; margin-right: 5%; margin-top: 3%;">
+    <header>
         <p id="headTitle"><font size ="7">정</font>부 지원금<font size ="7">바</font>로 지금</p>
-        <img id = "logo" src="../Media/logo.png" width = "90px" height = "90px">
+        <img id = "logo" src="../Media/logo.png" width = "80px" height = "80px">
         <form class="memberBtn">
         <input class="memberBtn" id="memberBtnMyPage" type="button" name="myPage" value="마이페이지">
         <input class="memberBtn" id="memberBtnLogin" type="button" name="logIn" value="로그인 ">
         </form>
         <br><br>
-        <form class="quickmenubtn">
-            <input id="quickmenubtn1" type="button" class="quickmenubtn" value="공지사항">
-            <input id="quickmenubtn2" type="button" class="quickmenubtn" value="지원정책">
-            <input id="quickmenubtn3" type="button" class="quickmenubtn" value="자유게시판">
-            <input id="quickmenubtn4" type="button" class="quickmenubtn" value="Q / A">
-        </form>
+        <nav>
+            <ul id="navul">
+                <li id="navli"><a href="#" id="nava">공지사항</a></li>
+                <li id="navli"><a href="#" id="nava">지원정책</a></li>
+                <li id="navli"><a href="#" id="nava">자유게시판</a></li>
+                <li id="navli"><a href="#" id="nava">"Q / A</a></li>
+            </ul>
+        </nav>
         <hr>
-        </header>
+    </header>
 <sectionclass='content'>
      <p align="middle"><video id="video" src = "../Media/영상.mp4" controls width="800px" height="600px"></video></p> 
     <!-- <div>
@@ -145,7 +171,7 @@
     <hr>
 </section>
 <footer>
-    <palign=center>Copyrightⓒ2020 Flower than java Project All Rights Reserved.
+    <p align=center>Copyrightⓒ2020 Flower than java Project All Rights Reserved.
     </p>
 </footer>
 
