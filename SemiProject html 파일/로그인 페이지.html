@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style>
+#head {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#logo {
+	float: right;
+}
+
+.loginbutton {
+	float: right;
+	margin-top: 10px;
+	border-radius: 12px;
+}
+
+#loginbutton1 {
+	border: none;
+	background-color: gray;
+	padding: 10px;
+}
+
+#loginbutton2 {
+	padding: 10px;
+	border: none;
+}
+
+#loginbutton3 {
+	padding: 10px;
+	background-color: gray;
+	border: none;
+	border-radius: 5px;
+}
+
+#ptag>a{
+	text-decoration: none;
+}
+
+input[id^=quickmenubtn] {
+	margin-bottom: -8px;
+	margin-right: -6px;
+	border: 1px;
+	padding: 20px;
+	font-family: "굴림체";
+	font-weight: bold;
+}
+
+footer {
+	width: 100%;
+	height: 100px;
+	padding-top: 3%;
+	background-color: skyblue;
+}
+</style>
+</head>
+<body>
+
+	<header>
+		<p id="head">
+			<font size="7">정</font>부 지원금<font size="7">바</font>로 지금
+		</p>
+		<img id="logo" src="../media/logo.PNG" width="90px" height="90px">
+
+		<form class="loginbutton">
+			<input class="loginbutton" id="loginbutton2" type="button"
+				name="my_menu" value="마이페이지"> <input class="loginbutton"
+				id="loginbutton1" type="button" name="login" value="로그인 ">
+
+		</form>
+
+		<br> <br> <br>
+
+		<form class="quickmenubtn">
+			<input id="quickmenubtn1" type="button" name="" value="공지사항">
+			<input id="quickmenubtn2" type="button" name="" value="지원정책">
+			<input id="quickmenubtn3" type="button" name="" value="자유게시판">
+			<input id="quickmenubtn4" type="button" name="" value="Q / A">
+		</form>
+
+		<hr>
+
+	</header>
+
+	<form>
+		<div>
+			<h1 align="center">로그인</h1>
+			<table align="center">
+				<tr>
+					<td><input type="text" id="userId" placeholder="아이디를 입력해주세요"></td>
+					<td rowspan="2"><button type="submit" id=loginButton3>로그인</button></td>
+				</tr>
+				<tr>
+					<td><input type="password" id="pw" placeholder="비밀번호를 입력해주세요"></td>
+				</tr>
+			</table>
+			<p align="center" id="ptag">
+				<a href=#>아이디 찾기</a> | <a href=#>비밀번호 찾기</a> | <a href=#>회원가입 찾기</a>
+			</p>
+		</div>
+	</form>
+
+	<footer>
+		<p align=center>
+			Copyrightⓒ2020 Flower than java Project All Rights Reserved. <br>주소
+			: 서울시 강남구 논현동 99-9번지 政바
+	</footer>
+</body>
+</html>
+
+
