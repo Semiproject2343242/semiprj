@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+    /* header{
+        margin-left: 10%; 
+        margin-right: 10%; 
+        margin-top: 2%;
+    }
+
+    #headTitle{display: inline-block; font-weight:bold;}
+
+    #logo{float:right;}
+
+    .memberBtn{
+        float:right;
+        border-radius: 12px;
+        border: none; 
+        padding:10px;
+    }
+    #memberBtnMyPage{background-color: silver;}
+    #memberBtnLogin{background-color: gray;} */
+
+
+    footer{
+    width:90%;
+    height:80px;
+    padding-top:3%;
+    margin-left: 5%; 
+    margin-right: 5%; 
+    background-color:snow;
+    }
