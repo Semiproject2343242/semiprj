@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+<style>
+
+    header{
+        margin-top: 2%;
+    }
+
+    #headTitle{display: inline-block; font-weight:bold; margin-left: 820px;}
+
+    #logo{float:right; margin-right: 300px;}
+
+    .memberBtn{
+        float:right;
+        border-radius: 12px;
+        border: none; 
+        padding:10px;
+    }
+    #memberBtnMyPage{background-color: silver;}
+    #memberBtnLogin{background-color: gray;}
+
+    #navul {  list-style-type: none; margin: 0; padding-left: 300px; overflow: hidden; }
+    #navli { float: left;  border-right: solid 1px whitesmoke;}
+    #nava { display: block; color: black; padding: 10px; text-decoration: none;
+    text-align: center; font-weight: bold; }
+    #nava:hover { background-color: silver; color: white; }
+
+    #mySerach{
+        margin-left: 20%;
+        width:60%;
+        height:80px;
+        background-color:gray;
+    }
+    .mySerach{
+        width:100px;
+        height:30px;
+        margin-left: 50px;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <p id="headTitle"><font size ="7">정</font>부 지원금<font size ="7">바</font>로 지금</p>
+        <img id = "logo" src="../Media/logo.png" width = "80px" height = "80px">
+        <form class="memberBtn">
+        <input class="memberBtn" id="memberBtnMyPage" type="button" name="myPage" value="마이페이지">
+        <input class="memberBtn" id="memberBtnLogin" type="button" name="logIn" value="로그인 ">
+        </form>
+        <br><br>
+        <nav>
+            <ul id="navul">
+                <li id="navli"><a href="#" id="nava">공지사항</a></li>
+                <li id="navli"><a href="#" id="nava">지원정책</a></li>
+                <li id="navli"><a href="#" id="nava">자유게시판</a></li>
+                <li id="navli"><a href="#" id="nava">"Q / A</a></li>
+            </ul>
+        </nav>
+        <hr>
+    </header>
+<sectionclass='content'>
+     <p align="middle"><video id="video" src = "../Media/영상.mp4" controls width="800px" height="600px"></video></p> 
+    <!-- <div>
+        <h3 class="title" id="notice" style="margin-left: 500px">공지사항</h3>
+        <h3 class="title" id="top3" style="margin-left: 700px">top3</h3>
+    </div> -->
+    <br><br><br>
+    <div id="mainTable" align="middle">
+        <table>
+            <tr>
+               <td>정보게시판</td>
+               <td>자유게시판</td>
+            </tr>
+            <tr>
+               <td>
+                  <table border="1">
+                     <tr>
+                        <th>No.</th>
+                        <th>제목</th>
+                        <th>날짜</th>
+                     </tr>
+                     <tr>
+                        <td>1</td>
+                        <td>최신글1</td>
+                        <td>2020.07.30</td>
+                     </tr>
+                     <tr>
+                        <td>2</td>
+                        <td>최신글2</td>
+                        <td>2020.07.29</td>   
+                     </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>최신글3</td>
+                        <td>2020.07.29</td>
+                     </tr>
+                  </table>
+               </td>
+               <td>
+                  <table border="1">
+                     <tr>
+                        <th>No.</th>
+                        <th>제목</th>
+                        <th>날짜</th>
+                     </tr>
+                     <tr>
+                        <td>1</td>
+                        <td>제목1</td>
+                        <td>2020.07.30</td>
+                     </tr>
+                     <tr>
+                        <td>2</td>
+                        <td>제목2</td>
+                        <td>2020.07.29</td>   
+                     </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>제목3</td>
+                        <td>2020.07.29</td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+         </table>
+    </div>
+    <div id="mySerach" align = "middle">
+        <h3><p align = "left">나를 위한 지원금 찾기</p></h3>   
+        <div align ="left">
+           <span  class="mySerach"> 나이 <input type="number" min=1 width=""></span>
+        <select id = "gender" class="mySerach" > 
+            <option value="1">남</option>
+            <option value="2">여</option>
+        </select> 
+        <select id = "location" class="mySerach">
+            <option value="1">가평군</option>
+            <option value="2">고양시</option>
+            <option value="3">과천시</option>
+            <option value="4">광명시</option>
+            <option value="5">광주시</option>
+            <option value="6">구리시</option>
+            <option value="7">군포시</option>
+            <option value="8">김포시</option>
+            <option value="9">남양주시</option>
+            <option value="10">동두천시</option>
+            <option value="11">부천시</option>
+            <option value="12">성남시</option>
+            <option value="13">수원시</option>
+            <option value="14">시흥시</option>
+            <option value="15">안산시</option>
+            <option value="16">안성시</option>
+            <option value="17">안양시</option>
+            <option value="18">양주시</option>
+            <option value="19">양평군</option>
+            <option value="20">여주시</option>
+            <option value="21">연천군</option>
+            <option value="22">오산시</option>
+            <option value="23">용인시</option>
+            <option value="24">의왕시</option>
+            <option value="25">의정부시</option>
+            <option value="26">이천시</option>
+            <option value="27">파주시</option>
+            <option value="28">평택시</option>
+            <option value="29">포천시</option>
+            <option value="30">하남시</option>
+            <option value="31">화성시</option>
+        </select>
+        <button onclick="search();">검색</button>
+        </div>   
+    </div>
+    <hr>
+</section>
+<footer>
+    <p align=center>Copyrightⓒ2020 Flower than java Project All Rights Reserved.
+    </p>
+</footer>
+
+</header>
+</body>
+</html>
