@@ -3,15 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/side.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/contents.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
 <!-- <script src="../resources/js/slides.js"></script> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>My Page</title>
 <style>
-
-
-#ptag>a{
-	text-decoration: none;
-}
-
 
 </style>
 </head>
@@ -41,27 +39,29 @@
 		</nav>
 	 </header> 
 	 <hr>
+
+	 <div id="nav"></div>
+	 <div id="side" >
+		 <h2 ><a href="#">마이페이지</h2></a>
+		 <hr>
+		 <div> <a href="#"><h2>나의게시물</h2></a>
+		 
+		 <dl>
+			 <dt><a href="#"><h3>정보게시판</h3></a></dt>
+			 <dt><a href="#"><h3>자유게시판</h3></a></dt>
+			 <dt><a href="#"><h3>Q / A</h3></a></dt>
+		 </dl>
+		 </div>
+		 <a href="#"><h2>회원탈퇴</h2></a>
+	 </div>
 	
-	<section id=loginSection>
-		<form>
-			<div>
-				<h1 align="center">로그인</h1>
-				<table align="center">
-					<tr>
-						<td><input type="text" id="userId" placeholder="아이디를 입력해주세요"></td>
-						<td rowspan="2"><button type="submit" id=loginButton3>로그인</button></td>
-					</tr>
-					<tr>
-						<td><input type="password" id="pw" placeholder="비밀번호를 입력해주세요"></td>
-					</tr>
-				</table>
-				<p align="center" id="ptag">
-					<a href=#>아이디 찾기</a> | <a href=#>비밀번호 찾기</a> | <a href=#>회원가입 찾기</a>
-				</p>
-			</div>
-		</form>
-	</section>
-	
+	 
+	 <section>
+		<!-- 컨텐츠 입력하는 곳!! -->
+	 </section>
+
+
+
 	<footer>
 		<p>
 		   Copyrightⓒ2020 Flower than java Project All Rights Reserved.
