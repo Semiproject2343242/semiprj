@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Test</title>
-<style>
-
-    #navul {  list-style-type: none; margin: 0; padding-left: 100px; overflow: hidden; }
-
-    #navli { float: left; background-color: lightgray; border-right: solid 1px white;}
-
-    #nava { display: block; color: black; padding: 20px; text-decoration: none;
-
-        text-align: center; font-weight: bold; }
-
-    #nava:hover { background-color: silver; color: white; }
-
-/* li:last-child { border-right: none; } */
-
-</style>
+    <meta charset="UTF-8">
+    <title>Layout01</title>
+    <style>
+        body {background: #c8e6c9;}
+        #wrap {width: 1000px; height: 900px; margin: 0 auto; color: #fff; font-size: 40px; text-align: center;}
+        #header {width: 1000px; height: 100px; line-height: 100px; background: #2e7d32;}
+        #nav {width: 1000px; height: 100px; line-height: 100px; background: #388e3c; }
+        #side {float: left; width: 300px; height: 600px; line-height: 600px; background: #43a047;}
+        #contents {float: left; width: 700px; height: 600px; line-height: 600px; background: #4caf50;}
+        #footer {float: left; width: 1000px; height: 100px; line-height: 100px; background: #66bb6a;}
+    </style>
 </head>
 <body>
-    <nav>
-        <ul id="navul">
-            <li id="navli"><a href="#" id="nava">공지사항</a></li>
-            <li id="navli"><a href="#" id="nava">지원정책</a></li>
-            <li id="navli"><a href="#" id="nava">자유게시판</a></li>
-            <li id="navli"><a href="#" id="nava">"Q / A</a></li>
-        </ul>
-    </nav>
+    <div id="wrap">
+        <div id="header">HEADER</div>
+        <div id="nav">NAV</div>
+        <div id="side">SIDE</div>
+        <div id="contents">CONTENTS</div>
+        <div id="footer">FOOTER</div>
+    </div>
 </body>
-</html> 
-
-
-
-
-
+</html>
