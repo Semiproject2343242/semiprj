@@ -1,0 +1,4 @@
+127.0.0.1 - - [10/Aug/2020:13:37:28 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [10/Aug/2020:13:37:29 +0900] "GET /JungBa_Semiproject/views/%EA%B2%8C%EC%8B%9C%ED%8C%90.jsp HTTP/1.1" 200 4700
+0:0:0:0:0:0:0:1 - - [10/Aug/2020:13:37:29 +0900] "GET /JungBa_Semiproject/media/logo.PNG HTTP/1.1" 404 848
+0:0:0:0:0:0:0:1 - - [10/Aug/2020:13:37:30 +0900] "GET /favicon.ico HTTP/1.1" 404 818
