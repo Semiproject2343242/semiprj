@@ -1,14 +1,26 @@
-body {
+html, body{
+  margin: 0px;
+  height: 100%;
+}
+
+section {
   margin: 0 auto;
-  width: 100%;
-  font-family: "바탕";
-  /* background-color: #fce4ec; */
+  width: 80%;
+  font-family: "fantasy";
+  min-height: 100%;
+  position: relative;
+}
+aside{
+  min-height: 100%;
+}
+#main_section{
+  min-height: 100%;
 }
 header {
-  background-color: white;
   top: 0;
   left: 0;
   right: 0;
+  height: 20%;
   /* background-color: #2979ff; */
 }
 a {
@@ -38,7 +50,9 @@ a {
   border-radius: 4px;
   color: black;
 }
-
+.lagefont{
+  font-size: 60px;
+}
 .navbar {
   display: flex;
   width: 80%;
@@ -56,8 +70,9 @@ a {
 .navbar_menu {
   display: flex;
   list-style: none;
-  padding-left: 0px;
+  padding : 40px 0px ;
   padding-right: 150px;
+  
 }
 
 .navbar_menu li {
@@ -112,8 +127,9 @@ hr {
 }
 
 footer {
+  padding-top: 10px;
   width: 100%;
-  height: 30px;
+  height: 3%;
   padding-top: 3%;
   background-color: rgb(15, 76, 130);
 }
