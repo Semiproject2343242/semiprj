@@ -1,21 +1,9 @@
 @charset "utf-8";
-
-
-/* #wrap {width: 1300px; border : 1px;  height: 900px; margin: 0 auto; color: #7c3b3b; font-size: 40px; text-align: center;} */
-/* #wrap {width: 1300px;  border : 1px; height: 900px; text-align : center;} */
-/* header {width: 1300px; height: 70px; line-height: 100px; background: #ffffff;} */
-/* #navbar {width: 1300px; height: 100px; line-height: 100px; background: #e04f4f; } */
-
-
-
-
 body {
-  margin: 0;
+  margin: 0 auto;
   width: 1300px;
   text-align: center;
   /* background-color: #fce4ec; */
-  margin:0 auto;
-  background: #ffffff;
 }
 a {
   text-decoration: none;
@@ -131,9 +119,8 @@ footer {
   width: 100%;
   height: auto;
   padding-top: 3%;
-  background-color: #bd4545;
-
+  background-color: #ffffff;
 }
 
-
+/* //////////////////////////////////////////////////////////여기까지가 헤더 푸터///////////////////////////////////////////////////////////////////// */
 
