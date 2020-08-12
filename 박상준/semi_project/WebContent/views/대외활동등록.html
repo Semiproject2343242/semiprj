@@ -5,9 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-    <script src="../resources/js/slides.js"></script>
+   <style>
+       form{width:1000px; margin: 0 auto;}
+       #mainbox>div{margin :0 auto;}
+       .hrwid{width:1000px; margin : 0 auto; color:skyblue;}
+       #textline{font-size: large;}
+       /* .divmain {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #000;
+       }
+        .divleft {
+            width: 50%;
+            float: left;
+            box-sizing: border-box;
+            background: #ff0;
+        }
+        .divright {
+            width: 50%;
+            float: right;
+            box-sizing: border-box;
+            background: #0ff;
+        } */
+        .container {
+            width: 800px;
+         margin : 0 auto;
+    }
+
+.infomation {
+  float: left;
+  width: 90px;
+  margin-right: 10px;
+  border-right: 0.2mm solid black;
+
+}
+.infomation-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+.infomation-item {
+  margin: 10px 0; /* 카테고리 대상별 지역별 간격 */
+}
+.infomation-link {
+  display: block;
+  text-decoration: none;
+  padding: 4px 10px;
+  color: black;
+}
+
+.infomation-link:hover {
+  background: #5457de;
+}
+
+.information-answer {
+  float: left;
+  width: 150px;
+  margin-right: 50px;
+}
+
+
+
+.first {
+    border: 1px solid rgb(107, 107, 107);
+    width:100px;
+    box-sizing: border-box;
+    margin-right:10px;
    
-   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+}
+
+.select{width:200px;height:30px; margin-top: 22px; }
+
+.table4{margin-left: 0px;}
+   </style>
 </head>
 <body>
 
@@ -27,11 +97,13 @@
                       <a href="#"><font size ="7">정</font>부지원금<font size ="7">바</font>로 지금</a>
                    </div>
                    <div class="navbar_menu">
+                      
                       <li><a href="#">공지사항</a></li>
                       <li><a href="#">지원정책</a></li>
                       <li><a href="#">커뮤니티</a></li>
                       <li><a href="#">대외활동</a></li>
                       <li><a href="#">Q / A</a></li>
+                      
                    </div>
                    <div class="navbar_logo">
                       <img id="logo" src="../Media/logo.png" width = "80px" height = "80px">
@@ -40,22 +112,62 @@
              </header> 
              <hr>
             </div>
+    <section>
+        <div id=mainbox>
+            <div>
+                <div>기관명 : <input type ="text" name = "기관명" class = "textline"></div>
+                <div>홈페이지 : <input type ="text" name = "홈페이지" class = "textline"></div>
+                <div>
+                    <span>담당자 : <input type ="text" name = "담당자"  class = "textline" ></span>
+                    <span>직위 : <input type ="text" name = "직위"  class = "textline" ></span>
+                </div>
+                <div>
+                    <span>연락처 : <input type ="tel" name = "연락처"  class = "textline" ></span>
+                    <span>이메일 : <input type ="text" name = "이메일"  class = "textline" ></span>
+                </div>
+                
+                <hr class = "hrwid">
+
+                <div class="container">
+                    <div class="infomation">
+                      <ul class="infomation-list">
+                        <li class="infomation-item"><a href="" class="infomation-link">카테고리:</a></li>
+                        <li class="infomation-item"><a href="" class="infomation-link">대상별:</a></li>
+                        <li class="infomation-item"><a href="" class="infomation-link">지역별:</a></li><br><br><br><br><br><br><br>
+                        
+                        
+                      </ul>
+                    </div>
+                    <!-- //nav -->
+                  </div>
 
 
-            
-            <h2>대외활동 등록</h2>
-            <p align-text = left;><h2>등록기관 정보</h2></p>
-            <hr length = 500px;>
-
-
-
-
-
-
-
-
-
-
+                <div class="information-answer">
+                  <div> 
+                  <select class="select">
+                    <option>공모전</option>
+                    <option>채용박람회/취업설명회</option>
+                    <option>경진대회</option>
+                    <option>봉사활동</option>
+                    <option>서포터즈</option>
+                    <option>관람/전시/체험</option>
+                 </select>
+                  </div>
+                  <div class="parent">
+                    <table class="table4">
+                      <th>
+                        <td><button class="first">청년<br>(18~34세) </button></td>
+                        <td><button class="first">중년<br>(35~49세) </button></td>
+                        <td><button class="first">장년<br>(50~64세) </button></td>
+                        <td><button class="first">어르신<br>(65세 이상) </button></td>
+                      </th>
+                    </table>
+                  </div>
+                </div>
+                <hr class = "hrwid">
+            </div>
+        </div>
+    </section>
         <div id="footer">
             <div id="footer">
                 <p align=center>Copyrightⓒ2020 Flower than java Project All Rights Reserved.<br>
