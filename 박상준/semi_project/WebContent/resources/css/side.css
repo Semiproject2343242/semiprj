@@ -1,5 +1,1 @@
-aside {float: left; 
-        display: block;
-        width: 200px;
-        line-height:40px; 
-    }
+#side {float: left; width: 200px; line-height:40px; height: 800px;  background: #ffffff;}
