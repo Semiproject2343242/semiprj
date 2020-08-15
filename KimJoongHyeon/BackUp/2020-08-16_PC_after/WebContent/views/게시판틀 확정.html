@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Layout01</title>
+    <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/contents.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/side.css">
+    <script src="../resources/js/slides.js"></script>
+   
+   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<style>
+    #b-main{background-color:rgb(15, 76, 130); color:white;}
+    tbody{background-color:rgb(228, 228, 228)}
+
+</style>
+<body>
+    <div id="wrap" >
+        <div id="header">
+
+            <header>
+                <div class="header_top">
+                   <div class="top">
+                      <li><a href="#" class="top_btn"><b>마이페이지</b></a></li>
+                      <li><a href="#" class="top_btn"><b>로그인</b></a></li>
+                   </div>
+                </div>
+                <nav class="navbar">
+                   <div class="navbar_title">
+                      <a href="#"><font size ="7">정</font>부지원금<font size ="7">바</font>로 지금</a>
+                   </div>
+                   <div class="navbar_menu">
+                      <li><a href="#">공지사항</a></li>
+                      <li><a href="#">지원정책</a></li>
+                      <li><a href="#">커뮤니티</a></li>
+                      <li><a href="#">대외활동</a></li>
+                      <li><a href="#">Q / A</a></li>
+                   </div>
+                   <div class="navbar_logo">
+                      <img id="logo" src="../Media/logo.png" width = "80px" height = "80px">
+                   </div>
+                </nav>
+             </header> 
+             <hr>
+
+
+
+        </div>
+
+        <div id="side" >
+            <h2 ><a href="#">마이페이지</h2></a>
+            <hr>
+            <div> <a href="#"><h2>나의게시물</h2></a>
+            
+            <dl>
+                <dt><a href="#"><h3>정보게시판</h3></a></dt>
+                <dt><a href="#"><h3>자유게시판</h3></a></dt>
+                <dt><a href="#"><h3>Q / A</h3></a></dt>
+            </dl>
+            </div>
+            <a href="#"><h2>회원탈퇴</h2></a>
+            
+
+        </div>
+        <div id="contents">
+            <br>
+            <h2>정보게시판</h2>
+            
+
+            
+
+    <table class="table table-striped"  width="800px" align="center">
+    
+    <caption>
+    <div align = "right">
+    <select>
+        <option value= "5pc" >5개씩 보기</option>
+        <option value= "10pc">10개씩 보기</option>
+    </select>
+    <button>글쓰기</button>
+    </div>
+    </caption>
+    
+        <thead>
+        <tr id = "b-main">
+            <th width= "30px">번호</th>
+            <th width= "400px">제목</th>
+            <th width= "50px">작성자</th>
+            <th width= "100px">날짜</th>
+            <th width= "40px">조회</th>
+            <th width= "40px">추천</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href>나자바바라</a></td>
+            <td>구준표</td>
+            <td>2020.08.02</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href>메에로옹</a></td>
+            <td>박상준</td>
+            <td>2020.08.02</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><a href>이리오너르</a></td>
+            <td>김준표</td>
+            <td>2020.08.02</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><a href>냠냠냠냠</a></td>
+            <td>백지후</td>
+            <td>2020.08.02</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><a href>옹뇨요</a></td>
+            <td>구준표</td>
+            <td>2020.08.02</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        </tbody>
+    </table>
+    <br>  
+    
+    <ul align="center">
+    <div class = "pagination">
+        <a href="#" title = "이전" class="pre"></a>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#" title = "다음" class="next"></a>
+    </div>
+    </ul>
+    </caption>
+    
+        </div>
+        <div id="footer">
+            <div id="footer">
+                <p align=center>Copyrightⓒ2020 Flower than java Project All Rights Reserved.<br>
+                    주소 : 서울시 강남구 논현동 99-9번지 政바
+                </p>
+                    
+            </div>
+        </div>
+    </div>
+</body>
+</html>
