@@ -24,12 +24,13 @@
         #text3{float: left;text-align: left; height:auto; width:70%; margin-left:1%; margin-top: 1%; font-size:20px} 
         #text4{float: right;text-align: right; height:auto; font-size:18px}
         #p1{font-size:15px}
-        #buttons{float: right; text-align: right; margin-right:5%  }
+        #buttons{float: right; text-align: right; margin-right:5%; margin-top:-3%  }
         #button1{height:30px; width:100px}
         #button2{height:30px; width:100px}
         #button3{height:30px; width:100px}
         #div1{width:80%; height: auto; margin-left:5%;}
         #img1{float:left; margin-left:5%;}
+        #span1{color:red}
 
     </style>
 </head>
@@ -45,7 +46,7 @@
         <br><br>
         <hr>
         <br>
-        <h1>제목</h1>
+        <h1><span id="span1">[필독] </span>공지사항 제목</h1>
         <br>
         <text id="text1"> 백성강 <br>2020.08.07 14:47 조회수 1 댓글 2</text>
         <br>
@@ -65,7 +66,6 @@
         </div>
         
         <div id="comment">
-            <hr>
             <img src="example/1.PNG" width="80px" height="80px" id="img1">
             <text id="text3"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
                 댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
@@ -75,7 +75,18 @@
                 <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
                 <br>2020.08.07 14:47 
         </div>
-      
+        <br><br><br><br>
+        <div id="comment">
+            <img src="example/1.PNG" width="80px" height="80px" id="img1">
+            <text id="text3"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
+            </text>
+            <text id="text4">
+                <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
+                <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
+                <br>2020.08.07 14:47 
+        </div>
+       
         </div>
         <div id="footer">
             <div id="footer">

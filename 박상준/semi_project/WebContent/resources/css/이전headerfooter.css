@@ -1,9 +1,21 @@
 @charset "utf-8";
+
+
+/* #wrap {width: 1300px; border : 1px;  height: 900px; margin: 0 auto; color: #7c3b3b; font-size: 40px; text-align: center;} */
+/* #wrap {width: 1300px;  border : 1px; height: 900px; text-align : center;} */
+/* header {width: 1300px; height: 70px; line-height: 100px; background: #ffffff;} */
+/* #navbar {width: 1300px; height: 100px; line-height: 100px; background: #e04f4f; } */
+
+
+
+
 body {
   margin: 0;
   width: 1300px;
   text-align: center;
   /* background-color: #fce4ec; */
+  margin:0 auto;
+  background: #ffffff;
 }
 a {
   text-decoration: none;
@@ -117,87 +129,17 @@ hr {
 
 footer {
   width: 100%;
-  height: auto;
-  padding-top: 3%;
-  background-color: #ffffff;
-}
-
-/* //////////////////////////////////////////////////////////여기까지가 헤더 푸터///////////////////////////////////////////////////////////////////// */
-
-#mySerach {
-  margin-left: 20%;
-  width: 60%;
-  height: 80px;
-  background-color: #efefef;
-}
-
-.mySerach {
-  width: 100px;
   height: 30px;
-  margin-left: 100px;
+  padding-top: 3%;
+  background-color: rgb(15, 76, 130);
 }
 
-/* 이미지 슬라이더 */
-.swiper-container {
-   height:420px;
-   border:5px solid silver;
-   border-radius:7px;
-   box-shadow:0 0 20px #ccc inset;
-}
-.swiper-slide {
-   text-align:center;
-   display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
-   align-items:center; /* 위아래 기준 중앙정렬 */
-   justify-content:center; /* 좌우 기준 중앙정렬 */
-}
-.swiper-slide img {
-   box-shadow:0 0 5px #555;
-   max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
-   /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
-}
-/* 이미지 슬라이더 */
-
-.top_util_wrap{
-  display: inline;
-
-}
-
-
-.left_util_area{
-  padding: 24px 14px 0px 20px;
-  float: left;
-}
-
-.right_util_area{
-  float: left;
-  padding: 24px 14px 0px 20px;
+.footer_box {
+  width: 80%;
+  color: rgb(255, 213, 0);
+  margin: 0px auto;
 }
 
 
 
-.list_type_a ul{
-  list-style: none;
-}
 
-.pagination a{
-  padding: 8px 16px;
-  text-decoration: none;
-  border: 1px solid black;
-  color: black;
-  }
-  
-  .pagination a.active {
-  background-color : gray;
-  border: 1px solid gray;
-  color : white;
-  }
-  
-  .pagination a:hover:not(.action){
-  background-color: white;
-  }
-  .pagination a:first-child{
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  }
-          /* pagination 설정부  */
-  .com{text-indent : 20px;}
