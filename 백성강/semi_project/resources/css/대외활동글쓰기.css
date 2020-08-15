@@ -1,0 +1,55 @@
+form{width:1000px; margin: 0 auto;}
+#mainbox>div{margin :0 auto;}
+.hrwid{width:1000px; margin : 0 auto; color:skyblue;}
+#textline{font-size: large;}
+
+ .container {
+     width: 800px;
+  margin : 0 auto;
+}
+
+.infomation {
+float: left;
+width: 90px;
+margin-right: 10px;
+border-right: 0.2mm solid black;
+
+}
+.infomation-list {
+list-style: none;
+margin: 0;
+padding: 0px;
+}
+.infomation-item {
+margin: 20px 0; /* 카테고리 대상별 지역별 간격 */
+}
+.infomation-link {
+display: block;
+text-decoration: none;
+padding: 4px 10px;
+color: black;
+}
+
+.infomation-link:hover {
+background: #5457de;
+}
+
+.information-answer {
+float: left;
+width: 150px;
+margin-right: 50px;
+}
+
+
+
+.first {
+border: 1px solid rgb(107, 107, 107);
+width:100px;
+box-sizing: border-box;
+margin-right:10px;
+
+}
+
+.select{width:200px;height:30px; margin-top: 22px; margin-left:7px; }
+
+.table4{margin-left: 0px; margin-top: 10px;}
