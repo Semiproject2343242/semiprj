@@ -7,16 +7,19 @@ body {
 .lagefont{color:rgb(15, 76, 130);}
 
 section {
+  display: flex;
   margin: 0 auto;
   width: 80%;
   font-family: "fantasy";
   position: relative;
   min-height: 80%;
+  line-height: 40px;
 }
 aside {
   min-height: 100%;
 }
 #main_section {
+  width: 100%;
   min-height: 100%;
 }
 header {
@@ -85,6 +88,8 @@ a {
 }
 
 hr {
+  color: black;
+  background-color: black;
   height: 1px;
   margin: 0px;
   border: 1px;
@@ -133,6 +138,7 @@ hr {
 }
 
 footer {
+  display: block;
   padding-top: 10px;
   width: 100%;
   height: 3%;
