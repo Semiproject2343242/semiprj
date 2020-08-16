@@ -7,13 +7,11 @@
 
         /* 내용 */
         #text1{float: left;text-align: left; height:30px; width:50%;  font-size:20px}
-        #text2{text-align: left;}
+        #text2{text-align: left; line-height: 40px;}
         #p1{font-size:15px}
-        #buttons{float: right; text-align: right; margin-right:5%; margin-top:-3%  }
-        #button1{height:30px; width:100px}
-        #button2{height:30px; width:100px}
-        #button3{height:30px; width:100px}
-        #div1{width:95%; height: auto; }
+        #buttons{float: right; text-align: right; margin-right:5%;}
+        .button1{height:30px; width:100px}
+        #div1{width:85%; height: auto; margin-left:5%}
         #img{width:400px ; height:300px; }
         #img1{float:left; width:90px; height:90px;}
         #span1{color:red}
@@ -22,6 +20,6 @@
         #comment{float: left;}
         #text3{float: left;text-align: left; height:auto; width:70%; margin-left:1%; font-size:20px} 
         #text4{float: right;text-align: right; height:auto; font-size:18px}
-        #textarea{float: left; width:85%; height:100px; margin-left:10%}
-        #button4{float: right; width:45px ; height:45px; margin-top:60px}
+        #textarea{float: left; width:80%; height:100px; margin-left:10%}
+        #button4{float: right; width:8% ; height:60px; margin-top:20px}
 
