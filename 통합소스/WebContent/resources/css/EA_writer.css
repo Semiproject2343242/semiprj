@@ -62,11 +62,11 @@ border-radius : 3px;
 .ea_table_age{margin-left: 0px; margin-top: 10px; border-radius : 3px;}
 
 #ea_button{text-align: center; margin-bottom:100px;}
-#ea_submit{background-color: skyblue; border:none; padding: 15px 30px; border-radius : 3px;}
-#ea_cancle{background-color: rgb(255, 227, 227)(55, 202, 202); border:none; padding: 15px 30px;  border-radius:3px;}
+#ea_submit{background-color: darkgray; border:none; padding: 15px 30px; border-radius : 3px;}
+#ea_cancle{background-color: lightgray; border:none; padding: 15px 30px;  border-radius:3px;}
 
 .textline1{font-size: 17px; width:100%}
 .textline2{font-size: 17px;}
 .writer-textbox{width:100%; }
 .form-control{width:100%}
-.dateline1{width:40%}
+.dateline1{width:20%}
