@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-    <link rel="stylesheet" type="text/css" href="../resources/css/EA_writer.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/EA_wiriter.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
 </head>
 <style>
@@ -35,7 +35,7 @@
      </header> 
  <!----------------------------------------header------------------------------------------->
      <from>
-          <h1 id = writing_maintext>대외활동 글쓰기</h1>
+          <h1 id = wiriting_maintext>대외활동 글쓰기</h1>
             <div id=External_mainbox>
                 <div class="container">
                     <p>기관명<input type ="text" name = "기관명" id="ea_com_name" placeholder="기관명을 입력하세요." class=textline1></p>
@@ -79,22 +79,21 @@
                     <div class="writertext-answer">
                       <div> 
                       <select class="categoty-select" id="ea_category">
-                        <option value="" selected disabled hidden >선택해주세요.</option>
-                        <option value="1">공모전</option>
-                        <option value="2">채용박람회/취업설명회</option>
-                        <option value="3">경진대회</option>
-                        <option value="4">봉사활동</option>
-                        <option value="5">서포터즈</option>
-                        <option value="6">관람/전시/체험</option>
+                        <option>공모전</option>
+                        <option>채용박람회/취업설명회</option>
+                        <option>경진대회</option>
+                        <option>봉사활동</option>
+                        <option>서포터즈</option>
+                        <option>관람/전시/체험</option>
                      </select>
                       </div>
-                      <div>
+                      <div class="parent">
                         <table class="ea_table_age">
                           <th>
-                            <td><button class="ea_age" id="ea_age_18">청년<br>(18~34세) </button></td>
-                            <td><button class="ea_age" id="ea_age_35">중년<br>(35~49세) </button></td>
-                            <td><button class="ea_age" id="ea_age_50">장년<br>(50~64세) </button></td>
-                            <td><button class="ea_age" id="ea_age_65">어르신<br>(65세 이상) </button></td>
+                            <td><button class="first" id="ea_age_18">청년<br>(18~34세) </button></td>
+                            <td><button class="first" id="ea_age_35">중년<br>(35~49세) </button></td>
+                            <td><button class="first" id="ea_age_50">장년<br>(50~64세) </button></td>
+                            <td><button class="first" id="ea_age_65">어르신<br>(65세 이상) </button></td>
                           </th>
                           <!-- 나이 카테고리
                             청년  ea_age_18
@@ -142,10 +141,8 @@
                    
                     <div>
                         <p>제목<input type ="text" id="ea_title" name = "제목" placeholder="제목을 입력하세요." class=textline1></p>
-                        <p><span>모집일정 : <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1></span>
-                        <span> ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</span></p> 
-                        <p><span>활동기간 : <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1></span>
-                          <span> ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</span></p> 
+                        <p>모집일정<br><input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1></p>
+                        <p>활동기간<br><input type ="date" id="ea_ac_date" name = "활동기간" class=dateline1></p>
                         <p>접수방법<textarea class="form-control" id="ea_re_apply" rows="5" name="접수방법" id="ea_text_apply" placeholder="내용을 입력해 주세요" ></textarea></p>
                         
                         <p>
