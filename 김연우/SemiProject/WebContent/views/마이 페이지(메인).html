@@ -23,24 +23,42 @@
 		object-fit: cover;
 	}
 
-    .sTable{
-        border-top: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    .sTable tr{
-
-    }
-
-    .sTable td{
-        border-bottom: 1px solid black;
-    }
-
-    .sTable th{
-        background-color: rgba(228, 222, 222, 0.904);
-        border-bottom: 1px solid black;
-    }
-
+    .board_area {
+	display: flex;
+	justify-content: center;
+	}
+	.board_box {
+	padding: 0px;
+	padding-top: 24px;
+	margin: 10px;
+	width: 40%;
+	line-height: 30px;
+	}
+	.board_box a {
+	/* text-decoration: none; */
+	float: left;
+	/* color: white; */
+	}
+	.board_box a:hover {
+	color: black;
+	font-weight: bold;
+	}
+	/* .my_util_area li:hover {
+	font-weight: bold;
+	} */
+	.box_title {
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+	margin-bottom: 0px;
+	height: 40px;
+	background-color: rgb(15, 76, 130);
+	border-radius: 7px;
+	}
+	.box_title h3{
+	color: white;
+	}
+	
 </style>
 
 <body>
@@ -98,117 +116,108 @@
 			</div>
 			<input type="button" value="Edit">
 
-			<div>
+			<div class="my_board">
 				<h1 align='left'>내가 쓴 글</h1>
-			<hr>
-				<table align='center' id="mTable">
-					<tr>
-						<td><h2>정보게시판</h2></td>
-						<td><h2>자유게시판</h2></td>
-						<tr>
-							<td><table class="sTable">
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>날짜</th>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>제목1</td>
-										<td>2020.08.12</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>제목2</td>
-										<td>2020.08.11</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>제목3</td>
-										<td>2020.08.10</td>
-									</tr>
-								</table>
-							</td>
-							
-							<td><table class="sTable">
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>날짜</th>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>제목1</td>
-										<td>2020.08.12</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>제목2</td>
-										<td>2020.08.11</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>제목3</td>
-										<td>2020.08.10</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<td><h2>정보게시판</h2></td>
-						<td><h2>자유게시판</h2></td>
-						<tr>
-							<td><table class="sTable">
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>날짜</th>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>제목1</td>
-										<td>2020.08.12</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>제목2</td>
-										<td>2020.08.11</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>제목3</td>
-										<td>2020.08.10</td>
-									</tr>
-								</table>
-							</td>
-							
-							<td><table class="sTable">
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>날짜</th>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>제목1</td>
-										<td>2020.08.12</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>제목2</td>
-										<td>2020.08.11</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>제목3</td>
-										<td>2020.08.10</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-				</table>
-				
+				<hr>
+				<div class="board_area">
+					<div class="board_box" >
+						<div class="box_title">
+							<a href="#"><h3>공지사항</h3></a>
+						</div>
+						<ol>
+							<li>
+							<a href="#" class="area_title">공지사항 최신글1</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글2</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글3</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글4</a>
+							<div>날짜</div>
+							</li>
+						</ol>
+					</div>
+			
+					<div class="board_box" >
+						<div class="box_title">
+							<a href="#"><h3>공지사항</h3></a>
+						</div>
+						<ol>
+							<li>
+							<a href="#" class="area_title">공지사항 최신글1</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글2</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글3</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글4</a>
+							<div>날짜</div>
+							</li>
+						</ol>
+					</div>
+				</div>
+				<div class="board_area">
+					<div class="board_box" >
+						<div class="box_title">
+							<a href="#"><h3>공지사항</h3></a>
+						</div>
+						<ol>
+							<li>
+							<a href="#" class="area_title">공지사항 최신글1</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글2</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글3</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글4</a>
+							<div>날짜</div>
+							</li>
+						</ol>
+					</div>
+			
+					<div class="board_box" >
+						<div class="box_title">
+							<a href="#"><h3>공지사항</h3></a>
+						</div>
+						<ol>
+							<li>
+							<a href="#" class="area_title">공지사항 최신글1</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글2</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글3</a>
+							<div>날짜</div>
+						</li>
+						<li>
+							<a href="#" class="area_title">공지사항 최신글4</a>
+							<div>날짜</div>
+							</li>
+						</ol>
+					</div>
+				</div>
 			</div>
-
 		</div>
 
 	</section>
