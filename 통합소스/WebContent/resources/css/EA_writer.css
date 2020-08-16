@@ -2,7 +2,7 @@ form{width:1000px; margin: 0 auto;}
 #bbox>div{margin :0 auto;}
 #textline{font-size: large;}
 
-#wiriting_maintext{
+#writing_maintext{
   text-align: center;
   font-size :35pt;
 }
@@ -35,15 +35,9 @@ float: left;
 width: 150px;
 margin-right: 50px;
 }
-
-
  .ea_areabutton{text-align:center; font-size: 12px; padding: 5px; width:90px; border:1px;
             background-color: rgb(185, 185, 185); border-radius: 3px; margin-left: 3px; margin-top: 5px; margin-right: 5px;}
   #ea_areatable{margin-top: 5px;}
-
-
-
-
 
 .first {
 border: 1px solid rgb(255, 255, 255);
