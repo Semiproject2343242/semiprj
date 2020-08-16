@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판 기본틀</title>
+
+<link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/side.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/게시판.css">
+
+<style>
+    #div1{float: left; text-align: center; font-size:22px; border: 1px solid black; width:650px; height: 500px }
+    .div11{float: left; width:600px; height:60px;border: 1px solid black; cursor: pointer;};
+    .contents{
+        border: 1px solid black;
+        width: 300px;
+        height: 200px;
+        display : none;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+$(document).ready(function(){
+    $(".div11").click(function(){
+        $(this).next("#contenets").toggleClass("")
+       });
+       });
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="header_top">
+           <div class="top">
+              <li><a href="#" class="top_btn"><b>마이페이지</b></a></li>
+              <li><a href="#" class="top_btn"><b>로그인</b></a></li>
+           </div>
+        </div>
+        <nav class="navbar">
+           <div class="navbar_title">
+              <a href="#"><span class="lagefont">정</span>부지원금<span class="lagefont">바</span>로 지금</a>
+           </div>
+           <div class="navbar_menu">
+              <li><a href="#">공지사항</a></li>
+              <li><a href="#">지원정책</a></li>
+              <li><a href="#">커뮤니티</a></li>
+              <li><a href="#">대외활동</a></li>
+              <li><a href="#">Q / A</a></li>
+           </div>
+           <div class="navbar_logo">
+              <img id="logo" src="../Media/logo.png" width = "80px" height = "80px">
+           </div>
+        </nav>
+     </header> 
+    <section>
+        <aside>
+            <a href="#"><h2> Q/A</h2></a>
+            <hr>
+            <a href="#"><h2>Q/A</h2></a>
+            <a href="#"><h2>자주 묻는 질문</h2></a>
+        </aside>
+        
+        <div id="main_section">
+            <br>
+            <h2>FAQ</h2>
+            <div id='div1' >
+                <div class="div11">[카테고리]'지원정책'채용정보는 등록할 수 없나요? 
+                    <div id='contenets'>내용1</div>
+                </div>
+
+            
+                <div class="div11">[카테고리]'지원정책'채용정보는 등록할 수 없나요? 
+                    <button class='click'>Click</button>
+                    <hr>
+                </div>
+                
+                <div class="div11">[카테고리]'지원정책'채용정보는 등록할 수 없나요? 
+                    <button class='click'>Click</button>
+                    <hr>
+                </div>
+               
+                <div class="div11">[카테고리]'지원정책'채용정보는 등록할 수 없나요? 
+                    <button class='click'>Click</button>
+                    <hr>
+                </div>
+              
+                <div class="div11">[카테고리]'지원정책'채용정보는 등록할 수 없나요? 
+                    <button class='click'>Click</button>
+                </div>
+                    
+            </div>
+        </div> 
+    </section>
+    <footer>
+        <div class="footer_box">
+            Copyrightⓒ2020 Flower than java Project All Rights Reserved.
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+ 
