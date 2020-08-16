@@ -1,32 +1,27 @@
-html,
-body {
+html, body{
   margin: 0px;
   height: 100%;
-  min-width: 505px;
 }
 .lagefont{color:rgb(15, 76, 130);}
 
 section {
-  display: flex;
   margin: 0 auto;
   width: 80%;
   font-family: "fantasy";
+  min-height: 100%;
   position: relative;
-  min-height: 80%;
-  line-height: 40px;
 }
-aside {
+aside{
   min-height: 100%;
 }
-#main_section {
-  width: 100%;
+#main_section{
   min-height: 100%;
 }
 header {
   top: 0;
   left: 0;
   right: 0;
-  height: 250px;
+  height: 20%;
   /* background-color: #2979ff; */
 }
 a {
@@ -56,11 +51,10 @@ a {
   border-radius: 4px;
   color: black;
 }
-.lagefont {
+.lagefont{
   font-size: 60px;
 }
 .navbar {
-  padding-top: 50px;
   display: flex;
   width: 80%;
   margin: 0px auto;
@@ -69,11 +63,17 @@ a {
   /* background-color: #f8bbd0; */
 }
 
+/* .navbar_title {
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+  } */
 .navbar_menu {
   display: flex;
   list-style: none;
-  padding: 40px 0px;
+  padding : 40px 0px ;
   padding-right: 150px;
+  
 }
 
 .navbar_menu li {
@@ -88,25 +88,16 @@ a {
 }
 
 hr {
-  color: black;
-  background-color: black;
   height: 1px;
-  margin: 0px;
-  border: 1px;
+  /* background-color: #c48b9f; */
+  margin: 1px;
 }
 
 @media screen and (max-width: 768px) {
-  header {
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 250px;
-    /* background-color: #2979ff; */
-  }
   .navbar {
     flex-direction: column;
     align-items: center;
-    padding: 0px;
+    padding: 0x;
   }
 
   .navbar_title {
@@ -121,7 +112,6 @@ hr {
     padding: 0px;
   }
   .navbar_menu li {
-    border-right: 0px solid silver;
     width: 100%;
     text-align: center;
     font-size: 12px;
@@ -138,7 +128,6 @@ hr {
 }
 
 footer {
-  display: block;
   padding-top: 10px;
   width: 100%;
   height: 3%;
