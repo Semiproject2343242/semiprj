@@ -1,0 +1,30 @@
+#div1{
+    float: left; 
+    text-align: center;  
+    width:900px; 
+    height: auto; 
+    font-size:20px;
+    margin-left: 20px; 
+}
+.div11{
+    float: left; 
+    text-align: left;
+    width:900px;  
+    height:45px;        
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+.contents{ 
+    float: left;
+    text-align: left;
+    width:840px; 
+    height: 200px; 
+    background: #97BAD6; 
+    display: none; 
+    line-height: auto;      
+    margin-left:30px;
+    margin-right:30px;
+} 
+ul{
+    float:left; margin-left:30%;
+}

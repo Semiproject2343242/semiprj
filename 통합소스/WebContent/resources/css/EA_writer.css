@@ -1,0 +1,63 @@
+form{width:1000px; margin: 0 auto;}
+#bbox>div{margin :0 auto;}
+#textline{font-size: large;}
+
+#writing_maintext{
+  text-align: center;
+  font-size :35pt;
+}
+ .container {
+  width: 800px;
+  margin : 0 auto;
+  border-top: 100px;
+}
+
+.writertext {
+float: left;
+width: 90px;
+margin-right: 10px;
+border-right: 0.2mm solid black;
+
+}
+.writerinformanion-list {
+list-style: none;
+margin: 0px;
+padding: 10px;
+line-height: 300%
+}
+
+.writertext-item {
+margin: 0px; /* 카테고리 대상별 지역별 간격 */
+}
+
+.writertext-answer {
+float: left;
+width: 150px;
+margin-right: 50px;
+}
+ .ea_areabutton{text-align:center; font-size: 12px; padding: 5px; width:90px; border:1px;
+            background-color: rgb(185, 185, 185); border-radius: 3px; margin-left: 3px; margin-top: 5px; margin-right: 5px;}
+  #ea_areatable{margin-top: 5px;}
+
+.first {
+border: 1px solid rgb(255, 255, 255);
+background-color: rgb(206, 245, 255);
+width:100px;
+box-sizing: border-box;
+margin-right:10px;
+
+}
+
+.categoty-select{width:200px;height:30px; margin-top: 22px; margin-left:7px; }
+
+.ea_table_age{margin-left: 0px; margin-top: 10px;}
+
+#ea_button{text-align: center; margin-bottom:100px;}
+#ea_submit{background-color: skyblue; border:none; padding: 15px 30px;   border-radius : 3px;}
+#ea_cancle{background-color: rgb(255, 227, 227)(55, 202, 202); border:none; padding: 15px 30px;  border-radius:3px;}
+
+.textline1{font-size: 17px; width:100%}
+.textline2{font-size: 17px;}
+.writer-textbox{width:100%; }
+.form-control{width:100%}
+.dateline1{width:50%}
