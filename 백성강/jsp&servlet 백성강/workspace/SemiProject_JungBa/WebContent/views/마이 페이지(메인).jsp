@@ -6,10 +6,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>마이 페이지(메인)</title>
-	<link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-	<link rel="stylesheet" type="text/css" href="../resources/css/side.css">
-	<link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
-	<link rel="stylesheet" type="text/css" href="../resources/css/boardtool.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/pagination.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/boardtool.css">
 </head>
 <style>
 	.box {
