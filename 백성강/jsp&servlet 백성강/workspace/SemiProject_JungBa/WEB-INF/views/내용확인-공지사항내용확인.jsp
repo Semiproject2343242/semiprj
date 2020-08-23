@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Layout01</title>
-    <script  src="../js/jquery-3.5.1.min.js"></script> 
+    <script src="../../resources/js/jquery-3.5.1.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
     <link rel="stylesheet" type="text/css" href="../../resources/css/공지사항내용확인.css">
 

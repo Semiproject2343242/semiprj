@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	123헣하하
+
 </body>
 </html>
