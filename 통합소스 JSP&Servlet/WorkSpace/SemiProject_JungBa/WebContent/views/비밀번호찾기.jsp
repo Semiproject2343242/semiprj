@@ -51,7 +51,6 @@
                 <form>
                     <div>
                         <h1 align="center">비밀번호 찾기</h1>
-                        <ta;e</tab>
                         <table align="center">
                             <tr>
                                 <td style = text-align:right>이름 :</td>
