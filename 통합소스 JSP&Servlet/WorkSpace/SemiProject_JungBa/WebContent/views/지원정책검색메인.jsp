@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-    <link rel="stylesheet" type="text/css" href="../resources/css/EA_writer.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/SP_search.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/EA_writer.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/SP_search.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/pagination.css">
 </head>
 <style>
 
