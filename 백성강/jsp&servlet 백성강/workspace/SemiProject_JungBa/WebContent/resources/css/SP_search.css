@@ -1,0 +1,32 @@
+.sp_Receipt_status{margin-top:10px;}
+.sp_Employment_status{margin-top:12px;}
+
+
+#sp_button{text-align: center; margin-bottom:100px;}
+#p_sp_search_submit{background-color: skyblue; border:none; padding: 15px 30px; border-radius : 3px; width:130px; text-align:center;}
+#p_sp_search_reset{background-color: rgb(223, 223, 223)(55, 202, 202); border:none; padding: 15px 30px; width:130px; border-radius:3px;}
+#p_sp_search_submit:hover{background-color:  rgb(194, 194, 194);}
+#p_sp_search_reset:hover{background-color:  rgb(194, 194, 194);}
+
+
+.sp_search_result{text-align:center;}
+footer{margin-top:100px;}
+.pagination{margin-top:100px;}
+
+.sp_search_result_table table{
+        margin: 0px auto;
+}
+
+.sp_search_result_table table tr{
+        Font-size: 20px
+       }
+        
+       .sp_search_result_table_title{width:600px;
+        
+       }
+       
+       
+       .sp_search_result_table_tr td{
+        border-bottom: 1px solid #444444;
+           
+}
