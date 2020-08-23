@@ -175,8 +175,4 @@ public class Member {
 		this.memberGrade = memberGrade;
 	}
 	
-	
-	
-	
-	
 }

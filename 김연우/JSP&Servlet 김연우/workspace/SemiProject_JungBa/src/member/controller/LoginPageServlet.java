@@ -6,25 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/logout.me")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/loginPage.me")
+public class LoginPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public LogoutServlet() {
+    public LoginPageServlet() {
         super();
-        
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.invalidate(); // 세션 무효화
+		request.setCharacterEncoding("UTF-8");
 		
-		response.sendRedirect(request.getContextPath());
+		request.getRequestDispatcher("WEB-INF/views/Member/로그인 페이지.jsp");
+		
 	}
 
 

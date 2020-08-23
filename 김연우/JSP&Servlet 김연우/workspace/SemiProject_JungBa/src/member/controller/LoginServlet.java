@@ -22,28 +22,24 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String memberId = request.getParameter("userId");
+		String memberPw = request.getParameter("userPwd");
 		
-		System.out.println("LoginServlet userId : " + userId);
-		System.out.println("LoginServlet userPwd : " + userPwd);
+//		System.out.println("LoginServlet userId : " + memberId);
+//		System.out.println("LoginServlet userPwd : " + memberPw);
 		
-		Member member = new Member(userId, userPwd);
+		Member member = new Member(memberId, memberPw);
 		Member loginUser = new MemberService().loginMember(member);
 		
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("loginUser", loginUser);
-			
-			/*
-			 	RequestDispatcher.forward()		vs		response.sendRedirect	
-			 */
 			response.sendRedirect(request.getContextPath());
 			
 		} else {
 			request.setAttribute("msg", "로그인 실패");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
 			view.forward(request, response);
 		}
 		
