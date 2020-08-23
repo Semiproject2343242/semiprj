@@ -4,8 +4,8 @@
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
- <link rel="stylesheet" type="text/css" href="../resources/css/maincontents.css">
+ <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+ <link rel="stylesheet" type="text/css" href="../../resources/css/maincontents.css">
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
