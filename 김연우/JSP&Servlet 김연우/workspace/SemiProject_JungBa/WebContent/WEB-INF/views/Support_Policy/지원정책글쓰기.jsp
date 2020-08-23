@@ -6,37 +6,15 @@
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
     <link rel="stylesheet" type="text/css" href="../../../resources/css/EA_writer.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
 </head>
 <style>
 
 </style>
 <body>
-    <header>
-        <div class="header_top">
-           <div class="top">
-              <li><a href="#" class="top_btn"><b>마이페이지</b></a></li>
-              <li><a href="#" class="top_btn"><b>로그인</b></a></li>
-           </div>
-        </div>
-        <nav class="navbar">
-           <div class="navbar_title">
-              <a href="#"><span class="lagefont">정</span>부지원금<span class="lagefont">바</span>로 지금</a>
-           </div>
-           <div class="navbar_menu">
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">지원정책</a></li>
-              <li><a href="#">커뮤니티</a></li>
-              <li><a href="#">대외활동</a></li>
-              <li><a href="#">Q / A</a></li>
-           </div>
-           <div class="navbar_logo">
-              <img id="logo" src="../Media/logo.png" width = "80px" height = "80px">
-           </div>
-        </nav>
-     </header> 
+    <%@ include file="../Common/header.jsp" %>
  <!----------------------------------------header------------------------------------------->
-     <from>
+     <form>
           <h1 id = writing_maintext>지원정책 글쓰기</h1>
             <div id=External_mainbox>
                 <div class="container">
@@ -142,12 +120,8 @@
             </div>
     
         </section>
-    </from>
-    <footer>
-        <div class="footer_box">
-            Copyrightⓒ2020 Flower than java Project All Rights Reserved.
-        </div>
-    </footer>
+    </form>
+	<%@ include file="../Common/footer.jsp" %>
 </body>
 </html>
 

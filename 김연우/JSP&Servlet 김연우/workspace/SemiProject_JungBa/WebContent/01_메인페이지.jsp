@@ -4,14 +4,165 @@
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
- <link rel="stylesheet" type="text/css" href="../../resources/css/maincontents.css">
+ <link rel="stylesheet" type="text/css" href="resources/css/body.css">
+<style>
+section{display: block;}
+.mySerach {
+  width: 100px;
+  height: 30px;
+  margin-left: 100px;
+}
 
+#mySerach {
+  width: 100%;
+  height: 80px;
+  margin-left: 20px;
+  background-color: #efefef;
+}
+
+/* 이미지 슬라이더 */
+.swiper-container {
+  height: 420px;
+  border: 1px solid silver;
+  border-radius: 7px;
+  box-shadow: 0 0 20px #ccc inset;
+}
+.swiper-slide {
+  text-align: center;
+  display: flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+  align-items: center; /* 위아래 기준 중앙정렬 */
+  justify-content: center; /* 좌우 기준 중앙정렬 */
+}
+.swiper-slide img {
+  box-shadow: 0 0 5px #555;
+  max-width: 100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+  /* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
+}
+/* 이미지 슬라이더 */
+.notice_util_area {
+  padding: 24px 14px 0px 20px;
+  /* float: left; */
+}
+
+.policy_util_area {
+  /* float: left; */
+  padding: 24px 14px 0px 20px;
+}
+
+.community_util_area {
+  padding: 24px 14px 0px 20px;
+  /* float: left; */
+}
+
+.external_util_area {
+  /* float: left; */
+  padding: 24px 14px 0px 20px;
+}
+
+/* .list_type_a {
+  display: inline;
+} */
+
+.util_area {
+  display: flex;
+}
+
+.notice_util_area {
+  padding: 0px;
+  padding-top: 24px;
+  width: 50%;
+}
+
+.policy_util_area {
+  padding: 0px;
+  padding-top: 24px;
+  width: 50%;
+}
+.list_type_a ul {
+  padding: 0px;
+  padding-top: 20px;
+  margin: 0px;
+  list-style: none;
+  font-family: "돋움";
+}
+
+/* external_util_area
+community_util_area */
+.community_util_area {
+  padding: 0px;
+  padding-top: 24px;
+}
+
+.external_util_area {
+  padding: 0px;
+  padding-top: 24px;
+}
+
+.list_type_a li {
+  line-height: 30px;
+  margin: 0px 15px;
+}
+.list_type_a li:hover {
+  font-weight: bold;
+}
+
+.list_type_b {
+  padding: 0px;
+  /* border: 1pxblack; */
+  /* width: 80%; */
+  font-size: 14px;
+}
+
+.list_type_b ul {
+  padding: 0px;
+  padding-top: 20px;
+  margin: 0px;
+  list-style: none;
+  column-count: 2;
+  font-family: "돋움";
+}
+
+.list_type_b li {
+  line-height: 30px;
+  margin: 0px 15px;
+}
+
+.list_type_b li:hover {
+  font-weight: bold;
+}
+
+.area_title {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  margin-bottom: 0px;
+  height: 40px;
+  background-color: rgb(15, 76, 130);
+  border-radius: 7px;
+  color: rgb(255, 213, 0);
+}
+.area_title a {
+  text-decoration: none;
+  color: white;
+}
+.area_title a:hover {
+  color: black;
+  font-weight: bold;
+}
+
+.all_link_area {
+  margin-left: 40px;
+  font-size: 12px;
+}
+
+
+</style>
+ 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
 <body>
-	<%@ include file="../Common/header.jsp" %>
+	<%@ include file="WEB-INF/views/Common/header.jsp" %>
 <section>
    <!-- 이미지 슬라이더 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
@@ -564,7 +715,7 @@
          </div>
          <br>
 </section>
-<%@ include file="../Common/footer.jsp" %>
+<%@ include file="WEB-INF/views/Common/footer.jsp" %>
 
 <script>
 // 이미지 슬라이더
