@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>회원정보 수정</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/side.css">
 </head>
 <style>
 	   section {

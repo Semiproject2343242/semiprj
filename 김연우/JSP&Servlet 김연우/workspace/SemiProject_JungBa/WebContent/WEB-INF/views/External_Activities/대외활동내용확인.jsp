@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <title>Layout01</title>
     <script src="../../resources/js/jquery-3.5.1.min.js"></script> 
-    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/대외활동내용확인.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/대외활동내용확인.css">
 
     <style>
     </style>

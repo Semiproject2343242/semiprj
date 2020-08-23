@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
+	<%@ include file="../Common/header.jsp" %>
 <section>
    <!-- 이미지 슬라이더 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
@@ -564,7 +564,7 @@
          </div>
          <br>
 </section>
-<%@ include file="../common/footer.jsp" %>
+<%@ include file="../Common/footer.jsp" %>
 
 <script>
 // 이미지 슬라이더
