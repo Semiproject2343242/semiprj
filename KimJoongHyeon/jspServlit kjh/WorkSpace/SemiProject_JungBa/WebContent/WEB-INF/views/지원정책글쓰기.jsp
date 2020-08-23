@@ -5,10 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-    <link rel="stylesheet" type="text/css" href="../resources/css/EA_writer.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/SP_search.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/EA_writer.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
 </head>
 <style>
 
@@ -39,15 +37,13 @@
      </header> 
  <!----------------------------------------header------------------------------------------->
      <from>
-          <h1 id = writing_maintext>지원정책 검색</h1>
+          <h1 id = writing_maintext>지원정책 글쓰기</h1>
             <div id=External_mainbox>
                 <div class="container">
                         <div class="writertext">
                         <ul class="writerinformanion-list">
                         <th>
                         <li class="infomation-item">카테고리:</li>
-                        <li class="infomation-item">접수상태:</li>
-                        <li class="infomation-item">취업상태:</li>
                         <li class="infomation-item">대상별:</li>
                         <li class="infomation-item">지역별:</li><br>
                         </th>
@@ -71,25 +67,6 @@
                         <option value="6">교통/주거</option>
                      </select>
                       </div>
-
-                      <div class="sp_Receipt_status">
-                          <table>
-                        <tr>
-                        <td><button class = "ea_areabutton" >접수중</button></td>
-                        <td><button class = "ea_areabutton" >마감</button></td>
-                    </tr>
-                </table>
-                    </div>
-                      <div class="sp_Employment_status">
-                        <table>
-                            <tr>
-                            <td><button class = "ea_areabutton" >구직중</button></td>
-                            <td><button class = "ea_areabutton" >재직중</button></td>
-                        </tr>
-                    </table>
-                      </div>
-
-
                       <div>
                         <table class="ea_table_age">
                           <th>
@@ -139,67 +116,30 @@
                       </div>
                     </div>
                     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
-                    
+
                     <br clear="all">
-                    <br>
 
-                   <div class = "sp_button">
-                    <input type='button' class='sp_searchbutton' name='btn' value='초기화' style="float: right;" id="p_sp_search_reset">
-                    <input type='button' class='sp_searchbutton' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
-                   </div>
-                  
-                   <br><br><br>
-                   <h1 class = "sp_search_result">N건이 검색되었습니다.</h1><br><br>
-                   </div>
+                   
+                    <div>
+                        <p>제목<input type ="text" id="ea_title" name = "제목" placeholder="제목을 입력하세요." class=textline1></p>
+                        <p><span>모집일정 : <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1></span>
+                            <span> ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</span></p> 
+                        <p>접수방법<textarea class="form-control" id="ea_re_apply" rows="5" name="접수방법" id="ea_text_apply" placeholder="내용을 입력해 주세요" ></textarea></p>
+                    
+                        <p>
+                            <span>메인 이미지 첨부 : <input type ="file" name = "연락처" class=textline2></span>
+                        </p>
+                        <p>홈페이지<input type ="text" name = "홈페이지" id="ea_com_url" placeholder="url을 입력하세요." class=textline1></p>
+                        
+                        <p >내용<textarea class="form-control" rows="5" name="내용" id="ea_text_Contents" placeholder="내용을 입력해 주세요" ></textarea>
+                    
+                <div id = ea_button>
+                    <button id = ea_submit>등록</button>
+                    <button id = ea_cancle>취소</button>
+                </div>
+                  </div>
+           
             </div>
-            <div class="sp_search_result_table">
-            <table>
-                <tr class="sp_search_result_table_tr">
-                    <td class=sp_search_result_table_title>
-                        <a href="#">[오산시] KH정보교육원 점심값 지원<br></a>
-                        2020-08-16 ~ 2020-09-16</td>
-                    <td>추천 수 : 5</td>
-                </tr>
-                <tr class="sp_search_result_table_tr">
-                    <td class=sp_search_result_table_title>
-                        <a href="#">[오산시] KH정보교육원 점심값 지원<br></a>
-                        2020-08-16 ~ 2020-09-16</td>
-                    <td>추천 수 : 4</td>
-                </tr>
-                <tr class="sp_search_result_table_tr">
-                    <td class=sp_search_result_table_title>
-                        <a href="#">[오산시] KH정보교육원 점심값 지원<br></a>
-                        2020-08-16 ~ 2020-09-16</td>
-                    <td>추천 수 : 1 </td>
-                </tr>
-                <tr class="sp_search_result_table_tr">
-                    <td class=sp_search_result_table_title>
-                        <a href="#">[오산시] KH정보교육원 점심값 지원<br></a>
-                        2020-08-16 ~ 2020-09-16</td>
-                    <td>추천 수 : 2</td>
-                </tr>
-                <tr class="sp_search_result_table_tr">
-                    <td class=sp_search_result_table_title>
-                        <a href="#">[오산시] KH정보교육원 점심값 지원<br></a>
-                        2020-08-16 ~ 2020-09-16</td>
-                    <td>추천 수 : 3</td>
-                </tr>
-            
-            </table>
-        </div>
-
-
-    <ul align="center">
-        <div class = "pagination">
-            <a href="#" title = "이전" class="pre"><</a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#" title = "다음" class="next">></a>
-        </div>
-        </ul>
     
         </section>
     </from>

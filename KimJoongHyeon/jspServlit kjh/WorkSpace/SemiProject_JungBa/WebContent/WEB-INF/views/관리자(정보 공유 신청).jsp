@@ -5,11 +5,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>관리자(대외 활동 신청)</title>
-    <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/side.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/boardtool.css">
+    <title>관리자(정보 공유 신청)</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/boardtool.css">
 </head>
 <style>
     #bottomContent {
@@ -79,7 +79,7 @@
 
         <div id="main_section" align="center">
             <h2>
-                <div id="subTitle"><b>대외 활동 신청</b></div>
+                <div id="subTitle"><b>정보 공유 신청</b></div>
             </h2>
             <hr>
             <div id="bottomContent">

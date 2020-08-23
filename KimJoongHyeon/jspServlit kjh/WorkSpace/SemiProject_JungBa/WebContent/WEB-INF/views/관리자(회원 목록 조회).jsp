@@ -5,11 +5,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>관리자(정보 공유 신청)</title>
-    <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/side.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/pagination.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/boardtool.css">
+    <title>관리자(회원 상세 조회)</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/boardtool.css">
 </head>
 <style>
     #bottomContent {
@@ -79,14 +79,15 @@
 
         <div id="main_section" align="center">
             <h2>
-                <div id="subTitle"><b>정보 공유 신청</b></div>
+                <div id="subTitle"><b>회원 목록</b></div>
             </h2>
             <hr>
             <div id="bottomContent">
                 <div id="searchDiv">
                     <select id="selectedOption">
-                        <option>승인 대기</option>
-                        <option>승인 완료</option>
+                        <option>아이디로 찾기</option>
+                        <option>이름으로 찾기</option>
+                        <option>전화번호로 찾기</option>
                     </select>
                     <input id="search" type="search">
                     <button type="submit">검색</button>
@@ -94,58 +95,52 @@
                 <div id="tableDiv">
                     <table id="infoTable">
                         <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>카테고리</th>
-                            <th>작성자</th>
-                            <th>게시 날짜</th>
-                            <th>조회수</th>
-                            <th>승인상태</th>
+                            <th>회원번호</th>
+                            <th>아이디(ID)</th>
+                            <th>이름(Name)</th>
+                            <th>휴대전화(Phone)</th>
+                            <th>회원 가입 날짜</th>
+                            <th>게시글 수</th>
                         </tr>
                         <tr>
-                            <td>5</td>
-                            <td><a href="#">제목1</a></td>
-                            <td>카테고리1</td>
+                            <td>1</td>
+                            <td><a href="#">junghyeon</a></td>
                             <td>김중현</td>
+                            <td>010-1111-1111</td>
                             <td>2020.01.01</td>
-                            <td>123</td>
-                            <td>N</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><a href="#">제목2</a></td>
-                            <td>카테고리2</td>
-                            <td>박상준</td>
-                            <td>2020.02.02</td>
-                            <td>4</td>
-                            <td>Y</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">제목3</a></td>
-                            <td>카테고리3</td>
-                            <td>이규호</td>
-                            <td>2020.03.03</td>
-                            <td>13</td>
-                            <td>N</td>
+                            <td>5</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><a href="#">제목4</a></td>
-                            <td>카테고리4</td>
-                            <td>백성강</td>
-                            <td>2020.04.04</td>
-                            <td>128</td>
-                            <td>N</td>
+                            <td><a href="#">sangjun</a></td>
+                            <td>박상준</td>
+                            <td>010-2222-2222</td>
+                            <td>2020.02.02</td>
+                            <td>4</td>
                         </tr>
-                                                <tr>
-                            <td>1</td>
-                            <td><a href="#">제목5</a></td>
-                            <td>카테고리5</td>
+                        <tr>
+                            <td>3</td>
+                            <td><a href="#">gyuho</a></td>
+                            <td>이규호</td>
+                            <td>010-3333-3333</td>
+                            <td>2020.03.03</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><a href="#">seongang</a></td>
+                            <td>백성강</td>
+                            <td>010-4444-4444</td>
+                            <td>2020.04.04</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><a href="#">rudy</a></td>
                             <td>김연우</td>
+                            <td>010-5555-5555</td>
                             <td>2020.05.05</td>
-                            <td>8</td>
-                            <td>Y</td>
+                            <td>1</td>
                         </tr>
                     </table>
                 </div>
@@ -174,4 +169,3 @@
     </footer>
 </body>
 
-</html>
