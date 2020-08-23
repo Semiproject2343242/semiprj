@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
 <!-- <script src="../resources/js/slides.js"></script> -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
