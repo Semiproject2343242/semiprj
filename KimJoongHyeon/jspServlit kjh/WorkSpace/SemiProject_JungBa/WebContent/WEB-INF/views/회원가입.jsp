@@ -1,11 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>회원가입</title>
-        <script src="../../resources/js/jquery-3.5.1.min.js"></script> 
-        <link rel="stylesheet" type="text/css" href="../resources/css/headerfooter.css">
-        <link rel="stylesheet" type="text/css" href="../resources/css/side.css">
+        <script  src="../js/jquery-3.5.1.min.js"></script> 
+        <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
+        <link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
     </head>
     <style>
        
