@@ -6,10 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자(회원 목록 조회)</title>
-    <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/pagination.css">
-    <link rel="stylesheet" type="text/css" href="../../resources/css/boardtool.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/headerfooter.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/side.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/boardtool.css">
 </head>
 <style>
 
