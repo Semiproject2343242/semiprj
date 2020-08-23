@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 기본틀</title>
-<script  src="../resources/js/jquery-3.5.1.min.js"></script> 
+<script src="../../resources/js/jquery-3.5.1.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../../resources/css/headerfooter.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/side.css">
