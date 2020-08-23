@@ -7,16 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/* 
-<servlet>
-		<servlet-name>SignUpFormServlet</servlet-name>
-		<servlet-class>member.controller.SignUpFormServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SignUpFormServlet</servlet-name>
-		<url-pattern>/signUpForm.me</url-pattern>
-	</servlet-mapping>
-*/
 
 @WebServlet("/signUpForm.me")
 public class SignUpFormServlet extends HttpServlet {
@@ -28,8 +18,7 @@ public class SignUpFormServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.sendRedirect("WEB-INF/views/member/signUpForm.jsp");
-		request.getRequestDispatcher("WEB-INF/views/member/signUpForm.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Member/회원가입.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
