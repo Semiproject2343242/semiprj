@@ -1,22 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
- <link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>
 <style>
     #b-main{background-color:rgb(15, 76, 130); color:white;}
     tbody{background-color:#F7F7F7}
 </style>
 <body>
+    <%@ include file="../Common/header.jsp" %>
      <hr>
     <section>
         <aside>
-            <h2 ><a href="#">Q/A</h2></a>
-            <hr></hr>
-            <h3 ><a href="#">Q/A</h3></a>
-            <h3 ><a href="#">FAQ</h3></a>
+           <h2> 묻고 답하기</h2></a>
+            <hr>
+            <dl>
+                <dt>
+                    <a href="<%=request.getContextPath()%>/main.qa"><h3>Q/A</h3></a>
+                </dt>
+                <dt>
+                    <a href="<%=request.getContextPath()%>/main.fa"><h3>FAQ</h3></a>
+                </dt>
+            </dl>
         </aside>
         <div id="main_section">
             <h2 align="center">Q/A</h2>
@@ -99,5 +109,10 @@
             </caption>
         </div>
     </section>
+   <%@ include file="../Common/footer.jsp" %>
 </body>
 </html>
+
+
+
+ 
