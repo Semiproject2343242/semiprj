@@ -5,8 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/EA_writer.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
+<!--     <link rel="stylesheet" type="text/css" href="../../../resources/css/EA_writer.css"> -->
+   <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>
 <style>
  section{

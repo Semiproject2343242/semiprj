@@ -20,7 +20,7 @@ public class LoginPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("WEB-INF/views/Member/로그인 페이지.jsp");
+		request.getRequestDispatcher("WEB-INF/views/Member/로그인_페이지.jsp").forward(request, response);;
 		
 	}
 
