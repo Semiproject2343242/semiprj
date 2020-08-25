@@ -63,6 +63,6 @@ hr {
 #b-main{background-color:rgb(15, 76, 130); color:white;}
 tbody{background-color:rgb(255, 255, 255)}
 .table{background-color:rgb(226, 226, 226); text-align:center; font-size:12pt;}
-#tablename{margin-left:200px; align-self:center;}
+#tablename{align-self:center;}
 #게시판이름{text-align:center;}
 

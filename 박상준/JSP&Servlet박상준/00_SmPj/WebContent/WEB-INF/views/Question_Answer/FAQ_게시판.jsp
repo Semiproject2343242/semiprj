@@ -4,8 +4,7 @@
 <html>
 <head>
 <!-- 	<meta charset="UTF-8"> -->
-	<title>FAQ_게시판</title>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<title>FAQ 게시판</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 	<style>
 	    /* #div1{
@@ -35,13 +34,14 @@
 	    }
 	
 	</style>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
     <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-            <a href="<%=request.getContextPath()%>/loginPage.me"><h2> Q/A</h2></a>
+            <a href="#"><h2> Q/A</h2></a>
             <hr>
             <dl>
                 <dt>
@@ -77,18 +77,18 @@
                 </script>
             <!-- </div> -->
             <br>
-<!--         <br clear="all">    -->
-<!--         <div class = "pagination"> -->
-<!--         <ul> -->
-<!--                 <a href="#" title = "이전" class="pre"><</a> -->
-<!--                 <a href="#" class="active">1</a> -->
-<!--                 <a href="#">2</a> -->
-<!--                 <a href="#">3</a> -->
-<!--                 <a href="#">4</a> -->
-<!--                 <a href="#">5</a> -->
-<!--                 <a href="#" title = "다음" class="next">></a> -->
-<!--             </ul> -->
-<!--         </div> -->
+        <br clear="all">   
+        <div class = "pagination">
+        <ul>
+                <a href="#" title = "이전" class="pre"><</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#" title = "다음" class="next">></a>
+            </ul>
+        </div>
         </div> 
         
     </section>
