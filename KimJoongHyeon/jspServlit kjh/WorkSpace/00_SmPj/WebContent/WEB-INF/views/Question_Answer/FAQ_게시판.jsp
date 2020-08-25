@@ -3,40 +3,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>게시판 기본틀</title>
-<script src="../../resources/js/jquery-3.5.1.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
-
-<style>
-    /* #div1{
-        text-align: center;  
-        height: auto; 
-    } */
-    .FAQ_title{
-        text-align: left;
-        height:45px;        
-        font-size:20px;
-        cursor: pointer;
-        padding-left: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid black;
-    }
-    .contents{ 
-        text-align: left;
-        height: 200px; 
-        background: RGB(238,238,238 ); 
-        display: none; 
-        line-height: auto;      
-        margin-left: 15px;
-    } 
-    .pagination{
-        text-align: center;
-        padding-right: 200px;
-    }
-
-</style>
+<!-- 	<meta charset="UTF-8"> -->
+	<title>FAQ 게시판</title>
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/body.css" />
+	<style>
+	    /* #div1{
+	        text-align: center;  
+	        height: auto; 
+	    } */
+	    .FAQ_title{
+	        text-align: left;
+	        height:45px;        
+	        font-size:20px; 
+	        cursor: pointer;
+	        padding-left: 15px;
+	        padding-bottom: 15px;
+	        border-bottom: 1px solid black;
+	    }
+	    .contents{ 
+	        text-align: left;
+	        height: 200px; 
+	        background: RGB(238,238,238 ); 
+	        display: none; 
+	        line-height: auto;      
+	        margin-left: 15px;
+	    } 
+	    .pagination{
+	        text-align: center;
+	        padding-right: 200px;
+	    }
+	
+	</style>
+	<script src="../../../resources/js/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
