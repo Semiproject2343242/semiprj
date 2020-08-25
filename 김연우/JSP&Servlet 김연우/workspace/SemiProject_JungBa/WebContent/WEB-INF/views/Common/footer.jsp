@@ -29,13 +29,17 @@ footer {
   color: rgb(255, 213, 0);
   margin: 0px auto;
 }
+
 </style>
 
 </head>
 <body>
 
 <hr>
-<%@ include file="../Common/footer.jsp" %>
-
+<footer>
+   <div class="footer_box">
+      Copyrightⓒ2020 Flower than java Project All Rights Reserved.
+   </div>
+</footer>
 </body>
 </html>

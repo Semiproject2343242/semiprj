@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자(회원 상세 조회)</title>
-<link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
     #bottomContent {
