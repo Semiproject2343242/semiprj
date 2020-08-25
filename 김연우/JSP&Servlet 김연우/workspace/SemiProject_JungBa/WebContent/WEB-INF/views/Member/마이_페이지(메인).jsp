@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지(메인)</title>
-<link rel="stylesheet" type="text/css" href="../.../../resources/css/body.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
 .box {
@@ -61,6 +63,7 @@
 </style>
 
 <body>
+	<%@ include file="../Common/header.jsp"%>
 	<section>
 		<aside>
 			<h2>
@@ -173,6 +176,8 @@
 		</div>
 
 	</section>
+
+	<%@ include file="../Common/footer.jsp"%>
 </body>
 
 </html>

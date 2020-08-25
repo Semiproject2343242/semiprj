@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/signUpForm.me")
-public class SignUpFormServlet extends HttpServlet {
+@WebServlet("/myPage.me")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	
-    public SignUpFormServlet() {
+       
+    public MyPageServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Member/회원가입.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("WEB-INF/views/Member/마이_페이지(메인).jsp").forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

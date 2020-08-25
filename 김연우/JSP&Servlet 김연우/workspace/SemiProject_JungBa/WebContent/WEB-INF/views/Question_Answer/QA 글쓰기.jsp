@@ -5,8 +5,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>게시판 기본틀</title>
- <link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/QAcontents.css" />
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/QAcontents.css" />
   </head>
   <style></style>
   <body>
