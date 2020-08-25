@@ -1,4 +1,4 @@
-package question.model.dao;
+package board.model.dao;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
