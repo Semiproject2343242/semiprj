@@ -26,7 +26,18 @@ public class QAMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Question_Answer/QA_게시판.jsp").forward(request, response);
+ArrayList<Notice> list = new NoticeService().selectList();
+		
+		String page = null;
+		if(list != null) {
+			page = "WEB-INF/views/Question_Answer/QA_게시판.jsp";
+			request.setAttribute("list", list);
+		}else {
+			page = "WEB-INF/views/common/errorPage.jsp";
+			request.setAttribute("msg", "Q/A 게시판 조회에 실패하였습니다.");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
