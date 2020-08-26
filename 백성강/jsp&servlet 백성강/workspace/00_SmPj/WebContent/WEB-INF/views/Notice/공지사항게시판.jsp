@@ -44,38 +44,7 @@
             <td>1</td>
             <td>1</td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td><a href>공지사항2</a></td>
-            <td>박상준</td>
-            <td>2020.08.02</td>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td><a href>공지사항3</a></td>
-            <td>김준표</td>
-            <td>2020.08.02</td>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td><a href>공지사항4</a></td>
-            <td>백지후</td>
-            <td>2020.08.02</td>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td><a href>공지사항5</a></td>
-            <td>구준표</td>
-            <td>2020.08.02</td>
-            <td>1</td>
-            <td>1</td>
-        </tr>
+
         </tbody>
     </table>
     <br>  
