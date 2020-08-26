@@ -9,24 +9,24 @@ public class Board {
 	private String 	boardContent;    	// 게시판 내용				// B_CONTENT
 	private Date 	boardCreateDate;   	// 게시판 생성 날짜			// B_DATE
 	private Date 	boardModifyDate;   	// 게시판 수정 날짜			// B_RDATE
-	private int 	boardViewCount;     // 게시판 조회수				// B_VIEW_COUNT
-	private int 	boardReCommend;     // 게시판 추천수				// B_RECOMMEND
+	private int 	boardViewCount;     // 게시판 조회수			// B_VIEW_COUNT
+	private int 	boardReCommend;     // 게시판 추천수			// B_RECOMMEND
 	private char 	boardEnable;       	// 게시판 삭제상태			// B_ENABLE
 	private int 	boardWriterNo;     	// 게시판 글쓴이 회원 번호		// B_WRITER
 	private String 	boardWriter;        // 게시판 글쓴이 회원			// MEMBER_NICKNAME
 	private int 	boardReply;     	// 게시판 댓글				// B_REPLY_COUNT
 	private String 	acState;         	// 접수상태				// AC_STATE
 	private String 	lcName;          	// 지역이름				// LC_NAME
-	private String 	enrollState;     	// 등록요청 상태				// ENROLL_STATE
+	private String 	enrollState;     	// 등록요청 상태			// ENROLL_STATE
 	private String 	emState;         	// 취업상태				// EM_STATE
 	private String 	tcName;          	// 대상명			    	// TC_NAME
-	private String 	cgName;          	// 카테고리 이름				// CG_NAME
+	private String 	cgName;          	// 카테고리 이름			// CG_NAME
 	                                       
 	public Board() {}
 	
 	//Q/A 리스트
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount, String boardWriter, int boardReply,String cgName) {
+			Date boardModifyDate, int boardViewCount, int boardWriterNo, String boardWriter, int boardReply,String cgName) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -34,6 +34,7 @@ public class Board {
 		this.boardCreateDate = boardCreateDate;
 		this.boardModifyDate = boardModifyDate;
 		this.boardViewCount = boardViewCount;
+		this.boardWriterNo = boardWriterNo;
 		this.boardWriter = boardWriter;
 		this.boardReply = boardReply;
 		this.cgName = cgName;
