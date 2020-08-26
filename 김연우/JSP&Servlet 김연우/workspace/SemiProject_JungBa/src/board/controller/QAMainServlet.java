@@ -1,23 +1,28 @@
-package question.controller;
+package board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.vo.Board;
+import board.model.service.QuestionService;
+
 /**
- * Servlet implementation class FAQServlet
+ * Servlet implementation class QAMainServlet
  */
-@WebServlet("/main.fa")
-public class FAQServlet extends HttpServlet {
+@WebServlet("/main.qa")
+public class QAMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FAQServlet() {
+    public QAMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +31,18 @@ public class FAQServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Question_Answer/FAQ_게시판.jsp").forward(request, response);
+		ArrayList<Board> list = new QuestionService().selectList();
+		
+		String page = null;
+		if(list != null) {
+			page = "WEB-INF/views/Question_Answer/QA_게시판.jsp";
+			request.setAttribute("list", list);
+		}else {
+			page = "WEB-INF/views/Common/errorPage.jsp";
+			request.setAttribute("msg", "Q/A 게시판 조회에 실패하였습니다.");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

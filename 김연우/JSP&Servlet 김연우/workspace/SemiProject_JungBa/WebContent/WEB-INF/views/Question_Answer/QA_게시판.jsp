@@ -1,11 +1,16 @@
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); %>
+    
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>
 <style>
     #b-main{background-color:rgb(15, 76, 130); color:white;}
@@ -16,10 +21,16 @@
      <hr>
     <section>
         <aside>
-            <h2 ><a href="#">Q/A</h2></a>
-            <hr></hr>
-            <h3 ><a href="#">Q/A</h3></a>
-            <h3 ><a href="#">FAQ</h3></a>
+           <h2> 묻고 답하기</h2></a>
+            <hr>
+            <dl>
+                <dt>
+                    <a href="<%=request.getContextPath()%>/main.qa"><h3>Q/A</h3></a>
+                </dt>
+                <dt>
+                    <a href="<%=request.getContextPath()%>/main.fa"><h3>FAQ</h3></a>
+                </dt>
+            </dl>
         </aside>
         <div id="main_section">
             <h2 align="center">Q/A</h2>
@@ -36,54 +47,30 @@
                 <thead>
                     <tr id = "b-main">
                         <th width= "30px">번호</th>
+                        <th width= "100px">카테고리</th>
                         <th width= "400px">제목</th>
                         <th width= "50px">작성자</th>
                         <th width= "100px">날짜</th>
                         <th width= "40px">조회</th>
-                        <th width= "40px">추천</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href>나자바바라</a></td>
-                        <td>구준표</td>
-                        <td>2020.08.02</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href>메에로옹</a></td>
-                        <td>박상준</td>
-                        <td>2020.08.02</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href>이리오너르</a></td>
-                        <td>김준표</td>
-                        <td>2020.08.02</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href>냠냠냠냠</a></td>
-                        <td>백지후</td>
-                        <td>2020.08.02</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><a href>옹뇨요</a></td>
-                        <td>구준표</td>
-                        <td>2020.08.02</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                  <% if(list.isEmpty()){ %>
+	            <tr>
+	               <td colspan="6">글이 존재 하지 않습니다.</td>
+	            </tr>
+            <% } else { %>
+            <% 		for(Board b : list){ %>
+          	<tr>
+          		<td><%= b.getBoardNo() %></td>
+          		<td><%= b.getCgName() %></td>
+          		<td><%= b.getBoardTitle() %></td>
+          		<td><%= b.getBoardWriter() %></td>
+          		<td><%= b.getBoardCreateDate()  %></td>
+          		<td><%= b.getBoardViewCount()  %></td>
+          	</tr>
+            <% 		} %>
+            <% } %>
                 </tbody>
             </table>
             <br>  

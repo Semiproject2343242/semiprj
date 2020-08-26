@@ -5,6 +5,7 @@
 <head>
 <!-- 	<meta charset="UTF-8"> -->
 	<title>FAQ 게시판</title>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 	<style>
 	    /* #div1{
@@ -34,21 +35,20 @@
 	    }
 	
 	</style>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
     <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-            <a href="#"><h2> Q/A</h2></a>
+            <h2> 묻고 답하기</h2></a>
             <hr>
             <dl>
                 <dt>
-                    <a href="#"><h3>Q/A</h3></a>
+                    <a href="<%=request.getContextPath()%>/main.qa"><h3>Q/A</h3></a>
                 </dt>
                 <dt>
-                    <a href="#"><h3>자주 묻는 질문</h3></a>
+                    <a href="<%=request.getContextPath()%>/main.fa"><h3>FAQ</h3></a>
                 </dt>
             </dl>
         </aside>
@@ -77,18 +77,18 @@
                 </script>
             <!-- </div> -->
             <br>
-        <br clear="all">   
-        <div class = "pagination">
-        <ul>
-                <a href="#" title = "이전" class="pre"><</a>
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#" title = "다음" class="next">></a>
-            </ul>
-        </div>
+<!--         <br clear="all">    -->
+<!--         <div class = "pagination"> -->
+<!--         <ul> -->
+<!--                 <a href="#" title = "이전" class="pre"><</a> -->
+<!--                 <a href="#" class="active">1</a> -->
+<!--                 <a href="#">2</a> -->
+<!--                 <a href="#">3</a> -->
+<!--                 <a href="#">4</a> -->
+<!--                 <a href="#">5</a> -->
+<!--                 <a href="#" title = "다음" class="next">></a> -->
+<!--             </ul> -->
+<!--         </div> -->
         </div> 
         
     </section>
