@@ -17,7 +17,7 @@
         <div id="main_section">
             <div id="contents">
                 <h2 id="ea_h21">NO.01</h2>
-                <h2 id="ea_h22">지원정책</h2>
+                <h2 id="ea_h22">지원정책 게시판</h2>
                 <hr>
                 <h1 style="text-align: center">지원정책 제목</h1>
                 <br>
@@ -26,7 +26,7 @@
                 <div id="ea_buttons">
                     <button class="ea_button1"> &lt; 이전글</button>
                     <button class="ea_button1">다음글 &gt;</button>
-                    <button class="ea_button1">목록</button><br>
+                    <button class="ea_button1"><a href="<%= request.getContextPath() %>/spMain.cm">목록</a></button><br>
                 </div>
 
                 <br clear="all"><br> 

@@ -17,16 +17,16 @@
         <div id="main_section">
             <div id="contents">
                 <h2 id="ea_h21">NO.01</h2>
-                <h2 id="ea_h22">지원정책</h2>
+                <h2 id="ea_h22">대외활동 게시판</h2>
                 <hr>
-                <h1 style="text-align: center">지원정책 제목</h1>
+                <h1 style="text-align: center">대외활동 제목</h1>
                 <br>
                 <text id="ea_text1"> 백성강 <br>2020.08.07 14:47 조회수 1 댓글 2</text>
                 <br>
                 <div id="ea_buttons">
-                    <button class="ea_button1"> &lt; 이전글</button>
-                    <button class="ea_button1">다음글 &gt;</button>
-                    <button class="ea_button1">목록</button><br>
+                    <button class="ea_button1" id="preDoc"> &lt; 이전글</button>
+                    <button class="ea_button1" id="nxtDoc">다음글 &gt;</button>
+                    <button class="ea_button1"><a href="<%= request.getContextPath() %>/eaMain.cm">목록</a></button><br>
                 </div>
 
                 <br clear="all"><br> 
@@ -37,13 +37,13 @@
                     </div>
 
                     <div id="ea_div3"> 
-                        <text><h2>제목 입력란</h2></text>
+                        <text><h2>2020 경기도 즐거운 체험 프로그램 공모</h2></text>
                         <ul>
                             <li class="ea_li">모집일정 : 2020-08-01(토) ~ 2020-08-18(화) 18:00 까지</li>
                             <br>
-                            <li class="ea_li">지원대상: 만 18세 이상 만 34세 이하 경기도 거주자</li>
+                            <li class="ea_li">활동기간 : 2020-09-01(토) ~ 2020-09-18(화) 18:00 까지</li>
                             <br>
-                            <li class="ea_li">접수상태 : 접수중</li>
+                            <li class="ea_li">활동장소 : kh정보교육원</li>
                             <br>
                             <li class="ea_li">접수방법 : 이메일 접수</li>
                         </ul>
@@ -61,6 +61,7 @@
                         <ul>
                             <li>대상 : 경기도내 소재한 민간 관광업체</li>
                             <li>신청기간 : 2020.07.29(수) ~ 2020.08.06(목) 까지</li>
+                            <li>활동기간 : 2020.07.29(수) ~ 2020.08.06(목) 까지</li>
                             <li>신청방법 : <a href="#" >이메일접수</a></li>
                             <li>상세페이지 : <button id="ea_button3">홈페이지 바로가기</button> </button></li>
                             <li>담당자 이메일 : nandong@gto.or.kr</li>
@@ -82,7 +83,7 @@
                             <table id="ea_table1">
                                 <tr>
                                     <td width="130px">기관명</td>
-                                    <td width="300px">파주 청년 일자리 지원 센터</td>
+                                    <td width="300px">국립국제교육원</td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
@@ -106,11 +107,71 @@
 
                     <br clear="all"><br> 
 
+                    <!-- 댓글 --> 
+
+                    <div> <h2>댓글</h2> </div>
+                    <hr><br>
+
+                    <div id="ea_comment">
+                        <img src="example/1.PNG" id="ea_img2">
+                        <text id="ea_text4"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                            댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
+                        </text>
+                        <text id="ea_text5">
+                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
+                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
+                            <br>2020.08.07 14:47 
+                        </text>
+                    </div>
+        
+                    <div id="ea_comment">
+                        <img src="example/1.PNG" id="ea_img2">
+                        <text id="ea_text4"> 백성강 
+                            <p id="ea_p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                                댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                            </p>
+                        </text>
+                        <text id="ea_text5">
+                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
+                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
+                            <br>2020.08.07 14:47 
+                        </text>
+                    </div>
+                    <br clear="all"><br>
+                    <div>
+                        <textarea id="ea_textarea" placeholder="댓글을 입력하세요."></textarea><br>
+                        <button id="ea_button5">등록</button>
+                    </div>
                 </div>
             </div>
         </div>
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>
 </body>
+<script>
+$("#preDoc").on("click",function(){ _this.preNextDoc('pre'); }); 
+//다음글 
+$("#nxtDoc").on("click",function(){ 
+		_this.preNextDoc('next'); }); 
+preNextDoc : function(flag){ 
+				var _this = this; 
+				var params = { 
+						docnum : _this.docnum, 
+						brdCode : _this.brdCode, 
+						brdType : _this.brdType, 
+						flag : flag, //pre,nxt 
+						viewFlag : _this.viewFlag 
+				} $.ajax({ 
+					type:"POST",
+					url: ePortalConfig.boardContext+"/preNextDoc", 
+					dataType: "json", 
+					data : params, 
+					cache : false,
+					success : function(res){
+				}
+			}
+		}
+출처: https://mkil.tistory.com/431 [나비와꽃기린]
+</script>
 </html>
 
