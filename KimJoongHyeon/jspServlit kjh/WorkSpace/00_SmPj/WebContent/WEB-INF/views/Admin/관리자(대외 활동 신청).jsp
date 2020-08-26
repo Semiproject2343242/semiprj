@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <title>관리자(대외 활동 신청)</title>
     
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
 </head>
 <style>

@@ -8,11 +8,12 @@ public class PageInfo {
 	private int maxPage;		// 최대 페이지 중 가장 마지막 페이지
 	private int startPage;		// 페이징된 페이지 중 시작 페이지
 	private int endPage;		// 페이징된 페이지 중 마지막 페이지
-
+	private String pageName;	// 페이지 이름
+	
 	public PageInfo() {}
 
 	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
-			int endPage) {
+			int endPage, String pageName) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
@@ -21,6 +22,7 @@ public class PageInfo {
 		this.maxPage = maxPage;
 		this.startPage = startPage;
 		this.endPage = endPage;
+		this.pageName = pageName;
 	}
 
 	public int getListCount() {
@@ -79,12 +81,20 @@ public class PageInfo {
 		this.endPage = endPage;
 	}
 
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
 	@Override
 	public String toString() {
 		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
 				+ ", boardLimit=" + boardLimit + ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage="
-				+ endPage + "]";
+				+ endPage + ", pageName=" + pageName + "]";
 	}
-	
+
 	
 }
