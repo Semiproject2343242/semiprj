@@ -27,7 +27,7 @@
         <div id="main_section">
             <br>
         <div id="tablename">
-            <h2 id="게시판이름">자유 게시판</h2>
+            <h2 id="게시판이름">자유게시판</h2>
          
 
     <table class="table"  width="800px" align="center">
