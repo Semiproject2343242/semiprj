@@ -10,12 +10,23 @@ import java.util.ArrayList;
 
 import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
+import board.model.vo.PageInfo;
 
 public class QuestionService {
-	public ArrayList<Board> selectList(){
+	public int getListCount() {
+	Connection conn = getConnection();
+		
+		int result = new QuestionDAO().getListCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public ArrayList<Board> selectList(PageInfo pi){
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new QuestionDAO().selectList(conn);
+		ArrayList<Board> list = new QuestionDAO().selectList(conn,pi);
 		
 		close(conn);
 		

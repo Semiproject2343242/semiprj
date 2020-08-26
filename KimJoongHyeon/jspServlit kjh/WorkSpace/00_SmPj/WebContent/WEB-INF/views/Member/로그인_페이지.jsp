@@ -8,7 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 <style>
 
-
+section {
+	display: block;
+}
 #ptag>a{
 	text-decoration: none;
 }
@@ -34,7 +36,7 @@
 				</table>
 			</form>
 			<p align="center" id="ptag">
-				<a href=#>아이디 찾기</a> | <a href=#>비밀번호 찾기</a> | <a href=#>회원가입 찾기</a>
+				<a href="<%=request.getContextPath()%>/serchIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/searchPwdForm.me">비밀번호 찾기</a> | <a href="<%=request.getContextPath()%>/insertForm.me">회원가입</a>
 			</p>
 		</div>
 	</section>

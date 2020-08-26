@@ -26,7 +26,9 @@ public class SupportMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Information/정보게시판.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Support_Policy/지원정책내용확인.jsp").forward(request, response);
+		
+	
 	}
 
 	/**
