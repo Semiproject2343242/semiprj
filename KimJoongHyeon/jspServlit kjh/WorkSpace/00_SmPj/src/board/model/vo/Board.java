@@ -12,8 +12,8 @@ public class Board {
 	private int 	boardViewCount;     // 게시판 조회수				// B_VIEW_COUNT
 	private int 	boardReCommend;     // 게시판 추천수				// B_RECOMMEND
 	private char 	boardEnable;       	// 게시판 삭제상태			// B_ENABLE
-	private int 	boardWriter;     	// 게시판 글쓴이 회원 번호		// B_WRITER
-//	private String 	boardWriter;        // 게시판 글쓴이 회원			// AC_STATE
+	private int 	boardWriterNo;     	// 게시판 글쓴이 회원 번호		// B_WRITER
+	private String 	boardWriter;        // 게시판 글쓴이 회원			// MEMBER_NICKNAME
 	private int 	boardReply;     	// 게시판 댓글				// B_REPLY_COUNT
 	private String 	acState;         	// 접수상태				// AC_STATE
 	private String 	lcName;          	// 지역이름				// LC_NAME
@@ -26,7 +26,7 @@ public class Board {
 	
 	//Q/A 리스트
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount, int boardWriter, int boardReply,String cgName) {
+			Date boardModifyDate, int boardViewCount, String boardWriter, int boardReply,String cgName) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -39,11 +39,10 @@ public class Board {
 		this.cgName = cgName;
 	}
 
-
 	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriter,
-			int boardReply, String acState, String lcName, String enrollState, String emState, String tcName,
-			String cgName) {
+			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
+			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
+			String tcName, String cgName) {
 		super();
 		this.boardNo = boardNo;
 		this.boardName = boardName;
@@ -54,6 +53,7 @@ public class Board {
 		this.boardViewCount = boardViewCount;
 		this.boardReCommend = boardReCommend;
 		this.boardEnable = boardEnable;
+		this.boardWriterNo = boardWriterNo;
 		this.boardWriter = boardWriter;
 		this.boardReply = boardReply;
 		this.acState = acState;
@@ -136,11 +136,19 @@ public class Board {
 		this.boardEnable = boardEnable;
 	}
 
-	public int getBoardWriter() {
+	public int getBoardWriterNo() {
+		return boardWriterNo;
+	}
+
+	public void setBoardWriterNo(int boardWriterNo) {
+		this.boardWriterNo = boardWriterNo;
+	}
+
+	public String getBoardWriter() {
 		return boardWriter;
 	}
 
-	public void setBoardWriter(int boardWriter) {
+	public void setBoardWriter(String boardWriter) {
 		this.boardWriter = boardWriter;
 	}
 
@@ -205,10 +213,12 @@ public class Board {
 		return "Board [boardNo=" + boardNo + ", boardName=" + boardName + ", boardTitle=" + boardTitle
 				+ ", boardContent=" + boardContent + ", boardCreateDate=" + boardCreateDate + ", boardModifyDate="
 				+ boardModifyDate + ", boardViewCount=" + boardViewCount + ", boardReCommend=" + boardReCommend
-				+ ", boardEnable=" + boardEnable + ", boardWriter=" + boardWriter + ", boardReply=" + boardReply
-				+ ", acState=" + acState + ", lcName=" + lcName + ", enrollState=" + enrollState + ", emState="
-				+ emState + ", tcName=" + tcName + ", cgName=" + cgName + "]";
+				+ ", boardEnable=" + boardEnable + ", boardWriterNo=" + boardWriterNo + ", boardWriter=" + boardWriter
+				+ ", boardReply=" + boardReply + ", acState=" + acState + ", lcName=" + lcName + ", enrollState="
+				+ enrollState + ", emState=" + emState + ", tcName=" + tcName + ", cgName=" + cgName + "]";
 	}
+
+	
 	
 	
 }
