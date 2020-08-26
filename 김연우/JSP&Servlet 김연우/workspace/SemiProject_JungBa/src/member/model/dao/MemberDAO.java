@@ -76,5 +76,37 @@ public class MemberDAO {
 		return result;
 		
 	}
+
+	public Member selectMember(Connection conn, String loginMemberId) {
+		// selectMember = SELECT * FROM MEMBER WHERE MEMBER_ID = ?
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, loginMemberId);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				member = new Member(rset.getInt("MEMBER_NO"), rset.getString("MEMBER_ID"),
+						rset.getString("MEMBER_PW"), rset.getString("MEMBER_NAME"), rset.getString("MEMBER_NICKNAME"),
+						rset.getString("MEMBER_GENDER"), rset.getDate("MEMBER_BIRTHDAY"), rset.getString("MEMBER_PHONE"),
+						rset.getString("MEMBER_EMAIL"),rset.getString("MEMBER_ADDRESS"),rset.getDate("MEMBER_REGDATE"), 
+						rset.getString("MEMBER_ENABLE"), rset.getString("MEMBER_GRADE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return member;
+	}
 	
 }

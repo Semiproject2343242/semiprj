@@ -5,8 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
     
@@ -14,34 +13,29 @@
 <body>
    <%@ include file="../Common/header.jsp" %>
     <section>
-        <aside>
-            <h2 ><a href="#">마이페이지</h2></a>
+         <aside>
+           <h2 ><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</h2></a>
             <hr>
-            <div> <a href="#"><h2>나의게시물</h2></a>
-            
+            <div>
             <dl>
-                <dt><a href="#"><h3>정보게시판</h3></a></dt>
-                <dt><a href="#"><h3>자유게시판</h3></a></dt>
-                <dt><a href="#"><h3>Q / A</h3></a></dt>
+             	<dt><a href="<%= request.getContextPath() %>/fMain.cm"><h3>자유게시판</h3></a></dt>
+                <dt><a href="<%= request.getContextPath() %>/spMain.cm"><h3>지원정책 게시판</h3></a></dt>
+                <dt><a href="<%= request.getContextPath() %>/eaMain.cm"><h3>대외활동 게시판</h3></a></dt>
+               
             </dl>
             </div>
-            <a href="#"><h2>회원탈퇴</h2></a>
         </aside>
         <div id="main_section">
             <br>
         <div id="tablename">
-            <h2 id="게시판이름">정보게시판</h2>
+            <h2 id="게시판이름">지원정책 게시판</h2>
          
 
     <table class="table"  width="800px" align="center">
     
     <caption>
     <div align = "right">
-    <select>
-        <option value= "5pc" >5개씩 보기</option>
-        <option value= "10pc">10개씩 보기</option>
-    </select>
-    <button>글쓰기</button>
+     <button><a href="<%= request.getContextPath() %>/spInsertForm.cm">글쓰기</button>
     </div>
     </caption>
     
@@ -58,7 +52,7 @@
         <tbody>
         <tr>
             <td>1</td>
-            <td><a href>나자바바라</a></td>
+            <td><a href="<%= request.getContextPath() %>/spDetail.cm">나자바바라</a></td>
             <td>구준표</td>
             <td>2020.08.02</td>
             <td>1</td>
@@ -66,7 +60,7 @@
         </tr>
         <tr>
             <td>2</td>
-            <td><a href>메에로옹</a></td>
+            <td><a href="<%= request.getContextPath() %>/spDetail.cm">메에로옹</a></td>
             <td>박상준</td>
             <td>2020.08.02</td>
             <td>1</td>
@@ -74,7 +68,7 @@
         </tr>
         <tr>
             <td>3</td>
-            <td><a href>이리오너르</a></td>
+            <td><a href="<%= request.getContextPath() %>/spDetail.cm">이리오너르</a></td>
             <td>김준표</td>
             <td>2020.08.02</td>
             <td>1</td>
@@ -82,7 +76,7 @@
         </tr>
         <tr>
             <td>4</td>
-            <td><a href>냠냠냠냠</a></td>
+            <td><a href="<%= request.getContextPath() %>/spDetail.cm">냠냠냠냠</a></td>
             <td>백지후</td>
             <td>2020.08.02</td>
             <td>1</td>
@@ -90,7 +84,7 @@
         </tr>
         <tr>
             <td>5</td>
-            <td><a href>옹뇨요</a></td>
+            <td><a href="<%= request.getContextPath() %>/spDetail.cm">옹뇨요</a></td>
             <td>구준표</td>
             <td>2020.08.02</td>
             <td>1</td>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CommuSupportMainServlet
  */
-@WebServlet("/fmain.cm")
+@WebServlet("/main.cm")
 public class CommuMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class CommuMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Information/지원정책게시판.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Community/자유게시판(커뮤니티).jsp").forward(request, response);
 	}
 
 	/**
