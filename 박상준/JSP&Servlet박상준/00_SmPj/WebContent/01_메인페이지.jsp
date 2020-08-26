@@ -162,7 +162,7 @@ community_util_area */
 
 </head>
 <body>
-<%@ include file="WEB-INF/views/Common/header.jsp" %>
+	<%@ include file="WEB-INF/views/Common/header.jsp" %>
 <section>
 	<!-- 이미지 슬라이더 -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
@@ -326,7 +326,6 @@ community_util_area */
 		</div>
 	</div>
 </section>
-<br>
 <%@ include file="WEB-INF/views/Common/footer.jsp" %>
 
 <script>

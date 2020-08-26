@@ -5,9 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/EA_writer.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/EA_writer.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
 section{
@@ -91,10 +90,10 @@ section{
                   <option value="" selected disabled hidden >선택해주세요.</option>
                   <option value="1">공모전</option>
                   <option value="2">채용박람회/취업박람회</option>
-                  <option value="3">기업지원</option>
-                  <option value="4">창업지원</option>
-                  <option value="5">생활/금융</option>
-                  <option value="6">교통/주거</option>`
+                  <option value="3">경진대회</option>
+                  <option value="4">봉사활동</option>
+                  <option value="5">서포터즈</option>
+                  <option value="6">관람/전시/체험</option>
               </select>
           </h3>
           <h3>

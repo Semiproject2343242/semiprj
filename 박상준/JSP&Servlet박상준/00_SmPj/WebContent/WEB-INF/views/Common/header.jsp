@@ -120,7 +120,7 @@ a {
    <header>
       <div class="header_top">
          <div class="top">
-            <li><a href="#" class="top_btn"><b>마이페이지</b></a></li>
+            <li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
             <li><a href="<%=request.getContextPath()%>/loginPage.me" class="top_btn"><b>로그인</b></a></li>
          </div>
       </div>

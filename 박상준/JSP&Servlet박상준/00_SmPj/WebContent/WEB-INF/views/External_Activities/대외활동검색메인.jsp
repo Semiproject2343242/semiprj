@@ -5,10 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-<!--     <link rel="stylesheet" type="text/css" href="../../../resources/css/EA_writer.css"> -->
-<!--     <link rel="stylesheet" type="text/css" href="../../../resources/css/SP_search.css"> -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/EA_writer.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SP_search.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
   
 </head>
 <style>
@@ -66,14 +65,12 @@
  <!----------------------------------------header------------------------------------------->
     <section>
         <!-- <from> -->
-            <h1 align="center">지원정책 검색</h1>
+            <h1 align="center">대외활동 검색</h1>
             <!-- <div id=External_mainbox> -->
                 <div class="serach_box">
                     <ul class="writertext">
                         <th>
                             <li class="infomation-item"><h3>카테고리:</h3></li>
-                            <li class="infomation-item"><h3>접수상태:</h3></li>
-                            <li class="infomation-item"><h3>취업상태:</h3></li>
                             <li class="infomation-item"><h3>대상별:</h3></li>
                             <li class="infomation-item"><h3>지역별:</h3></li>
                         </th>
@@ -81,29 +78,17 @@
                     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
                     <!-- <div class="writertext-answer"> -->
                     <div class="select_box">
-                        <h3>
-                            <select class="categoty_select" id="sp_category">
-                                <option value="" selected disabled hidden >선택해주세요.</option>
-                                <option value="1">재직지원</option>
-                                <option value="2">취업지원</option>
-                                <option value="3">기업지원</option>
-                                <option value="4">창업지원</option>
-                                <option value="5">생활/금융</option>
-                                <option value="6">교통/주거</option>
-                            </select>
-                        </h3>
-                        <h3 class="sp_Receipt_status">
-                            <div>
-                                <button class = "select_btn" >접수중</button>
-                                <button class = "select_btn" >마감</button>
-                            </div>
-                        </h3>
-                        <h3 class="sp_Employment_status">
-                            <div>
-                                <button class = "select_btn" >구직중</button>
-                                <button class = "select_btn" >재직중</button>
-                            </div>
-                        </h3>
+                          <h3>
+				              <select class="categoty_select" id="ea_category">
+				                  <option value="" selected disabled hidden >선택해주세요.</option>
+				                  <option value="1">공모전</option>
+				                  <option value="2">채용박람회/취업박람회</option>
+				                  <option value="3">경진대회</option>
+				                  <option value="4">봉사활동</option>
+				                  <option value="5">서포터즈</option>
+				                  <option value="6">관람/전시/체험</option>
+				              </select>
+				          </h3>
                         <h3>
                             <div>
                                 <button class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
