@@ -106,6 +106,42 @@
 
                     <br clear="all"><br> 
 
+                    <!-- 댓글 --> 
+
+               <!--  <div> <h2>댓글</h2> </div>
+                    <hr><br>
+
+                    <div id="ea_comment">
+                        <img src="example/1.PNG" id="ea_img2">
+                        <text id="ea_text4"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                            댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
+                        </text>
+                        <text id="ea_text5">
+                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
+                            관리자랑 사용자랑 나눠서 사용해야한다.
+                            <br>2020.08.07 14:47 
+                        </text>
+                    </div>
+        
+                    <div id="ea_comment">
+                        <img src="example/1.PNG" id="ea_img2">
+                        <text id="ea_text4"> 백성강 
+                            <p id="ea_p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                                댓글입니다.댓글입니다.댓글입니다.댓글입니다.
+                            </p>
+                        </text> 
+                        
+                        <text id="ea_text5">
+                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
+                            관리자랑 사용자랑 나눠서 사용해야한다.
+                            <br>2020.08.07 14:47 
+                        </text>
+                    </div>
+                    <br clear="all"><br>
+                    <div>
+                        <textarea id="ea_textarea" placeholder="댓글을 입력하세요."></textarea><br>
+                        <button id="ea_button5">등록</button>
+                    </div> -->
                 </div>
             </div>
         </div>
