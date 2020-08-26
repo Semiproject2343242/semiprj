@@ -8,22 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/loginPage.me")
-public class LoginPageServlet extends HttpServlet {
+@WebServlet("/myPage.me")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public LoginPageServlet() {
+    public MyPageServlet() {
         super();
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("WEB-INF/views/Member/로그인_페이지.jsp").forward(request, response);;
+		request.getRequestDispatcher("WEB-INF/views/Member/마이_페이지(메인).jsp").forward(request, response);
 		
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

@@ -21,7 +21,8 @@ public ArrayList<Board> selectList(Connection conn) {
 	ResultSet rset = null;
 	ArrayList<Board> list = null;
 	
-	String query = "SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME FROM BOARD JOIN MEMBER ON(MEMBER_NO = B_WRITER) WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' ORDER BY B_NO DESC";
+	String query = "SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+					+ "FROM BOARD JOIN MEMBER ON(MEMBER_NO = B_WRITER) WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' ORDER BY B_NO DESC";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -34,7 +35,7 @@ public ArrayList<Board> selectList(Connection conn) {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
-									 rset.getInt("MEMBER_NO"),
+									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"),
 									 rset.getString("CG_NAME"));
 				list.add(bo); 
