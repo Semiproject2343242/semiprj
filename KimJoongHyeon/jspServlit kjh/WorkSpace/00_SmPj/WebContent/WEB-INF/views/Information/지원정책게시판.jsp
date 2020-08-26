@@ -5,8 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 기본틀</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
     
@@ -15,22 +14,20 @@
    <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-            <h2 ><a href="#">마이페이지</h2></a>
+            <h2 ><a href="#">커뮤니티</h2></a>
             <hr>
-            <div> <a href="#"><h2>나의게시물</h2></a>
-            
+            <div>
             <dl>
-                <dt><a href="#"><h3>정보게시판</h3></a></dt>
+                <dt><a href="#"><h3>지원정책 게시판</h3></a></dt>
+                <dt><a href="#"><h3>대외활동 게시판</h3></a></dt>
                 <dt><a href="#"><h3>자유게시판</h3></a></dt>
-                <dt><a href="#"><h3>Q / A</h3></a></dt>
             </dl>
             </div>
-            <a href="#"><h2>회원탈퇴</h2></a>
         </aside>
         <div id="main_section">
             <br>
         <div id="tablename">
-            <h2 id="게시판이름">정보게시판</h2>
+            <h2 id="게시판이름">지원정책 게시판</h2>
          
 
     <table class="table"  width="800px" align="center">

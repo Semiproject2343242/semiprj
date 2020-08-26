@@ -26,7 +26,7 @@ public class CommuSupportMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Community/지원정책게시판(커뮤니티).jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Information/지원정책게시판.jsp").forward(request, response);
 	}
 
 	/**
