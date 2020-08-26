@@ -1,13 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>게시판 기본틀</title>
- <link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
     <link rel="stylesheet" type="text/css" href="../../../resources/css/QAcontents.css" />
   </head>
   <style></style>
   <body>
+    <%@ include file="../Common/header.jsp" %>
     <section>
       <aside>
         <h2>NO.01</h2>
@@ -38,5 +42,6 @@
         </h2>
       </div>
     </section>
+    <%@ include file="../Common/footer.jsp" %>
   </body>
 </html>
