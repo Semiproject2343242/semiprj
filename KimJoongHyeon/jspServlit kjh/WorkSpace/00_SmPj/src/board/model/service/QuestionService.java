@@ -32,4 +32,26 @@ public class QuestionService {
 		
 		return list;
 	}
+
+	public Board selectBoard(int bId) {
+		Connection conn = getConnection();
+		
+		QuestionDAO dao = new QuestionDAO();
+		
+		int result = dao.updateCount(conn, bId);
+		Board board = null;
+		if(result > 0) {
+			board = dao.selectBoard(conn, bId);
+			if(board != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return board;
+	}
 }

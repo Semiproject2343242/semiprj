@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 <style>
 
 section {
@@ -23,15 +22,15 @@ section {
 
 	<section id=loginSection>
 		<div>
-			<form action="<%=request.getContextPath()%>/login.me">
+			<form action="<%=request.getContextPath()%>/login.me" method="post">
 				<h1 align="center">로그인</h1>
 				<table align="center">
 					<tr>
-						<td><input type="text" id="userId" placeholder="아이디를 입력해주세요"></td>
+						<td><input type="text" name="userId" id="userId" placeholder="아이디를 입력해주세요"></td>
 						<td rowspan="2"><button type="submit" id=loginButton3>로그인</button></td>
 					</tr>
 					<tr>
-						<td><input type="password" id="userPwd" placeholder="비밀번호를 입력해주세요"></td>
+						<td><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요"></td>
 					</tr>
 				</table>
 			</form>

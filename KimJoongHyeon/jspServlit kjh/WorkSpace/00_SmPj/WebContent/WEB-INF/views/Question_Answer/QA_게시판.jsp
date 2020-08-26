@@ -23,13 +23,10 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>
 <style>
-    #b-main{background-color:rgb(15, 76, 130); color:white;}
-    tbody{background-color:#F7F7F7}
     .pagingArea button{border-radius: 15px; background: #D5D5D5; margin: 10px;}
 	button:hover{cursor: pointer;}
 	#numBtn{background: rgb(15, 76, 130); color: white; width: 40px; heigth: 40px;}
 	#choosen{background: skyblue; color: white; width: 40px;}
-/* 	.paginbtn{padding: 10px;} */
 </style>
 <body>
     <%@ include file="../Common/header.jsp" %>
@@ -49,24 +46,15 @@
         </aside>
         <div id="main_section">
             <h2 align="center">Q/A</h2>
-            <table class="table table-striped"  width="800px" align="center">
-                <caption>
-                    <div align = "right">
-<!--                     <select> -->
-<!--                         <option value= "5pc" >5개씩 보기</option> -->
-<!--                         <option value= "10pc">10개씩 보기</option> -->
-<!--                     </select> -->
-                    <button>글쓰기</button>
-                    </div>
-                </caption>
+            <table class="contentsTable" width="800px" align="center">
                 <thead>
-                    <tr id = "b-main">
+                    <tr>
                         <th width= "50px">번호</th>
                         <th width= "100px">카테고리</th>
                         <th width= "400px">제목</th>
                         <th width= "100px">작성자</th>
                         <th width= "100px">날짜</th>
-                        <th width= "50px">조회</th>
+                        <th width= "60px">조회</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,7 +65,10 @@
             <% } else { %>
             <% 		for(Board b : list){ %>
           	<tr>
-          		<td><%= b.getBoardNo() %></td>
+          		<td>
+          			<input type="hidden" value="<%= b.getBoardNo() %>">
+          			<%= b.getBoardNo() %>
+          		</td>
           		<td><%= b.getCgName() %></td>
           		<td><%= b.getBoardTitle() %></td>
           		<td><%= b.getBoardWriter() %></td>
@@ -87,10 +78,15 @@
             <% 		} %>
             <% } %>
                 </tbody>
+                <tfoot>
+	                <tr>
+	                <td colspan="5"></td>
+	                <td>
+	                    <button onclick="location.href='<%= request.getContextPath()  %>/mainForm.qa'">글쓰기</button>
+	                </td>
+	                </tr>
+                </tfoot>
             </table>
-            
-            <br>  
-            
             <!--  페이징 -->
 			<div class="paginArea" align="center">
 				<!-- 맨처음으로 -->
@@ -127,7 +123,22 @@
 				<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= maxPage %>'">맨끝</button>
 			</div>
 		</div>
-        </div>
+        <script>
+         $(function(){
+            $('tbody td').mouseenter(function(){
+               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+            }).mouseout(function(){
+               $(this).parent().css('background', 'none');
+            }).click(function(){
+               var bId = $(this).parent().children().children('input').val();
+               <% if(loginUser != null){%>
+                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+               <% }else{ %>
+                  alert('회원만 이용할 수 있는 서비스입니다.')
+               <% } %>
+            })
+         })
+      </script>
     </section>
    <%@ include file="../Common/footer.jsp" %>
 </body>

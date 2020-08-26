@@ -82,6 +82,61 @@ public class QuestionDAO {
 		return list;
 	}
 
+	public int updateCount(Connection conn, int bId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE BOARD SET B_VIEW_COUNT = B_VIEW_COUNT+1 WHERE B_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Board selectBoard(Connection conn, int bId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board board = null;
+		
+		String query = "SELECT * FROM QADETAIL WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board(rset.getInt("B_NO"),
+						 rset.getString("B_TITLE"),
+						 rset.getString("B_CONTENT"),
+						 rset.getDate("B_DATE"),
+						 rset.getDate("B_RDATE"),
+						 rset.getInt("B_VIEW_COUNT"),
+						 rset.getInt("B_WRITER"),
+						 rset.getString("MEMBER_NICKNAME"),
+						 rset.getInt("B_REPLY_COUNT"),
+						 rset.getString("CG_NAME"));
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return board;
+	}
+
 
 	
 }
