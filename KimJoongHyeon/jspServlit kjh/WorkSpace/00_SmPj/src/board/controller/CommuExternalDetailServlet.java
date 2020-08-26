@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CommuSupportMainServlet
+ * Servlet implementation class CommuExternalDetailServlet
  */
-@WebServlet("/fmain.cm")
-public class CommuMainServlet extends HttpServlet {
+@WebServlet("/eaDetail.cm")
+public class CommuExternalDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommuMainServlet() {
+    public CommuExternalDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class CommuMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Information/지원정책게시판.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Community/대외활동내용확인(커뮤니티).jsp").forward(request, response);
 	}
 
 	/**

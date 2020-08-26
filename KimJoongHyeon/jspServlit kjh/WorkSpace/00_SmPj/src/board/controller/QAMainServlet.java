@@ -40,7 +40,7 @@ public class QAMainServlet extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageInfo pi = Page.PageInfo("QA", currentPage);
+		PageInfo pi = Page.PageInfo("QA", currentPage, "/main.qa");
 		//페이징
 		
 		ArrayList<Board> list =  qServuce.selectList(pi);

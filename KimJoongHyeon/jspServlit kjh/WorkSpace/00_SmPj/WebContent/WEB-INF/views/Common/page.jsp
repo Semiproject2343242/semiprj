@@ -9,6 +9,9 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();	
+	String pageName = pi.getPageName();
+	
+	System.out.println(pi);
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +29,7 @@
 	<!--  페이징 -->
 	<div class="pagingArea" align="center">
 		<!-- 맨처음으로 -->
-		<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=1'" id="firstBtn">처음</button>
+		<button class="paginbtn" onclick="location.href='<%= request.getContextPath()+pageName %>?currentPage=1'" id="firstBtn">처음</button>
 		<script>
 			if(<%= currentPage %> <=1){
 				var before = $('#firstBtn');
@@ -34,7 +37,7 @@
 			}
 		</script>
 		<!-- 이전 페이지로 -->
-		<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= currentPage - 1 %>'" id="beforeBtn">이전</button>
+		<button class="paginbtn" onclick="location.href='<%= request.getContextPath()+pageName %>?currentPage=<%= currentPage - 1 %>'" id="beforeBtn">이전</button>
 		<script>
 			if(<%= currentPage %> <=1){
 				var before = $('#beforeBtn');
@@ -46,11 +49,11 @@
 			<% if(p == currentPage){ %>
 			<button id="choosen" disabled><%= p %></button>
 			<% } else{ %>
-				<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= p %>'"><%= p %></button>
+				<button id="numBtn" onclick="location.href='<%= request.getContextPath()+pageName %>?currentPage=<%= p %>'"><%= p %></button>
 			<% } %>
 		<% } %>
 		<!-- 다음 페이지로 -->
-		<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= currentPage + 1 %>'" id="afterBtn">다음</buuton>
+		<button class="paginbtn" onclick="location.href='<%= request.getContextPath()+pageName %>?currentPage=<%= currentPage + 1 %>'" id="afterBtn">다음</buuton>
 		<script>
 			if(<%= currentPage %> >= <%= maxPage %>){
 				var after = $('#afterBtn');
@@ -59,7 +62,7 @@
 		</script>
 		
 		<!-- 맨 끝으로 -->
-		<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= maxPage %>'" id="lastBtn">맨끝</button>
+		<button class="paginbtn" onclick="location.href='<%= request.getContextPath()+pageName %>?currentPage=<%= maxPage %>'" id="lastBtn">맨끝</button>
 		<script>
 			if(<%= currentPage %> >= <%= maxPage %>){
 				var after = $('#lastBtn');

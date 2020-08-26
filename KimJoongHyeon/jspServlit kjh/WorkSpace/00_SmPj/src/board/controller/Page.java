@@ -5,7 +5,7 @@ import board.model.vo.PageInfo;
 
 public class Page {
 
-	public static PageInfo PageInfo(String strName, int iCurrentPage) {
+	public static PageInfo PageInfo(String strName, int iCurrentPage, String strPageName) {
 		BoardService bServuce = new BoardService();
 		
 		//페이징을 위한 변수들
@@ -16,8 +16,9 @@ public class Page {
 		int maxPage;		// 최대 페이지 중 가장 마지막 페이지
 		int startPage;		// 페이징된 페이지 중 시작 페이지
 		int endPage;		// 페이징된 페이지 중 마지막 페이지
+		String pageName;	// 페이지 이름
 		
-		listCount = bServuce.getListCount("QA");
+		listCount = bServuce.getListCount(strName);
 		
 		currentPage = iCurrentPage;
 		
@@ -32,7 +33,10 @@ public class Page {
 		if(maxPage < endPage) { //페이지 수가 10개가 안될때
 			endPage = maxPage;
 		}
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		pageName = strPageName;
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage,pageName);
 		
 		return pi;
 				

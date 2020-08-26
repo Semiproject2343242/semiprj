@@ -5,20 +5,13 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-// 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
-// 	int listCount = pi.getListCount();
-// 	int currentPage = pi.getCurrentPage();
-// 	int maxPage = pi.getMaxPage();
-// 	int startPage = pi.getStartPage();
-// 	int endPage = pi.getEndPage();	
 %>
     
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>게시판 기본틀</title>
+    <title>Q&A 게시판</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>

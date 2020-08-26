@@ -24,6 +24,20 @@ public class Board {
 	                                       
 	public Board() {}
 	
+	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+	}
+
 	//Q/A 리스트
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply,String cgName) {
