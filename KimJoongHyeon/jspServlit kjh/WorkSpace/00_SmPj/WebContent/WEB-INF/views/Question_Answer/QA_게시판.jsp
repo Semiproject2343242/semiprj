@@ -5,13 +5,13 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+// 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();	
+// 	int listCount = pi.getListCount();
+// 	int currentPage = pi.getCurrentPage();
+// 	int maxPage = pi.getMaxPage();
+// 	int startPage = pi.getStartPage();
+// 	int endPage = pi.getEndPage();	
 %>
     
 <!DOCTYPE html>
@@ -23,24 +23,20 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>
 <style>
-    .pagingArea button{border-radius: 15px; background: #D5D5D5; margin: 10px;}
-	button:hover{cursor: pointer;}
-	#numBtn{background: rgb(15, 76, 130); color: white; width: 40px; heigth: 40px;}
-	#choosen{background: skyblue; color: white; width: 40px;}
+    
 </style>
 <body>
     <%@ include file="../Common/header.jsp" %>
-     <hr>
     <section>
         <aside>
-           <h2> 묻고 답하기</h2></a>
+           <h2>묻고 답하기</h2></a>
             <hr>
             <dl>
-                <dt>
-                    <a href="<%=request.getContextPath()%>/main.qa"><h3>Q/A</h3></a>
+               <dt>
+                    <a href="<%=request.getContextPath()%>/main.fa"><h3>FAQ</h3></a>
                 </dt>
                 <dt>
-                    <a href="<%=request.getContextPath()%>/main.fa"><h3>FAQ</h3></a>
+                    <a href="<%=request.getContextPath()%>/main.qa"><h3>Q/A</h3></a>
                 </dt>
             </dl>
         </aside>
@@ -87,41 +83,7 @@
 	                </tr>
                 </tfoot>
             </table>
-            <!--  페이징 -->
-			<div class="paginArea" align="center">
-				<!-- 맨처음으로 -->
-				<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=1'">처음</button>
-	
-				<!-- 이전 페이지로 -->
-				<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= currentPage - 1 %>'" id="beforeBtn">이전</button>
-				<script>
-					if(<%= currentPage %> <=1){
-						var before = $('#beforeBtn');
-						before.attr('disabled', 'true');
-					}
-				</script>
-				
-				<!-- 10개 페이지 목록 -->
-				<% for(int p = startPage; p<= endPage; p++){ %>
-					<% if(p == currentPage){ %>
-					<button id="choosen" disabled><%= p %></button>
-					<% } else{ %>
-						<button id="numBtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= p %>'"><%= p %></button>
-					<% } %>
-				<% } %>
-				
-				<!-- 다음 페이지로 -->
-				<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= currentPage + 1 %>'" id="afterBtn">다음</buuton>
-				<script>
-					if(<%= currentPage %> >= <%= maxPage %>){
-						var after = $('#afterBtn');
-						after.attr('disabled','true');
-					}
-				</script>
-				
-				<!-- 맨 끝으로 -->
-				<button class="paginbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa?currentPage=<%= maxPage %>'">맨끝</button>
-			</div>
+ 		<%@ include file="../Common/page.jsp" %>
 		</div>
         <script>
          $(function(){
