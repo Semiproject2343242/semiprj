@@ -24,6 +24,8 @@ end_temp_folder\
 Thumbs.db
 .settings
 build
-src
 .classpath
 .project
+.metadata
+Servers
+.gitignore
