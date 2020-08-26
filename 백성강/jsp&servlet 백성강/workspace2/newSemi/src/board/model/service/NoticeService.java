@@ -8,14 +8,26 @@ import java.util.ArrayList;
 
 import board.model.dao.NoticeDAO;
 import board.model.vo.Board;
+import board.model.vo.PageInfo;
 
 public class NoticeService {
 	
-	public ArrayList<Board> selectList(){ 
-		//service에서 제일 먼저 해야하는 커넥션 연결.
+	public int getListCount() {
+	Connection conn = getConnection();
+		
+		int result = new NoticeDAO().getListCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	public ArrayList<Board> selectList(PageInfo pi){ 
+
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new NoticeDAO().selectList(conn);
+		ArrayList<Board> list = new NoticeDAO().selectList(conn,pi);
 		
 		close(conn);
 		
