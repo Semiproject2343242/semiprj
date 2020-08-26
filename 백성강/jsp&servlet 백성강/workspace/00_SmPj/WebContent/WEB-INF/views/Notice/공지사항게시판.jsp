@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import = "java.util.ArrayList, notice.model.vo.Notice" %>
+    <% ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +18,6 @@
 	 <%@ include file="../Common/header.jsp" %>
     <h2 id="게시판이름">공지사항게시판</h2>
     <table class="table"  width="800px" align="center">
-    	<caption>
     		<div align = "right">
     			<select>
        				 <option value= "5pc" >5개씩 보기</option>
@@ -24,8 +25,6 @@
     			</select>
     		    <a href="<%= request.getContextPath() %>/main.no">글쓰기</a>
     		</div>
-    	</caption>
-        <thead>
         <tr id = "b-main">
             <th width= "30px">번호</th>
             <th width= "400px">제목</th>
@@ -34,7 +33,6 @@
             <th width= "40px">조회</th>
             <th width= "40px">추천</th>
         </tr>
-        </thead>
         <tbody>
         <tr>
             <td>1</td>
