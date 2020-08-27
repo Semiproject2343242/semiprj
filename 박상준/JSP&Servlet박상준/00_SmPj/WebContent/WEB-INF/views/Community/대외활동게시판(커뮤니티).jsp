@@ -14,7 +14,7 @@
    <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-            <h2 ><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</h2></a>
+            <h2>커뮤니티</h2>
             <hr>
             <div>
             <dl>

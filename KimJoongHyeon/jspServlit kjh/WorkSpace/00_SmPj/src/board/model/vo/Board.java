@@ -24,6 +24,29 @@ public class Board {
 	                                       
 	public Board() {}
 	
+	
+	public Board(int boardNo, String boardTitle, String boardContent, int boardWriterNo, String cgName) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriterNo = boardWriterNo;
+		this.cgName = cgName;
+	}
+
+	//QA게시글 생성
+	public Board(String boardTitle, String boardContent, int boardWriterNo, String 	cgName) {
+		super();
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriterNo = boardWriterNo;
+		this.cgName = cgName;
+		
+	}
+
+	
+	
+	//자유게시판
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply) {
 		super();
@@ -38,7 +61,7 @@ public class Board {
 		this.boardReply = boardReply;
 	}
 
-	//Q/A 리스트
+	//Q/A 리스트,공지사항
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply,String cgName) {
 		super();
