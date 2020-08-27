@@ -51,6 +51,8 @@ a {
 .lagefont {
   font-size: 60px;
 }
+
+
 .navbar {
   padding-top: 50px;
   display: flex;
@@ -61,6 +63,32 @@ a {
   /* background-color: #f8bbd0; */
 }
 
+.navbar_dropdown:hover .navbar_dropdown-content {
+	background-color: white;
+	display: block;
+}
+.navbar_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  max-width: 100px;
+  box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.2);
+  text-align: center;
+  font-size: 12px;
+}
+.navbar_dropdown-content a {
+  color: black;
+  padding: 5px 6px;
+  text-decoration: none;
+  display: inline-table;
+  
+}
+.navbar_dropdown-content a:hover{
+	 background-color: #f5f5f5;
+  	font-weight: bold;
+  	border-radius: 4px;
+}
 .navbar_menu {
   display: flex;
   list-style: none;
@@ -137,14 +165,21 @@ a {
          	<li><a href="<%=request.getContextPath()%>/logout.me" class="top_btn"><b>로그아웃</b></a></li>
          <% } %>
       </div>
-      <nav class="navbar">
+     <nav class="navbar">
          <div class="navbar_title">
             <a href="<%= request.getContextPath() %>"><span class="lagefont">정</span>부지원금<span class="lagefont">바</span>로 지금</a>
          </div>
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
-            <li><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</a></li>
+             <li class="navbar_dropdown">
+               <a href="<%= request.getContextPath() %>/fMain.cm" class="navbar_dropbtn">커뮤니티</a>
+             <div class='navbar_dropdown-content'>
+                 <a href="<%= request.getContextPath() %>/fMain.cm">자유게시판</a><br>
+                 <a href="<%= request.getContextPath() %>/spMain.cm">지원정책</a><br>
+                 <a href="<%= request.getContextPath() %>/eaMain.cm">대외활동</a>
+             </div>
+           </li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>

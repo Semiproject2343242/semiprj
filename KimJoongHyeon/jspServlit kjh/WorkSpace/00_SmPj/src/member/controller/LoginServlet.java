@@ -35,8 +35,6 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("loginUser", loginUser);
-			System.out.println("로그인 했을때 Member : " + member);
-			System.out.println("로그인 했을때 loginUser : " + loginUser);
 			response.sendRedirect(request.getContextPath());
 			
 		} else {
