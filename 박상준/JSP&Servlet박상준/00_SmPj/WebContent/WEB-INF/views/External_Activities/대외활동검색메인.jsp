@@ -71,6 +71,7 @@
                     <ul class="writertext">
                         <th>
                             <li class="infomation-item"><h3>카테고리:</h3></li>
+                            <li class="infomation-item"><h3>접수상태:</h3></li>
                             <li class="infomation-item"><h3>대상별:</h3></li>
                             <li class="infomation-item"><h3>지역별:</h3></li>
                         </th>
@@ -89,6 +90,12 @@
 				                  <option value="6">관람/전시/체험</option>
 				              </select>
 				          </h3>
+				          <h3 class="sp_Receipt_status">
+                            <div>
+                                <button class = "select_btn" >접수중</button>
+                                <button class = "select_btn" >마감</button>
+                            </div>
+                        </h3>
                         <h3>
                             <div>
                                 <button class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>

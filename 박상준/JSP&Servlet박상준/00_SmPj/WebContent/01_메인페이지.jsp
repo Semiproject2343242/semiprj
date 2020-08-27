@@ -327,7 +327,6 @@ community_util_area */
 	</div>
 </section>
 <%@ include file="WEB-INF/views/Common/footer.jsp" %>
-
 <script>
 // 이미지 슬라이더
    new Swiper('.swiper-container', {
