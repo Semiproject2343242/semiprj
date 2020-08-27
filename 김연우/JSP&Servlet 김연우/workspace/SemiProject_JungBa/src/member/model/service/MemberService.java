@@ -5,6 +5,11 @@ import static common.JDBCTemplate.rollback;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
+import java.util.ArrayList;
+
+import board.model.dao.CommuDAO;
+import board.model.vo.Board;
+import board.model.vo.PageInfo;
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
 
@@ -48,6 +53,50 @@ public class MemberService {
 
 		return member;
 		
+	}
+
+	public ArrayList<Board> selectMyCommuFreeList(int loginMemberNo, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyCommuFreeList(conn, loginMemberNo, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Board> selectMyQAList(int loginMemberNo, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyQAList(conn, loginMemberNo, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectMySupportList(int loginMemberNo, PageInfo pi) {
+	
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMySupportList(conn, loginMemberNo, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectMyExternalList(int loginMemberNo, PageInfo pi) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyExternalList(conn, loginMemberNo, pi);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }
