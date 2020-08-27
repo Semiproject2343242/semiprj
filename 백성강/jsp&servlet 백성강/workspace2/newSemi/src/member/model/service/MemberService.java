@@ -38,16 +38,4 @@ public class MemberService {
 		
 	}
 
-	public Member selectMember(String loginMemberId) {
-		
-		Connection conn = getConnection();
-		
-		Member member = new MemberDAO().selectMember(conn, loginMemberId);
-				
-		close(conn);
-
-		return member;
-		
-	}
-
 }

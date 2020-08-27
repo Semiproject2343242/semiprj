@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <%@ include file="../Common/header.jsp" %>
     <meta charset="UTF-8">
     <title>Layout01</title>
     <script src="../../resources/js/jquery-3.5.1.min.js"></script> 
@@ -18,7 +18,6 @@
     </style>
 </head>
 <body>
-	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
             <a href="#"><h2>NO.01</h2></a>

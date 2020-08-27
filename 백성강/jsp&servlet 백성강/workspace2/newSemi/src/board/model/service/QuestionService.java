@@ -13,6 +13,16 @@ import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
 public class QuestionService {
+	public int getListCount() {
+	Connection conn = getConnection();
+		
+		int result = new QuestionDAO().getListCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	public ArrayList<Board> selectList(PageInfo pi){
 		Connection conn = getConnection();
 		

@@ -17,6 +17,33 @@ import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
 public class QuestionDAO {
+	
+	public int getListCount(Connection conn) {
+		Statement stmt = null;
+//		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = 'QA' AND B_ENABLE = 'Y'";
+		
+		try {
+			stmt= conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return result;
+	}
+	
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

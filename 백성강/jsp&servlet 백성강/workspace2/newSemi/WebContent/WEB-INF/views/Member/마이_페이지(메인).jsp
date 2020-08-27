@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	Member member = (Member)request.getAttribute("member");
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지(메인)</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>
 <style>
 .box {
@@ -70,44 +67,40 @@
 	<%@ include file="../Common/header.jsp"%>
 	<section>
 		<aside>
-			<h2>마이페이지</h2>
+			<h2>
+				<a href="#">마이페이지</a>
+			</h2>
 			<hr>
 			<div>
-				<h2>나의게시물</h2>
+				<a href="#">
+					<h2>나의게시물</h2>
+				</a>
+
 				<dl>
 					<dt>
-						<a href="${pageContext.request.contextPath}/myPageSupport.me">
-							<h3>지원정책 게시판</h3>
-						</a>
+						<a href="#"></a>
+						<h3>정보게시판</h3>
 					</dt>
 					<dt>
-						<a href="${pageContext.request.contextPath}/myPageExternal.me">
-							<h3>대외활동 게시판</h3>
-						</a>
-					</dt>
-					<dt>
-						<a href="${pageContext.request.contextPath}/myPageCommuFree.me">
+						<a href="#">
 							<h3>자유게시판</h3>
 						</a>
 					</dt>
 					<dt>
-						<a href="${pageContext.request.contextPath}/myPageQA.me">
+						<a href="#">
 							<h3>Q / A</h3>
 						</a>
 					</dt>
 				</dl>
-			</div>		
-			<a href="${pageContext.request.contextPath}/memberInfo.me">
-				<h2>회원정보</h2>
-			</a>
-			<a href="${pageContext.request.contextPath}/deleteForm.me">
+			</div>
+			<a href="#">
 				<h2>회원탈퇴</h2>
 			</a>
 		</aside>
 
 		<div id="main_section" align="center">
 			<div class="box" style="background: #BDBDBD;">
-				<img class="profile" src="${pageContext.request.contextPath}/Media/Music2.jpg">
+				<img class="profile" src="../Media/Music2.jpg">
 			</div>
 			<input type="button" value="Edit">
 
@@ -117,32 +110,32 @@
 				<div class="board_area">
 					<div class="board_box">
 						<div class="box_title">
-							<a href="#"><h3>지원정책</h3></a>
+							<a href="#"><h3>공지사항</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">지원정책 최신글1</a>
+							<li><a href="#" class="area_title">공지사항 최신글1</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">지원정책 최신글2</a>
+							<li><a href="#" class="area_title">공지사항 최신글2</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">지원정책 최신글3</a>
+							<li><a href="#" class="area_title">공지사항 최신글3</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">지원정책 최신글4</a>
+							<li><a href="#" class="area_title">공지사항 최신글4</a>
 								<div>날짜</div></li>
 						</ol>
 					</div>
 
 					<div class="board_box">
 						<div class="box_title">
-							<a href="#"><h3>대외활동</h3></a>
+							<a href="#"><h3>공지사항</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">대외활동 최신글1</a>
+							<li><a href="#" class="area_title">공지사항 최신글1</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">대외활동 최신글2</a>
+							<li><a href="#" class="area_title">공지사항 최신글2</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">대외활동 최신글3</a>
+							<li><a href="#" class="area_title">공지사항 최신글3</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">대외활동 최신글4</a>
+							<li><a href="#" class="area_title">공지사항 최신글4</a>
 								<div>날짜</div></li>
 						</ol>
 					</div>
@@ -150,32 +143,32 @@
 				<div class="board_area">
 					<div class="board_box">
 						<div class="box_title">
-							<a href="#"><h3>자유게시판</h3></a>
+							<a href="#"><h3>공지사항</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">자유게시판 최신글1</a>
+							<li><a href="#" class="area_title">공지사항 최신글1</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">자유게시판 최신글2</a>
+							<li><a href="#" class="area_title">공지사항 최신글2</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">자유게시판 최신글3</a>
+							<li><a href="#" class="area_title">공지사항 최신글3</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">자유게시판 최신글4</a>
+							<li><a href="#" class="area_title">공지사항 최신글4</a>
 								<div>날짜</div></li>
 						</ol>
 					</div>
 
 					<div class="board_box">
 						<div class="box_title">
-							<a href="#"><h3>Q/A</h3></a>
+							<a href="#"><h3>공지사항</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">Q/A 최신글1</a>
+							<li><a href="#" class="area_title">공지사항 최신글1</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">Q/A 최신글2</a>
+							<li><a href="#" class="area_title">공지사항 최신글2</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">Q/A 최신글3</a>
+							<li><a href="#" class="area_title">공지사항 최신글3</a>
 								<div>날짜</div></li>
-							<li><a href="#" class="area_title">Q/A 최신글4</a>
+							<li><a href="#" class="area_title">공지사항 최신글4</a>
 								<div>날짜</div></li>
 						</ol>
 					</div>

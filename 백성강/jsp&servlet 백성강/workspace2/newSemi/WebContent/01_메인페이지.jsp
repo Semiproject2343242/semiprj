@@ -158,7 +158,7 @@ community_util_area */
 
 </style>
  
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
 <body>
