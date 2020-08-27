@@ -132,6 +132,7 @@ a {
   .navbar_logo img {
     display: none;
   }
+<<<<<<< HEAD
 
 
 
@@ -153,14 +154,17 @@ a {
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
+<<<<<<< HEAD
              <li class="dropdown">
    				<a href="#" class="dropbtn">커뮤니티</a>
     			<div class='dropdown-content'>
      				<a href="<%= request.getContextPath() %>/fMain.cm">자유게시판</a><br>
-            		<a href="<%= request.getContextPath() %>/spMain.cm">지원정책</a><br>
-            		<a href="<%= request.getContextPath() %>/eaMain.cm">대외활동</a>
+            <a href="<%= request.getContextPath() %>/spMain.cm">지원정책</a><br>
+            <a href="<%= request.getContextPath() %>/eaMain.cm">대외활동</a>
     			</div>
   			</li>
+=======
+            <li><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</a></li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>
