@@ -72,6 +72,18 @@
 					<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 				<% } %>
 				<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
+				<script>
+				function deleteNotice(){
+					var num = <%= b.getBoardNo() %>;
+					var result = window.confirm(num+'삭제?');
+				    if(result){
+				    	location.href="<%= request.getContextPath() %>/noticeDelete.no?no="+num;
+				    }
+				    else{
+				        alert('취소하셨습니다.');
+				    }
+				}
+	</script>
 			</div>
 		<form action="noticeUpdateForm.no" id="detailForm" name="detailForm">
       </div>
