@@ -30,7 +30,6 @@ aside {
 #main_section {
 	width: 100%;
 	min-height: 100%;
-	margin: 0px 50px;
 }
 
 a {
@@ -61,9 +60,9 @@ hr {
 .com{text-indent : 20px;}
 
 
-.contentsTable{text-align:center; font-size:12pt;}
-.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
-.contentsTable tbody{background-color:#F7F7F7}
-#tablename{align-self:center;}
+#b-main{background-color:rgb(15, 76, 130); color:white;}
+tbody{background-color:rgb(255, 255, 255)}
+.table{background-color:rgb(226, 226, 226); text-align:center; font-size:12pt;}
+#tablename{margin-left:200px; align-self:center;}
 #게시판이름{text-align:center;}
 

@@ -24,8 +24,9 @@ public class Board {
 	                                       
 	public Board() {}
 	
+	//Q/A 리스트
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply) {
+			Date boardModifyDate, int boardViewCount, int boardWriterNo, String boardWriter, int boardReply,String cgName) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -36,72 +37,9 @@ public class Board {
 		this.boardWriterNo = boardWriterNo;
 		this.boardWriter = boardWriter;
 		this.boardReply = boardReply;
+		this.cgName = cgName;
 	}
 
-	//Q/A 리스트,공지사항
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply,String cgName) {
-		super();
-		this.boardNo = boardNo;
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.boardCreateDate = boardCreateDate;
-		this.boardModifyDate = boardModifyDate;
-		this.boardViewCount = boardViewCount;
-		this.boardWriterNo = boardWriterNo;
-		this.boardWriter = boardWriter;
-		this.boardReply = boardReply;
-		this.cgName = cgName;
-	}
-	
-	//myPage 지원정책 리스트
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount, int boardReCommend, int boardWriterNo,
-			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
-			String tcName, String cgName) {
-		super();
-		this.boardNo = boardNo;
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.boardCreateDate = boardCreateDate;
-		this.boardModifyDate = boardModifyDate;
-		this.boardViewCount = boardViewCount;
-		this.boardReCommend = boardReCommend;
-		this.boardWriterNo = boardWriterNo;
-		this.boardWriter = boardWriter;
-		this.boardReply = boardReply;
-		this.acState = acState;
-		this.lcName = lcName;
-		this.enrollState = enrollState;
-		this.emState = emState;
-		this.tcName = tcName;
-		this.cgName = cgName;
-	}
-	
-	//myPage 대외활동 리스트
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount, int boardReCommend, int boardWriterNo,
-			String boardWriter, int boardReply, String acState, String lcName, String enrollState, 
-			String tcName, String cgName) {
-		super();
-		this.boardNo = boardNo;
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.boardCreateDate = boardCreateDate;
-		this.boardModifyDate = boardModifyDate;
-		this.boardViewCount = boardViewCount;
-		this.boardReCommend = boardReCommend;
-		this.boardWriterNo = boardWriterNo;
-		this.boardWriter = boardWriter;
-		this.boardReply = boardReply;
-		this.acState = acState;
-		this.lcName = lcName;
-		this.enrollState = enrollState;
-		this.tcName = tcName;
-		this.cgName = cgName;
-	}
-	
-	
 	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
