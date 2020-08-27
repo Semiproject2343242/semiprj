@@ -19,7 +19,7 @@ public class Page {
 		String pageName;	// 페이지 이름
 		
 		listCount = bServuce.getListCount(strName);
-		System.out.println(strName + "리스트 : " +listCount);
+		
 		currentPage = iCurrentPage;
 		
 		pageLimit = 10;

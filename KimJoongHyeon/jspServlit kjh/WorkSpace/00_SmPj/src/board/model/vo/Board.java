@@ -38,7 +38,7 @@ public class Board {
 		this.boardReply = boardReply;
 	}
 
-	//Q/A 리스트,공지사항
+	//Q/A 리스트
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply,String cgName) {
 		super();
