@@ -174,5 +174,16 @@ public class Member {
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberName="
+				+ memberName + ", memberNickName=" + memberNickName + ", memberGender=" + memberGender
+				+ ", memberBirthDay=" + memberBirthDay + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail
+				+ ", memberAddress=" + memberAddress + ", memberRegDate=" + memberRegDate + ", memberEnable="
+				+ memberEnable + ", memberGrade=" + memberGrade + "]";
+	}
+	
 	
 }
