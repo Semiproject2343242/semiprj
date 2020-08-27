@@ -144,7 +144,7 @@ a {
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
-            <li><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</a></li>
+            <li><a href="<%= request.getContextPath() %>/fmain.cm">커뮤니티</a></li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>

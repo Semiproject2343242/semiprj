@@ -112,33 +112,7 @@ a {
   .navbar_logo img {
     display: none;
   }
-  
-/*   .navbar_menu li ul a{
-  				display:block;
-  				height:80px;
-  				font-size:10px;
-  				margin:0px;
-  				padding:0px 10px 0px 15px;
-  				text-align:left; */
-  }
-.navbar_menu li ul{
-background: red;
-display:none; 
-height:auto;
-border:0px;
-position:absolute;
-width:200px;
-z-index:200;
 }
-/* .navbar_menu{
-border:none;
-border:0px;
-margin:0px;
-padding:0px;
-font: "sans-serif";
-font-size:18px;
-} */
-
  </style>
  
 </head>
@@ -157,14 +131,7 @@ font-size:18px;
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
-            <li id = "dropmenu"><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</a>
-            	<ul>
-            		<li><a href='#'>자유게시판</a></li>
-            		<li><a href='#'>지원정책 게시판</a></li>
-            		<li><a href='#'>대외활동 게시판</a></li>
-            	</ul>
-            </li>
-            
+            <li><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</a></li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>
