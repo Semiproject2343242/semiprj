@@ -1,10 +1,17 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	String msg = (String)session.getAttribute("msg");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
  
  <style>
 header {
@@ -120,9 +127,15 @@ a {
    <header>
       <div class="header_top">
          <div class="top">
-            <li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
+         <% if(loginUser == null) { %>
+            <li><a href="<%=request.getContextPath()%>/insertForm.me" class="top_btn"><b>회원가입</b></a></li>
             <li><a href="<%=request.getContextPath()%>/loginPage.me" class="top_btn"><b>로그인</b></a></li>
          </div>
+         <% } else { %>
+         	<li><label><%= loginUser.getMemberName() %>님의 방문을 환영합니다.</label></li>
+         	<li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
+         	<li><a href="<%=request.getContextPath()%>/logout.me" class="top_btn"><b>로그아웃</b></a></li>
+         <% } %>
       </div>
       <nav class="navbar">
          <div class="navbar_title">
@@ -131,7 +144,7 @@ a {
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
-            <li><a href="<%= request.getContextPath() %>/fmain.cm">커뮤니티</a></li>
+            <li><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</a></li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>

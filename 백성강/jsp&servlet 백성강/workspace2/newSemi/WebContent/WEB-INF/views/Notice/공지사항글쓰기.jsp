@@ -1,48 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="board.model.vo.PageInfo"%>
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
+<% ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
-    <title>Layout01</title>
-    <script src="../../resources/js/jquery-3.5.1.min.js"></script> 
- 	<link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/°øÁö»çÇ×³»¿ëÈ®ÀÎ.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/side.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/°øÁö»çÇ×±Û¾²±â.css">
-
-    <script src="../resources/js/slides.js"></script>
-
-    <style>
-    </style>
+    <title>ì •ë¶€ì§€ì›ê¸ˆ ë°”ë¡œì§€ê¸ˆ</title> 
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/side.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ê³µì§€ì‚¬í•­ê¸€ì“°ê¸°.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
+<style></style>
+
 <body>
 	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
             <a href="#"><h2>NO.01</h2></a>
             <hr>
-            <a href="#"><h2>Á¦¸ñ</h2></a>
-            <a href="#"><h2>Ä«Å×°í¸®</h2></a>
-            <a href="#"><h2>³»¿ë</h2></a>
+            <a href="#"><h2>ì œëª©</h2></a>
+            <a href="#"><h2>ì¹´í…Œê³ ë¦¬</h2></a>
+            <a href="#"><h2>ë‚´ìš©</h2></a>
             <br><br><br><br><br><br>
-            <a href="#"><h2>Ã·ºÎÆÄÀÏ</h2></a>
+            <a href="#"><h2>ì²¨ë¶€íŒŒì¼</h2></a>
         </aside>
+        
         <div id="main_section">
+            <h2 style="text-align: center;" >ê³µì§€ì‚¬í•­ ì œëª©</h2>
             
-            <h2 style="text-align: center;">°øÁö»çÇ× Á¦¸ñ</h2>
-            
-            <input type="text" id="text1" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä."><br clear="all"> 
+            <input type="text" id="text1" placeholder="ì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”."><br clear="all"> 
             <select id="select1">
-                <option value="ÇÊµ¶">ÇÊµ¶</option>
-                <option value="°øÁö">°øÁö</option>
+                <option value="í•„ë…">í•„ë…</option>
+                <option value="ê³µì§€">ê³µì§€</option>
             </select>
-            <textarea id="textarea" placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä."></textarea><br>
+            <textarea id="textarea" placeholder="ë‚´ìš©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”."></textarea><br>
             <input type="file" id="file"><br>
             <div id="buttons1">
-                <button id="button1">µî·Ï</button>
-                <button id="button2">Ãë¼Ò</button>
+                <button id="button1">ë“±ë¡</button>
+                <button id="button2">ì·¨ì†Œ</button>
             </div>
         </div>
        </section>

@@ -26,7 +26,7 @@ public class ExternalMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/External_Activities/대외활동메인.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/External_Activities/대외활동검색메인.jsp").forward(request, response);
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

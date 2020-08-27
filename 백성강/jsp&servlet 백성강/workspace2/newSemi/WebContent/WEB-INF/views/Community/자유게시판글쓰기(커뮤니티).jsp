@@ -1,21 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    
+
     <meta charset="UTF-8">
     <title>Layout01</title>
-    <script src="../../resources/js/jquery-3.5.1.min.js"></script> 
- 	<link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/공지사항내용확인.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/side.css">
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/공지사항글쓰기.css">
-
-    <script src="../resources/js/slides.js"></script>
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항글쓰기.css">
     <style>
     </style>
 </head>
 <body>
+	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
             <a href="#"><h2>NO.01</h2></a>
@@ -28,7 +25,7 @@
         </aside>
         <div id="main_section">
             
-            <h2 style="text-align: center;">공지사항 제목</h2>
+            <h2 style="text-align: center;">자유게시판</h2>
             
             <input type="text" id="text1" placeholder="제목을 입력해주세요."><br clear="all"> 
             <select id="select1">
@@ -44,7 +41,6 @@
         </div>
        </section>
 		<br>
-		
+	<%@ include file="../Common/footer.jsp" %>
 </body>
 </html>
-

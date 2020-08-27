@@ -46,16 +46,16 @@ public class NoticeDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 		
-		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; //현재 페이지, 한페이지에서 보일 게시글 최대 개수
-		int endRow = startRow + pi.getBoardLimit() - 1; //(현재 페이지-1)*현재페이지 게시글 최대개수 +1 + -1 +현재페이지 게시글 최대개수
+		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
+		int endRow = startRow + pi.getBoardLimit() - 1; 
 		
-		String query = "SELECT * FROM BOARD WHERE RNUM BETWEEN ? AND ? ORDER BY B_NO DESC"; 
-									//QALIST - > NOTICE , BNUM
+		String query = "SELECT * FROM NOTICELIST WHERE RNUM BETWEEN ? AND ? ORDER BY B_NO DESC"; 
+									//QALIST - > NOTICE 
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			rset = pstmt.executeQuery(query); 
+			rset = pstmt.executeQuery(); 
 			list = new ArrayList<Board>();
 			
 			while(rset.next()){
