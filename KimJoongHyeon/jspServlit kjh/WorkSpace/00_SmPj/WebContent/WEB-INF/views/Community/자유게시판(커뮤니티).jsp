@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	System.out.println(list);
 %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +47,7 @@
                 <tbody>
                   <% if(list.isEmpty()){ %>
 	            <tr>
-	               <td colspan="6">글이 존재 하지 않습니다.</td>
+	               <td colspan="5">글이 존재 하지 않습니다.</td>
 	            </tr>
             <% } else { %>
             <% 		for(Board b : list){ %>
@@ -76,18 +77,20 @@
 		</div>
         <script>
          $(function(){
-            $('tbody td').mouseenter(function(){
-               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
-            }).mouseout(function(){
-               $(this).parent().css('background', 'none');
-            }).click(function(){
-               var bId = $(this).parent().children().children('input').val();
-               <% if(loginUser != null){%>
-                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
-               <% }else{ %>
-                  alert('회원만 이용할 수 있는 서비스입니다.')
-               <% } %>
-            })
+        	<%if(!list.isEmpty()){%> 
+	            $('tbody td').mouseenter(function(){
+	               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	               $(this).parent().css('background', 'none');
+	            }).click(function(){
+	               var bId = $(this).parent().children().children('input').val();
+	               <% if(loginUser != null){%>
+	                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	               <% }else{ %>
+	                  alert('회원만 이용할 수 있는 서비스입니다.')
+	               <% } %>
+	            })
+	        <% } %>
          })
       </script>
     </section>
