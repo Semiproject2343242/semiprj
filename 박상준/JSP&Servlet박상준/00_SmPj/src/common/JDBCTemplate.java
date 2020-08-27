@@ -15,8 +15,8 @@ public class JDBCTemplate {
 		
 		Connection conn = null;
 		String driver = "oracle.jdbc.driver.OracleDriver";
-//		String url = "jdbc:oracle:thin:@localhost:1521:xe"; // oracle 11g
-		String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; // oracle 18c
+		String url = "jdbc:oracle:thin:@localhost:1521:xe"; // oracle 11g
+//		String url = "jdbc:oracle:thin:@localhost:1521/xepdb1"; // oracle 18c
 		String user = "JEONGBA";
 		String password = "JEONGBA";
 		
