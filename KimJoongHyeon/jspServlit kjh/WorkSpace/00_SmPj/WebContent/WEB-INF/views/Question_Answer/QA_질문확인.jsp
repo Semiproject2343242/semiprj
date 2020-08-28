@@ -86,9 +86,9 @@
 				        alert('취소하셨습니다.');
 				    }
 				}
-	</script>
+		</script>
 			</div>
-		<form action="noticeUpdateForm.no" id="detailForm" name="detailForm">
+		</form>
       </div>
     </section>
     <%@ include file="../Common/footer.jsp" %>
