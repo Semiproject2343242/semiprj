@@ -158,7 +158,6 @@ public class MemberDAO {
 		
 		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 		int endRow = startRow + pi.getBoardLimit() - 1;
-		
 		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN ? AND ? AND B_WRITER = ? ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -266,6 +265,7 @@ public class MemberDAO {
 									 rset.getString("AC_STATE"),
 									 rset.getString("LC_NAME"),
 									 rset.getString("ENROLL_STATE"),
+									 rset.getString("EM_STATE"),
 									 rset.getString("TC_NAME"),
 									 rset.getString("CG_NAME"));
 				list.add(bo); 
@@ -279,6 +279,149 @@ public class MemberDAO {
 		return list;
 	}
 
+	public ArrayList<Board> selectMyRecentSupportList(Connection conn, int loginMemberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+				
+		String query = "SELECT * FROM SUPPORTLIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, loginMemberNo);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board bo = new Board(rset.getInt("B_NO"),
+									 rset.getString("B_TITLE"),
+									 rset.getString("B_CONTENT"),
+									 rset.getDate("B_DATE"),
+									 rset.getDate("B_RDATE"),
+									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
+									 rset.getInt("B_WRITER"),
+									 rset.getString("MEMBER_NICKNAME"),
+									 rset.getInt("B_REPLY_COUNT"),
+									 rset.getString("AC_STATE"),
+									 rset.getString("LC_NAME"),
+									 rset.getString("ENROLL_STATE"),
+									 rset.getString("TC_NAME"),
+									 rset.getString("CG_NAME"));
+				list.add(bo); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
+	public ArrayList<Board> selectMyRecentExternalList(Connection conn, int loginMemberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+				
+		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, loginMemberNo);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board bo = new Board(rset.getInt("B_NO"),
+									 rset.getString("B_TITLE"),
+									 rset.getString("B_CONTENT"),
+									 rset.getDate("B_DATE"),
+									 rset.getDate("B_RDATE"),
+									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
+									 rset.getInt("B_WRITER"),
+									 rset.getString("MEMBER_NICKNAME"),
+									 rset.getInt("B_REPLY_COUNT"),
+									 rset.getString("AC_STATE"),
+									 rset.getString("LC_NAME"),
+									 rset.getString("ENROLL_STATE"),
+									 rset.getString("TC_NAME"),
+									 rset.getString("CG_NAME"));
+				list.add(bo); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Board> selectMyRecentCommuFreeList(Connection conn, int loginMemberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+				
+		String query = "SELECT * FROM FREELIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, loginMemberNo);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board bo = new Board(rset.getInt("B_NO"),
+									 rset.getString("B_TITLE"),
+									 rset.getString("B_CONTENT"),
+									 rset.getDate("B_DATE"),
+									 rset.getDate("B_RDATE"),
+									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_WRITER"),
+									 rset.getString("MEMBER_NICKNAME"),
+									 rset.getInt("B_REPLY_COUNT"));
+			 list.add(bo); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Board> selectMyRecentQAList(Connection conn, int loginMemberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+				
+		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, loginMemberNo);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board bo = new Board(rset.getInt("B_NO"),
+									 rset.getString("B_TITLE"),
+									 rset.getString("B_CONTENT"),
+									 rset.getDate("B_DATE"),
+									 rset.getDate("B_RDATE"),
+									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_WRITER"),
+									 rset.getString("MEMBER_NICKNAME"),
+									 rset.getInt("B_REPLY_COUNT"),
+									 rset.getString("CG_NAME"));
+				list.add(bo); 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 }
