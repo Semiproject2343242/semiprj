@@ -4,7 +4,6 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-	System.out.println(list);
 %>
 <!DOCTYPE html>
 <html>

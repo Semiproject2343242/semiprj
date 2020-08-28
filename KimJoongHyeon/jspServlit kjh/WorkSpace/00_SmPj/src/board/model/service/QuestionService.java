@@ -74,4 +74,19 @@ Connection conn = getConnection();
 		
 		return result;
 	}
+
+	public int deliteBoard(Board board) {
+		Connection conn = getConnection();
+		QuestionDAO nDAO = new QuestionDAO();
+		int result = nDAO.boardDelete(conn, board);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

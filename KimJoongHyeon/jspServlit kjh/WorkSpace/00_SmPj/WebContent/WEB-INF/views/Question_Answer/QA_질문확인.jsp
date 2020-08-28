@@ -34,8 +34,9 @@
       </aside>
       <div id="main_section">
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
-	        <h2 align="center">묻고 답하기</h2>
 	        <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
+	        <input type="hidden" size="50" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
+	        <h2 align="center">묻고 답하기</h2>
 	        <hr />
 	        <h2>
 		        <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
@@ -72,6 +73,20 @@
 					<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 				<% } %>
 				<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
+				<script>
+				function deleteBoard(){
+					var num = <%= b.getBoardNo() %>;
+					var result = window.confirm(num+'삭제?');
+					var wno = <%= b.getBoardWriterNo()%>;
+					console.log(wno);
+				    if(result){
+				    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+				    }
+				    else{
+				        alert('취소하셨습니다.');
+				    }
+				}
+	</script>
 			</div>
 		<form action="noticeUpdateForm.no" id="detailForm" name="detailForm">
       </div>

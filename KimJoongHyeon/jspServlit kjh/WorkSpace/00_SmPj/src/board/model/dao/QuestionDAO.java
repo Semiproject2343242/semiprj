@@ -157,6 +157,24 @@ public class QuestionDAO {
 		return result;
 	}
 
-
+	public int boardDelete(Connection conn, Board board) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+				
+		String query = "UPDATE BOARD SET BOARD.B_ENABLE='N' WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }
