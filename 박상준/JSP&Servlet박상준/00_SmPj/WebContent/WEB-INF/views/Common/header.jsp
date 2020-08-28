@@ -7,25 +7,7 @@
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
  
  <style>
-  .dropdown:hover .dropdown-content {
- display: block;
-}
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 100px;
-  max-width: 100px;
-  box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.2);
-}
-.dropdown-content a {
-  color: black;
-  padding: 5px 6px;
-  text-decoration: none;
-  display: inline-table;
-  text-align: left;
-}
 header {
   top: 0;
   left: 0;
@@ -62,6 +44,25 @@ a {
 }
 .lagefont {
   font-size: 60px;
+}
+.navbar_dropdown:hover .navbar_dropdown-content {
+ display: block;
+}
+
+.navbar_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  max-width: 100px;
+  box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.2);
+}
+.navbar_dropdown-content a {
+  color: black;
+  padding: 5px 6px;
+  text-decoration: none;
+  display: inline-table;
+  text-align: left;
 }
 .navbar {
   padding-top: 50px;
@@ -132,13 +133,6 @@ a {
   .navbar_logo img {
     display: none;
   }
-<<<<<<< HEAD
-
-
-
-=======
-}
->>>>>>> 39367853114395cf169f14f055d2cd00d14d80b6
  </style>
  
 </head>
@@ -157,17 +151,14 @@ a {
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
-<<<<<<< HEAD
-             <li class="dropdown">
-   				<a href="#" class="dropbtn">커뮤니티</a>
-    			<div class='dropdown-content'>
+             <li class="navbar_dropdown">
+   				<a href="#" class="navbar_dropbtn">커뮤니티</a>
+    			<div class='navbar_dropdown-content'>
      				<a href="<%= request.getContextPath() %>/fMain.cm">자유게시판</a><br>
-            <a href="<%= request.getContextPath() %>/spMain.cm">지원정책</a><br>
-            <a href="<%= request.getContextPath() %>/eaMain.cm">대외활동</a>
+          			<a href="<%= request.getContextPath() %>/spMain.cm">지원정책</a><br>
+          		    <a href="<%= request.getContextPath() %>/eaMain.cm">대외활동</a>
     			</div>
   			</li>
-=======
-            <li><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</a></li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>
