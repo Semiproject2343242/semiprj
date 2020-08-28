@@ -25,6 +25,7 @@ aside {
 	display: block;
 	width: 200px;
 	line-height: 40px;
+	margin-left: 5px;
 }
 
 #main_section {

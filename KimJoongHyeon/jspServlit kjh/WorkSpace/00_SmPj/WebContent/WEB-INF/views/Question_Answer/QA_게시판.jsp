@@ -71,7 +71,9 @@
 	                <tr>
 	                <td colspan="5"></td>
 	                <td>
-	                    <button onclick="location.href='<%= request.getContextPath()  %>/mainForm.qa'">글쓰기</button>
+	                    <% if(loginUser != null){ %>
+						<button onclick="location.href='<%= request.getContextPath()  %>/insertForm.qa'">글쓰기</button>
+						<% } %>
 	                </td>
 	                </tr>
                 </tfoot>
@@ -79,19 +81,21 @@
  		<%@ include file="../Common/page.jsp" %>
 		</div>
         <script>
-         $(function(){
-            $('tbody td').mouseenter(function(){
-               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
-            }).mouseout(function(){
-               $(this).parent().css('background', 'none');
-            }).click(function(){
-               var bId = $(this).parent().children().children('input').val();
-               <% if(loginUser != null){%>
-                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
-               <% }else{ %>
-                  alert('회원만 이용할 수 있는 서비스입니다.')
-               <% } %>
-            })
+        $(function(){
+        	<%if(!list.isEmpty()){%> 
+	            $('tbody td').mouseenter(function(){
+	               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	               $(this).parent().css('background', 'none');
+	            }).click(function(){
+	               var bId = $(this).parent().children().children('input').val();
+	               <% if(loginUser != null){%>
+	                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	               <% }else{ %>
+	                  alert('회원만 이용할 수 있는 서비스입니다.')
+	               <% } %>
+	            })
+	        <% } %>
          })
       </script>
     </section>

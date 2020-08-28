@@ -44,4 +44,49 @@ public class QuestionService {
 		
 		return board;
 	}
+
+	public int insertBoard(Board b) {
+		Connection conn = getConnection();
+		
+		int result = new QuestionDAO().insertNotice(conn, b);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int modifyBoard(Board b) {
+Connection conn = getConnection();
+		
+		int result = new QuestionDAO().modifyBoard(conn, b);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int deliteBoard(Board board) {
+		Connection conn = getConnection();
+		QuestionDAO nDAO = new QuestionDAO();
+		int result = nDAO.boardDelete(conn, board);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }
