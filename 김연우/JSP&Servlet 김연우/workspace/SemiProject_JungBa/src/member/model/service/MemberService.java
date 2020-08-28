@@ -99,4 +99,48 @@ public class MemberService {
 		return list;
 	}
 
+	public ArrayList<Board> selectMyRecentSupportList(int loginMemberNo) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyRecentSupportList(conn, loginMemberNo);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectMyRecentExternalList(int loginMemberNo) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyRecentExternalList(conn, loginMemberNo);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectMyRecentCommuFreeList(int loginMemberNo) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyRecentCommuFreeList(conn, loginMemberNo);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectMyRecentQAList(int loginMemberNo) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new MemberDAO().selectMyRecentQAList(conn, loginMemberNo);
+		
+		close(conn);
+		
+		return list;
+	}
+
 }
