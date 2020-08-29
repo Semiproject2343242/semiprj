@@ -24,6 +24,24 @@ public class Board {
 	                                       
 	public Board() {}
 
+	//커뮤니티 게시판
+	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount, int boardWriterNo, String boardWriter, int boardReply) {
+		super();
+		this.boardNo = boardNo;
+		this.boardName = boardName;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+	}
+
+
+
 	//QA 삭제
 	public Board(int boardNo) {
 		super();

@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	Member member = (Member)request.getAttribute("member");
 	ArrayList<Board> supportList = (ArrayList<Board>)request.getAttribute("supportList");
 	ArrayList<Board> externalList = (ArrayList<Board>)request.getAttribute("externalList");
 	ArrayList<Board> commuFreeList = (ArrayList<Board>)request.getAttribute("commuFreeList");
