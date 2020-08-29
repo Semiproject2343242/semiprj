@@ -1,7 +1,13 @@
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	Member member = (Member)request.getAttribute("member");
+	ArrayList<Board> supportList = (ArrayList<Board>)request.getAttribute("supportList");
+	ArrayList<Board> externalList = (ArrayList<Board>)request.getAttribute("externalList");
+	ArrayList<Board> commuFreeList = (ArrayList<Board>)request.getAttribute("commuFreeList");
+	ArrayList<Board> qaList = (ArrayList<Board>)request.getAttribute("qaList");
 %>
 
 <!DOCTYPE html>
@@ -10,6 +16,7 @@
 <meta charset="UTF-8">
 <title>마이 페이지(메인)</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 </head>
 <style>
 .box {
@@ -120,14 +127,16 @@
 							<a href="#"><h3>지원정책</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">지원정책 최신글1</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">지원정책 최신글2</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">지원정책 최신글3</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">지원정책 최신글4</a>
-								<div>날짜</div></li>
+						<% if(supportList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else { %>
+							<% for (Board b : supportList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } %>
 						</ol>
 					</div>
 
@@ -136,47 +145,54 @@
 							<a href="#"><h3>대외활동</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">대외활동 최신글1</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">대외활동 최신글2</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">대외활동 최신글3</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">대외활동 최신글4</a>
-								<div>날짜</div></li>
+						<% if(supportList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else { %>
+							<% for (Board b : externalList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } %>
 						</ol>
 					</div>
 				</div>
+				
 				<div class="board_area">
 					<div class="board_box">
 						<div class="box_title">
 							<a href="#"><h3>자유게시판</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">자유게시판 최신글1</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">자유게시판 최신글2</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">자유게시판 최신글3</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">자유게시판 최신글4</a>
-								<div>날짜</div></li>
+						<% if(supportList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else { %>
+							<% for (Board b : commuFreeList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } %>
 						</ol>
 					</div>
 
 					<div class="board_box">
 						<div class="box_title">
-							<a href="#"><h3>Q/A</h3></a>
+							<a href="#"><h3>Q / A</h3></a>
 						</div>
 						<ol>
-							<li><a href="#" class="area_title">Q/A 최신글1</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">Q/A 최신글2</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">Q/A 최신글3</a>
-								<div>날짜</div></li>
-							<li><a href="#" class="area_title">Q/A 최신글4</a>
-								<div>날짜</div></li>
+						<% if(supportList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else { %>
+							<% for (Board b : qaList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } %>
 						</ol>
 					</div>
 				</div>
