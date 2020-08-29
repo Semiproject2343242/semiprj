@@ -17,6 +17,7 @@ import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
 public class QuestionDAO {
+	
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

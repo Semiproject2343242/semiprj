@@ -46,8 +46,8 @@ public class NoticeDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 		
-		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; //현재 페이지, 한페이지에서 보일 게시글 최대 개수
-		int endRow = startRow + pi.getBoardLimit() - 1; //(현재 페이지-1)*현재페이지 게시글 최대개수 +1 + -1 +현재페이지 게시글 최대개수
+		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1; 
 		
 		String query = "SELECT * FROM NOTICELIST WHERE RNUM BETWEEN ? AND ? ORDER BY B_NO DESC"; 
 									//QALIST - > NOTICE , BNUM
@@ -80,5 +80,29 @@ public class NoticeDAO {
 		return list;
 			
 	}
-
+	
+	public int insertNotice(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, '공지사항', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setInt(3, b.getBoardWriterNo());
+			pstmt.setString(4, b.getCgName());
+			
+			result =  pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 }
