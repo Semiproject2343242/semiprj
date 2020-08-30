@@ -28,10 +28,10 @@
                 <h2 id="h22">공지사항</h2>
                 <hr>
                 <!--카테고리  -->
-                <h1 style="text-align: center" > <span id="span1" name="category" ><%= b.getCgName() %></span> <span name="title"> <%= b.getBoardTitle() %></span></h1>
+                <h1 style= "text-align: center" > <span id="span1" name="category" ><%= b.getCgName() %></span> <span name="title"> <%= b.getBoardTitle() %></span></h1>
                 <br>
                 <!--사용자이름 -->
-                <text id="text1" name="WriterNo" > <%= b.getBoardWriterNo()%> <br><%= b.getBoardModifyDate() %> 조회수 1 댓글 2</text>
+                <text id="text1" name="WriterNo" > <%= b.getBoardWriterNo()%> <br><%= b.getBoardModifyDate() %>댓글 2</text>
                 <br>
                 <div id="buttons">
                 	<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
@@ -64,7 +64,7 @@
                     <div style="text-align: center">
                         <img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
                     </div>
-                    <h2>참고자료 (1) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
+                    <h2> 참고자료 (1) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
                     <input type="file" id="ea_write_file"><br><br>
 
                     <!-- 댓글 --> 
