@@ -53,4 +53,42 @@ public class NoticeService {
 		return result;
 	}
 
+	
+	public Board selectBoard(int bId) {
+		Connection conn = getConnection();
+		
+		NoticeDAO dao = new NoticeDAO();
+		
+		int result = dao.updateCount(conn, bId);
+		Board board = null;
+		if(result > 0) {
+			board = dao.selectBoard(conn, bId);
+			if(board != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return board;
+	}
+
+
+	public int deliteBoard(Board board) {
+		Connection conn = getConnection();
+		NoticeDAO nDAO = new NoticeDAO();
+		int result = nDAO.boardDelete(conn, board);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }
