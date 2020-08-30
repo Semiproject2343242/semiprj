@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.NoticeService;
 import board.model.vo.Board;
 import member.model.vo.Member;
 
 /**
  * Servlet implementation class QAModifyFormServlet
  */
-@WebServlet("/modifyForm.qa")
-public class QAModifyFormServlet extends HttpServlet {
+@WebServlet("/modify.no")
+public class NoticeModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QAModifyFormServlet() {
+    public NoticeModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +32,7 @@ public class QAModifyFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -39,13 +41,23 @@ public class QAModifyFormServlet extends HttpServlet {
 		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		String category = request.getParameter("category");
 		
-		
 		Board b = new Board(no,title,content,userId,category);
-		System.out.println("QAModifyForm에서의 Board : " + b);
+		int result = new NoticeService().modifyBoard(b);
 		String page = null;
 		
-		page ="WEB-INF/views/Question_Answer/QA_글수정.jsp";
-		request.setAttribute("board", b);
+		if(result > 0) {
+			Board board = new NoticeService().selectBoard(b.getBoardNo());
+			if(board != null) {
+				page = "WEB-INF/views/Notice/공지사항내용확인.jsp";
+				request.setAttribute("board", board);
+			} else {
+				request.setAttribute("msg", "게시판 수정에 실패하였습니다.");
+				page = "WEB-INF/views/common/errorPage.jsp";
+			}
+		} else {
+			request.setAttribute("msg", "게시판 수정에 실패하였습니다.");
+			page = "WEB-INF/views/common/errorPage.jsp";
+		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	}
