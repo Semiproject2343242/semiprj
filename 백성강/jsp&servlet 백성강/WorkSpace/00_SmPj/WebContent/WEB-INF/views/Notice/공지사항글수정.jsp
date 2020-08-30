@@ -1,21 +1,5 @@
-<%@page import="oracle.net.aso.b"%>
-<%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	Board b = (Board)request.getAttribute("board"); 
-	System.out.println("공지사항글수정 에서의 Board : " + b);	
-
-	String categoryStr = b.getCgName();
-	String[] category = new String[2];
-	String[] splitStr = categoryStr.split(",");
-	for(int i = 0; i < splitStr.length; i++){
-		switch(splitStr[i]){
-		case "필독" : category[0] = "selected"; break; 
-		case "공지" : category[1] = "selected"; break; 
-	}
-} 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,25 +21,24 @@
 	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
-		   <input type="hidden" name="no"  value="<%= b.getBoardNo() %>">
-		   <hr>
-           <h2>제목</h2>
-           <h2>카테고리</h2>
-           <h2>내용</h2>
-           <br><br><br><br><br><br>
-           <h2>첨부파일</h2>
+            <a href="#"><h2>NO.01</h2></a>
+            <hr>
+            <a href="#"><h2>제목</h2></a>
+            <a href="#"><h2>카테고리</h2></a>
+            <a href="#"><h2>내용</h2></a>
+            <br><br><br><br><br><br>
+            <a href="#"><h2>첨부파일</h2></a>
         </aside>
         <div id="main_section">
-            <form action="<%= request.getContextPath() %>/modify.no" method="post">
-            
+            <form action="<%= request.getContextPath() %>/insert.no" method="post">
             	<h2 style="text-align: center;">공지사항 제목</h2>
             
-           	 	<input type="text" id="text1" name="title" placeholder="<%= b.getBoardTitle() %>"><br clear="all"> 
+           	 	<input type="text" id="text1" placeholder="제목을 입력해주세요." name="title"><br clear="all"> 
             	<select id="select1" name="category">
-               	 	<option value="필독" <%= category[0] %>>필독</option>
-                	<option value="공지"<%= category[1] %>>공지</option>
+               	 	<option value="필독">필독</option>
+                	<option value="공지">공지</option>
             	</select>
-            	<textarea id="textarea" name="content" placeholder="<%= b.getBoardContent() %>"></textarea><br>
+            	<textarea id="textarea" name="content" placeholder="내용을 입력해주세요."></textarea><br>
             	<input type="file" id="file"><br>
             	<div id="buttons1">
                 	<button id="button1">등록</button>

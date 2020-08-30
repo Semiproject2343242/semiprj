@@ -91,19 +91,4 @@ public class NoticeService {
 		return result;
 	}
 
-
-	public int modifyBoard(Board b) {
-		Connection conn = getConnection();
-		
-		int result = new NoticeDAO().modifyBoard(conn, b);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		
-		return result;
-	}
-
 }

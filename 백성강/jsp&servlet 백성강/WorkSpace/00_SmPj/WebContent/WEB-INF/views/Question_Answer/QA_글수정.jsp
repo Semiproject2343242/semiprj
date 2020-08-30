@@ -49,7 +49,7 @@
 	      <form action="<%= request.getContextPath() %>/modify.qa" method="post">
 			<h2>질문하기</h2>
 			<input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
-			<hr>
+			<hr />
 			<h2>
 			<input type="text" size="50" name="title" value="<%= b.getBoardTitle() %>">
 			</h2>

@@ -184,26 +184,4 @@ public class NoticeDAO {
 		
 		return result;
 	}
-
-	public int modifyBoard(Connection conn, Board b) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, CG_NAME = ?, B_RDATE = SYSDATE WHERE B_NO = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, b.getBoardTitle());
-			pstmt.setString(2, b.getBoardContent());
-			pstmt.setString(3, b.getCgName());
-			pstmt.setInt(4, b.getBoardNo());
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
 }

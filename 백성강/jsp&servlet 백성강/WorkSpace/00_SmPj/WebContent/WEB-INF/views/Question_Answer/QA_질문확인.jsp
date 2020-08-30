@@ -90,8 +90,7 @@
 				</script>
 			
 			</div>
-		</form>
-		<!-- <form action="noticeUpdateForm.no" id="detailForm" name="detailForm"> -->
+		<form action="noticeUpdateForm.no" id="detailForm" name="detailForm">
       </div>
     </section>
     <%@ include file="../Common/footer.jsp" %>
