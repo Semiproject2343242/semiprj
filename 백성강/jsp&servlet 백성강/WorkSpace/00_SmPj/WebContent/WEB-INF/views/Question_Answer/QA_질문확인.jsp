@@ -32,7 +32,6 @@
         <h2 id="content">내용</h2>
         <h2 id="filetext">첨부파일</h2>
       </aside>
-      
       <div id="main_section">
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
 	        <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
@@ -87,11 +86,9 @@
 				        alert('취소하셨습니다.');
 				    }
 				}
-				</script>
-			
+	</script>
 			</div>
-		</form>
-		<!-- <form action="noticeUpdateForm.no" id="detailForm" name="detailForm"> -->
+		<form action="noticeUpdateForm.no" id="detailForm" name="detailForm">
       </div>
     </section>
     <%@ include file="../Common/footer.jsp" %>

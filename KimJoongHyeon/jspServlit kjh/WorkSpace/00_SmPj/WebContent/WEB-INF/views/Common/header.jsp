@@ -18,7 +18,8 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 250px;
+  /* background-color: #2979ff; */
 }
 a {
   text-decoration: none;
@@ -26,8 +27,9 @@ a {
 }
 .header_top {
   width: 100%;
-  height: 50px;
+  height: 30px;
   background-color: rgb(15, 76, 130);
+  /* background-color: #c48b9f; */
 }
 .top {
   display: flex;
@@ -49,13 +51,16 @@ a {
 .lagefont {
   font-size: 60px;
 }
+
+
 .navbar {
+  padding-top: 50px;
   display: flex;
   width: 80%;
   margin: 0px auto;
-  margin-top: 20px;
   justify-content: space-between;
   align-items: center;
+  /* background-color: #f8bbd0; */
 }
 
 .navbar_dropdown:hover .navbar_dropdown-content {
@@ -103,9 +108,13 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-header {
-  height: auto;
-}
+  header {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 250px;
+    /* background-color: #2979ff; */
+  }
   .navbar {
     flex-direction: column;
     align-items: center;
@@ -149,16 +158,12 @@ header {
          <% if(loginUser == null) { %>
             <li><a href="<%=request.getContextPath()%>/insertForm.me" class="top_btn"><b>회원가입</b></a></li>
             <li><a href="<%=request.getContextPath()%>/loginPage.me" class="top_btn"><b>로그인</b></a></li>
+         </div>
          <% } else { %>
          	<li><label><%= loginUser.getMemberName() %>님의 방문을 환영합니다.</label></li>
-         	<% if(loginUser.getMemberName().equals("관리자")) { %>
-         		<li><a href="<%=request.getContextPath()%>/adminPage.ad" class="top_btn"><b>관리자 페이지</b></a></li>
-         	<% } else { %>
-         		<li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
-        	 <% } %>
+         	<li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
          	<li><a href="<%=request.getContextPath()%>/logout.me" class="top_btn"><b>로그아웃</b></a></li>
          <% } %>
-         </div>
       </div>
      <nav class="navbar">
          <div class="navbar_title">
