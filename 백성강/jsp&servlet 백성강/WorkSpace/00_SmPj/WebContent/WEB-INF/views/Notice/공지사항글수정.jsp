@@ -36,8 +36,8 @@
 <body>
 	<%@ include file="../Common/header.jsp" %>
      <section>
-        <aside>
-		   <input type="hidden" name="no"  value="<%= b.getBoardNo() %>">
+        <aside>		   
+		   <h2>NO.1<%= b.getBoardNo() %></h2>
 		   <hr>
            <h2>제목</h2>
            <h2>카테고리</h2>
@@ -47,19 +47,24 @@
         </aside>
         <div id="main_section">
             <form action="<%= request.getContextPath() %>/modify.no" method="post">
+            	<input type="hidden" name="no" value="<%= b.getBoardNo() %>">
+            	
+            	<h2 style="text-align: center;">공지사항 수정하기</h2> <hr>
             
-            	<h2 style="text-align: center;">공지사항 제목</h2>
-            
-           	 	<input type="text" id="text1" name="title" placeholder="<%= b.getBoardTitle() %>"><br clear="all"> 
-            	<select id="select1" name="category">
+           	 	<input type="text" id="text1" name="title" value="<%= b.getBoardTitle() %>">
+           	 	
+           	 	<br clear="all"> 
+           	 	
+            	<select id="select1" name="category" >
                	 	<option value="필독" <%= category[0] %>>필독</option>
                 	<option value="공지"<%= category[1] %>>공지</option>
             	</select>
-            	<textarea id="textarea" name="content" placeholder="<%= b.getBoardContent() %>"></textarea><br>
+            	
+            	<textarea id="textarea" name="content" style="resize:none; "> <%= b.getBoardContent() %></textarea><br>
             	<input type="file" id="file"><br>
             	<div id="buttons1">
-                	<button id="button1">등록</button>
-                	<button id="button2" onclick="location.href='javascript:history.go(-1);'">취소</button>
+                	<input type="submit" id="insertNoBtn" value="등록">
+                	<input type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="취소">
             	</div>
             </form>
         </div>
