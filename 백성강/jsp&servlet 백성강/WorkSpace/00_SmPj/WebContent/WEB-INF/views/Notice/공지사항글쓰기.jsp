@@ -21,18 +21,18 @@
 	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
-           <h2> 공지사항</h2>
-           <hr>
-           <h2>제목</h2>
-           <h2>카테고리</h2>
-           <h2>내용</h2>
-           <br><br><br><br><br><br>
-           <h2>첨부파일</h2>
+            <a href="#"><h2>NO.01</h2></a>
+            <hr>
+            <a href="#"><h2>제목</h2></a>
+            <a href="#"><h2>카테고리</h2></a>
+            <a href="#"><h2>내용</h2></a>
+            <br><br><br><br><br><br>
+            <a href="#"><h2>첨부파일</h2></a>
         </aside>
         <div id="main_section">
             <form action="<%= request.getContextPath() %>/insert.no" method="post">
             	<h2 style="text-align: center;">공지사항 제목</h2>
-            	<hr>
+            
            	 	<input type="text" id="text1" placeholder="제목을 입력해주세요." name="title"><br clear="all"> 
             	<select id="select1" name="category">
                	 	<option value="필독">필독</option>
