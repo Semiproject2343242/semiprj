@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 elements from project &apos;00_SmPj&apos;&#x0D;&#x0A;- Original project: &apos;00_SmPj&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     jspwork&#x0D;&#x0A;     org&#x0D;&#x0A;     context.xml&#x0D;&#x0A;     SESSIONS.ser" description="Delete elements" element1="WebContent/META-INF/jspwork" element2="WebContent/META-INF/context.xml" element3="WebContent/META-INF/org" element4="WebContent/META-INF/SESSIONS.ser" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="4" stamp="1598777692840" subPackages="false" version="1.0"/>
+</session>
