@@ -87,7 +87,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 8 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -125,7 +125,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM COMMULIST WHERE RNUM BETWEEN 1 AND 8 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM COMMULIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -158,7 +158,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN 1 AND 8 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();

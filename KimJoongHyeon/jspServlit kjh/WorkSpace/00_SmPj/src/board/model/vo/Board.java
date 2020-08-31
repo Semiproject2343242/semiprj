@@ -21,7 +21,6 @@ public class Board {
 	private String 	emState;         	// 취업상태				// EM_STATE
 	private String 	tcName;          	// 대상명			    	// TC_NAME
 	private String 	cgName;          	// 카테고리 이름				// CG_NAME
-	                                       
 	public Board() {}
 
 	//커뮤니티 게시판

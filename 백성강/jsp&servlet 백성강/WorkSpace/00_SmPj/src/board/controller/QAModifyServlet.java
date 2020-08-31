@@ -1,7 +1,6 @@
 package board.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,7 +32,9 @@ public class QAModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
+		
 		int no = Integer.parseInt(request.getParameter("no"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -43,7 +44,6 @@ public class QAModifyServlet extends HttpServlet {
 		Board b = new Board(no,title,content,userId,category);
 		int result = new QuestionService().modifyBoard(b);
 		String page = null;
-		
 		
 		if(result > 0) {
 			Board board = new QuestionService().selectBoard(b.getBoardNo());

@@ -38,6 +38,7 @@ public class MyPageServlet extends HttpServlet {
 		ArrayList<Board> commuFreeList = memberService.selectMyRecentCommuFreeList(loginMemberNo);
 		ArrayList<Board> qaList = memberService.selectMyRecentQAList(loginMemberNo);
 		
+		System.out.println(member);
     	String page = null;
     	if(member != null) {
     		page = "WEB-INF/views/Member/마이_페이지(메인).jsp";
