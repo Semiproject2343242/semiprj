@@ -3,9 +3,15 @@ package board.model.dao;
 import static common.JDBCTemplate.close;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import board.model.vo.Board;
+import board.model.vo.FileVO;
 
 public class BoardDAO {
 
@@ -32,5 +38,6 @@ public class BoardDAO {
 		}
 		return result;
 	}
+
 
 }

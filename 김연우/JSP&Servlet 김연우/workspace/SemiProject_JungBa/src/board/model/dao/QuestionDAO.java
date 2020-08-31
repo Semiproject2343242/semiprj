@@ -1,22 +1,23 @@
 package board.model.dao;
 
 import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.sun.xml.internal.ws.api.message.Attachment;
+
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 
 public class QuestionDAO {
+	
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -110,6 +111,167 @@ public class QuestionDAO {
 		return board;
 	}
 
+	public int insertNotice(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, 'QA', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setInt(3, b.getBoardWriterNo());
+			pstmt.setString(4, b.getCgName());
+			
+			result =  pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 
+	public int modifyBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, CG_NAME = ?, B_RDATE = SYSDATE WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setString(3, b.getCgName());
+			pstmt.setInt(4, b.getBoardNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int boardDelete(Connection conn, Board board) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+				
+		String query = "UPDATE BOARD SET BOARD.B_ENABLE='N' WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	// File 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	public ArrayList<FileVO> selectFList(Connection conn) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE STATUS='Y' AND FILE_LEVEL=0";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				list.add(new FileVO(rset.getInt("b_no"),
+									   (rset.getString("change_name"))));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
+	}
+	
+	public int insertFile(Connection conn, ArrayList<FileVO> fileList) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT, SEQ_BNO.CURRVAL)";
+		
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				FileVO a = fileList.get(i);
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, a.getOriginName());
+				pstmt.setString(2, a.getChangeName());
+				pstmt.setString(3, a.getFilePath());
+				pstmt.setInt(4, a.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' ORDER BY FILE_NO";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				FileVO f = new FileVO();
+				f.setFileNo(rset.getInt("file_no"));
+				f.setOriginName(rset.getString("origin_name"));
+				f.setChangeName(rset.getString("change_name"));
+				f.setFilePath(rset.getString("file_path"));
+				f.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(f);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	
 }
