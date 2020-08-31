@@ -30,7 +30,7 @@
             <div id="contents">
                 <!-- <h2 id="h21" >NO.01</h1> -->
                 <!-- 넘버  -->
-                <h2 id="h21"> <%= b.getBoardNo() %> </h2>
+                <h2 id="h21"> NO. <%= b.getBoardNo() %> </h2>
                 <h2 id="h22">공지사항</h2>
                 <hr>
                 <!--카테고리  -->
@@ -40,18 +40,18 @@
                 </h1>
                 <br>
                 <!--사용자이름 -->	
-                <text>
-	                	<%= b.getBoardWriterNo() %> 
-	                	<br> 
-	                	<%= b.getBoardModifyDate() %>
+                <text style="float:left">
+	                	<h3> <%= b.getBoardWriter() %> </h3>
+	                	<h3> <%= b.getBoardModifyDate() %> </h3>
                 </text>
                 <br>
                 <div id="buttons">
+                	<br><br>
                 	<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
-						<input type="submit" id="updateBtn" value="수정">
-						<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+						<input type="submit" style="font-size:130%" id="updateBtn" value="수정">
+						<input type="button" style="font-size:130%" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 					<% } %>
-					<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
+					<input type="button" style="font-size:130%" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
 					<script>
 						function deleteBoard(){
 							var num = <%= b.getBoardNo() %>; 
@@ -72,7 +72,7 @@
                 <hr>
                 <div id="div1">
                     <br>
-                    	<textarea cols="125" rows="40" name="content" style="resize:none; border:none" readonly><%= b.getBoardContent() %></textarea>
+                    	<textarea cols="125" rows="40" name="content" style="resize:none; font-size:130%; border:none " readonly><%= b.getBoardContent() %></textarea>
                     	<div style="text-align: center">
                         	<img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
                     	</div>
