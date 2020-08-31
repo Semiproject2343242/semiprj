@@ -21,18 +21,18 @@
 	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
-            <a href="#"><h2>NO.01</h2></a>
-            <hr>
-            <a href="#"><h2>제목</h2></a>
-            <a href="#"><h2>카테고리</h2></a>
-            <a href="#"><h2>내용</h2></a>
-            <br><br><br><br><br><br>
-            <a href="#"><h2>첨부파일</h2></a>
+           <h2> 공지사항</h2>
+           <hr>
+           <h2>제목</h2>
+           <h2>카테고리</h2>
+           <h2>내용</h2>
+           <br><br><br><br><br><br>
+           <h2>첨부파일</h2>
         </aside>
         <div id="main_section">
             <form action="<%= request.getContextPath() %>/insert.no" method="post">
             	<h2 style="text-align: center;">공지사항 제목</h2>
-            
+            	<hr>
            	 	<input type="text" id="text1" placeholder="제목을 입력해주세요." name="title"><br clear="all"> 
             	<select id="select1" name="category">
                	 	<option value="필독">필독</option>
@@ -41,8 +41,8 @@
             	<textarea id="textarea" name="content" placeholder="내용을 입력해주세요."></textarea><br>
             	<input type="file" id="file"><br>
             	<div id="buttons1">
-                	<button id="button1">등록</button>
-                	<button id="button2" onclick="location.href='javascript:history.go(-1);'">취소</button>
+                	<input type="submit" id="button1" value="등록">
+               		<input type="button" id="button2" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="취소">
             	</div>
             </form>
         </div>

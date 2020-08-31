@@ -75,7 +75,7 @@
 	            }).click(function(){
 	               var bId = $(this).parent().children().children('input').val(); // 버튼을 누르면 bId에 데이터 값 저장-> 값을 /q_detail.no에 보내줌
 	               <% if(loginUser != null){%> //로그인 시 가능
-	                  location.href = '<%= request.getContextPath() %>/q_detail.no?bId=' + bId; 
+	                  location.href = '<%= request.getContextPath() %>/detail.no?bId=' + bId; 
 	               <% }else{ %>
 	                  alert('회원만 이용할 수 있는 서비스입니다.')
 	               <% } %>

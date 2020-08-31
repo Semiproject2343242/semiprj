@@ -1,0 +1,12 @@
+INDEX VERSION 1.131+C:\Users\tkdwn\Documents\GitHub\semiprj\นฺป๓มุ\workspace\.metadata\.plugins\org.eclipse.jdt.core
+4048828160.index
+1315211617.index
+4144447482.index
+1607230975.index
+3353394404.index
+1245413547.index
+141539121.index
+4288343592.index
+3573976178.index
+4251237401.index
+1211597211.index
