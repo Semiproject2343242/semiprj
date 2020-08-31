@@ -1,5 +1,10 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	Member member = (Member)request.getAttribute("member");
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 
@@ -34,19 +39,21 @@
 
 <body>
    <%@ include file="../Common/header.jsp" %>
-    <section>
+   <section>
         <aside>
-            <h2><a href="#">관리자</h2></a>
+            <h2><a href="${pageContext.request.contextPath}/adminPage.ad">
+            	관리자
+            </h2></a>
             <hr>
             <div>
                 <dl>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/memList.ad">
                             <h3>회원 목록 조회</h3>
                         </a></dt>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/spList.ad">
                             <h3>정보 공유 신청</h3>
                         </a></dt>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/eaList.ad">
                             <h3>대외 활동 신청</h3>
                         </a></dt>
                 </dl>
@@ -55,88 +62,77 @@
 
         <div id="main_section" align="center">
             <h2>
-                <div id="subTitle"><b>회원 목록</b></div>
+                <div id="subTitle"><b>회원 목록 조회</b></div>
             </h2>
             <hr>
             <div id="bottomContent">
                 <div id="searchDiv">
                     <select id="selectedOption">
-                        <option>아이디로 찾기</option>
-                        <option>이름으로 찾기</option>
-                        <option>전화번호로 찾기</option>
+                        <option>회원 번호</option>
+                        <option>아이디</option>
+                        <option>닉네임</option>
                     </select>
                     <input id="search" type="search">
                     <button type="submit">검색</button>
                 </div>
                 <div id="tableDiv">
-                    <table id="infoTable">
-                        <tr>
-                            <th>회원번호</th>
-                            <th>아이디(ID)</th>
-                            <th>이름(Name)</th>
-                            <th>휴대전화(Phone)</th>
-                            <th>회원 가입 날짜</th>
-                            <th>게시글 수</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="#">junghyeon</a></td>
-                            <td>김중현</td>
-                            <td>010-1111-1111</td>
-                            <td>2020.01.01</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#">sangjun</a></td>
-                            <td>박상준</td>
-                            <td>010-2222-2222</td>
-                            <td>2020.02.02</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">gyuho</a></td>
-                            <td>이규호</td>
-                            <td>010-3333-3333</td>
-                            <td>2020.03.03</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><a href="#">seongang</a></td>
-                            <td>백성강</td>
-                            <td>010-4444-4444</td>
-                            <td>2020.04.04</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><a href="#">rudy</a></td>
-                            <td>김연우</td>
-                            <td>010-5555-5555</td>
-                            <td>2020.05.05</td>
-                            <td>1</td>
-                        </tr>
+                	<table class="contentsTable" width="100%" align="center">
+	                	<thead>
+	                        <tr>
+	                            <th width= "50px">번호</th>
+	                            <th width= "100px">아이디</th>
+	                            <th width= "100px">닉네임</th>
+	                            <th width= "50px">성별</th>
+	                            <th width= "200px">생일</th>
+	                            <th width= "150px">핸드폰</th>
+	                            <th width= "100px">이메일</th>
+	                            <th width= "200px">주소</th>
+	                            <th width= "200px">가입날짜</th>
+	                            <th width= "50px">게시글수</th>
+	                        </tr>
+	            		</thead>
+	            		<tbody>
+							<% if(list.isEmpty()){ %>
+							<tr>
+								<td colspan="7">글이 존재 하지 않습니다.</td>
+							</tr>
+						<% } else { %>
+						<%		for (Member m : list) { %>
+							<tr>
+								<td><input type="hidden" value="<%=m.getMemberNo()%>">
+									<%=m.getMemberNo()%></td>
+								<td><%=m.getMemberId()%></td>
+								<td><%=m.getMemberNickName() %></td>
+								<td><%=m.getMemberGender()%></td>
+								<td><%=m.getMemberBirthDay()%></td>
+								<td><%=m.getMemberPhone()%></td>
+								<td><%=m.getMemberEmail()%></td>
+								<td><%=m.getMemberAddress()%></td>
+								<td><%=m.getMemberRegDate()%></td>
+								<td><%=m.getMemberBoard()%></td>
+							</tr>
+						<%		} %>
+						<%	} %>
+						</tbody>
                     </table>
+                    <%@ include file="../Common/page.jsp" %>
                 </div>
             </div>
-
-            <ul align="center">
-                <div class = "pagination">
-                    <a href="#" title = "이전" class="pre"><</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#" title = "다음" class="next">></a>
-                </div>
-            </ul>
-
         </div>
-
-
+    <script>
+	    $(function(){
+	    	<%if(!list.isEmpty()){%> 
+	        	$('tbody td').mouseenter(function(){
+	            	$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	            	$(this).parent().css('background', 'none');
+	            }).click(function(){
+	                var bId = $(this).parent().children().children('input').val();
+	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	         });
+	         <% } %>
+		});
+    </script>
     </section>
    <%@ include file="../Common/footer.jsp" %>
 </body>

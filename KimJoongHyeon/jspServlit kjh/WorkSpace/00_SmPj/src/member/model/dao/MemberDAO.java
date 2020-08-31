@@ -395,7 +395,7 @@ public class MemberDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM QALIST WHERE B_WRITER = ? ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, loginMemberNo);
