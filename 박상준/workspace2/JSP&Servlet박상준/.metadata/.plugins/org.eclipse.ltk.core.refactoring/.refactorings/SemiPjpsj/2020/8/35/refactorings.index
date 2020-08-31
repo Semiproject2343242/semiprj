@@ -1,0 +1,27 @@
+1598331935181	Delete element
+1598331983278	Rename type 'ExternalDetailServlet'
+1598331989865	Rename type 'CommuExternalDetailServlet'
+1598331998522	Rename type 'CommuCommuExternalDetailServlet'
+1598332016064	Rename type 'ExternalInsertFormServlet'
+1598332035621	Rename type 'ExternalInsertServlet'
+1598332048894	Rename type 'ExternalMainServlet'
+1598332056217	Rename type 'SupportDetailServlet'
+1598332063228	Rename type 'SupportInsertFormServlet'
+1598332069634	Rename type 'SupportInsertServlet'
+1598332077498	Rename type 'SupportMainServlet'
+1598332090604	Rename type 'DetailServlet'
+1598332100154	Rename type 'InsertServlet'
+1598332112119	Rename type 'InsertFormServlet'
+1598332124191	Rename type 'MainServlet'
+1598332492310	Rename package 'commu'
+1598332511191	Rename package 'external'
+1598371785645	Delete element
+1598401175009	Delete element
+1598401180096	Delete element
+1598401183021	Delete element
+1598401226966	Delete element
+1598404578381	Move 2 resources to 'Community'
+1598405627626	Move '지원정책게시판(커뮤니티).jsp' to 'Community'
+1598405630260	Delete element
+1598492233362	Delete element
+1598505170640	Move '지원정책내용확인(커뮤니티).jsp' to 'External_Activities'
