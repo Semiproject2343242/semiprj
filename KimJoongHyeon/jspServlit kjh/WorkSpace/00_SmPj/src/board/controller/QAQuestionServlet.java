@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.QuestionService;
 import board.model.vo.Board;
+import board.model.vo.Reply;
 
 /**
  * Servlet implementation class QAQuestionServlet
@@ -34,13 +35,13 @@ public class QAQuestionServlet extends HttpServlet {
 	int bId = Integer.parseInt(request.getParameter("bId"));
 		Board board = new QuestionService().selectBoard(bId);
 		
-//		ArrayList<Reply> list = new BoardService().selectReplyList(bId);
+		ArrayList<Reply> replyList = new QuestionService().selectReplyList(bId);
 		
 		String page = null;
 		if(board != null) {
 			page = "WEB-INF/views/Question_Answer/QA_질문확인.jsp";
 			request.setAttribute("board", board);
-//			request.setAttribute("list", list);
+			request.setAttribute("replyList", replyList);
 		} else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
 			request.setAttribute("msg", "Q&A 상세조회에 실패하였습니다.");

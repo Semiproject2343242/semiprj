@@ -18,7 +18,7 @@
 	    }
 	    .contents{ 
 	        text-align: left;
-	        height: 200px; 
+	        height: 100px; 
 	        background: RGB(238,238,238 ); 
 	        display: none; 
 	        line-height: auto;      

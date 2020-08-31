@@ -182,7 +182,7 @@
 							<a href="#"><h3>Q / A</h3></a>
 						</div>
 						<ol>
-						<% if(supportList.isEmpty()) { %>
+						<% if(qaList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else { %>
 							<% for (Board b : qaList) { %>
