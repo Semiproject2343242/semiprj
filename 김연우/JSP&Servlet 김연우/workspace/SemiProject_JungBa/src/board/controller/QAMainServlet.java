@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 import board.model.service.BoardService;
 import board.model.service.QuestionService;
@@ -44,12 +45,20 @@ public class QAMainServlet extends HttpServlet {
 		//페이징
 		
 		ArrayList<Board> list =  qServuce.selectList(pi);
-				
+		
+		//////////////// FILE 테스트 /////////////////
+		ArrayList<FileVO> fList = qServuce.selectFList();
+		////////////////////////////////////////////
+		
 		String page = null;
 		if(list != null) {
 			page = "WEB-INF/views/Question_Answer/QA_게시판.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);//페이징
+			
+			//////////////// FILE 테스트 /////////////////
+			request.setAttribute("fList", fList);
+			////////////////////////////////////////////
 			
 		}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";

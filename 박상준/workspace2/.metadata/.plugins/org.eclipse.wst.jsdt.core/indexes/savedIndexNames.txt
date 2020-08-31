@@ -1,0 +1,4 @@
+INDEX VERSION 1.4+C:\Users\tkdwn\Documents\GitHub\semiprj\นฺป๓มุ\workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3353394404.index
+4288343592.index
+2441674412.index

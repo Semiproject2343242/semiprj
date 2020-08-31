@@ -21,24 +21,37 @@
     <%@ include file="../Common/header.jsp" %>
         <div id="main_section">
 			<form action="modifyForm.no" id="detailForm" name="detailForm">
+			
+			<input type="hidden" name="no" value="<%= b.getBoardNo() %>">
+	        <input type="hidden" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
+	        <input type="hidden" name="category" value="<%= b.getCgName() %>" />
+	        <input type="hidden" name="title"  value="<%= b.getBoardTitle() %>" />
+	        
             <div id="contents">
                 <!-- <h2 id="h21" >NO.01</h1> -->
                 <!-- 넘버  -->
-                <h2 id="h21" name="no" ><%= b.getBoardNo() %> </h1>
+                <h2 id="h21"> NO. <%= b.getBoardNo() %> </h2>
                 <h2 id="h22">공지사항</h2>
                 <hr>
                 <!--카테고리  -->
-                <h1 style= "text-align: center" > <span id="span1" name="category" ><%= b.getCgName() %></span> <span name="title"> <%= b.getBoardTitle() %></span></h1>
+                <h1 style= "text-align: center" > 
+                	<span id="span1">[<%= b.getCgName() %>]</span>  	
+                	<span> <%= b.getBoardTitle() %></span> 	
+                </h1>
                 <br>
-                <!--사용자이름 -->
-                <text id="text1" name="WriterNo" > <%= b.getBoardWriterNo()%> <br><%= b.getBoardModifyDate() %>댓글 2</text>
+                <!--사용자이름 -->	
+                <text style="float:left">
+	                	<h3> <%= b.getBoardWriter() %> </h3>
+	                	<h3> <%= b.getBoardModifyDate() %> </h3>
+                </text>
                 <br>
                 <div id="buttons">
+                	<br><br>
                 	<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
-						<input type="submit" id="updateBtn" value="수정">
-						<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+						<input type="submit" style="font-size:130%" id="updateBtn" value="수정">
+						<input type="button" style="font-size:130%" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 					<% } %>
-					<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
+					<input type="button" style="font-size:130%" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
 					<script>
 						function deleteBoard(){
 							var num = <%= b.getBoardNo() %>; 
@@ -59,11 +72,12 @@
                 <hr>
                 <div id="div1">
                     <br>
-                    <text id="text2" name="date"> <%= b.getBoardContent() %> </text>
+                    	<textarea cols="125" rows="40" name="content" style="resize:none; font-size:130%; border:none " readonly><%= b.getBoardContent() %></textarea>
+                    	<div style="text-align: center">
+                        	<img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
+                    	</div>
                     <br>
-                    <div style="text-align: center">
-                        <img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
-                    </div>
+
                     <h2> 참고자료 (1) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
                     <input type="file" id="ea_write_file"><br><br>
 

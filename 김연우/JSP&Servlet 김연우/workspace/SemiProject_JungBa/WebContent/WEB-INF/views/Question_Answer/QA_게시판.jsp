@@ -1,3 +1,4 @@
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.PageInfo"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,6 +6,10 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	
+	//////////////// FILE 테스트 /////////////////
+	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fList");
+	////////////////////////////////////////////
 %>
     
 <!DOCTYPE html>
@@ -22,7 +27,7 @@
     <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-           <h2>묻고 답하기</h2></a>
+           <h2>묻고 답하기</h2>
             <hr>
             <dl>
                <dt>
@@ -52,10 +57,17 @@
 	               <td colspan="6">글이 존재 하지 않습니다.</td>
 	            </tr>
             <% } else { %>
-            <% 		for(Board b : list){ %>
+            	<%	for(int i = 0; i < fList.size(); i++){ %>
+            		<% Board b = list.get(i); %>
           	<tr>
           		<td>
           			<input type="hidden" value="<%= b.getBoardNo() %>">
+          			<% for(int j = 0; j < fList.size(); j++){ %>
+						<% FileVO f = fList.get(i); %>
+							<% if(b.getBoardNo() == f.getBoardNo()){ %>
+								<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= f.getChangeName() %>" width="200px" height="150px">
+						<% } %>
+					<% } %>	
           			<%= b.getBoardNo() %>
           		</td>
           		<td><%= b.getCgName() %></td>
@@ -71,7 +83,9 @@
 	                <tr>
 	                <td colspan="5"></td>
 	                <td>
-	                    <button onclick="location.href='<%= request.getContextPath()  %>/mainForm.qa'">글쓰기</button>
+	                    <% if(loginUser != null){ %>
+						<button onclick="location.href='<%= request.getContextPath()  %>/insertForm.qa'">글쓰기</button>
+						<% } %>
 	                </td>
 	                </tr>
                 </tfoot>
@@ -79,19 +93,21 @@
  		<%@ include file="../Common/page.jsp" %>
 		</div>
         <script>
-         $(function(){
-            $('tbody td').mouseenter(function(){
-               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
-            }).mouseout(function(){
-               $(this).parent().css('background', 'none');
-            }).click(function(){
-               var bId = $(this).parent().children().children('input').val();
-               <% if(loginUser != null){%>
-                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
-               <% }else{ %>
-                  alert('회원만 이용할 수 있는 서비스입니다.')
-               <% } %>
-            })
+        $(function(){
+        	<%if(!list.isEmpty()){%> 
+	            $('tbody td').mouseenter(function(){
+	               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	               $(this).parent().css('background', 'none');
+	            }).click(function(){
+	               var bId = $(this).parent().children().children('input').val();
+	               <% if(loginUser != null){%>
+	                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	               <% }else{ %>
+	                  alert('회원만 이용할 수 있는 서비스입니다.')
+	               <% } %>
+	            })
+	        <% } %>
          })
       </script>
     </section>

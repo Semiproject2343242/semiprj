@@ -11,7 +11,7 @@ public class Board {
 	private Date 	boardModifyDate;   	// 게시판 수정 날짜			// B_RDATE
 	private int 	boardViewCount;     // 게시판 조회수			// B_VIEW_COUNT
 	private int 	boardReCommend;     // 게시판 추천수			// B_RECOMMEND
-	private char 	boardEnable;       	// 게시판 삭제상태			// B_ENABLE
+	private String 	boardEnable;       	// 게시판 삭제상태			// B_ENABLE
 	private int 	boardWriterNo;     	// 게시판 글쓴이 회원 번호		// B_WRITER
 	private String 	boardWriter;        // 게시판 글쓴이 회원			// MEMBER_NICKNAME
 	private int 	boardReply;     	// 게시판 댓글				// B_REPLY_COUNT
@@ -23,7 +23,55 @@ public class Board {
 	private String 	cgName;          	// 카테고리 이름			// CG_NAME
 	                                       
 	public Board() {}
+
+	//커뮤니티 게시판
+	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount, int boardWriterNo, String boardWriter, int boardReply) {
+		super();
+		this.boardNo = boardNo;
+		this.boardName = boardName;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+	}
+
+
+
+	//QA 삭제
+	public Board(int boardNo) {
+		super();
+		this.boardNo = boardNo;
+	}
+
+
+	//QA수정
+	public Board(int boardNo, String boardTitle, String boardContent, int boardWriterNo, String cgName) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriterNo = boardWriterNo;
+		this.cgName = cgName;
+	}
+
+	//QA게시글 생성
+	public Board(String boardTitle, String boardContent, int boardWriterNo, String 	cgName) {
+		super();
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriterNo = boardWriterNo;
+		this.cgName = cgName;
+		
+	}
+
 	
+	
+	//자유게시판
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply) {
 		super();
@@ -103,7 +151,7 @@ public class Board {
 	
 	
 	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
+			Date boardModifyDate, int boardViewCount, int boardReCommend, String boardEnable, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
 			String tcName, String cgName) {
 		super();
@@ -191,11 +239,11 @@ public class Board {
 		this.boardReCommend = boardReCommend;
 	}
 
-	public char getBoardEnable() {
+	public String getBoardEnable() {
 		return boardEnable;
 	}
 
-	public void setBoardEnable(char boardEnable) {
+	public void setBoardEnable(String boardEnable) {
 		this.boardEnable = boardEnable;
 	}
 
