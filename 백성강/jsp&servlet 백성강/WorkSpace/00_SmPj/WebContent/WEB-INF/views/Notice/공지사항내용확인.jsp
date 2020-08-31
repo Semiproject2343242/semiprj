@@ -24,14 +24,14 @@
             <div id="contents">
                 <!-- <h2 id="h21" >NO.01</h1> -->
                 <!-- 넘버  -->
-                <h2 id="h21"><%= b.getBoardNo() %> </h1>
+                <h2 id="h21" name="no" ><%= b.getBoardNo() %> </h1>
                 <h2 id="h22">공지사항</h2>
                 <hr>
                 <!--카테고리  -->
-                <h1 style="text-align: center"><span id="span1">[<%= b.getCgName() %>] </span> <%= b.getBoardTitle() %></h1>
+                <h1 style="text-align: center" > <span id="span1" name="category" ><%= b.getCgName() %></span> <span name="title"> <%= b.getBoardTitle() %></span></h1>
                 <br>
                 <!--사용자이름 -->
-                <text id="text1"> <%= b.getBoardWriterNo()%> <br><%= b.getBoardModifyDate() %> 조회수 1 댓글 2</text>
+                <text id="text1" name="WriterNo" > <%= b.getBoardWriterNo()%> <br><%= b.getBoardModifyDate() %> 조회수 1 댓글 2</text>
                 <br>
                 <div id="buttons">
                 	<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
@@ -59,9 +59,7 @@
                 <hr>
                 <div id="div1">
                     <br>
-                    <text id="text2"> 
-                    	<%= b.getBoardContent() %>
-                    </text>
+                    <text id="text2" name="date"> <%= b.getBoardContent() %> </text>
                     <br>
                     <div style="text-align: center">
                         <img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
@@ -93,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <form action="noticeUpdateForm.no" id="detailForm" name="detailForm"> -->
+          </form>
         </div>
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>

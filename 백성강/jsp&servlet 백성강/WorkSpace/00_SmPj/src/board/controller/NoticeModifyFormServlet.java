@@ -15,14 +15,14 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class QAModifyFormServlet
  */
-@WebServlet("/modifyForm.qa")
-public class QAModifyFormServlet extends HttpServlet {
+@WebServlet("/modifyForm.no")
+public class NoticeModifyFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QAModifyFormServlet() {
+    public NoticeModifyFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +31,7 @@ public class QAModifyFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -39,12 +40,11 @@ public class QAModifyFormServlet extends HttpServlet {
 		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		String category = request.getParameter("category");
 		
-		
 		Board b = new Board(no,title,content,userId,category);
-		System.out.println("QAModifyForm에서의 Board : " + b);
+		System.out.println("NoticeModifyForm에서의 Board : " + b);
 		String page = null;
 		
-		page ="WEB-INF/views/Question_Answer/QA_글수정.jsp";
+		page ="WEB-INF/views/Notice/공지사항글수정.jsp";
 		request.setAttribute("board", b);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
