@@ -171,6 +171,12 @@ li:hover {
 				<div class="swiper-slide">
 					<img src="Media/mainimage_3.png">
 				</div>
+				<div class="swiper-slide">
+					<img src="Media/mainimage_4.png">
+				</div>
+				<div class="swiper-slide">
+					<img src="Media/mainimage_5.png">
+				</div>
 			</div>
 
 			<!-- 네비게이션 -->
@@ -331,8 +337,9 @@ li:hover {
 					<% } else { %>
 					<% for (Board b : commuList) { %>
 					<li class="area_list">
-					<input type="hidden" value="<%=b.getBoardNo()%>">
-						<div class="area_list_title" >[<%= b.getBoardName() %>]<%= b.getBoardTitle() %></div>
+						<input type="hidden" class="area_list_no" value="<%=b.getBoardNo()%>">
+						<input type="hidden"  class="area_list_title" value="<%=b.getBoardName()%>">
+						<div class="area_list_title">[<%= b.getBoardName() %>]<%= b.getBoardTitle() %></div>
 						<div class="area_date"><%=b.getBoardCreateDate()%></div>
 					</li>
 					<% } %>
@@ -346,8 +353,20 @@ li:hover {
             }).mouseout(function(){
                $(this).css('none');
            	}).click(function(){
-           	 var bId = $(this).parent().children().children('input').val();
-				location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId;
+           	 	var bId = $(this).children('.area_list_no').val();
+	       	 	var bName = $(this).children('.area_list_title').val();
+	       	 	switch(bName){
+	       	 	case "자유":
+<%-- 	       	 	location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId; --%>
+	       	 	location.href = '<%=request.getContextPath()%>/fMain.cm';
+	       	 	break;
+	       	 	case "지원":
+	       	 		location.href = '<%=request.getContextPath()%>/spMain.cm';
+	       	 	break;
+	       	 	case "대외":
+	       	 		location.href = '<%=request.getContextPath()%>/eaMain.cm';
+	       	 	break;
+	       	 	}
 			})
 		})
 		</script>

@@ -26,13 +26,13 @@
       </aside>
       <div id="main_section">
 	      <form action="<%= request.getContextPath() %>/insert.qa" method="post">
-			<h2>질문하기</h2>
+			 <h2 style="text-align: center;">질문하기</h2>
 			<hr />
 			<h2>
 			<input type="text" size="50" name="title" placeholder="제목을 입력해주세요.">
 			</h2>
 			<h2>
-			  <select name="category">
+			  <select name="category" class="combo_category">
 			    <option value="이용관련">이용관련</option>
 			    <option value="회원관련">회원관련</option>
 			    <option value="게시글등록">게시글 등록</option>

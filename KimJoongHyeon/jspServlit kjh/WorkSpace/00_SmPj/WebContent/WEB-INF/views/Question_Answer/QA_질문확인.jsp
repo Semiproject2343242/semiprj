@@ -20,6 +20,9 @@
   	#filetext{
   		margin-top : 220px;
   	}
+  	span{
+  		float:right;
+  	}
   </style>
   <body>
     <%@ include file="../Common/header.jsp" %>
@@ -38,27 +41,15 @@
 	        <input type="hidden" size="50" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
 	        <h2 align="center">묻고 답하기</h2>
 	        <hr />
-	        <h2>
-		        <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
-		        <%= b.getBoardTitle() %>
-	        </h2>
-	        <h2>
-	        	<table>
-	        		<tr>
-	        			<td style="width: 60%">
-		        			<input type="hidden" name=category value="<%= b.getCgName() %>" />
-				        	<%= b.getCgName() %>
-	        			</td>
-	        			
-	        			<td>
-				        	등록 날짜
-	        			</td>
-	        			<td>
-				        	<%= b.getBoardModifyDate() %>
-							<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
-	        			</td>
-	        		</tr>
-	        	</table>
+       			<input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
+				<input type="hidden" name="writer" value="<%= b.getBoardWriter()%>">
+       			<input type="hidden" name=category value="<%= b.getCgName() %>" />
+
+       			<h2><%= b.getBoardTitle() %><span class="sub">작성자 : <%= b.getBoardWriter()%></span></h2>
+
+	        	<h2><%= b.getCgName() %><span class="sub">등록 날짜 : <%= b.getBoardModifyDate() %></span><h2>
+      			
+				<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
 	        </h2>
 	        <h2>
 		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>
