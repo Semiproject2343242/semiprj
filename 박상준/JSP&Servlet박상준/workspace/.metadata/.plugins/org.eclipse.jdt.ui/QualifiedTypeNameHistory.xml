@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="board.model.vo.Board"/>
-<fullyQualifiedTypeName name="board.model.service.QuestionService"/>
-<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 <fullyQualifiedTypeName name="member.model.vo.Member"/>
 </qualifiedTypeNameHistroy>
