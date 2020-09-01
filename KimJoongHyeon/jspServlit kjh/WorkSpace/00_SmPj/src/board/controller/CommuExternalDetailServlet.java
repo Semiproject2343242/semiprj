@@ -39,7 +39,6 @@ public class CommuExternalDetailServlet extends HttpServlet {
 		Board board = service.selectBoard(bId,"대외");
 		ArrayList<AddFile> fileList = service.selectFile(bId);
 //		ArrayList<Reply> replyList = new CommunityService().selectReplyList(bId);
-		
 		String page = null;
 		if(board != null) {
 			page = "WEB-INF/views/Community/대외활동내용확인(커뮤니티).jsp";

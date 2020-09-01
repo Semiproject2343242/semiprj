@@ -1,11 +1,71 @@
+<%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Board b = (Board)request.getAttribute("board"); 
+	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
+
+	String categoryStr = b.getCgName();
+	String[] categoryarr = new String[7];
+	String[] splitCate = categoryStr.split(",");
+	for(int i = 0; i < splitCate.length; i++){
+		switch(splitCate[i]){
+		case "선택" : categoryarr[0] = "selected"; break; 
+		case "공모전" : categoryarr[1] = "selected"; break; 
+		case "채용박람회/취업박람회" : categoryarr[2] = "selected"; break; 
+		case "경진대회" : categoryarr[3] = "selected"; break; 
+		case "봉사활동" : categoryarr[4] = "selected"; break; 
+		case "서포터즈" : categoryarr[5] = "selected"; break; 
+		case "관람/전시/체험" : categoryarr[6] = "selected"; break; 
+		}
+	}
+	
+	String tcName = b.getTcName();
+	String[] tcarr = new String[4];
+	String[] splitTc = tcName.split(",");
+	for(int i = 0; i < splitTc.length; i++){
+		switch(splitTc[i]){
+		case "청년": tcarr[0] = "checked"; break;
+		case "중년": tcarr[1] = "checked"; break;
+		case "장년": tcarr[2] = "checked"; break;
+		case "어르신": tcarr[3] = "checked"; break;
+		}
+	}
+	
+	String lcName = b.getLcName();
+	String[] lcarr = new String[21];
+	String[] splitLc = lcName.split(",");
+	for(int i = 0; i < splitLc.length; i++){
+		switch(splitLc[i]){
+		case "가평군": lcarr[0] = "checked"; break;
+		case "고양시": lcarr[1] = "checked"; break;
+		case "과천시": lcarr[2] = "checked"; break;
+		case "광명시": lcarr[3] = "checked"; break;
+		case "광주시": lcarr[4] = "checked"; break;
+		case "구리시": lcarr[5] = "checked"; break;
+		case "군포시": lcarr[6] = "checked"; break;
+		case "김포시": lcarr[7] = "checked"; break;
+		case "남양주시": lcarr[8] = "checked"; break;
+		case "동두천시": lcarr[9] = "checked"; break;
+		case "부천시 ": lcarr[10] = "checked"; break;
+		case "성남시 ": lcarr[11] = "checked"; break;
+		case "수원시 ": lcarr[12] = "checked"; break;
+		case "시흥시 ": lcarr[13] = "checked"; break;
+		case "안산시 ": lcarr[14] = "checked"; break;
+		case "안양시 ": lcarr[15] = "checked"; break;
+		case "파주시 ": lcarr[16] = "checked"; break;
+		case "평택시 ": lcarr[17] = "checked"; break;
+		case "포천시 ": lcarr[18] = "checked"; break;
+		case "하남시 ": lcarr[19] = "checked"; break;
+		case "화성시 ": lcarr[20] = "checked"; break;
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>게시판 기본틀</title>
-<%--     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/EA_writer.css"> --%>
+    <title>정부지원금 바로지금</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
@@ -73,8 +133,8 @@ section{
  <!----------------------------------------header------------------------------------------->
  <section>
  <div id="main_section">
-  <form action="<%= request.getContextPath() %>/eaInsert.cm" method="post" encType="multipart/form-data">
-    <h1 align="center">대외활동 글쓰기</h1>
+  <form action="<%= request.getContextPath() %>/eaModify.cm" method="post" encType="multipart/form-data">
+    <h1 align="center">대외활동 수정</h1>
     <div class="writerinformanion_box">
       <ul class="writertext">
           <th>
@@ -87,13 +147,13 @@ section{
       <div class="select_box">
           <h3>
               <select class="categoty_select" name="ea_category">
-                  <option value="선택" selected disabled hidden >선택</option>
-                  <option value="공모전">공모전</option>
-                  <option value="채용박람회/취업박람회">채용박람회/취업박람회</option>
-                  <option value="경진대회">경진대회</option>
-                  <option value="봉사활동">봉사활동</option>
-                  <option value="서포터즈">서포터즈</option>
-                  <option value="관람/전시/체험">관람/전시/체험</option>
+                  <option value="선택" <%= categoryarr[0] %> selected disabled hidden  >선택해주세요.</option>
+                  <option value="공모전" <%= categoryarr[1] %>>공모전</option>
+                  <option value="채용박람회/취업박람회" <%= categoryarr[2] %>>채용박람회/취업박람회</option>
+                  <option value="경진대회" <%= categoryarr[3] %>>경진대회</option>
+                  <option value="봉사활동" <%= categoryarr[4] %>>봉사활동</option>
+                  <option value="서포터즈" <%= categoryarr[5] %>>서포터즈</option>
+                  <option value="관람/전시/체험" <%= categoryarr[6] %>>관람/전시/체험</option>
               </select>
           </h3>
           <h3>
@@ -104,12 +164,90 @@ section{
                   <button type="button"class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
               </div>
               <div id="ck_ea_age">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_18" value="청년"">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_35" value="중년">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_50" value="장년">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_65" value="어르신">
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_18" value="청년" <%= tcarr[0] %>>
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_35" value="중년" <%= tcarr[1] %>>
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_50" value="장년" <%= tcarr[2] %>>
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_65" value="어르신" <%= tcarr[3] %>>
             </div>
             <script>
+            $(document).ready(function(){
+            	if($("#ck_ea_age_18").is(":checked") == true){
+           		 $("#ea_age_18").css({'background':'darkgray'});
+           		}
+           		if($("#ck_ea_age_35").is(":checked") == true){
+           		  	 $("#ea_age_35").css({'background':'darkgray'});
+           	    }
+           		if($("#ck_ea_age_50").is(":checked") == true){
+           		  	 $("#ea_age_50").css({'background':'darkgray'});
+           	    }
+           		if($("#ck_ea_age_65").is(":checked") == true){
+           		  	 $("#ea_age_65").css({'-':'darkgray'});
+           	    }
+           		if($("#ck_GP").is(":checked") == true){
+          		  	 $("#GP").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GY").is(":checked") == true){
+          		  	 $("#GY").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GC").is(":checked") == true){
+          		  	 $("#GC").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GM").is(":checked") == true){
+          		  	 $("#GM").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GJ").is(":checked") == true){
+          		  	 $("#GJ").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GL").is(":checked") == true){
+          		  	 $("#GL").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GP2").is(":checked") == true){
+          		  	 $("#GP2").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_GP3").is(":checked") == true){
+          		  	 $("#GP3").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_NYJ").is(":checked") == true){
+          		  	 $("#NYJ").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_DDC").is(":checked") == true){
+          		  	 $("#DDC").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_BC").is(":checked") == true){
+          		  	 $("#BC").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_SN").is(":checked") == true){
+          		  	 $("#SN").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_SW").is(":checked") == true){
+          		  	 $("#SW").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_SH").is(":checked") == true){
+          		  	 $("#SH").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_AS").is(":checked") == true){
+          		  	 $("#AS").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_AY").is(":checked") == true){
+          		  	 $("#AY").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_PJ").is(":checked") == true){
+          		  	 $("#PJ").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_PT").is(":checked") == true){
+          		  	 $("#PT").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_PC").is(":checked") == true){
+          		  	 $("#PC").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_NH").is(":checked") == true){
+          		  	 $("#HN").css({'background':'darkgray'});
+          	    }
+           		if($("#ck_HS").is(":checked") == true){
+          		  	 $("#HS").css({'background':'darkgray'});
+          	    }
+           		
+            	});
                $(function(){
                   $("#ck_ea_age").hide();
                   $("#ea_age_18").click(function(){
@@ -174,27 +312,27 @@ section{
 	              <button type="button" class = "select_btn" id= "HS">화성시</button>
               </div>
               <div id="ck_ea_areatable">
-             	<input type="checkbox" name="ck_lc" id="ck_GP" value="가평군">
-				<input type="checkbox" name="ck_lc" id="ck_GY" value="고양시">
-				<input type="checkbox" name="ck_lc" id="ck_GC" value="과천시">
-				<input type="checkbox" name="ck_lc" id="ck_GM" value="광명시">
-				<input type="checkbox" name="ck_lc" id="ck_GJ" value="광주시">
-				<input type="checkbox" name="ck_lc" id="ck_GL" value="구리시">
-				<input type="checkbox" name="ck_lc" id="ck_GP2" value="군포시">
-              	<input type="checkbox" name="ck_lc" id="ck_GP3" value="김포시">
-				<input type="checkbox" name="ck_lc" id="ck_NYJ" value="남양주시">
-				<input type="checkbox" name="ck_lc" id="ck_DDC" value="동두천시">
-				<input type="checkbox" name="ck_lc" id="ck_BC" value="부천시">
-				<input type="checkbox" name="ck_lc" id="ck_SN" value="성남시">
-				<input type="checkbox" name="ck_lc" id="ck_SW" value="수원시">
-				<input type="checkbox" name="ck_lc" id="ck_SH" value="시흥시">
-				<input type="checkbox" name="ck_lc" id="ck_AS" value="안산시"">
-				<input type="checkbox" name="ck_lc" id="ck_AY" value="안양시">
-				<input type="checkbox" name="ck_lc" id="ck_PJ" value="파주시">
-				<input type="checkbox" name="ck_lc" id="ck_PT" value="평택시">
-				<input type="checkbox" name="ck_lc" id="ck_PC" value="포천시">
-				<input type="checkbox" name="ck_lc" id="ck_HN" value="하남시">
-				<input type="checkbox" name="ck_lc" id="ck_HS" value="화성시">
+             	<input type="checkbox" name="ck_lc" id="ck_GP" value="가평군" <%= lcarr[0] %>>
+				<input type="checkbox" name="ck_lc" id="ck_GY" value="고양시" <%= lcarr[1] %>>
+				<input type="checkbox" name="ck_lc" id="ck_GC" value="과천시" <%= lcarr[2] %>>
+				<input type="checkbox" name="ck_lc" id="ck_GM" value="광명시" <%= lcarr[3] %>>
+				<input type="checkbox" name="ck_lc" id="ck_GJ" value="광주시" <%= lcarr[4] %>>
+				<input type="checkbox" name="ck_lc" id="ck_GL" value="구리시" <%= lcarr[5] %>>
+				<input type="checkbox" name="ck_lc" id="ck_GP2" value="군포시" <%= lcarr[6] %>>
+              	<input type="checkbox" name="ck_lc" id="ck_GP3" value="김포시" <%= lcarr[7] %>>
+				<input type="checkbox" name="ck_lc" id="ck_NYJ" value="남양주시" <%= lcarr[8] %>>
+				<input type="checkbox" name="ck_lc" id="ck_DDC" value="동두천시" <%= lcarr[9] %>>
+				<input type="checkbox" name="ck_lc" id="ck_BC" value="부천시" <%= lcarr[10] %>>
+				<input type="checkbox" name="ck_lc" id="ck_SN" value="성남시" <%= lcarr[11] %>>
+				<input type="checkbox" name="ck_lc" id="ck_SW" value="수원시" <%= lcarr[12] %>>
+				<input type="checkbox" name="ck_lc" id="ck_SH" value="시흥시" <%= lcarr[13] %>>
+				<input type="checkbox" name="ck_lc" id="ck_AS" value="안산시" <%= lcarr[14] %>>
+				<input type="checkbox" name="ck_lc" id="ck_AY" value="안양시" <%= lcarr[15] %>>
+				<input type="checkbox" name="ck_lc" id="ck_PJ" value="파주시" <%= lcarr[16] %>>
+				<input type="checkbox" name="ck_lc" id="ck_PT" value="평택시" <%= lcarr[17] %>>
+				<input type="checkbox" name="ck_lc" id="ck_PC" value="포천시" <%= lcarr[18] %>>
+				<input type="checkbox" name="ck_lc" id="ck_HN" value="하남시" <%= lcarr[19] %>>
+				<input type="checkbox" name="ck_lc" id="ck_HS" value="화성시" <%= lcarr[20] %>>
             </div>
              <script>
                $(function(){
@@ -378,7 +516,7 @@ section{
         <table class="writer_table">
           <tr>
             <th width="15%">제목</th>
-            <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1></td>
+            <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1 value="<%=b.getBoardTitle() %>"></td>
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
@@ -396,7 +534,7 @@ section{
           </tr>
           <tr>
             <th>내용</th>
-            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ></textarea></td>
+            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ><%=b.getBoardContent() %></textarea></td>
           </tr>
           <tr>
             <th>내용 이미지 첨부</th>
@@ -412,6 +550,7 @@ section{
       <input type="submit" id="insertBtn" value="작성완료">
       <input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/eaMain.cm'" value="취소하기">
     </div>
+	</script>
   </form>
   </div>
 </section>  

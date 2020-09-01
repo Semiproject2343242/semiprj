@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,16 +24,16 @@ import common.MyFileRenamePolicy;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class CommuExternalInsertServlet
+ * Servlet implementation class CommuExternalModifyFormServlet
  */
-@WebServlet("/eaInsert.cm")
-public class CommuExternalInsertServlet extends HttpServlet {
+@WebServlet("/eaModify.cm")
+public class CommuExternalModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommuExternalInsertServlet() {
+    public CommuExternalModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +42,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 	      
 	      // encType 이 multipart/form-data 로 전송되었는지 확인
 	      if(ServletFileUpload.isMultipartContent(request)) {
@@ -151,7 +152,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	            request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp").forward(request, response);
 	         }
 	      }
-	}
+}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

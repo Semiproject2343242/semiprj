@@ -1,5 +1,15 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="board.model.vo.AddFile"%>
+<%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+ 	Board b = (Board)request.getAttribute("board");
+	ArrayList<AddFile> fList = (ArrayList<AddFile>)request.getAttribute("fileList");
+	AddFile titleImg = fList.get(0);
+	System.out.println("대외커뮤.jsp에서의 board : " + b);
+	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,34 +22,36 @@
     section{
       display: block;
   	}
-  	.writerinformanion_box{
-      background-color: RGB(248,248,248);
-      display: flex;
-  	}
-  	.writertext{
-      list-style: none;
-      line-height: 70px;
-  	}
-  	.select_box{
-      margin: 16px;
-      line-height: 70px;
-  	}
-  	.select_btn{
-      height: 50px;
-      width: 100px;
-      background-color:  RGB(221,228,236);
-  	}
-  	.categoty_select{
-      height: 40px;
-  	}
+	.thumbnailArea {
+		width: 80%;
+		height: auto;
+		margin: 0px auto;
+		padding: 0px;
+	}
+
+	.thumb-list {
+		margin: 20px;
+		display: flex;
+		line-height:15px; 
+		border-bottom: 1px solid silver;
+	}
+	.imageArea{
+		margin: auto 0px;
+		align-items: "center";
+	}
+	.textArea{
+		line-height: 30px;
+		text-align: left;
+		margin-left : 30px;
+	}
+
   	.writer_box{
       margin: 0px auto;
+      border-bottom: 1px solid silver;
   	}
   	.writer_table{
-    margin: 0px;
-    margin-top: 100px;
-    width: 100%;
-    line-height: 80px;
+	    margin: 0px;
+	    width: 100%;
   	}
   
   	.writer_text{
@@ -48,371 +60,122 @@
       width: 100%;
  	 }
   	textarea{
-    height: 100px;
-    width: 80%;
-    resize: none;
+	    height: 100px;
+	    width: 80%;
+	    resize: none;
   	}
   	.textline1{
-    width: 80%;
-    height: 30px;
+	    width: 80%;
+	    height: 30px;
   	}
 
   	.ea_button{
-    margin: 0 auto; 
-    text-align: center;
+	    margin: 0 auto; 
+	    text-align: center;
   	}	
 
   	.result_btn{
-    height: 50px;
-    width: 100px;
-    margin: 30px;
+	    height: 50px;
+	    width: 100px;
+	    margin: 30px;
   	}
+.detailImg{width:250px; height:180px;}
     </style>
 </head>
 <body>
     <%@ include file="../Common/header.jsp" %>
     <section>
-        <div id="main_section">
-    <h1 align="center">대외활동 글쓰기</h1>
-    <div class="writerinformanion_box">
-      <ul class="writertext">
-          <th>
-              <li><h3>카테고리</h3></li>
-              <li><h3>대상</h3></li>
-              <li><h3>지역</h3></li>
-          </th>
-      </ul>
-      <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
-      <div class="select_box">
-          <h3>
-              <select class="categoty_select" name="ea_category">
-                  <option value="0" selected disabled hidden >선택해주세요.</option>
-                  <option value="1">공모전</option>
-                  <option value="2">채용박람회/취업박람회</option>
-                  <option value="3">경진대회</option>
-                  <option value="4">봉사활동</option>
-                  <option value="5">서포터즈</option>
-                  <option value="6">관람/전시/체험</option>
-              </select>
-          </h3>
-          <h3>
-              <div>
-                  <button class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
-                  <button class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
-                  <button class="select_btn" id="ea_age_50">장년<br>(50~64세) </button>
-                  <button class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
-              </div>
-              <div id="ea_age">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_18" value="청년"">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_35" value="중년">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_50" value="장년">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_65" value="어르신">
-            </div>
-            <script>
-               $(function(){
-                  $("#ea_age").hide();
-                  $("#ea_age_18").click(function(){
-                     $("#ck_ea_age_18").click();
-                     if($("#ck_ea_age_18").is(":checked") == true){
-                    	 $(this).css({'background':'darkgray'});
-                     }else{
-                    	 $(this).css('background', 'RGB(221,228,236)');
-                     }
-                  });
-                  $("#ea_age_35").click(function(){
-                     $("#ck_ea_age_35").click();
-                     if($("#ck_ea_age_35").is(":checked") == true){
-                    	 $(this).css({'background':'darkgray'});
-                     }else{
-                    	 $(this).css('background', 'RGB(221,228,236)');
-                     }
-                  });
-                  $("#ea_age_50").click(function(){
-                     $("#ck_ea_age_50").click();
-                     if($("#ck_ea_age_50").is(":checked") == true){
-                    	 $(this).css({'background':'darkgray'});
-                     }else{
-                    	 $(this).css('background', 'RGB(221,228,236)');
-                     }
-                  });
-                  $("#ea_age_65").click(function(){
-                     $("#ck_ea_age_65").click();
-                     if($("#ck_ea_age_65").is(":checked") == true){
-                    	 $(this).css({'background':'darkgray'});
-                     }else{
-                    	 $(this).css('background', 'RGB(221,228,236)');
-                     }
-                  });
-               });
-           </script>
-          </h3>
-          <h3 id = "ea_areatable_div">
-              <div id= "ea_areatable">
-	              <button class = "select_btn" id= "GP">가평군</button>
-	              <button class = "select_btn" id= "GY">고양시</button>
-	              <button class = "select_btn" id= "GC">과천시</button>
-	              <button class = "select_btn" id= "GM">광명시</button>
-	              <button class = "select_btn" id= "GJ">광주시</button>
-	              <button class = "select_btn" id= "GL">구리시</button>
-	              <button class = "select_btn" id= "GP2">군포시</button>
-	              <br>
-	              <button class = "select_btn" id= "GP3">김포시</button>
-	              <button class = "select_btn" id= "NYJ">남양주시</button>
-	              <button class = "select_btn" id= "DDC">동두천시</button>
-	              <button class = "select_btn" id= "BC">부천시</button>
-	              <button class = "select_btn" id= "SN">성남시</button>
-	              <button class = "select_btn" id= "SW">수원시</button>
-	              <button class = "select_btn" id= "SH">시흥시</button>
-	              <br>
-	              <button class = "select_btn" id= "AS">안산시</button>
-	              <button class = "select_btn" id= "AY">안양시</button>
-	              <button class = "select_btn" id= "PJ">파주시</button>
-	              <button class = "select_btn" id= "PT">평택시</button>
-	              <button class = "select_btn" id= "PC">포천시</button>
-	              <button class = "select_btn" id= "HN">하남시</button>
-	              <button class = "select_btn" id= "HS">화성시</button>
-              </div>
-              <div id="ea_areatable">
-             	<input type="checkbox" name="ck_lc" id="ck_GP" value="가평군">
-				<input type="checkbox" name="ck_lc" id="ck_GY" value="고양시">
-				<input type="checkbox" name="ck_lc" id="ck_GC" value="과천시">
-				<input type="checkbox" name="ck_lc" id="ck_GM" value="광명시">
-				<input type="checkbox" name="ck_lc" id="ck_GJ" value="광주시">
-				<input type="checkbox" name="ck_lc" id="ck_GL" value="구리시">
-				<input type="checkbox" name="ck_lc" id="ck_GP2" value="군포시">
-              	<input type="checkbox" name="ck_lc" id="ck_GP3" value="김포시">
-				<input type="checkbox" name="ck_lc" id="ck_NYJ" value="남양주시">
-				<input type="checkbox" name="ck_lc" id="ck_DDC" value="동두천시">
-				<input type="checkbox" name="ck_lc" id="ck_BC" value="부천시">
-				<input type="checkbox" name="ck_lc" id="ck_SN" value="성남시">
-				<input type="checkbox" name="ck_lc" id="ck_SW" value="수원시">
-				<input type="checkbox" name="ck_lc" id="ck_SH" value="시흥시">
-				<input type="checkbox" name="ck_lc" id="ck_AS" value="안산시"">
-				<input type="checkbox" name="ck_lc" id="ck_AY" value="안양시">
-				<input type="checkbox" name="ck_lc" id="ck_PJ" value="파주시">
-				<input type="checkbox" name="ck_lc" id="ck_PT" value="평택시">
-				<input type="checkbox" name="ck_lc" id="ck_PC" value="포천시">
-				<input type="checkbox" name="ck_lc" id="ck_HN" value="하남시">
-				<input type="checkbox" name="ck_lc" id="ck_HS" value="화성시">
-            </div>
-             <script>
-               $(function(){
-                  $("#ea_areatable").hide();
-                  $("#GP").click(function(){
-                     $("#ck_GP").click();
-                     if($("#ck_GP").is(":checked") == true){
-                    	 $(this).css({'background':'darkgray'});
-                     }else{
-                    	 $(this).css('background', 'RGB(221,228,236)');
-                     }
-                  });
-                  $("#GY").click(function(){
-                      $("#ck_GY").click();
-                      if($("#ck_GY").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                  $("#GC").click(function(){
-                      $("#ck_GC").click();
-                      if($("#ck_GC").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                  $("#GM").click(function(){
-                      $("#ck_GM").click();
-                      if($("#ck_GM").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                  $("#GJ").click(function(){
-                      $("#ck_GJ").click();
-                      if($("#ck_GJ").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                  $("#GL").click(function(){
-                      $("#ck_GL").click();
-                      if($("#ck_GL").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                  $("#GP2").click(function(){
-                      $("#ck_GP2").click();
-                      if($("#ck_GP2").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                  $("#GP3").click(function(){
-                      $("#ck_GP3").click();
-                      if($("#ck_GP3").is(":checked") == true){
-                     	 $(this).css({'background':'darkgray'});
-                      }else{
-                     	 $(this).css('background', 'RGB(221,228,236)');
-                      }
-                   });
-                   $("#NYJ").click(function(){
-                       $("#ck_NYJ").click();
-                       if($("#ck_NYJ").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                   $("#DDC").click(function(){
-                       $("#ck_DDC").click();
-                       if($("#ck_DDC").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                   $("#BC").click(function(){
-                       $("#ck_BC").click();
-                       if($("#ck_BC").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                   $("#SN").click(function(){
-                       $("#ck_SN").click();
-                       if($("#ck_SN").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                   $("#SW").click(function(){
-                       $("#ck_SW").click();
-                       if($("#ck_SW").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                   $("#SH").click(function(){
-                       $("#ck_SH").click();
-                       if($("#ck_SH").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                   $("#AS").click(function(){
-                       $("#ck_AS").click();
-                       if($("#ck_AS").is(":checked") == true){
-                      	 $(this).css({'background':'darkgray'});
-                       }else{
-                      	 $(this).css('background', 'RGB(221,228,236)');
-                       }
-                    });
-                    $("#AY").click(function(){
-                        $("#ck_AY").click();
-                        if($("#ck_AY").is(":checked") == true){
-                       	 $(this).css({'background':'darkgray'});
-                        }else{
-                       	 $(this).css('background', 'RGB(221,228,236)');
-                        }
-                     });
-                    $("#PJ").click(function(){
-                        $("#ck_PJ").click();
-                        if($("#ck_PJ").is(":checked") == true){
-                       	 $(this).css({'background':'darkgray'});
-                        }else{
-                       	 $(this).css('background', 'RGB(221,228,236)');
-                        }
-                     });
-                    $("#PT").click(function(){
-                        $("#ck_PT").click();
-                        if($("#ck_PT").is(":checked") == true){
-                       	 $(this).css({'background':'darkgray'});
-                        }else{
-                       	 $(this).css('background', 'RGB(221,228,236)');
-                        }
-                     });
-                    $("#PC").click(function(){
-                        $("#ck_PC").click();
-                        if($("#ck_PC").is(":checked") == true){
-                       	 $(this).css({'background':'darkgray'});
-                        }else{
-                       	 $(this).css('background', 'RGB(221,228,236)');
-                        }
-                     });
-                    $("#HN").click(function(){
-                        $("#ck_HN").click();
-                        if($("#ck_HN").is(":checked") == true){
-                       	 $(this).css({'background':'darkgray'});
-                        }else{
-                       	 $(this).css('background', 'RGB(221,228,236)');
-                        }
-                     });
-                    $("#HS").click(function(){
-                        $("#ck_HS").click();
-                        if($("#ck_HS").is(":checked") == true){
-                       	 $(this).css({'background':'darkgray'});
-                        }else{
-                       	 $(this).css('background', 'RGB(221,228,236)');
-                        }
-                     });
-               });
-           </script>
-          </h3>
-      </div>  
-      <!-- </div> -->
-    </div>
+    <div id="main_section">
+    <form action="<%= request.getContextPath() %>/eaModifyForm.cm" method="post" encType="multipart/form-data">
+    <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
+    <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
+    <input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
+	<input type="hidden" name=category value="<%= b.getCgName() %>" />
+	<input type="hidden" name=acState value="<%= b.getAcState() %>" />
+	<input type="hidden" name=tcName value="<%= b.getTcName() %>" />
+	<input type="hidden" name=lcName value="<%= b.getLcName() %>" />
+	<input type="hidden" name=viewCount value="<%= b.getBoardViewCount() %>" />
+	<input type="hidden" name=reCommend value="<%= b.getBoardReCommend() %>" />
+	<input type="hidden" name=writer value="<%= b.getBoardWriter() %>" />
+    
+    <h4>대외활동 -<%=b.getCgName()%></h4>
+    <hr>
+    <h3><%=b.getBoardNo()%>.<%= b.getBoardTitle() %></h3>
+    <ul class="thumbnailArea">
+		<li class="thumb-list">
+			<div id="titldImgArea" align="center">
+				<a href="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				</a>
+			</div>
+			<div class="textArea">
+				<p>	
+					<b>접수상태 </b><br>
+					<%=b.getAcState()%></p>
+				<p>
+					<b>지원대상 </b><br>
+					<%=b.getTcName()%></p>
+				<p>
+					<b>지역 </b><br>
+					<%=b.getLcName()%></p>
+				<p>
+					<b>모집 일정 </b>
+					<%=b.getReStratDate()%>~<%=b.getReEndDate()%></p>
+				<p>
+					<b>활동 일정 </b>
+					<%=b.getAcStartDate()%>~<%=b.getAcEndDate()%></p>
+			</div>
+		</li>
+	</ul>
+    
     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
     <div class="writer_box">
         <table class="writer_table">
           <tr>
-            <th width="15%">제목</th>
-            <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1></td>
-          </tr>
-          <tr>
-            <th>메인 이미지 첨부</th>
-            <td colspan="3"><input type ="file" id="ea_title_image" name = "ea_title_image" class=textline2></td>
-          </tr>
-          <tr>
-            <th>모집 일정</th>
-            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1>
-              ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1> 까지</td>
-          </tr>
-          <tr>
-            <th>활동 기간</th>
-            <td colspan="3"><input type ="date" id="ea_acs_date"name = "ea_acs_date"  class=dateline1>
-              ~ <input type ="date" id="ea_ace_date"name = "ea_ace_date"  class=dateline1> 까지</td>
-          </tr>
-          <tr>
             <th>내용</th>
-            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ></textarea></td>
+            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" readonly><%=b.getBoardContent()%></textarea></td>
           </tr>
-          <tr>
-            <th>내용 이미지 첨부</th>
-            <td colspan="3"><input type ="file" id="ea_main_image" name = "ea_main_image" class=textline2></td>
-          </tr>
-          <tr>
-            <th>참고자료</th>
-            <td colspan="3"><input type ="file" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
-          </tr>
-          <tr> 
-            <th>연락처</th>
-            <td><input type ="tel" name = "ea_manager_phone" id="ea_manager_phone" placeholder="연락처" class=textline3 readonly><%= loginUser.getMemberPhone()%></td>
-            <th>이메일</th>
-            <td><input type ="email" name = "ea_manager_email" id="ea_manager_email" placeholder="이메일" class=textline3 readonly><%= loginUser.getMemberEmail()%></td>
+           <tr>
+            <th>첨부파일</th>
+				<td>
+            <% for(int i = 1; i< fList.size(); i++){ %>
+					<a href="<%= request.getContextPath()%>/thumbnail_uploadFiles/<%= fList.get(i).getChangeName() %>" download="<%= fList.get(i).getOriginName() %>">
+						<%= fList.get(i).getOriginName() %>&emsp;
+					</a>
+				<% } %>
+				</td>
           </tr>
         </table>
+        <table class="detail">
+			<tr>
+				
+			</tr>
+		</table>
     </div>
+    <div align="right">
+				<input type="button" onclick="location.href='<%= request.getContextPath() %>/eaMain.cm'" id="menuBtn" value="메뉴로">
+				<% if(loginUser != null) { %>
+					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
+						<input type="submit" id="updateBtn" value="수정">
+						<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+					<% } %>
+				<% } %>
+				<script>
+				function deleteBoard(){
+					var num = <%= b.getBoardNo() %>;
+					var result = window.confirm(num+'삭제?');
+					var wno = <%= b.getBoardWriterNo()%>;
+					console.log(wno);
+				    if(result){
+				    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+				    }
+				    else{
+				        alert('취소하셨습니다.');
+				    }
+				}
+		</script>
+			</div>
+  </form>
   </div>
 </section>  
     <%@ include file="../Common/footer.jsp" %>

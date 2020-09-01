@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,23 +17,21 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 
-import board.model.service.CommunityService;
-import board.model.vo.AddFile;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class CommuExternalInsertServlet
+ * Servlet implementation class CommuExternalModifyFormServlet
  */
-@WebServlet("/eaInsert.cm")
-public class CommuExternalInsertServlet extends HttpServlet {
+@WebServlet("/eaModifyForm.cm")
+public class CommuExternalModifyFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommuExternalInsertServlet() {
+    public CommuExternalModifyFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +40,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 	      
 	      // encType 이 multipart/form-data 로 전송되었는지 확인
 	      if(ServletFileUpload.isMultipartContent(request)) {
@@ -84,80 +83,38 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	               originFiles.add(multiRequest.getOriginalFileName(name));
 	            }
 	         }
-	         String category = multiRequest.getParameter("ea_category");
-	         String[] agearr = multiRequest.getParameterValues("ck_ea_age");
-	         String[] localarr = multiRequest.getParameterValues("ck_lc");
-	         String title = multiRequest.getParameter("ea_title");
-	         String content = multiRequest.getParameter("ea_text_contents");
-	         String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
-	         int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-	 		 String age = "";
-	 		 if(agearr != null) {
-	 			for (int i = 0; i< agearr.length; i++) {
-	 				if(i == agearr.length -1)
-	 					age += agearr[i];
-	 				else
-	 					age += agearr[i] + ",";
-	 			}
-	 		 }
-	 		 
-	 		String local = "";
-	 		 if(localarr != null) {
-	 			for (int i = 0; i< localarr.length; i++) {
-	 				if(i == localarr.length -1)
-	 					local += localarr[i];
-	 				else
-	 					local += localarr[i] + ",";
-	 			}
-	 		 }
-	 		
-	         Board b = new Board();
 	         
-	         b.setBoardTitle(title);
-	         b.setBoardContent(content);
-	         b.setBoardWriter(bWriter);
-	         b.setBoardWriterNo(userId);
-	         b.setCgName(category);
-	         b.setTcName(age);
-	         b.setLcName(local);
-//	         System.out.println(b);
-//	         System.out.println(originFiles);
-//	         System.out.println(saveFiles);
-	         
-	         ArrayList<AddFile> fileList = new ArrayList<AddFile>();
-	         for(int i  = originFiles.size() - 1; i>=0; i--) {
-	        	 AddFile af = new AddFile();
-	        	 af.setFilePath(savePath);
-	        	 af.setOriginName(originFiles.get(i));
-	        	 af.setChangeName(saveFiles.get(i));
-	            
-	            if(i == originFiles.size()-1) {
-	            	af.setFileLevel(0);
-	            }else {
-	            	af.setFileLevel(1);
-	            }
-	            fileList.add(af);
-	         }
-	         int result = new CommunityService().insertAddFile(b, fileList);
-	         
-	         if(result>0) {
-	            response.sendRedirect("eaMain.cm");
-	         }else {
-	            for(int i = 0; i < saveFiles.size(); i++) {
-	               File failedFile = new File(savePath + saveFiles.get(i));
-	               failedFile.delete();
-	            }
-	            request.setAttribute("msg", "게시판 등록에 실패하였습니다.");
-	            request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp").forward(request, response);
-	         }
-	      }
+		int no = Integer.parseInt(multiRequest.getParameter("no"));
+		String title = multiRequest.getParameter("title");
+		String content = multiRequest.getParameter("content");
+		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		String category = multiRequest.getParameter("category");
+		String acState = multiRequest.getParameter("acState");
+		String tcName = multiRequest.getParameter("tcName");
+		String lcName = multiRequest.getParameter("lcName");
+		int viewCount = Integer.parseInt(multiRequest.getParameter("viewCount"));
+		int reCommend = Integer.parseInt(multiRequest.getParameter("reCommend"));
+		String writer = multiRequest.getParameter("writer");
+		
+		
+		System.out.println("category : " +category);
+		System.out.println("acState : " +acState);
+		System.out.println("tcName : " +tcName);
+		System.out.println("lcName : " +lcName);
+		
+		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null,tcName, category);
+		String page = null;
+		System.out.println("Board,Board : " +b);
+		page ="WEB-INF/views/Community/대외활동글수정(커뮤니티).jsp";
+		request.setAttribute("board", b);
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+	    }
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

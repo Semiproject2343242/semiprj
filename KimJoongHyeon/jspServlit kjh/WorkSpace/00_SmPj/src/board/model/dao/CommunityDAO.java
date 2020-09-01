@@ -50,15 +50,20 @@ public class CommunityDAO {
 			
 			if(rset.next()) {
 				board = new Board(rset.getInt("B_NO"),
-						 rset.getString("B_TITLE"),
-						 rset.getString("B_CONTENT"),
-						 rset.getDate("B_DATE"),
-						 rset.getDate("B_RDATE"),
-						 rset.getInt("B_VIEW_COUNT"),
-						 rset.getInt("B_WRITER"),
-						 rset.getString("MEMBER_NICKNAME"),
-						 rset.getInt("B_REPLY_COUNT"),
-						 rset.getString("CG_NAME"));
+						   rset.getString("B_TITLE"),
+						   rset.getString("B_CONTENT"),
+						   rset.getDate("B_DATE"),
+						   rset.getDate("B_RDATE"),
+						   rset.getInt("B_VIEW_COUNT"),
+						   rset.getInt("B_RECOMMEND"),
+						   rset.getInt("B_WRITER"),
+						   rset.getString("MEMBER_NICKNAME"),
+						   rset.getInt("B_REPLY_COUNT"),
+						   rset.getString("AC_STATE"),
+						   rset.getString("LC_NAME"),
+						   rset.getString("ENROLL_STATE"),
+						   rset.getString("TC_NAME"),
+						   rset.getString("CG_NAME"));
 			}
 				
 		} catch (SQLException e) {
@@ -257,7 +262,7 @@ public class CommunityDAO {
 		ResultSet rset = null;
 		ArrayList<AddFile> list = null;
 		
-		String query = "SELECT * FROM ATTACHMENT WHERE BOARD_ID=? AND STATUS='Y' ORDER BY FILE_ID";
+		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -269,7 +274,7 @@ public class CommunityDAO {
 			
 			while(rset.next()) {
 				AddFile af = new AddFile();
-				af.setFileNo(rset.getInt("file_id"));
+				af.setFileNo(rset.getInt("file_no"));
 				af.setOriginName(rset.getString("origin_name"));
 				af.setChangeName(rset.getString("change_name"));
 				af.setFilePath(rset.getString("file_path"));

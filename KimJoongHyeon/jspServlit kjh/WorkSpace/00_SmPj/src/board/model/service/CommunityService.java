@@ -102,18 +102,12 @@ Connection conn = getConnection();
 	public ArrayList<AddFile> selectFile(int bId) {
 		Connection conn = getConnection();
 		
-		int result = new CommunityDAO().updateCount(conn, bId);
-		
 		ArrayList<AddFile> list = null;
-		if(result > 0) {
-			list  = new CommunityDAO().selectFile(conn, bId);
-			
-			if(list != null) {
-				commit(conn);
-			}else {
-				rollback(conn);
-			}
-		} else {
+		list  = new CommunityDAO().selectFile(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		}else {
 			rollback(conn);
 		}
 		

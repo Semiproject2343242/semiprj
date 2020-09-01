@@ -30,6 +30,7 @@
 	line-height:15px; 
 	border-bottom: 1px solid silver;
 	border-radius: 7px;
+	align-items: center;
 }
 
 .thumb-list:hover {
@@ -46,9 +47,16 @@
 	margin: auto 0px;
 	align-items: "center";
 }
+.textArea_title{
+	width: 100%;
+}
 .textArea{
 	text-align: left;
 	margin-left : 30px;
+	width: 50%
+}
+.textArea1{
+	float: right;
 }
 </style>
 <body>
@@ -87,7 +95,7 @@
 			</div>
 			</h2>
 			<ul class="thumbnailArea">
-				<%if (bList.isEmpty()) {%>
+				<% if(bList.isEmpty() || fList.isEmpty()){ %>
 				등록된 사진이 없습니다.
 				<%} else {%>
 				<%for (int i = 0; i < bList.size(); i++) {%>
@@ -105,9 +113,7 @@
 						<%}%>
 					</div>
 					<div class="textArea">
-						<p>
-							<%=b.getBoardNo()%>.
-							<%=b.getBoardTitle()%></p>
+					<h3><%=b.getBoardNo()%>.<%=b.getBoardTitle()%></h3>
 						<p>
 							<b>접수상태 </b>
 							<%=b.getAcState()%></p>
@@ -118,6 +124,14 @@
 							<b>지역 </b>
 							<%=b.getLcName()%></p>
 					</div>
+					<div class="textArea1">
+						<b>조회수 </b>
+						<%=b.getBoardViewCount()%></p>
+						<p>
+						<b>추전수 </b>
+						<%=b.getBoardReCommend()%></p>
+					</div>
+					
 				</li>
 				<%}%>
 				<%}%>
