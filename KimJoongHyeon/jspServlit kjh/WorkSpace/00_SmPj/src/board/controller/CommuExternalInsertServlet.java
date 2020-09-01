@@ -42,9 +42,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 request.setCharacterEncoding("UTF-8");
-	      
-//	      String title = request.getParameter("title");
-//	      System.out.println(title);
+	      System.out.println("여기는 타나1");
 	      
 	      // encType 이 multipart/form-data 로 전송되었는지 확인
 	      if(ServletFileUpload.isMultipartContent(request)) {
@@ -52,13 +50,13 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	         String root = request.getSession().getServletContext().getRealPath("/");
 	         String savePath = root + "thumbnail_uploadFiles/";
 	         
-//	         System.out.println(savePath);
+	         System.out.println(savePath);
 	         
 	         File f = new File(savePath);
 	         if(!f.exists()) {
 	            f.mkdirs();
 	         }
-	         
+	         System.out.println("여기는 타나2");
 	         /* 
 	           파일 명 변환 및 저장 작업
 	              사용자가 올린 파일 명을 그대로 저장하지 않는 것이 원칙
@@ -74,12 +72,14 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	          * */
 	         MultipartRequest multiRequest 
 	         = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-	         
+	         System.out.println("여기는 타나3");
 	         
 	         ArrayList<String> saveFiles = new ArrayList<String>(); // 바뀐 파일의 이름을 저장 할 ArrayList
 	         ArrayList<String> originFiles = new ArrayList<String>(); //원본 파일의 이름을 저장할 ArrayList
 	         
 	         Enumeration<String> files = multiRequest.getFileNames(); // getFileNames() : 폼에서 전송된 File의 name 반환 //여러개 가능
+	         
+	         System.out.println("여기는 타나4");
 	         while(files.hasMoreElements()) {
 	            String name = files.nextElement();
 	            
@@ -88,13 +88,14 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	               originFiles.add(multiRequest.getOriginalFileName(name));
 	            }
 	         }
+	         System.out.println("여기는 타나5");
 	         String category = multiRequest.getParameter("ea_category");
 	         String[] agearr = multiRequest.getParameterValues("ck_ea_age");
 	         String[] localarr = multiRequest.getParameterValues("ck_lc");
 	         String title = multiRequest.getParameter("ea_title");
 	         String content = multiRequest.getParameter("ea_text_contents");
 	         String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
-	         
+	         int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 	 		 String age = "";
 	 		 if(agearr != null) {
 	 			for (int i = 0; i< agearr.length; i++) {
@@ -120,6 +121,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	         b.setBoardTitle(title);
 	         b.setBoardContent(content);
 	         b.setBoardWriter(bWriter);
+	         b.setBoardWriterNo(userId);
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
@@ -150,8 +152,8 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	               File failedFile = new File(savePath + saveFiles.get(i));
 	               failedFile.delete();
 	            }
-	            request.setAttribute("msg", "사진 게시판 등록에 실패하였습니다.");
-	            request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
+	            request.setAttribute("msg", "게시판 등록에 실패하였습니다.");
+	            request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp").forward(request, response);
 	         }
 	      }
 	}

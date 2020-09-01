@@ -17,9 +17,9 @@ public class AddFile {
     public AddFile() {
     }
     
-	public AddFile(int fileNo, String changeName) {
+	public AddFile(int boardNo, String changeName) {
 		super();
-		this.fileNo = fileNo;
+		this.boardNo = boardNo;
 		this.changeName = changeName;
 	}
 

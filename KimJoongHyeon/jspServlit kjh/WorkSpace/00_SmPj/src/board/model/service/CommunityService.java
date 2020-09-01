@@ -15,7 +15,7 @@ import board.model.vo.PageInfo;
 
 public class CommunityService {
 
-	public Board selectBoard(int bId) {
+	public Board selectBoard(int bId, String bName) {
 		Connection conn = getConnection();
 		
 		CommunityDAO dao = new CommunityDAO();
@@ -23,7 +23,7 @@ public class CommunityService {
 		int result = dao.updateCount(conn, bId);
 		Board board = null;
 		if(result > 0) {
-			board = dao.selectBoard(conn, bId);
+			board = dao.selectBoard(conn, bId, bName);
 			if(board != null) {
 				commit(conn);
 			} else {
@@ -97,5 +97,28 @@ Connection conn = getConnection();
 		close(conn);
 		
 		return result1;
+	}
+
+	public ArrayList<AddFile> selectFile(int bId) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDAO().updateCount(conn, bId);
+		
+		ArrayList<AddFile> list = null;
+		if(result > 0) {
+			list  = new CommunityDAO().selectFile(conn, bId);
+			
+			if(list != null) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
 	}
 }
