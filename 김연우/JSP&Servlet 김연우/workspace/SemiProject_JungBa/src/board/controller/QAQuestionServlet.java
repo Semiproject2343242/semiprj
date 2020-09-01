@@ -32,9 +32,7 @@ public class QAQuestionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	int bId = Integer.parseInt(request.getParameter("bId"));
-		System.out.println("bId : " + bId);
 		Board board = new QuestionService().selectBoard(bId);
-		System.out.println("board : " + board);
 		
 //		ArrayList<Reply> list = new BoardService().selectReplyList(bId);
 		

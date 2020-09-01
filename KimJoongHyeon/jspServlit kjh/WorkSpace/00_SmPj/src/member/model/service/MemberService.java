@@ -7,7 +7,6 @@ import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import board.model.dao.CommuDAO;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
 import member.model.dao.MemberDAO;

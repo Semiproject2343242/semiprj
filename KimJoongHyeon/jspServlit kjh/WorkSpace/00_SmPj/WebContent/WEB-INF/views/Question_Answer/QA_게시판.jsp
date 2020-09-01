@@ -53,6 +53,7 @@
 	            </tr>
             <% } else { %>
             <% 		for(Board b : list){ %>
+            <% System.out.println(b); %>
           	<tr>
           		<td>
           			<input type="hidden" value="<%= b.getBoardNo() %>">

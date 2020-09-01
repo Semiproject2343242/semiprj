@@ -41,8 +41,8 @@
             	<textarea id="textarea" name="content" placeholder="내용을 입력해주세요."></textarea><br>
             	<input type="file" id="file"><br>
             	<div id="buttons1">
-                	<button id="button1">등록</button>
-                	<button id="button2" onclick="location.href='javascript:history.go(-1);'">취소</button>
+                	<input type="submit" id="button1" value="등록">
+               		<input type="button" id="button2" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="취소">
             	</div>
             </form>
         </div>

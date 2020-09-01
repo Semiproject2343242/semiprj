@@ -6,172 +6,416 @@
     <meta charset="UTF-8">
     <title>Layout01</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/대외활동내용확인.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
-    <style>
+	<style>
+    section{
+      display: block;
+  	}
+  	.writerinformanion_box{
+      background-color: RGB(248,248,248);
+      display: flex;
+  	}
+  	.writertext{
+      list-style: none;
+      line-height: 70px;
+  	}
+  	.select_box{
+      margin: 16px;
+      line-height: 70px;
+  	}
+  	.select_btn{
+      height: 50px;
+      width: 100px;
+      background-color:  RGB(221,228,236);
+  	}
+  	.categoty_select{
+      height: 40px;
+  	}
+  	.writer_box{
+      margin: 0px auto;
+  	}
+  	.writer_table{
+    margin: 0px;
+    margin-top: 100px;
+    width: 100%;
+    line-height: 80px;
+  	}
+  
+  	.writer_text{
+      margin-left: 80px;
+      line-height: 160px;
+      width: 100%;
+ 	 }
+  	textarea{
+    height: 100px;
+    width: 80%;
+    resize: none;
+  	}
+  	.textline1{
+    width: 80%;
+    height: 30px;
+  	}
+
+  	.ea_button{
+    margin: 0 auto; 
+    text-align: center;
+  	}	
+
+  	.result_btn{
+    height: 50px;
+    width: 100px;
+    margin: 30px;
+  	}
     </style>
 </head>
 <body>
     <%@ include file="../Common/header.jsp" %>
+    <section>
         <div id="main_section">
-            <div id="contents">
-                <h2 id="ea_h21">NO.01</h2>
-                <h2 id="ea_h22">대외활동 게시판</h2>
-                <hr>
-                <h1 style="text-align: center">대외활동 제목</h1>
-                <br>
-                <text id="ea_text1"> 백성강 <br>2020.08.07 14:47 조회수 1 댓글 2</text>
-                <br>
-                <div id="ea_buttons">
-                    <button class="ea_button1" id="preDoc"> &lt; 이전글</button>
-                    <button class="ea_button1" id="nxtDoc">다음글 &gt;</button>
-                    <button class="ea_button1"><a href="<%= request.getContextPath() %>/eaMain.cm">목록</a></button><br>
-                </div>
-
-                <br clear="all"><br> 
-
-                <div id="ea_div1">
-                    <div id="ea_div2">
-                        <img src="../img/1.PNG" id="ea_img1" >
-                    </div>
-
-                    <div id="ea_div3"> 
-                        <text><h2>2020 경기도 즐거운 체험 프로그램 공모</h2></text>
-                        <ul>
-                            <li class="ea_li">모집일정 : 2020-08-01(토) ~ 2020-08-18(화) 18:00 까지</li>
-                            <br>
-                            <li class="ea_li">활동기간 : 2020-09-01(토) ~ 2020-09-18(화) 18:00 까지</li>
-                            <br>
-                            <li class="ea_li">활동장소 : kh정보교육원</li>
-                            <br>
-                            <li class="ea_li">접수방법 : 이메일 접수</li>
-                        </ul>
-                    </div>
-                    <button id="ea_button2">홈페이지 바로가기</button>
-                    
-                    <br clear="all"><br> 
-
-                    <div class="ea_div4"><a href="#ea_act_info">상세정보</a></div>
-                    <div class="ea_div4"><a href="#ea_write_file">참고자료</a></div>
-                    <div class="ea_div4"><a href="#ea_org_name">기관명/연락처</a></div>
-
-                    <div id="ea_div5">
-                        <h2 style="text-align: center;"  id="ea_act_info">활동정보</h2>
-                        <ul>
-                            <li>대상 : 경기도내 소재한 민간 관광업체</li>
-                            <li>신청기간 : 2020.07.29(수) ~ 2020.08.06(목) 까지</li>
-                            <li>활동기간 : 2020.07.29(수) ~ 2020.08.06(목) 까지</li>
-                            <li>신청방법 : <a href="#" >이메일접수</a></li>
-                            <li>상세페이지 : <button id="ea_button3">홈페이지 바로가기</button> </button></li>
-                            <li>담당자 이메일 : nandong@gto.or.kr</li>
-                            <li>담당자 전화번호 : 031-259-4790</li>
-                            <li>
-                                공모개요
-                                <ul>
-                                    <li>공모명 : 경기도 즐거운 체험 프로그램 공모</li>
-                                    <li>공모대상 : 경기도내 소재한 민간 관광업체가 운영하는 체험 프로그램<br>
-                                        ※ 제외 : 공공(정부, 지자체 등이 운영)부문 및 대기업 계열사 관광시설, 여행사 상품, 단순관람 위주 프로그램, 축제/이벤트/행사, 기 인증 프로그램
-                                    </li>
-                                    <li>선정절차 : 접수 → 서류심사 → 선정 → 컨설팅 및 홍보 마케팅 지원</li>
-                                    <li>선정규모 : 5개 체험 프로그램</li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <h2 style="text-align: center;" id="ea_org_name">기관명</h2>
-                        <div id="ea_divtable">
-                            <table id="ea_table1">
-                                <tr>
-                                    <td width="130px">기관명</td>
-                                    <td width="300px">국립국제교육원</td>
-                                </tr>
-                                <tr>
-                                    <td>주소</td>
-                                    <td>경기 성남시</td>
-                                </tr>
-                                <tr>
-                                    <td>전화번호</td>
-                                    <td>02-545-4848</td>
-                                </tr>
-                                <tr>
-                                    <td>이메일</td>
-                                    <td>sdjflksnf@naver.com</td>
-                                </tr>
-                            </table>
-                        </div>       
-                    </div>
-                    
-                    <div sytle="float:left; width:70%;"><h2 id="참고자료">참고자료</h2></div>
-                    <input type="file" id="ea_write_file"><br><br>
-
-
-                    <br clear="all"><br> 
-
-                    <!-- 댓글 --> 
-
-                    <div> <h2>댓글</h2> </div>
-                    <hr><br>
-
-                    <div id="ea_comment">
-                        <img src="example/1.PNG" id="ea_img2">
-                        <text id="ea_text4"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                            댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
-                        </text>
-                        <text id="ea_text5">
-                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
-                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                            <br>2020.08.07 14:47 
-                        </text>
-                    </div>
-        
-                    <div id="ea_comment">
-                        <img src="example/1.PNG" id="ea_img2">
-                        <text id="ea_text4"> 백성강 
-                            <p id="ea_p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                                댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                            </p>
-                        </text>
-                        <text id="ea_text5">
-                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
-                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                            <br>2020.08.07 14:47 
-                        </text>
-                    </div>
-                    <br clear="all"><br>
-                    <div>
-                        <textarea id="ea_textarea" placeholder="댓글을 입력하세요."></textarea><br>
-                        <button id="ea_button5">등록</button>
-                    </div>
-                </div>
+    <h1 align="center">대외활동 글쓰기</h1>
+    <div class="writerinformanion_box">
+      <ul class="writertext">
+          <th>
+              <li><h3>카테고리</h3></li>
+              <li><h3>대상</h3></li>
+              <li><h3>지역</h3></li>
+          </th>
+      </ul>
+      <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
+      <div class="select_box">
+          <h3>
+              <select class="categoty_select" name="ea_category">
+                  <option value="0" selected disabled hidden >선택해주세요.</option>
+                  <option value="1">공모전</option>
+                  <option value="2">채용박람회/취업박람회</option>
+                  <option value="3">경진대회</option>
+                  <option value="4">봉사활동</option>
+                  <option value="5">서포터즈</option>
+                  <option value="6">관람/전시/체험</option>
+              </select>
+          </h3>
+          <h3>
+              <div>
+                  <button class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
+                  <button class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
+                  <button class="select_btn" id="ea_age_50">장년<br>(50~64세) </button>
+                  <button class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
+              </div>
+              <div id="ea_age">
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_18" value="청년"">
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_35" value="중년">
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_50" value="장년">
+				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_65" value="어르신">
             </div>
-        </div>
-        <br clear="all"><br>
-        <%@ include file="../Common/footer.jsp" %>
+            <script>
+               $(function(){
+                  $("#ea_age").hide();
+                  $("#ea_age_18").click(function(){
+                     $("#ck_ea_age_18").click();
+                     if($("#ck_ea_age_18").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+                  $("#ea_age_35").click(function(){
+                     $("#ck_ea_age_35").click();
+                     if($("#ck_ea_age_35").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+                  $("#ea_age_50").click(function(){
+                     $("#ck_ea_age_50").click();
+                     if($("#ck_ea_age_50").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+                  $("#ea_age_65").click(function(){
+                     $("#ck_ea_age_65").click();
+                     if($("#ck_ea_age_65").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+               });
+           </script>
+          </h3>
+          <h3 id = "ea_areatable_div">
+              <div id= "ea_areatable">
+	              <button class = "select_btn" id= "GP">가평군</button>
+	              <button class = "select_btn" id= "GY">고양시</button>
+	              <button class = "select_btn" id= "GC">과천시</button>
+	              <button class = "select_btn" id= "GM">광명시</button>
+	              <button class = "select_btn" id= "GJ">광주시</button>
+	              <button class = "select_btn" id= "GL">구리시</button>
+	              <button class = "select_btn" id= "GP2">군포시</button>
+	              <br>
+	              <button class = "select_btn" id= "GP3">김포시</button>
+	              <button class = "select_btn" id= "NYJ">남양주시</button>
+	              <button class = "select_btn" id= "DDC">동두천시</button>
+	              <button class = "select_btn" id= "BC">부천시</button>
+	              <button class = "select_btn" id= "SN">성남시</button>
+	              <button class = "select_btn" id= "SW">수원시</button>
+	              <button class = "select_btn" id= "SH">시흥시</button>
+	              <br>
+	              <button class = "select_btn" id= "AS">안산시</button>
+	              <button class = "select_btn" id= "AY">안양시</button>
+	              <button class = "select_btn" id= "PJ">파주시</button>
+	              <button class = "select_btn" id= "PT">평택시</button>
+	              <button class = "select_btn" id= "PC">포천시</button>
+	              <button class = "select_btn" id= "HN">하남시</button>
+	              <button class = "select_btn" id= "HS">화성시</button>
+              </div>
+              <div id="ea_areatable">
+             	<input type="checkbox" name="ck_lc" id="ck_GP" value="가평군">
+				<input type="checkbox" name="ck_lc" id="ck_GY" value="고양시">
+				<input type="checkbox" name="ck_lc" id="ck_GC" value="과천시">
+				<input type="checkbox" name="ck_lc" id="ck_GM" value="광명시">
+				<input type="checkbox" name="ck_lc" id="ck_GJ" value="광주시">
+				<input type="checkbox" name="ck_lc" id="ck_GL" value="구리시">
+				<input type="checkbox" name="ck_lc" id="ck_GP2" value="군포시">
+              	<input type="checkbox" name="ck_lc" id="ck_GP3" value="김포시">
+				<input type="checkbox" name="ck_lc" id="ck_NYJ" value="남양주시">
+				<input type="checkbox" name="ck_lc" id="ck_DDC" value="동두천시">
+				<input type="checkbox" name="ck_lc" id="ck_BC" value="부천시">
+				<input type="checkbox" name="ck_lc" id="ck_SN" value="성남시">
+				<input type="checkbox" name="ck_lc" id="ck_SW" value="수원시">
+				<input type="checkbox" name="ck_lc" id="ck_SH" value="시흥시">
+				<input type="checkbox" name="ck_lc" id="ck_AS" value="안산시"">
+				<input type="checkbox" name="ck_lc" id="ck_AY" value="안양시">
+				<input type="checkbox" name="ck_lc" id="ck_PJ" value="파주시">
+				<input type="checkbox" name="ck_lc" id="ck_PT" value="평택시">
+				<input type="checkbox" name="ck_lc" id="ck_PC" value="포천시">
+				<input type="checkbox" name="ck_lc" id="ck_HN" value="하남시">
+				<input type="checkbox" name="ck_lc" id="ck_HS" value="화성시">
+            </div>
+             <script>
+               $(function(){
+                  $("#ea_areatable").hide();
+                  $("#GP").click(function(){
+                     $("#ck_GP").click();
+                     if($("#ck_GP").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+                  $("#GY").click(function(){
+                      $("#ck_GY").click();
+                      if($("#ck_GY").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                  $("#GC").click(function(){
+                      $("#ck_GC").click();
+                      if($("#ck_GC").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                  $("#GM").click(function(){
+                      $("#ck_GM").click();
+                      if($("#ck_GM").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                  $("#GJ").click(function(){
+                      $("#ck_GJ").click();
+                      if($("#ck_GJ").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                  $("#GL").click(function(){
+                      $("#ck_GL").click();
+                      if($("#ck_GL").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                  $("#GP2").click(function(){
+                      $("#ck_GP2").click();
+                      if($("#ck_GP2").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                  $("#GP3").click(function(){
+                      $("#ck_GP3").click();
+                      if($("#ck_GP3").is(":checked") == true){
+                     	 $(this).css({'background':'darkgray'});
+                      }else{
+                     	 $(this).css('background', 'RGB(221,228,236)');
+                      }
+                   });
+                   $("#NYJ").click(function(){
+                       $("#ck_NYJ").click();
+                       if($("#ck_NYJ").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                   $("#DDC").click(function(){
+                       $("#ck_DDC").click();
+                       if($("#ck_DDC").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                   $("#BC").click(function(){
+                       $("#ck_BC").click();
+                       if($("#ck_BC").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                   $("#SN").click(function(){
+                       $("#ck_SN").click();
+                       if($("#ck_SN").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                   $("#SW").click(function(){
+                       $("#ck_SW").click();
+                       if($("#ck_SW").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                   $("#SH").click(function(){
+                       $("#ck_SH").click();
+                       if($("#ck_SH").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                   $("#AS").click(function(){
+                       $("#ck_AS").click();
+                       if($("#ck_AS").is(":checked") == true){
+                      	 $(this).css({'background':'darkgray'});
+                       }else{
+                      	 $(this).css('background', 'RGB(221,228,236)');
+                       }
+                    });
+                    $("#AY").click(function(){
+                        $("#ck_AY").click();
+                        if($("#ck_AY").is(":checked") == true){
+                       	 $(this).css({'background':'darkgray'});
+                        }else{
+                       	 $(this).css('background', 'RGB(221,228,236)');
+                        }
+                     });
+                    $("#PJ").click(function(){
+                        $("#ck_PJ").click();
+                        if($("#ck_PJ").is(":checked") == true){
+                       	 $(this).css({'background':'darkgray'});
+                        }else{
+                       	 $(this).css('background', 'RGB(221,228,236)');
+                        }
+                     });
+                    $("#PT").click(function(){
+                        $("#ck_PT").click();
+                        if($("#ck_PT").is(":checked") == true){
+                       	 $(this).css({'background':'darkgray'});
+                        }else{
+                       	 $(this).css('background', 'RGB(221,228,236)');
+                        }
+                     });
+                    $("#PC").click(function(){
+                        $("#ck_PC").click();
+                        if($("#ck_PC").is(":checked") == true){
+                       	 $(this).css({'background':'darkgray'});
+                        }else{
+                       	 $(this).css('background', 'RGB(221,228,236)');
+                        }
+                     });
+                    $("#HN").click(function(){
+                        $("#ck_HN").click();
+                        if($("#ck_HN").is(":checked") == true){
+                       	 $(this).css({'background':'darkgray'});
+                        }else{
+                       	 $(this).css('background', 'RGB(221,228,236)');
+                        }
+                     });
+                    $("#HS").click(function(){
+                        $("#ck_HS").click();
+                        if($("#ck_HS").is(":checked") == true){
+                       	 $(this).css({'background':'darkgray'});
+                        }else{
+                       	 $(this).css('background', 'RGB(221,228,236)');
+                        }
+                     });
+               });
+           </script>
+          </h3>
+      </div>  
+      <!-- </div> -->
+    </div>
+    <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
+    <div class="writer_box">
+        <table class="writer_table">
+          <tr>
+            <th width="15%">제목</th>
+            <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1></td>
+          </tr>
+          <tr>
+            <th>메인 이미지 첨부</th>
+            <td colspan="3"><input type ="file" id="ea_title_image" name = "ea_title_image" class=textline2></td>
+          </tr>
+          <tr>
+            <th>모집 일정</th>
+            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1>
+              ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1> 까지</td>
+          </tr>
+          <tr>
+            <th>활동 기간</th>
+            <td colspan="3"><input type ="date" id="ea_acs_date"name = "ea_acs_date"  class=dateline1>
+              ~ <input type ="date" id="ea_ace_date"name = "ea_ace_date"  class=dateline1> 까지</td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ></textarea></td>
+          </tr>
+          <tr>
+            <th>내용 이미지 첨부</th>
+            <td colspan="3"><input type ="file" id="ea_main_image" name = "ea_main_image" class=textline2></td>
+          </tr>
+          <tr>
+            <th>참고자료</th>
+            <td colspan="3"><input type ="file" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
+          </tr>
+          <tr> 
+            <th>연락처</th>
+            <td><input type ="tel" name = "ea_manager_phone" id="ea_manager_phone" placeholder="연락처" class=textline3 readonly><%= loginUser.getMemberPhone()%></td>
+            <th>이메일</th>
+            <td><input type ="email" name = "ea_manager_email" id="ea_manager_email" placeholder="이메일" class=textline3 readonly><%= loginUser.getMemberEmail()%></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</section>  
+    <%@ include file="../Common/footer.jsp" %>
 </body>
-<script>
-$("#preDoc").on("click",function(){ _this.preNextDoc('pre'); }); 
-//다음글 
-$("#nxtDoc").on("click",function(){ 
-		_this.preNextDoc('next'); }); 
-preNextDoc : function(flag){ 
-				var _this = this; 
-				var params = { 
-						docnum : _this.docnum, 
-						brdCode : _this.brdCode, 
-						brdType : _this.brdType, 
-						flag : flag, //pre,nxt 
-						viewFlag : _this.viewFlag 
-				} $.ajax({ 
-					type:"POST",
-					url: ePortalConfig.boardContext+"/preNextDoc", 
-					dataType: "json", 
-					data : params, 
-					cache : false,
-					success : function(res){
-				}
-			}
-		}
-출처: https://mkil.tistory.com/431 [나비와꽃기린]
-</script>
 </html>
 
