@@ -151,6 +151,53 @@ public class CommunityDAO {
 			list = new ArrayList<Board>();
 			
 			while(rset.next()) {
+				list.add(new Board(rset.getInt("B_NO"),	
+								   rset.getString("B_TITLE"),
+								   rset.getString("B_CONTENT"),
+								   rset.getDate("B_DATE"),
+								   rset.getDate("B_RDATE"),
+								   rset.getInt("B_VIEW_COUNT"),
+								   rset.getInt("B_RECOMMEND"),
+								   rset.getInt("B_WRITER"),
+								   rset.getString("MEMBER_NICKNAME"),
+								   rset.getInt("B_REPLY_COUNT"),
+								   rset.getString("AC_STATE"),
+								   rset.getString("LC_NAME"),
+								   rset.getString("ENROLL_STATE"),
+								   rset.getString("TC_NAME"),
+								   rset.getString("CG_NAME")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	
+	public ArrayList selectBListS(Connection conn, PageInfo pi) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		String query = "SELECT * FROM SUPPORTLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
 				list.add(new Board(rset.getInt("B_NO"),
 								   rset.getString("B_TITLE"),
 								   rset.getString("B_CONTENT"),
@@ -176,6 +223,8 @@ public class CommunityDAO {
 		return list;
 	}
 
+	
+	
 	public ArrayList selectFList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
