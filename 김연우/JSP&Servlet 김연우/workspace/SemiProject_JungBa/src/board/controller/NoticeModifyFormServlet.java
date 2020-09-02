@@ -1,23 +1,28 @@
 package board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.vo.Board;
+import member.model.vo.Member;
+
 /**
- * Servlet implementation class NoticeInsertFormServlet
+ * Servlet implementation class QAModifyFormServlet
  */
-@WebServlet("/insertForm.no")
-public class NoticeInsertFormServlet extends HttpServlet {
+@WebServlet("/modifyForm.no")
+public class NoticeModifyFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeInsertFormServlet() {
+    public NoticeModifyFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +34,20 @@ public class NoticeInsertFormServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("WEB-INF/views/Notice/공지사항글쓰기.jsp").forward(request, response);
+		int no = Integer.parseInt(request.getParameter("no"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		String category = request.getParameter("category");
+		
+		Board b = new Board(no,title,content,userId,category);
+		System.out.println("NoticeModifyForm에서의 Board : " + b);
+		String page = null;
+		
+		page ="WEB-INF/views/Notice/공지사항글수정.jsp";
+		request.setAttribute("board", b);
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
