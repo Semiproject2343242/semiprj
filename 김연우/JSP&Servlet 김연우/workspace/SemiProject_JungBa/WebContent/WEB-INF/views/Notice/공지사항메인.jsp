@@ -56,7 +56,9 @@
 	                <tr>
 	                <td colspan="5"></td>
 	                <td>
+	                	<% if(loginUser != null){ %>
 	                    <button onclick="location.href='<%= request.getContextPath()  %>/insertForm.no'">글쓰기</button>
+	                    <% } %>
 	                </td>
 	                </tr>
                 </tfoot>
@@ -64,19 +66,21 @@
  		<%@ include file="../Common/page.jsp" %>
 		</div>
         <script>
-         $(function(){
-            $('tbody td').mouseenter(function(){
-               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
-            }).mouseout(function(){
-               $(this).parent().css('background', 'none');
-            }).click(function(){
-               var bId = $(this).parent().children().children('input').val();
-               <% if(loginUser != null){%>
-                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
-               <% }else{ %>
-                  alert('회원만 이용할 수 있는 서비스입니다.')
-               <% } %>
-            })
+        $(function(){
+        	<%if(!list.isEmpty()){%> 
+	            $('tbody td').mouseenter(function(){
+	               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'}); // 커서 올리면 흑색
+	            }).mouseout(function(){
+	               $(this).parent().css('background', 'none'); //벗어나면
+	            }).click(function(){
+	               var bId = $(this).parent().children().children('input').val(); // 버튼을 누르면 bId에 데이터 값 저장-> 값을 /q_detail.no에 보내줌
+	               <% if(loginUser != null){%> //로그인 시 가능
+	                  location.href = '<%= request.getContextPath() %>/detail.no?bId=' + bId; 
+	               <% }else{ %>
+	                  alert('회원만 이용할 수 있는 서비스입니다.')
+	               <% } %>
+	            })
+	        <% } %>
          })
       </script>
     </section>
