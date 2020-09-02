@@ -1,4 +1,3 @@
-<%@page import="oracle.net.aso.b"%>
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

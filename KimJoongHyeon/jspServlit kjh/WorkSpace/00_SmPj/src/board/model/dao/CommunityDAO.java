@@ -34,30 +34,36 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public Board selectBoard(Connection conn, int bId) {
+	public Board selectBoard(Connection conn, int bId, String bName) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Board board = null;
 		
-		String query = "SELECT * FROM FREELISTDETAIL WHERE B_NO = ?";
+		String query = "SELECT * FROM COMMULIST WHERE B_NO = ? AND B_NAME = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bId);
+			pstmt.setString(2, bName);
 			
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
 				board = new Board(rset.getInt("B_NO"),
-						 rset.getString("B_TITLE"),
-						 rset.getString("B_CONTENT"),
-						 rset.getDate("B_DATE"),
-						 rset.getDate("B_RDATE"),
-						 rset.getInt("B_VIEW_COUNT"),
-						 rset.getInt("B_WRITER"),
-						 rset.getString("MEMBER_NICKNAME"),
-						 rset.getInt("B_REPLY_COUNT"),
-						 rset.getString("CG_NAME"));
+						   rset.getString("B_TITLE"),
+						   rset.getString("B_CONTENT"),
+						   rset.getDate("B_DATE"),
+						   rset.getDate("B_RDATE"),
+						   rset.getInt("B_VIEW_COUNT"),
+						   rset.getInt("B_RECOMMEND"),
+						   rset.getInt("B_WRITER"),
+						   rset.getString("MEMBER_NICKNAME"),
+						   rset.getInt("B_REPLY_COUNT"),
+						   rset.getString("AC_STATE"),
+						   rset.getString("LC_NAME"),
+						   rset.getString("ENROLL_STATE"),
+						   rset.getString("TC_NAME"),
+						   rset.getString("CG_NAME"));
 			}
 				
 		} catch (SQLException e) {
@@ -188,8 +194,8 @@ public class CommunityDAO {
 			
 			list = new ArrayList<AddFile>();
 			while(rset.next()) {
-				list.add(new AddFile(rset.getInt("file_no"),
-								  rset.getString("change_Name")));
+				list.add(new AddFile(rset.getInt("b_no"),
+								  rset.getString("change_name")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,7 +211,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 //		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜,  수정날짜,   조회수,    추천수,    삭제여부,  글쓴이번호, 댓글수,    AC_SATA,   LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
-		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 대외,     ?,   ?,  SYSDATE, SYSDATE, DEFAULT, DEFAULT, DEFAULT, ?,      DEFAULT, '접수중',    ?,        DEFAULT,      NULL,     ?,      ?)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'대외',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,NULL,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -230,7 +236,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, SEQ_BID.CURRVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,SEQ_BNO.CURRVAL)";
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 			AddFile af = fileList.get(i);
@@ -251,4 +257,38 @@ public class CommunityDAO {
 		return result;
 	}
 
+	public ArrayList<AddFile> selectFile(Connection conn, int bId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AddFile> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1,  bId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<AddFile>();
+			
+			while(rset.next()) {
+				AddFile af = new AddFile();
+				af.setFileNo(rset.getInt("file_no"));
+				af.setOriginName(rset.getString("origin_name"));
+				af.setChangeName(rset.getString("change_name"));
+				af.setFilePath(rset.getString("file_path"));
+				af.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(af);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }
