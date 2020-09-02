@@ -26,8 +26,10 @@ public class NoticeInsertFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		request.getRequestDispatcher("WEB-INF/views/Notice/공지사항글쓰기.jsp").forward(request, response);
 	}
 
 	/**

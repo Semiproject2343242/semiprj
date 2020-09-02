@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.CommuService;
+import board.model.service.CommunityService;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
@@ -32,7 +32,7 @@ public class CommuFreeMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CommuService cServuce = new CommuService();
+		CommunityService cServuce = new CommunityService();
 		
 		//페이징
 		int currentPage = 1;

@@ -2,7 +2,7 @@ package board.model.vo;
 
 import java.sql.Date;
 
-public class AddFile {
+public class FileVO {
 	private int fileNo;
     private String originName;    // 이미지 이름
     private String changeName;
@@ -14,16 +14,16 @@ public class AddFile {
     private int boardNo;
     
     
-    public AddFile() {
+    public FileVO() {
     }
     
-	public AddFile(int boardNo, String changeName) {
+	public FileVO(int boardNo, String changeName) {
 		super();
 		this.boardNo = boardNo;
 		this.changeName = changeName;
 	}
 
-	public AddFile(int fileNo, String originName, String changeName, String filePath, Date uploadDate, int fileLevel,
+	public FileVO(int fileNo, String originName, String changeName, String filePath, Date uploadDate, int fileLevel,
 			int downloadCount, String status, int boardNo) {
 		super();
 		this.fileNo = fileNo;
