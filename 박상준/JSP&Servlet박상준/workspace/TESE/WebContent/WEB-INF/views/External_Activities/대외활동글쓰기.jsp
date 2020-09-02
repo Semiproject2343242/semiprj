@@ -149,13 +149,13 @@ section{
           </tr>
           <tr>
             <th>모집 일정</th>
-            <td colspan="3"><input type ="text" id="ea_re_date"name = "모집일정"  class=textline2>
-              ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=textline2> 까지</td>
+            <td colspan="3"><input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1>
+              ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</td>
           </tr>
           <tr>
             <th>활동 기간</th>
-            <td colspan="3"><input type ="text" id="ea_re_date"name = "모집일정"  class=textline2>
-              ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=textline2> 까지</td>
+            <td colspan="3"><input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1>
+              ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</td>
           </tr>
           <tr>
             <th>접수 방법</th>
@@ -175,7 +175,27 @@ section{
           </tr>
           <tr>
             <th>참고자료</th>
-            <td colspan="3"><input type ="file" name = "참고자료" placeholder="자료첨부" class=textline2></td>
+            <td colspan="3"><input type ="file" name = "참고자료" laceholder="자료첨부" class=textline2></td>
+          </tr>
+          <tr>
+            <th>기관명</th>
+            <td colspan="3"><input type ="text" name = "기관명" id="ea_name_com" placeholder="기관명" class=textline1></td>
+          </tr>
+          <tr>
+            <th>홈페이지</th>
+            <td colspan="3"><input type ="text" name = "홈페이지" id="ea_com_url" placeholder="url을 입력하세요." class=textline1></td>
+          </tr>
+          <tr>
+            <th>담당자</th>
+            <td><input type ="text" name = "담당자" id="ea_manager_name" placeholder="담당자" class=textline3></td>
+            <th>직위</th>
+            <td><input type ="text" name = "직위" id="ea_manager_spot" placeholder="직위" class=textline3></td>
+          </tr>
+          <tr> 
+            <th>연락처</th>
+            <td><input type ="tel" name = "연락처" id="ea_manager_phone" placeholder="연락처" class=textline3></td>
+            <th>이메일</th>
+            <td><input type ="email" name = "이메일" id="ea_manager_email" placeholder="이메일" class=textline3></td>
           </tr>
         </table>
     </div>

@@ -148,8 +148,8 @@
           </tr>
           <tr>
             <th>모집 일정</th>
-            <td><input type ="text" id="ea_re_date"name = "모집일정"  class=textline2>
-              ~ <input type ="text" id="ea_re_date"name = "모집일정"  class=textline2> 까지</td>
+            <td><input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1>
+              ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</td>
           </tr>
           <tr>
             <th>접수 방법</th>

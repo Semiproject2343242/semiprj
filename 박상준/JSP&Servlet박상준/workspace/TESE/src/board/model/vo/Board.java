@@ -133,7 +133,7 @@ public class Board {
 		this.tcName = tcName;
 		this.cgName = cgName;
 	}
-	
+
 	//myPage 대외활동 리스트
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, int boardWriterNo,
@@ -183,10 +183,6 @@ public class Board {
 		this.cgName = cgName;
 	}
 
-
-
-
-
 	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
@@ -215,6 +211,8 @@ public class Board {
 		this.acStartDate = acStartDate;
 		this.acEndDate = acEndDate;
 	}
+
+	
 
 	public int getBoardNo() {
 		return boardNo;
