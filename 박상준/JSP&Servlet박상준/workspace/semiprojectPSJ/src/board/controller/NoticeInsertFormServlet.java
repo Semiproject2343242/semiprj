@@ -29,7 +29,7 @@ public class NoticeInsertFormServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		request.getRequestDispatcher("WEB-INF/views/Notice/ê³µì§€ì‚¬í•­ê¸€ì“°ê¸°.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Notice/°øÁö»çÇ×±Û¾²±â.jsp").forward(request, response);
 	}
 
 	/**

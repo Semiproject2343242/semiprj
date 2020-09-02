@@ -1,10 +1,13 @@
-<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="board.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board"); 
-	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
-
+// 	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
+	
+	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	FileVO titleImg = fList.get(0);
 	String categoryStr = b.getCgName();
 	String[] categoryarr = new String[7];
 	String[] splitCate = categoryStr.split(",");
@@ -45,19 +48,19 @@
 		case "구리시": lcarr[5] = "checked"; break;
 		case "군포시": lcarr[6] = "checked"; break;
 		case "김포시": lcarr[7] = "checked"; break;
-		case "남양주시": lcarr[8] = "checked"; break;
-		case "동두천시": lcarr[9] = "checked"; break;
-		case "부천시 ": lcarr[10] = "checked"; break;
-		case "성남시 ": lcarr[11] = "checked"; break;
-		case "수원시 ": lcarr[12] = "checked"; break;
-		case "시흥시 ": lcarr[13] = "checked"; break;
-		case "안산시 ": lcarr[14] = "checked"; break;
-		case "안양시 ": lcarr[15] = "checked"; break;
-		case "파주시 ": lcarr[16] = "checked"; break;
-		case "평택시 ": lcarr[17] = "checked"; break;
-		case "포천시 ": lcarr[18] = "checked"; break;
-		case "하남시 ": lcarr[19] = "checked"; break;
-		case "화성시 ": lcarr[20] = "checked"; break;
+		case "남양주시": lcarr[8] = "checked";break;
+		case "동두천시": lcarr[9] = "checked";break;
+		case "부천시": lcarr[10] = "checked"; break;
+		case "성남시": lcarr[11] = "checked"; break;
+		case "수원시": lcarr[12] = "checked"; break;
+		case "시흥시": lcarr[13] = "checked"; break;
+		case "안산시": lcarr[14] = "checked"; break;
+		case "안양시": lcarr[15] = "checked"; break;
+		case "파주시": lcarr[16] = "checked"; break;
+		case "평택시": lcarr[17] = "checked"; break;
+		case "포천시": lcarr[18] = "checked"; break;
+		case "하남시": lcarr[19] = "checked"; break;
+		case "화성시": lcarr[20] = "checked"; break;
 		}
 	}
 %>
@@ -181,7 +184,7 @@ section{
            		  	 $("#ea_age_50").css({'background':'darkgray'});
            	    }
            		if($("#ck_ea_age_65").is(":checked") == true){
-           		  	 $("#ea_age_65").css({'-':'darkgray'});
+           		  	 $("#ea_age_65").css({'background':'darkgray'});
            	    }
            		if($("#ck_GP").is(":checked") == true){
           		  	 $("#GP").css({'background':'darkgray'});
@@ -240,13 +243,12 @@ section{
            		if($("#ck_PC").is(":checked") == true){
           		  	 $("#PC").css({'background':'darkgray'});
           	    }
-           		if($("#ck_NH").is(":checked") == true){
+           		if($("#ck_HN").is(":checked") == true){
           		  	 $("#HN").css({'background':'darkgray'});
           	    }
            		if($("#ck_HS").is(":checked") == true){
           		  	 $("#HS").css({'background':'darkgray'});
           	    }
-           		
             	});
                $(function(){
                   $("#ck_ea_age").hide();
@@ -287,29 +289,29 @@ section{
           </h3>
           <h3 id = "ea_areatable_div">
               <div id= "ea_areatable">
-	              <button type="button" class = "select_btn" id= "GP">가평군</button>
-	              <button type="button" class = "select_btn" id= "GY">고양시</button>
-	              <button type="button" class = "select_btn" id= "GC">과천시</button>
-	              <button type="button" class = "select_btn" id= "GM">광명시</button>
-	              <button type="button" class = "select_btn" id= "GJ">광주시</button>
-	              <button type="button" class = "select_btn" id= "GL">구리시</button>
-	              <button type="button" class = "select_btn" id= "GP2">군포시</button>
+	              <button type="button" class = "select_btn" id="GP">가평군</button>
+	              <button type="button" class = "select_btn" id="GY">고양시</button>
+	              <button type="button" class = "select_btn" id="GC">과천시</button>
+	              <button type="button" class = "select_btn" id="GM">광명시</button>
+	              <button type="button" class = "select_btn" id="GJ">광주시</button>
+	              <button type="button" class = "select_btn" id="GL">구리시</button>
+	              <button type="button" class = "select_btn" id="GP2">군포시</button>
 	              <br>
-	              <button type="button" class = "select_btn" id= "GP3">김포시</button>
-	              <button type="button" class = "select_btn" id= "NYJ">남양주시</button>
-	              <button type="button" class = "select_btn" id= "DDC">동두천시</button>
-	              <button type="button" class = "select_btn" id= "BC">부천시</button>
-	              <button type="button" class = "select_btn" id= "SN">성남시</button>
-	              <button type="button" class = "select_btn" id= "SW">수원시</button>
-	              <button type="button" class = "select_btn" id= "SH">시흥시</button>
+	              <button type="button" class = "select_btn" id="GP3">김포시</button>
+	              <button type="button" class = "select_btn" id="NYJ">남양주시</button>
+	              <button type="button" class = "select_btn" id="DDC">동두천시</button>
+	              <button type="button" class = "select_btn" id="BC">부천시</button>
+	              <button type="button" class = "select_btn" id="SN">성남시</button>
+	              <button type="button" class = "select_btn" id="SW">수원시</button>
+	              <button type="button" class = "select_btn" id="SH">시흥시</button>
 	              <br>
-	              <button type="button" class = "select_btn" id= "AS">안산시</button>
-	              <button type="button" class = "select_btn" id= "AY">안양시</button>
-	              <button type="button" class = "select_btn" id= "PJ">파주시</button>
-	              <button type="button" class = "select_btn" id= "PT">평택시</button>
-	              <button type="button" class = "select_btn" id= "PC">포천시</button>
-	              <button type="button" class = "select_btn" id= "HN">하남시</button>
-	              <button type="button" class = "select_btn" id= "HS">화성시</button>
+	              <button type="button" class = "select_btn" id="AS">안산시</button>
+	              <button type="button" class = "select_btn" id="AY">안양시</button>
+	              <button type="button" class = "select_btn" id="PJ">파주시</button>
+	              <button type="button" class = "select_btn" id="PT">평택시</button>
+	              <button type="button" class = "select_btn" id="PC">포천시</button>
+	              <button type="button" class = "select_btn" id="HN">하남시</button>
+	              <button type="button" class = "select_btn" id="HS">화성시</button>
               </div>
               <div id="ck_ea_areatable">
              	<input type="checkbox" name="ck_lc" id="ck_GP" value="가평군" <%= lcarr[0] %>>
@@ -513,37 +515,49 @@ section{
     </div>
     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
     <div class="writer_box">
+    <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
         <table class="writer_table">
           <tr>
             <th width="15%">제목</th>
             <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1 value="<%=b.getBoardTitle() %>"></td>
           </tr>
           <tr>
-            <th>메인 이미지 첨부</th>
+            <th>현재 메인 이미지</th>
+            <td colspan="3" name="ea_orgin_title_image" value="<%=titleImg.getOriginName() %>"><%= titleImg.getOriginName() %></td>
+          </tr>
+          <tr>
+            <th>메인 이미지 수정</th>
             <td colspan="3"><input type ="file" multiple="multiple" id="ea_title_image" name = "ea_title_image" class=textline2></td>
           </tr>
           <tr>
             <th>모집 일정</th>
-            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1>
-              ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1> 까지</td>
+            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1 value="<%=b.getReStratDate() %>">
+              ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1 value="<%=b.getReEndDate() %>"> 까지</td>
           </tr>
           <tr>
             <th>활동 기간</th>
-            <td colspan="3"><input type ="date" id="ea_acs_date"name = "ea_acs_date"  class=dateline1>
-              ~ <input type ="date" id="ea_ace_date"name = "ea_ace_date"  class=dateline1> 까지</td>
+            <td colspan="3"><input type ="date" id="ea_acs_date"name = "ea_acs_date"  class=dateline1 value="<%=b.getAcStartDate() %>">
+              ~ <input type ="date" id="ea_ace_date"name = "ea_ace_date"  class=dateline1 value="<%=b.getAcEndDate() %>"> 까지</td>
           </tr>
           <tr>
             <th>내용</th>
             <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ><%=b.getBoardContent() %></textarea></td>
           </tr>
-          <tr>
-            <th>내용 이미지 첨부</th>
-            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
-          </tr>
-          <tr>
-            <th>참고자료</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
-          </tr>
+           <%if(fList.size()>1){ %>
+	          	<tr>
+	            <th>현재 참고자료</th>
+	            <td><%= fList.get(1).getOriginName() %></td>
+	            </tr>
+	            <tr>
+	            <th>참고자료 수정</th>
+	            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
+	            </tr>
+            <%}else{ %>
+	            <tr>
+	            <th>참고자료</th>
+	            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "titleImage" class=textline2></td>
+	            </tr>
+            <%} %>
         </table>
     </div>
     <div class = "ea_button">

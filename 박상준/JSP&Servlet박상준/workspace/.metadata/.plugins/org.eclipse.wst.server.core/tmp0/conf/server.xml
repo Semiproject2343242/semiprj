@@ -153,7 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\Users\tkdwn\Documents\GitHub\semiprj\박상준\JSP&amp;Servlet박상준\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\tkdwn\Documents\GitHub\semiprj\박상준\JSP&amp;Servlet박상준\workspace\semiprojectPSJ\WebContent" path="/semiprojectPSJ" reloadable="true" source="org.eclipse.jst.jee.server:semiprojectPSJ"><Resources><PreResources base="C:\Users\tkdwn\Documents\GitHub\semiprj\박상준\JSP&amp;Servlet박상준\workspace\semiprojectPSJ\WebContent\WEB-INF\classes" classLoaderOnly="false" className="org.apache.catalina.webresources.DirResourceSet" internalPath="/" webAppMount="/WEB-INF/classes"/></Resources></Context></Host>
+      <Context docBase="C:\Users\tkdwn\Documents\GitHub\semiprj\박상준\JSP&amp;Servlet박상준\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\tkdwn\Documents\GitHub\semiprj\박상준\JSP&amp;Servlet박상준\workspace\semiprojectPSJ\WebContent" path="/00_SmPj" reloadable="true" source="org.eclipse.jst.jee.server:semiprojectPSJ"><Resources><PreResources base="C:\Users\tkdwn\Documents\GitHub\semiprj\박상준\JSP&amp;Servlet박상준\workspace\semiprojectPSJ\WebContent\WEB-INF\classes" classLoaderOnly="false" className="org.apache.catalina.webresources.DirResourceSet" internalPath="/" webAppMount="/WEB-INF/classes"/></Resources></Context></Host>
     </Engine>
   </Service>
 </Server>

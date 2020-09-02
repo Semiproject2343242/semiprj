@@ -39,7 +39,6 @@ public class NoticeInsertServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		String category = request.getParameter("category");
-		
 		Board b = new Board(title, content, userId, category);
 		int result = new NoticeService().insertBoard(b);
 		

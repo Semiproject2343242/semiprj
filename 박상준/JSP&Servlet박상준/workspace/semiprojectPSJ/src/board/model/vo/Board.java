@@ -21,9 +21,35 @@ public class Board {
 	private String 	emState;         	// 취업상태				// EM_STATE
 	private String 	tcName;          	// 대상명			    	// TC_NAME
 	private String 	cgName;          	// 카테고리 이름				// CG_NAME
-	                                       
+	private Date 	reStratDate;   		// 모집 시작 날짜				// B_DATE
+	private Date 	reEndDate;   		// 모집 끝 날짜				// B_DATE
+	private Date 	acStartDate;   		// 활동 시작 날짜				// B_DATE
+	private Date 	acEndDate;   		// 활동 끝 날짜				// B_DATE
 	public Board() {}
 
+	//자유게시글 글쓰기
+	public Board(String boardTitle, String boardContent, int boardWriterNo) {
+		super();
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriterNo = boardWriterNo;
+	}
+
+	//커뮤니티 게시판
+	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount, int boardWriterNo, String boardWriter, int boardReply) {
+		super();
+		this.boardNo = boardNo;
+		this.boardName = boardName;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+	}
 	//QA 삭제
 	public Board(int boardNo) {
 		super();
@@ -155,6 +181,39 @@ public class Board {
 		this.emState = emState;
 		this.tcName = tcName;
 		this.cgName = cgName;
+	}
+
+
+
+
+
+	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
+			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
+			String tcName, String cgName, Date reStratDate, Date reEndDate, Date acStartDate, Date acEndDate) {
+		super();
+		this.boardNo = boardNo;
+		this.boardName = boardName;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardReCommend = boardReCommend;
+		this.boardEnable = boardEnable;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+		this.acState = acState;
+		this.lcName = lcName;
+		this.enrollState = enrollState;
+		this.emState = emState;
+		this.tcName = tcName;
+		this.cgName = cgName;
+		this.reStratDate = reStratDate;
+		this.reEndDate = reEndDate;
+		this.acStartDate = acStartDate;
+		this.acEndDate = acEndDate;
 	}
 
 	public int getBoardNo() {
@@ -301,6 +360,38 @@ public class Board {
 		this.cgName = cgName;
 	}
 
+	public Date getReStratDate() {
+		return reStratDate;
+	}
+
+	public void setReStratDate(Date reStratDate) {
+		this.reStratDate = reStratDate;
+	}
+
+	public Date getReEndDate() {
+		return reEndDate;
+	}
+
+	public void setReEndDate(Date reEndDate) {
+		this.reEndDate = reEndDate;
+	}
+
+	public Date getAcStartDate() {
+		return acStartDate;
+	}
+
+	public void setAcStartDate(Date acStartDate) {
+		this.acStartDate = acStartDate;
+	}
+
+	public Date getAcEndDate() {
+		return acEndDate;
+	}
+
+	public void setAcEndDate(Date acEndDate) {
+		this.acEndDate = acEndDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardName=" + boardName + ", boardTitle=" + boardTitle
@@ -308,9 +399,12 @@ public class Board {
 				+ boardModifyDate + ", boardViewCount=" + boardViewCount + ", boardReCommend=" + boardReCommend
 				+ ", boardEnable=" + boardEnable + ", boardWriterNo=" + boardWriterNo + ", boardWriter=" + boardWriter
 				+ ", boardReply=" + boardReply + ", acState=" + acState + ", lcName=" + lcName + ", enrollState="
-				+ enrollState + ", emState=" + emState + ", tcName=" + tcName + ", cgName=" + cgName + "]";
+				+ enrollState + ", emState=" + emState + ", tcName=" + tcName + ", cgName=" + cgName + ", reStratDate="
+				+ reStratDate + ", reEndDate=" + reEndDate + ", acStartDate=" + acStartDate + ", acEndDate=" + acEndDate
+				+ "]";
 	}
 
+	
 	
 	
 	

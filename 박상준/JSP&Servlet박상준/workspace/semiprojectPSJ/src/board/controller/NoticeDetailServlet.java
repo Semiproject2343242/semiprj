@@ -41,7 +41,7 @@ public class NoticeDetailServlet extends HttpServlet {
 //			request.setAttribute("list", list);
 //		} else {
 //			page = "WEB-INF/views/Common/errorPage.jsp";
-//			request.setAttribute("msg", "공지사항 상세조회에 실패하였습니다.");
+//			request.setAttribute("msg", "�������� ����ȸ�� �����Ͽ����ϴ�.");
 //		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
+import board.model.vo.Reply;
 
 public class QuestionDAO {
-	
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -176,6 +176,39 @@ public class QuestionDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Reply> selectReplyList(Connection conn, int bId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reply> list = null;
+		
+		String query = "selectReplyList=SELECT * FROM RLIST WHERE REF_BID=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Reply>();
+			while(rset.next()) {
+				list.add(new Reply(rset.getInt("reply_id"),
+									rset.getString("reply_content"),
+									rset.getInt("ref_bid"),
+									rset.getString("nickname"),
+									rset.getDate("create_date"),
+									rset.getDate("modify_date"),
+									rset.getString("status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 	
 }

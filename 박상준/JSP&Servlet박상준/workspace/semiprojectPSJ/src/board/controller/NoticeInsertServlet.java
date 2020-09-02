@@ -35,7 +35,7 @@ public class NoticeInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String title = request.getParameter("title"); //HTTP ìš”ì²­ì˜ íŒŒë¼ë¯¸í„° ê°’ì„ ì–»ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ request.getParameter() ë©”ì˜ë“œì…ë‹ˆë‹¤.
+		String title = request.getParameter("title"); //HTTP ¿äÃ»ÀÇ ÆÄ¶ó¹ÌÅÍ °ªÀ» ¾ò±â À§ÇØ »ç¿ëÇÏ´Â °ÍÀÌ request.getParameter() ¸Ş½îµåÀÔ´Ï´Ù.
 		String content = request.getParameter("content");
 		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		String category = request.getParameter("category");
@@ -44,9 +44,9 @@ public class NoticeInsertServlet extends HttpServlet {
 		int result = new NoticeService().insertBoard(b);
 		
 		if(result > 0) {
-			response.sendRedirect("main.no"); //JSP í˜ì´ì§€ì—ì„œ íŠ¹ì •í•œ ì‘ì—…ì„ ìˆ˜í–‰í•œ í›„ ì§€ì •í•œ í˜ì´ì§€ë¡œ ì´ë™í•˜ê³  ì‹¶ì€ ê²½ìš°ê°€ ìˆì„ ê²ƒì´ë‹¤
+			response.sendRedirect("main.no"); //JSP ÆäÀÌÁö¿¡¼­ Æ¯Á¤ÇÑ ÀÛ¾÷À» ¼öÇàÇÑ ÈÄ ÁöÁ¤ÇÑ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ°í ½ÍÀº °æ¿ì°¡ ÀÖÀ» °ÍÀÌ´Ù
 		} else {
-			request.setAttribute("msg", "ê³µì§€ì‚¬í•­ ë“±ë¡ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤."); //setAttribute(), getAttribute()ì—ì„œ ì†ì„± ê°’ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” íƒ€ì…ì€ Objectì…ë‹ˆë‹¤. msgeì—ëŠ” ì†ì„± ì´ë¦„ì„, ê³µì§€ì‚¬í•­ ë“œë¡ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤ ì—ëŠ” ì†ì„±ê°’ì„ ë„£ìŠµë‹ˆë‹¤.
+			request.setAttribute("msg", "°øÁö»çÇ× µî·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù."); //setAttribute(), getAttribute()¿¡¼­ ¼Ó¼º °ªÀ¸·Î »ç¿ëÇÏ´Â Å¸ÀÔÀº ObjectÀÔ´Ï´Ù. msge¿¡´Â ¼Ó¼º ÀÌ¸§À», °øÁö»çÇ× µå·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù ¿¡´Â ¼Ó¼º°ªÀ» ³Ö½À´Ï´Ù.
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
 			view.forward(request, response);
 		}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.CommunityService;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
@@ -56,11 +57,10 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	            f.mkdirs();
 	         }
 	         /* 
-	           파일 명 변환 및 저장 작업
-	              사용자가 올린 파일 명을 그대로 저장하지 않는 것이 원칙
+	           	파일 명 변환 및 저장 작업
+	            사용자가 올린 파일 명을 그대로 저장하지 않는 것이 원칙
 	                    1) 같은 파일 명이 있는 경우 기존 파일을 덮어쓰거나 시스템이 지정한 이름대로 바꿔서 저장될 수 있기 때문
 	                    2) 특수기호나 띄어쓰기 등 서버에 들어가면 문제가 생기는 이름으로 저장될 수 있기 때문
-	                    
 	                    
 	                 DefaultFileRenamePolicy (cos.jar 안에 존재하는 클래스)
 	                    같은 파일명이 있는지 확인 후 있을 경우 파일 명 뒤에 숫자를 붙여줌
@@ -111,8 +111,63 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			}
 	 		 }
 	 		
+	 		String strea_res_date = multiRequest.getParameter("ea_res_date"); 
+	 		Date ea_res_date = null;
+	 		if(strea_res_date != "") {
+	 			String[] dateArr = strea_res_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_res_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ree_date = multiRequest.getParameter("ea_ree_date"); 
+	 		Date ea_ree_date = null;
+	 		if(strea_ree_date != "") {
+	 			String[] dateArr = strea_ree_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_ree_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_acs_date = multiRequest.getParameter("ea_acs_date"); 
+	 		Date ea_acs_date = null;
+	 		if(strea_acs_date != "") {
+	 			String[] dateArr = strea_acs_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_acs_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ace_date = multiRequest.getParameter("ea_ace_date"); 
+	 		Date ea_ace_date = null;
+	 		if(strea_ace_date != "") {
+	 			String[] dateArr = strea_ace_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_ace_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		 
 	         Board b = new Board();
-	         
 	         b.setBoardTitle(title);
 	         b.setBoardContent(content);
 	         b.setBoardWriter(bWriter);
@@ -120,13 +175,14 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
-//	         System.out.println(b);
-//	         System.out.println(originFiles);
-//	         System.out.println(saveFiles);
-	         
-	         ArrayList<AddFile> fileList = new ArrayList<AddFile>();
+	         b.setReStratDate(ea_res_date);
+	         b.setReEndDate(ea_ree_date);
+	         b.setAcStartDate(ea_acs_date);
+	         b.setAcEndDate(ea_ace_date);
+	        
+	         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 	         for(int i  = originFiles.size() - 1; i>=0; i--) {
-	        	 AddFile af = new AddFile();
+	        	 FileVO af = new FileVO();
 	        	 af.setFilePath(savePath);
 	        	 af.setOriginName(originFiles.get(i));
 	        	 af.setChangeName(saveFiles.get(i));

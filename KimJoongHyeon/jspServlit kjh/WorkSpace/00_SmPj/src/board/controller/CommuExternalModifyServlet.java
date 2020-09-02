@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.CommunityService;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
@@ -50,7 +51,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         String root = request.getSession().getServletContext().getRealPath("/");
 	         String savePath = root + "exteranl_uploadFiles/";
 	         
-	         System.out.println(savePath);
+	         System.out.println("savePath : "+savePath);
 	         
 	         File f = new File(savePath);
 	         if(!f.exists()) {
@@ -85,6 +86,11 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	               originFiles.add(multiRequest.getOriginalFileName(name));
 	            }
 	         }
+	         
+	        
+	         int no = Integer.parseInt(multiRequest.getParameter("no"));
+	         String titleImage = multiRequest.getFilesystemName("ea_title_image");
+	         String mainfile = multiRequest.getFilesystemName("titleImage");
 	         String category = multiRequest.getParameter("ea_category");
 	         String[] agearr = multiRequest.getParameterValues("ck_ea_age");
 	         String[] localarr = multiRequest.getParameterValues("ck_lc");
@@ -112,8 +118,65 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	 			}
 	 		 }
 	 		
+	 		 
+	 		String strea_res_date = multiRequest.getParameter("ea_res_date"); 
+	 		Date ea_res_date = null;
+	 		if(strea_res_date != "") {
+	 			String[] dateArr = strea_res_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_res_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ree_date = multiRequest.getParameter("ea_ree_date"); 
+	 		Date ea_ree_date = null;
+	 		if(strea_ree_date != "") {
+	 			String[] dateArr = strea_ree_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_ree_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_acs_date = multiRequest.getParameter("ea_acs_date"); 
+	 		Date ea_acs_date = null;
+	 		if(strea_acs_date != "") {
+	 			String[] dateArr = strea_acs_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_acs_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ace_date = multiRequest.getParameter("ea_ace_date"); 
+	 		Date ea_ace_date = null;
+	 		if(strea_ace_date != "") {
+	 			String[] dateArr = strea_ace_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_ace_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
 	         Board b = new Board();
-	         
+	         b.setBoardNo(no);
 	         b.setBoardTitle(title);
 	         b.setBoardContent(content);
 	         b.setBoardWriter(bWriter);
@@ -121,25 +184,59 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
+	         b.setReStratDate(ea_res_date);
+	         b.setReEndDate(ea_ree_date);
+	         b.setAcStartDate(ea_acs_date);
+	         b.setAcEndDate(ea_ace_date);
 //	         System.out.println(b);
-//	         System.out.println(originFiles);
-//	         System.out.println(saveFiles);
+	         System.out.println("originFiles : "+originFiles);
+	         System.out.println("saveFiles : "+saveFiles);
+	         System.out.println("mainfile : "+mainfile);
 	         
-	         ArrayList<AddFile> fileList = new ArrayList<AddFile>();
-	         for(int i  = originFiles.size() - 1; i>=0; i--) {
-	        	 AddFile af = new AddFile();
-	        	 af.setFilePath(savePath);
-	        	 af.setOriginName(originFiles.get(i));
-	        	 af.setChangeName(saveFiles.get(i));
-	            
-	            if(i == originFiles.size()-1) {
-	            	af.setFileLevel(0);
-	            }else {
-	            	af.setFileLevel(1);
-	            }
-	            fileList.add(af);
+	         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+	         int result = 0;
+	         
+	         if(mainfile==null || mainfile.length() == 0) {
+	        	 if(titleImage==null || titleImage.length() == 0) {
+	        		 for(int i  = originFiles.size()-1; i>=0; i--) {
+	        			 FileVO af = new FileVO();
+	        			 af.setFilePath(savePath);
+	        			 af.setOriginName(originFiles.get(i));
+	        			 af.setChangeName(saveFiles.get(i));
+	        			 af.setFileLevel(1);
+	        			 af.setBoardNo(no);
+	        			 fileList.add(af);
+	        		 }
+	        	 }else{
+	        		 System.out.println(originFiles.size());
+	        		 for(int i  = originFiles.size() - 1; i>=0; i--) {
+	        			 FileVO af = new FileVO();
+	        			 af.setFilePath(savePath);
+	        			 af.setOriginName(originFiles.get(i));
+	        			 af.setChangeName(saveFiles.get(i));
+	        			 af.setBoardNo(no);
+	        			 if(i == originFiles.size()-1) {
+	        				 af.setFileLevel(0);
+	        			 }else {
+	        				 af.setFileLevel(1);
+	        			 }
+	        			 fileList.add(af);
+	        		 }
+	        	}
+	         }else {
+	        	 for(int i  = originFiles.size()-1; i>=0; i--) {
+	        		 FileVO af = new FileVO();
+	        		 af.setFilePath(savePath);
+	        		 af.setOriginName(originFiles.get(i));
+	        		 af.setChangeName(saveFiles.get(i));
+	        		 af.setFileLevel(1);
+	        		 af.setBoardNo(no);
+	        		 fileList.add(af);
+	        	 }
+        		 result = new CommunityService().AddFile(b, fileList);
 	         }
-	         int result = new CommunityService().insertAddFile(b, fileList);
+	         
+	         result = new CommunityService().modifyBoard(b, fileList);
 	         
 	         if(result>0) {
 	            response.sendRedirect("eaMain.cm");
