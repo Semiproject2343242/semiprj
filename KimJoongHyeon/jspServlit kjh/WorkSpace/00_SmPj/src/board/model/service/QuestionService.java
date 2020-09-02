@@ -72,7 +72,6 @@ public class QuestionService {
 			rollback(conn);
 		}
 		close(conn);
-		
 		return result;
 	}
 

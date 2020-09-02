@@ -4,11 +4,11 @@
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board"); 
-	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
+// 	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
 	
-	ArrayList<AddFile> fList = (ArrayList<AddFile>)request.getAttribute("fileList");
-	AddFile titleImg = fList.get(0);
-	System.out.println(fList.size());
+	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	FileVO titleImg = fList.get(0);
+// 	System.out.println(fList.size());
 	String categoryStr = b.getCgName();
 	String[] categoryarr = new String[7];
 	String[] splitCate = categoryStr.split(",");
@@ -517,6 +517,7 @@ section{
     </div>
     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
     <div class="writer_box">
+    <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
         <table class="writer_table">
           <tr>
             <th width="15%">제목</th>
@@ -524,7 +525,7 @@ section{
           </tr>
           <tr>
             <th>현재 메인 이미지</th>
-            <td colspan="3"><%= titleImg.getOriginName() %></td>
+            <td colspan="3" name="ea_orgin_title_image" value="<%=titleImg.getOriginName() %>"><%= titleImg.getOriginName() %></td>
           </tr>
           <tr>
             <th>메인 이미지 수정</th>
@@ -545,19 +546,19 @@ section{
             <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ><%=b.getBoardContent() %></textarea></td>
           </tr>
            <%if(fList.size()>1){ %>
-          	<tr>
-            <th>현재 참고자료</th>
-            <td><%= fList.get(1).getOriginName() %></td>
-            </tr>
-            <tr>
-            <th>참고자료 수정</th>
-            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
-            </tr>
+	          	<tr>
+	            <th>현재 참고자료</th>
+	            <td><%= fList.get(1).getOriginName() %></td>
+	            </tr>
+	            <tr>
+	            <th>참고자료 수정</th>
+	            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
+	            </tr>
             <%}else{ %>
-            <tr>
-            <th>참고자료</th>
-            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
-            </tr>
+	            <tr>
+	            <th>참고자료</th>
+	            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "titleImage" class=textline2></td>
+	            </tr>
             <%} %>
         </table>
     </div>

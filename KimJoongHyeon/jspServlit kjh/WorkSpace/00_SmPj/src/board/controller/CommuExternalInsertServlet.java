@@ -17,7 +17,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.CommunityService;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
@@ -124,9 +124,9 @@ public class CommuExternalInsertServlet extends HttpServlet {
 //	         System.out.println(originFiles);
 //	         System.out.println(saveFiles);
 	         
-	         ArrayList<AddFile> fileList = new ArrayList<AddFile>();
+	         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 	         for(int i  = originFiles.size() - 1; i>=0; i--) {
-	        	 AddFile af = new AddFile();
+	        	 FileVO af = new FileVO();
 	        	 af.setFilePath(savePath);
 	        	 af.setOriginName(originFiles.get(i));
 	        	 af.setChangeName(saveFiles.get(i));

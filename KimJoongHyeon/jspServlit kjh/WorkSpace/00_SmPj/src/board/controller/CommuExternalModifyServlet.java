@@ -18,7 +18,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.CommunityService;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
@@ -50,7 +50,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         String root = request.getSession().getServletContext().getRealPath("/");
 	         String savePath = root + "exteranl_uploadFiles/";
 	         
-	         System.out.println(savePath);
+	         System.out.println("savePath : "+savePath);
 	         
 	         File f = new File(savePath);
 	         if(!f.exists()) {
@@ -85,6 +85,11 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	               originFiles.add(multiRequest.getOriginalFileName(name));
 	            }
 	         }
+	         
+	        
+	         int no = Integer.parseInt(multiRequest.getParameter("no"));
+	         String titleImage = multiRequest.getFilesystemName("ea_title_image");
+	         String mainfile = multiRequest.getFilesystemName("titleImage");
 	         String category = multiRequest.getParameter("ea_category");
 	         String[] agearr = multiRequest.getParameterValues("ck_ea_age");
 	         String[] localarr = multiRequest.getParameterValues("ck_lc");
@@ -113,7 +118,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	 		 }
 	 		
 	         Board b = new Board();
-	         
+	         b.setBoardNo(no);
 	         b.setBoardTitle(title);
 	         b.setBoardContent(content);
 	         b.setBoardWriter(bWriter);
@@ -122,24 +127,54 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         b.setTcName(age);
 	         b.setLcName(local);
 //	         System.out.println(b);
-//	         System.out.println(originFiles);
-//	         System.out.println(saveFiles);
+	         System.out.println("originFiles : "+originFiles);
+	         System.out.println("saveFiles : "+saveFiles);
+	         System.out.println("mainfile : "+mainfile);
 	         
-	         ArrayList<AddFile> fileList = new ArrayList<AddFile>();
-	         for(int i  = originFiles.size() - 1; i>=0; i--) {
-	        	 AddFile af = new AddFile();
-	        	 af.setFilePath(savePath);
-	        	 af.setOriginName(originFiles.get(i));
-	        	 af.setChangeName(saveFiles.get(i));
-	            
-	            if(i == originFiles.size()-1) {
-	            	af.setFileLevel(0);
-	            }else {
-	            	af.setFileLevel(1);
-	            }
-	            fileList.add(af);
+	         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+	         int result = 0;
+	         
+	         if(mainfile==null || mainfile.length() == 0) {
+	        	 if(titleImage==null || titleImage.length() == 0) {
+	        		 for(int i  = originFiles.size()-1; i>=0; i--) {
+	        			 FileVO af = new FileVO();
+	        			 af.setFilePath(savePath);
+	        			 af.setOriginName(originFiles.get(i));
+	        			 af.setChangeName(saveFiles.get(i));
+	        			 af.setFileLevel(1);
+	        			 af.setBoardNo(no);
+	        			 fileList.add(af);
+	        		 }
+	        	 }else{
+	        		 System.out.println(originFiles.size());
+	        		 for(int i  = originFiles.size() - 1; i>=0; i--) {
+	        			 FileVO af = new FileVO();
+	        			 af.setFilePath(savePath);
+	        			 af.setOriginName(originFiles.get(i));
+	        			 af.setChangeName(saveFiles.get(i));
+	        			 af.setBoardNo(no);
+	        			 if(i == originFiles.size()-1) {
+	        				 af.setFileLevel(0);
+	        			 }else {
+	        				 af.setFileLevel(1);
+	        			 }
+	        			 fileList.add(af);
+	        		 }
+	        	}
+	         }else {
+	        	 for(int i  = originFiles.size()-1; i>=0; i--) {
+	        		 FileVO af = new FileVO();
+	        		 af.setFilePath(savePath);
+	        		 af.setOriginName(originFiles.get(i));
+	        		 af.setChangeName(saveFiles.get(i));
+	        		 af.setFileLevel(1);
+	        		 af.setBoardNo(no);
+	        		 fileList.add(af);
+	        	 }
+        		 result = new CommunityService().AddFile(b, fileList);
 	         }
-	         int result = new CommunityService().modifyBoard(b, fileList);
+	         
+	         result = new CommunityService().modifyBoard(b, fileList);
 	         
 	         if(result>0) {
 	            response.sendRedirect("eaMain.cm");

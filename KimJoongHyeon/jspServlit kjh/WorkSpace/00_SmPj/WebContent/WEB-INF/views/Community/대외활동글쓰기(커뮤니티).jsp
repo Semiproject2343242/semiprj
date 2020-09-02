@@ -382,7 +382,7 @@ section{
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="ea_title_image" name = "ea_title_image" class=textline2></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="ea_title_image" name = "ea_title_image" class=textline2 required></td>
           </tr>
           <tr>
             <th>모집 일정</th>
@@ -397,10 +397,6 @@ section{
           <tr>
             <th>내용</th>
             <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ></textarea></td>
-          </tr>
-          <tr>
-            <th>내용 이미지 첨부</th>
-            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
           </tr>
           <tr>
             <th>참고자료</th>

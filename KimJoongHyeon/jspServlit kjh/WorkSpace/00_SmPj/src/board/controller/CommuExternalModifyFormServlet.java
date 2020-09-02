@@ -18,7 +18,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.CommunityService;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
@@ -95,7 +95,7 @@ public class CommuExternalModifyFormServlet extends HttpServlet {
 		int viewCount = Integer.parseInt(multiRequest.getParameter("viewCount"));
 		int reCommend = Integer.parseInt(multiRequest.getParameter("reCommend"));
 		String writer = multiRequest.getParameter("writer");
-		ArrayList<AddFile> fileList = new CommunityService().selectFile(no);
+		ArrayList<FileVO> fileList = new CommunityService().selectFile(no);
 //		
 //		System.out.println("category : " +category);
 //		System.out.println("acState : " +acState);
@@ -104,7 +104,7 @@ public class CommuExternalModifyFormServlet extends HttpServlet {
 		
 		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null,tcName, category);
 		String page = null;
-		System.out.println("Board,Board : " +b);
+//		System.out.println("Board,Board : " +b);
 		page ="WEB-INF/views/Community/대외활동글수정(커뮤니티).jsp";
 		request.setAttribute("board", b);
 		request.setAttribute("fileList", fileList);

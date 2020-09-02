@@ -1,11 +1,11 @@
-<%@page import="board.model.vo.AddFile"%>
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Board> bList = (ArrayList<Board>) request.getAttribute("bList");
-	ArrayList<AddFile> fList = (ArrayList<AddFile>) request.getAttribute("fList");
+	ArrayList<FileVO> fList = (ArrayList<FileVO>) request.getAttribute("fList");
 %>
 <!DOCTYPE html>
 <html>
@@ -88,26 +88,42 @@
 		<div id="main_section" align="center">
 			<h2 align="center">대외 활동
 			<div class="buttonArea">
-				<%if (loginUser != null) {%>
+				<%
+					if (loginUser != null) {
+				%>
 				<input type="button" onclick="location.href='eaInsertForm.cm'"
 					id="insertBtn" value="작성하기">
-				<%}%>
+				<%
+					}
+				%>
 			</div>
 			</h2>
 			<ul class="thumbnailArea">
-				<% if(bList.isEmpty() || fList.isEmpty()){ %>
-				등록된 사진이 없습니다.
-				<%} else {%>
-				<%for (int i = 0; i < bList.size(); i++) {%>
-				<%Board b = bList.get(i);%>
+				<%
+					if(bList.isEmpty() || fList.isEmpty()){
+				%>
+				등록된 게시판이 없습니다.
+				<%
+					} else {
+				%>
+				<%
+					for (int i = 0; i < bList.size(); i++) {
+				%>
+				<%
+					Board b = bList.get(i);
+				%>
 				<li class="thumb-list">
 					<div class="imageArea">
 						<input type="hidden" value="<%=b.getBoardNo()%>">
-						<%for (int j = 0; j < fList.size(); j++) {%>
-						<%AddFile f = fList.get(j);%>
+						<%
+							for (int j = 0; j < fList.size(); j++) {
+						%>
+						<%
+							FileVO f = fList.get(j);
+						%>
 						<%if (b.getBoardNo() == f.getBoardNo()) {%>
 						<img
-							src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=f.getChangeName()%>"
+							src="<%=request.getContextPath()%>/exteranl_uploadFiles/<%=f.getChangeName()%>"
 							width="150px" height="100%">
 						<%}%>
 						<%}%>

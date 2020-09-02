@@ -4,12 +4,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Á¤ºÎÁö¿ø±Ý ¹Ù·ÎÁö±Ý1</title>
+    <title>ì •ë¶€ì§€ì›ê¸ˆ ë°”ë¡œì§€ê¸ˆ1</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
  	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/side.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/°øÁö»çÇ×±Û¾²±â.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ê³µì§€ì‚¬í•­ê¸€ì“°ê¸°.css"/>
 
     <script src="../resources/js/slides.js"></script>
 
@@ -21,28 +21,33 @@
 	<%@ include file="../Common/header.jsp" %>
      <section>
         <aside>
-           <h2> °øÁö»çÇ×</h2>
+           <h2> ê³µì§€ì‚¬í•­</h2>
            <hr>
-           <h2>Á¦¸ñ</h2>
-           <h2>Ä«Å×°í¸®</h2>
-           <h2>³»¿ë</h2>
+           <h2>ì œëª©</h2>
+           <h2>ì¹´í…Œê³ ë¦¬</h2>
+           <h2>ë‚´ìš©</h2>
            <br><br><br><br><br><br>
-           <h2>Ã·ºÎÆÄÀÏ</h2>
+           <h2>ì²¨ë¶€íŒŒì¼</h2>
         </aside>
         <div id="main_section">
-            <form action="<%= request.getContextPath() %>/insert.no" method="post">
-            	<h2 style="text-align: center;">°øÁö»çÇ× Á¦¸ñ</h2>
+            <form action="<%= request.getContextPath() %>/insert.no" method="post" encType="multipart/form-data">
+            	<h2 style="text-align: center;">ê³µì§€ì‚¬í•­ ì œëª©</h2>
             	<hr>
-           	 	<input type="text" id="text1" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä." name="title"><br clear="all"> 
+           	 	<input type="text" id="text1" placeholder="ì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”." name="title"><br clear="all"> 
             	<select id="select1" name="category">
-               	 	<option value="ÇÊµ¶">ÇÊµ¶</option>
-                	<option value="°øÁö">°øÁö</option>
+               	 	<option value="í•„ë…">í•„ë…</option>
+                	<option value="ê³µì§€">ê³µì§€</option>
             	</select>
-            	<textarea id="textarea" name="content" placeholder="³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä."></textarea><br>
-            	<input type="file" id="file"><br>
+            	<textarea id="textarea" name="content" placeholder="ë‚´ìš©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”."></textarea><br>
+            	<!-- íŒŒì¼ ì—…ë¡œë“œ í•˜ëŠ” ë¶€ë¶„ -->
+				<div id="fileArea">
+					<input type="file" id="file1" multiple="multiple" name="file1">
+					<input type="file" id="file2" multiple="multiple" name="file2">
+					<input type="file" id="file3" multiple="multiple" name="file3">
+				</div>
             	<div id="buttons1">
-                	<button id="button1">µî·Ï</button>
-                	<button id="button2" onclick="location.href='javascript:history.go(-1);'">Ãë¼Ò</button>
+                	<input type="submit" id="button1" value="ë“±ë¡">
+               		<input type="button" id="button2" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="ì·¨ì†Œ">
             	</div>
             </form>
         </div>
