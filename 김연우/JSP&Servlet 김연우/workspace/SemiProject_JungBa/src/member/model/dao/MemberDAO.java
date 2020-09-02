@@ -7,9 +7,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 import member.model.vo.Member;
 
@@ -284,7 +286,7 @@ public class MemberDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM SUPPORTLIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM SUPPORTLIST WHERE B_WRITER = ? ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, loginMemberNo);
@@ -323,7 +325,7 @@ public class MemberDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM EXTERNALLIST WHERE B_WRITER = ? ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, loginMemberNo);
@@ -362,7 +364,7 @@ public class MemberDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM FREELIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM FREELIST WHERE B_WRITER = ? ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, loginMemberNo);
@@ -395,7 +397,7 @@ public class MemberDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN 1 AND 4 AND B_WRITER = ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM QALIST WHERE B_WRITER = ? ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, loginMemberNo);
@@ -423,5 +425,108 @@ public class MemberDAO {
 		}
 		return list;
 	}
+
+	public FileVO selectProfile(Connection conn, int memberNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		FileVO profile = null;
+		
+		String query = "SELECT * FROM FILES WHERE MEMBER_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				profile = new FileVO(rset.getString("change_name"), 
+						 			 rset.getInt("member_no"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return profile;
+	}
+	
+	public int insertProfile(Connection conn, FileVO profile, int loginMemberNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, 0, DEFAULT, DEFAULT, NULL, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, profile.getOriginName());
+			pstmt.setString(2, profile.getChangeName());
+			pstmt.setString(3, profile.getFilePath());
+			pstmt.setInt(4, loginMemberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	////////////////////////추후 수정 예정 /////////////////////////////
+	public int deleteProfile(Connection conn, int fileNo, int loginMemberNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "DELETE FILES WHERE FILE_NO = ? AND MEMBER_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, fileNo);
+			pstmt.setInt(2, loginMemberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	///////////////////////////////////////////////////////////////
+	
+	
+	public int deleteProfile(Connection conn, int loginMemberNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "DELETE FILES WHERE MEMBER_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, loginMemberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 }
