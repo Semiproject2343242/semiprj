@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.CommunityDAO;
+import board.model.dao.QuestionDAO;
 import board.model.vo.AddFile;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
@@ -81,7 +82,7 @@ Connection conn = getConnection();
 	}
 
 	public int insertAddFile(Board b, ArrayList<AddFile> fileList) {
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		CommunityDAO dao = new CommunityDAO();
 		
@@ -114,5 +115,27 @@ Connection conn = getConnection();
 		close(conn);
 		
 		return list;
+	}
+
+	public int modifyBoard(Board b, ArrayList<AddFile> fileList) {
+		Connection conn = getConnection();
+		
+		CommunityDAO dao = new CommunityDAO();	
+		int result1 = dao.modifyBoard(conn,b);
+		if(result1 > 0) { //게시판 수정 성공!
+			int result2 = dao.modifyAddFile(conn, fileList);
+			fileList.get(0).
+			
+			if(result2>0) {	
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+
+		}
+		
+		close(conn);
+		
+		return result1;
 	}
 }

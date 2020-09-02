@@ -63,7 +63,7 @@ public class QuestionService {
 	}
 
 	public int modifyBoard(Board b) {
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		int result = new QuestionDAO().modifyBoard(conn, b);
 		if(result > 0) {
