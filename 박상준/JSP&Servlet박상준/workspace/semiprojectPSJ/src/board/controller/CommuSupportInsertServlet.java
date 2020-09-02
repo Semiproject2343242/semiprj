@@ -43,7 +43,6 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-	      System.out.println("여기는 타나1");
 	      
 	      // encType 이 multipart/form-data 로 전송되었는지 확인
 	      if(ServletFileUpload.isMultipartContent(request)) {
@@ -57,20 +56,16 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	         if(!f.exists()) {
 	            f.mkdirs();
 	         }
-	         System.out.println("여기는 타나2");
 	         
 			
 	         MultipartRequest multiRequest = new MultipartRequest(request, savePath,
 				 maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-	         System.out.println("여기는 타나3");
 	         
 	         ArrayList<String> saveFiles = new ArrayList<String>(); // 바뀐 파일의 이름을 저장 할 ArrayList
 	         ArrayList<String> originFiles = new ArrayList<String>(); //원본 파일의 이름을 저장할 ArrayList
 	         
 	         Enumeration<String> files = multiRequest.getFileNames(); // getFileNames() : 폼에서 전송된 File의 name 반환 //여러개 가능
-	         
-	         System.out.println("여기는 타나4");
+	    
 	         while(files.hasMoreElements()) {
 	            String name = files.nextElement();
 	            

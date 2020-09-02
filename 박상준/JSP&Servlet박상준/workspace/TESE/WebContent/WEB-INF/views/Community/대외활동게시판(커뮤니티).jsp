@@ -1,11 +1,11 @@
-<%@page import="board.model.vo.AddFile"%>
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Board> bList = (ArrayList<Board>) request.getAttribute("bList");
-	ArrayList<AddFile> fList = (ArrayList<AddFile>) request.getAttribute("fList");
+	ArrayList<FileVO> fList = (ArrayList<FileVO>) request.getAttribute("fList");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,6 +30,7 @@
 	line-height:15px; 
 	border-bottom: 1px solid silver;
 	border-radius: 7px;
+	align-items: center;
 }
 
 .thumb-list:hover {
@@ -46,9 +47,16 @@
 	margin: auto 0px;
 	align-items: "center";
 }
+.textArea_title{
+	width: 100%;
+}
 .textArea{
 	text-align: left;
 	margin-left : 30px;
+	width: 50%
+}
+.textArea1{
+	float: right;
 }
 </style>
 <body>
@@ -80,34 +88,48 @@
 		<div id="main_section" align="center">
 			<h2 align="center">대외 활동
 			<div class="buttonArea">
-				<%if (loginUser != null) {%>
+				<%
+					if (loginUser != null) {
+				%>
 				<input type="button" onclick="location.href='eaInsertForm.cm'"
 					id="insertBtn" value="작성하기">
-				<%}%>
+				<%
+					}
+				%>
 			</div>
 			</h2>
 			<ul class="thumbnailArea">
-				<%if (bList.isEmpty()) {%>
-				등록된 사진이 없습니다.
-				<%} else {%>
-				<%for (int i = 0; i < bList.size(); i++) {%>
-				<%Board b = bList.get(i);%>
+				<%
+					if(bList.isEmpty() || fList.isEmpty()){
+				%>
+				등록된 게시판이 없습니다.
+				<%
+					} else {
+				%>
+				<%
+					for (int i = 0; i < bList.size(); i++) {
+				%>
+				<%
+					Board b = bList.get(i);
+				%>
 				<li class="thumb-list">
 					<div class="imageArea">
 						<input type="hidden" value="<%=b.getBoardNo()%>">
-						<%for (int j = 0; j < fList.size(); j++) {%>
-						<%AddFile f = fList.get(j);%>
+						<%
+							for (int j = 0; j < fList.size(); j++) {
+						%>
+						<%
+							FileVO f = fList.get(j);
+						%>
 						<%if (b.getBoardNo() == f.getBoardNo()) {%>
 						<img
-							src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=f.getChangeName()%>"
+							src="<%=request.getContextPath()%>/exteranl_uploadFiles/<%=f.getChangeName()%>"
 							width="150px" height="100%">
 						<%}%>
 						<%}%>
 					</div>
 					<div class="textArea">
-						<p>
-							<%=b.getBoardNo()%>.
-							<%=b.getBoardTitle()%></p>
+					<h3><%=b.getBoardNo()%>.<%=b.getBoardTitle()%></h3>
 						<p>
 							<b>접수상태 </b>
 							<%=b.getAcState()%></p>
@@ -118,6 +140,14 @@
 							<b>지역 </b>
 							<%=b.getLcName()%></p>
 					</div>
+					<div class="textArea1">
+						<b>조회수 </b>
+						<%=b.getBoardViewCount()%></p>
+						<p>
+						<b>추전수 </b>
+						<%=b.getBoardReCommend()%></p>
+					</div>
+					
 				</li>
 				<%}%>
 				<%}%>

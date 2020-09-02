@@ -20,8 +20,9 @@
   	#filetext{
   		margin-top : 220px;
   	}
-  	span{
-  		float:right;
+  	.sub1{
+  		width: 50%;
+		float:left;
   	}
   </style>
   <body>
@@ -33,7 +34,6 @@
         <h2>제목</h2>
         <h2>카테고리</h2>
         <h2 id="content">내용</h2>
-        <h2 id="filetext">첨부파일</h2>
       </aside>
       <div id="main_section">
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
@@ -45,25 +45,22 @@
 				<input type="hidden" name="writer" value="<%= b.getBoardWriter()%>">
        			<input type="hidden" name=category value="<%= b.getCgName() %>" />
 
-       			<h2><%= b.getBoardTitle() %><span class="sub">작성자 : <%= b.getBoardWriter()%></span></h2>
+       			<h2><div class="sub1"><%= b.getBoardTitle() %></div class="sub2"> <div>작성자 : <%= b.getBoardWriter()%></div></h2>
 
-	        	<h2><%= b.getCgName() %><span class="sub">등록 날짜 : <%= b.getBoardModifyDate() %></span><h2>
+	        	<h2><div class="sub1"><%= b.getCgName() %></div><div class="sub2">등록 날짜 : <%= b.getBoardModifyDate() %></div><h2>
       			
 				<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
 	        </h2>
 	        <h2>
 		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>
 	        </h2>
-	        <h2>
-	        	<input type="file" id="file" disabled>
-	        </h2>
 	        <hr />
 	        <div align="right">
 				<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
-					<input type="submit" id="updateBtn" value="수정">
-					<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+					<input type="submit" class="btn" id="updateBtn" value="수정">
+					<input type="button" class="btn" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 				<% } %>
-				<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
+				<input type="button" class="btn" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
 				<script>
 				function deleteBoard(){
 					var num = <%= b.getBoardNo() %>;
