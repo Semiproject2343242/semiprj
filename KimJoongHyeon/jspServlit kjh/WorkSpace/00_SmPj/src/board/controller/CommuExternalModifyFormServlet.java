@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -96,13 +97,70 @@ public class CommuExternalModifyFormServlet extends HttpServlet {
 		int reCommend = Integer.parseInt(multiRequest.getParameter("reCommend"));
 		String writer = multiRequest.getParameter("writer");
 		ArrayList<FileVO> fileList = new CommunityService().selectFile(no);
+		
+		String strea_res_date = multiRequest.getParameter("ea_res_date"); 
+ 		Date ea_res_date = null;
+ 		if(strea_res_date != "") {
+ 			String[] dateArr = strea_res_date.split("-");
+ 			
+ 			int year = Integer.parseInt(dateArr[0]);
+ 			int month = Integer.parseInt(dateArr[1]) - 1;
+ 			int day = Integer.parseInt(dateArr[2]);
+ 			
+ 			ea_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+ 		}else {
+ 			ea_res_date =new Date(new GregorianCalendar().getTimeInMillis());
+ 		} 
+ 		
+ 		String strea_ree_date = multiRequest.getParameter("ea_ree_date"); 
+ 		Date ea_ree_date = null;
+ 		if(strea_ree_date != "") {
+ 			String[] dateArr = strea_ree_date.split("-");
+ 			
+ 			int year = Integer.parseInt(dateArr[0]);
+ 			int month = Integer.parseInt(dateArr[1]) - 1;
+ 			int day = Integer.parseInt(dateArr[2]);
+ 			
+ 			ea_ree_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+ 		}else {
+ 			ea_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
+ 		} 
+ 		
+ 		String strea_acs_date = multiRequest.getParameter("ea_acs_date"); 
+ 		Date ea_acs_date = null;
+ 		if(strea_acs_date != "") {
+ 			String[] dateArr = strea_acs_date.split("-");
+ 			
+ 			int year = Integer.parseInt(dateArr[0]);
+ 			int month = Integer.parseInt(dateArr[1]) - 1;
+ 			int day = Integer.parseInt(dateArr[2]);
+ 			
+ 			ea_acs_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+ 		}else {
+ 			ea_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
+ 		} 
+ 		
+ 		String strea_ace_date = multiRequest.getParameter("ea_ace_date"); 
+ 		Date ea_ace_date = null;
+ 		if(strea_ace_date != "") {
+ 			String[] dateArr = strea_ace_date.split("-");
+ 			
+ 			int year = Integer.parseInt(dateArr[0]);
+ 			int month = Integer.parseInt(dateArr[1]) - 1;
+ 			int day = Integer.parseInt(dateArr[2]);
+ 			
+ 			ea_ace_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+ 		}else {
+ 			ea_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
+ 		} 
+		
 //		
 //		System.out.println("category : " +category);
 //		System.out.println("acState : " +acState);
 //		System.out.println("tcName : " +tcName);
 //		System.out.println("lcName : " +lcName);
 		
-		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null,tcName, category);
+		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null,tcName, category,ea_res_date,ea_ace_date,ea_acs_date,ea_ace_date);
 		String page = null;
 //		System.out.println("Board,Board : " +b);
 		page ="WEB-INF/views/Community/대외활동글수정(커뮤니티).jsp";

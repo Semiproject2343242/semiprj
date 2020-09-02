@@ -63,7 +63,11 @@ public class CommunityDAO {
 						   rset.getString("LC_NAME"),
 						   rset.getString("ENROLL_STATE"),
 						   rset.getString("TC_NAME"),
-						   rset.getString("CG_NAME"));
+						   rset.getString("CG_NAME"),
+						   rset.getDate("RECRUIT_STARTDATE"),
+						   rset.getDate("RECRUIT_ENDDATE"),
+						   rset.getDate("ACTIVITY_STARTDATE"),
+						   rset.getDate("ACTIVITY_ENDDATE"));
 			}
 				
 		} catch (SQLException e) {
@@ -157,20 +161,24 @@ public class CommunityDAO {
 			
 			while(rset.next()) {
 				list.add(new Board(rset.getInt("B_NO"),
-								   rset.getString("B_TITLE"),
-								   rset.getString("B_CONTENT"),
-								   rset.getDate("B_DATE"),
-								   rset.getDate("B_RDATE"),
-								   rset.getInt("B_VIEW_COUNT"),
-								   rset.getInt("B_RECOMMEND"),
-								   rset.getInt("B_WRITER"),
-								   rset.getString("MEMBER_NICKNAME"),
-								   rset.getInt("B_REPLY_COUNT"),
-								   rset.getString("AC_STATE"),
-								   rset.getString("LC_NAME"),
-								   rset.getString("ENROLL_STATE"),
-								   rset.getString("TC_NAME"),
-								   rset.getString("CG_NAME")));
+						   rset.getString("B_TITLE"),
+						   rset.getString("B_CONTENT"),
+						   rset.getDate("B_DATE"),
+						   rset.getDate("B_RDATE"),
+						   rset.getInt("B_VIEW_COUNT"),
+						   rset.getInt("B_RECOMMEND"),
+						   rset.getInt("B_WRITER"),
+						   rset.getString("MEMBER_NICKNAME"),
+						   rset.getInt("B_REPLY_COUNT"),
+						   rset.getString("AC_STATE"),
+						   rset.getString("LC_NAME"),
+						   rset.getString("ENROLL_STATE"),
+						   rset.getString("TC_NAME"),
+						   rset.getString("CG_NAME"),
+						   rset.getDate("RECRUIT_STARTDATE"),
+						   rset.getDate("RECRUIT_ENDDATE"),
+						   rset.getDate("ACTIVITY_STARTDATE"),
+						   rset.getDate("ACTIVITY_ENDDATE")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -210,8 +218,7 @@ public class CommunityDAO {
 	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜,  수정날짜,   조회수,    추천수,    삭제여부,  글쓴이번호, 댓글수,    AC_SATA,   LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
-		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'대외',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,NULL,?,?)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'대외',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,NULL,?,?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -221,7 +228,10 @@ public class CommunityDAO {
 			pstmt.setString(4, b.getLcName());
 			pstmt.setString(5, b.getTcName());
 			pstmt.setString(6, b.getCgName());
-			
+			pstmt.setDate(7, b.getReStratDate());
+			pstmt.setDate(8, b.getReEndDate());
+			pstmt.setDate(9, b.getAcStartDate());
+			pstmt.setDate(10, b.getAcEndDate());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -236,7 +246,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,SEQ_BNO.CURRVAL)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,SEQ_BNO.CURRVAL,NULL)";
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 			FileVO af = fileList.get(i);
@@ -296,7 +306,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=? WHERE B_NO = ?";
+		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=?, RECRUIT_STARTDATE = ?,RECRUIT_ENDDATE=?,ACTIVITY_STARTDATE=?,ACTIVITY_ENDDATE=?  WHERE B_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
@@ -304,7 +314,11 @@ public class CommunityDAO {
 			pstmt.setString(3, b.getLcName());
 			pstmt.setString(4, b.getTcName());
 			pstmt.setString(5, b.getCgName());
-			pstmt.setInt(6, b.getBoardNo());
+			pstmt.setDate(6, b.getReStratDate());
+			pstmt.setDate(7, b.getReEndDate());
+			pstmt.setDate(8, b.getAcStartDate());
+			pstmt.setDate(9, b.getAcEndDate());
+			pstmt.setInt(10, b.getBoardNo());
 			
 			result += pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -345,7 +359,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,?)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,?,NULL)";
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 			FileVO af = fileList.get(i);
