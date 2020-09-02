@@ -7,8 +7,8 @@ import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import board.model.dao.CommuDAO;
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
@@ -143,4 +143,126 @@ public class MemberService {
 		return list;
 	}
 
+	public FileVO selectProfile(int memberNo) {
+		
+		Connection conn = getConnection();
+		
+		FileVO profile = new MemberDAO().selectProfile(conn, memberNo);
+		
+		close(conn);
+				
+		return profile;
+	}
+	
+	public int insertProfile(FileVO profile, int loginMemberNo) {
+		
+		Connection conn = getConnection();
+		
+		MemberDAO dao = new MemberDAO();
+		
+		int result = dao.insertProfile(conn, profile, loginMemberNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+		
+	}
+	
+	
+	//////////////////////// 추후 수정 예정 /////////////////////////////
+	public int deleteProfile(int fileNo, int loginMemberNo) {
+		
+		Connection conn = getConnection();
+		
+		MemberDAO dao = new MemberDAO();
+		
+		int result = dao.deleteProfile(conn, fileNo, loginMemberNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+	}
+	///////////////////////////////////////////////////////////////
+	
+	
+	
+	public int deleteProfile(int loginMemberNo) {
+		
+		Connection conn = getConnection();
+		
+		MemberDAO dao = new MemberDAO();
+		
+		int result = dao.deleteProfile(conn, loginMemberNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+	}
+	
+	
+	
+	
+	//////////////////////// 추후 수정 예정 /////////////////////////////
+	public int updateProfile(FileVO profile, int originalFileNo, int loginMemberNo) {
+		
+		Connection conn = getConnection();
+		
+		MemberDAO dao = new MemberDAO();
+		
+		int result1 = dao.deleteProfile(conn, originalFileNo, loginMemberNo);
+		int result2 = dao.insertProfile(conn, profile, loginMemberNo);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+	////////////////////////////////////////////////////////////////
+	
+
+	
+	
+	public int updateProfile(FileVO profile, int loginMemberNo) {
+		
+		Connection conn = getConnection();
+		
+		MemberDAO dao = new MemberDAO();
+		
+		int result1 = dao.deleteProfile(conn, loginMemberNo);
+		int result2 = dao.insertProfile(conn, profile, loginMemberNo);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+	
 }

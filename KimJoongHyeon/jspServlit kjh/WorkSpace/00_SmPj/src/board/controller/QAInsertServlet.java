@@ -46,7 +46,7 @@ public class QAInsertServlet extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("main.qa");
 		} else {
-			request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
+			request.setAttribute("msg", "Q/A 등록에 실패하였습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
 			view.forward(request, response);
 		}

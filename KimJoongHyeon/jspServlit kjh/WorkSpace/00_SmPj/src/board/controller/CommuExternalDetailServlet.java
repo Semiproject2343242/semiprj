@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.CommunityService;
 import board.model.service.QuestionService;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import board.model.vo.Reply;
 
@@ -37,7 +37,7 @@ public class CommuExternalDetailServlet extends HttpServlet {
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		CommunityService service = new CommunityService();
 		Board board = service.selectBoard(bId,"대외");
-		ArrayList<AddFile> fileList = service.selectFile(bId);
+		ArrayList<FileVO> fileList = service.selectFile(bId);
 //		ArrayList<Reply> replyList = new CommunityService().selectReplyList(bId);
 		String page = null;
 		if(board != null) {

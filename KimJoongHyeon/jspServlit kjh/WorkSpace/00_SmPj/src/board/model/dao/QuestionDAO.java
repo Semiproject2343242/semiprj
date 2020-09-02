@@ -115,8 +115,8 @@ public class QuestionDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
-		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, 'QA', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?)";
+//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME,RECRUIT_STARTDATE,RECRUIT_ENDDATE,ACTIVITY_STARTDATE,ACTIVITY_ENDDATE)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, 'QA', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?, NULL, NULL, NULL, NULL)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);

@@ -22,7 +22,6 @@
         <h2>제목</h2>
         <h2>카테고리</h2>
         <h2>내용</h2>
-        <h2 id="filetext">첨부파일</h2>
       </aside>
       <div id="main_section">
 	      <form action="<%= request.getContextPath() %>/insert.qa" method="post">
@@ -42,7 +41,6 @@
 			  </select>
 			</h2>
 			<h2><textarea id="textarea" name="content" placeholder="내용을 입력해주세요." cols="100" rows="15" style="resize:none;"></textarea></h2>
-			<h2><input type="file" name="file" /></h2>
 			<hr />
 			<h2>
 			  <div align="right">

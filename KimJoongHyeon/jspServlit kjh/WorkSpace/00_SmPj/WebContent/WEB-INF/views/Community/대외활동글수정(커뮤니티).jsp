@@ -1,10 +1,14 @@
-<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="board.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board"); 
-	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
-
+// 	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
+	
+	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	FileVO titleImg = fList.get(0);
+// 	System.out.println(fList.size());
 	String categoryStr = b.getCgName();
 	String[] categoryarr = new String[7];
 	String[] splitCate = categoryStr.split(",");
@@ -513,13 +517,18 @@ section{
     </div>
     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
     <div class="writer_box">
+    <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
         <table class="writer_table">
           <tr>
             <th width="15%">제목</th>
             <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1 value="<%=b.getBoardTitle() %>"></td>
           </tr>
           <tr>
-            <th>메인 이미지 첨부</th>
+            <th>현재 메인 이미지</th>
+            <td colspan="3" name="ea_orgin_title_image" value="<%=titleImg.getOriginName() %>"><%= titleImg.getOriginName() %></td>
+          </tr>
+          <tr>
+            <th>메인 이미지 수정</th>
             <td colspan="3"><input type ="file" multiple="multiple" id="ea_title_image" name = "ea_title_image" class=textline2></td>
           </tr>
           <tr>
@@ -536,14 +545,21 @@ section{
             <th>내용</th>
             <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ><%=b.getBoardContent() %></textarea></td>
           </tr>
-          <tr>
-            <th>내용 이미지 첨부</th>
-            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
-          </tr>
-          <tr>
-            <th>참고자료</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
-          </tr>
+           <%if(fList.size()>1){ %>
+	          	<tr>
+	            <th>현재 참고자료</th>
+	            <td><%= fList.get(1).getOriginName() %></td>
+	            </tr>
+	            <tr>
+	            <th>참고자료 수정</th>
+	            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
+	            </tr>
+            <%}else{ %>
+	            <tr>
+	            <th>참고자료</th>
+	            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "titleImage" class=textline2></td>
+	            </tr>
+            <%} %>
         </table>
     </div>
     <div class = "ea_button">

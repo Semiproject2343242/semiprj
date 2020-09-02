@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 
 public class CommunityDAO {
@@ -184,7 +184,7 @@ public class CommunityDAO {
 	public ArrayList selectFList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<AddFile> list = null;
+		ArrayList<FileVO> list = null;
 		
 		String query= "SELECT * FROM FILES WHERE STATUS ='Y' AND FILE_LEVEL = 0";
 		
@@ -192,9 +192,9 @@ public class CommunityDAO {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
 			
-			list = new ArrayList<AddFile>();
+			list = new ArrayList<FileVO>();
 			while(rset.next()) {
-				list.add(new AddFile(rset.getInt("b_no"),
+				list.add(new FileVO(rset.getInt("b_no"),
 								  rset.getString("change_name")));
 			}
 		} catch (SQLException e) {
@@ -232,14 +232,14 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public int insertAddFile(Connection conn, ArrayList<AddFile> fileList) {
+	public int insertAddFile(Connection conn, ArrayList<FileVO> fileList) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,SEQ_BNO.CURRVAL)";
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
-			AddFile af = fileList.get(i);
+			FileVO af = fileList.get(i);
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1,  af.getOriginName());
 				pstmt.setString(2,  af.getChangeName());
@@ -257,10 +257,10 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public ArrayList<AddFile> selectFile(Connection conn, int bId) {
+	public ArrayList<FileVO> selectFile(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<AddFile> list = null;
+		ArrayList<FileVO> list = null;
 		
 		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
 		
@@ -270,10 +270,10 @@ public class CommunityDAO {
 			
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<AddFile>();
+			list = new ArrayList<FileVO>();
 			
 			while(rset.next()) {
-				AddFile af = new AddFile();
+				FileVO af = new FileVO();
 				af.setFileNo(rset.getInt("file_no"));
 				af.setOriginName(rset.getString("origin_name"));
 				af.setChangeName(rset.getString("change_name"));
@@ -290,5 +290,80 @@ public class CommunityDAO {
 		}
 		
 		return list;
+	}
+
+	public int modifyBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=? WHERE B_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setString(3, b.getLcName());
+			pstmt.setString(4, b.getTcName());
+			pstmt.setString(5, b.getCgName());
+			pstmt.setInt(6, b.getBoardNo());
+			
+			result += pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int modifyFile(Connection conn, ArrayList<FileVO> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE FILES SET ORIGIN_NAME = ?, CHANGE_NAME = ?, UPLOAD_DATE=SYSDATE, FILE_PATH = ? WHERE B_NO = ? AND FILE_LEVEL = ?";
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				FileVO af = fileList.get(i);
+				System.out.println("af"+i+" : " + af);
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1,  af.getOriginName());
+				pstmt.setString(2,  af.getChangeName());
+				pstmt.setString(3,  af.getFilePath());
+				pstmt.setInt(4, af.getBoardNo());
+				pstmt.setInt(5, af.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int AddFile(Connection conn, ArrayList<FileVO> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,?)";
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+			FileVO af = fileList.get(i);
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1,  af.getOriginName());
+				pstmt.setString(2,  af.getChangeName());
+				pstmt.setString(3,  af.getFilePath());
+				pstmt.setInt(4, af.getFileLevel());
+				pstmt.setInt(5, af.getBoardNo());
+				
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

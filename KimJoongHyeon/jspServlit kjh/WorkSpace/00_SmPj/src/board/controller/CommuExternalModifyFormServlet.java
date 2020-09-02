@@ -17,6 +17,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import board.model.service.CommunityService;
+import board.model.vo.FileVO;
 import board.model.vo.Board;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
@@ -47,8 +49,6 @@ public class CommuExternalModifyFormServlet extends HttpServlet {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
 	         String savePath = root + "exteranl_uploadFiles/";
-	         
-	         System.out.println(savePath);
 	         
 	         File f = new File(savePath);
 	         if(!f.exists()) {
@@ -95,18 +95,19 @@ public class CommuExternalModifyFormServlet extends HttpServlet {
 		int viewCount = Integer.parseInt(multiRequest.getParameter("viewCount"));
 		int reCommend = Integer.parseInt(multiRequest.getParameter("reCommend"));
 		String writer = multiRequest.getParameter("writer");
-		
-		
-		System.out.println("category : " +category);
-		System.out.println("acState : " +acState);
-		System.out.println("tcName : " +tcName);
-		System.out.println("lcName : " +lcName);
+		ArrayList<FileVO> fileList = new CommunityService().selectFile(no);
+//		
+//		System.out.println("category : " +category);
+//		System.out.println("acState : " +acState);
+//		System.out.println("tcName : " +tcName);
+//		System.out.println("lcName : " +lcName);
 		
 		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null,tcName, category);
 		String page = null;
-		System.out.println("Board,Board : " +b);
+//		System.out.println("Board,Board : " +b);
 		page ="WEB-INF/views/Community/대외활동글수정(커뮤니티).jsp";
 		request.setAttribute("board", b);
+		request.setAttribute("fileList", fileList);
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 	    }

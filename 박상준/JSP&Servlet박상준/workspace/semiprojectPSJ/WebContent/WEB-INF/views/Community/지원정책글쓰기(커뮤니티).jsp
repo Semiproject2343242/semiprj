@@ -97,10 +97,10 @@
           </h3>
           <h3>
               <div>
-                  <button class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
-                  <button class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
-                  <button class="select_btn" id="ea_age_50">장년<br>(50~64세) </button>
-                  <button class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
+                  <button class="select_btn" id="sp_age_18">청년<br>(18~34세) </button>
+                  <button class="select_btn" id="sp_age_35">중년<br>(35~49세) </button>
+                  <button class="select_btn" id="sp_age_50">장년<br>(50~64세) </button>
+                  <button class="select_btn" id="sp_age_65">어르신<br>(65세 이상) </button>
                       <!-- 나이 카테고리
                       청년  ea_age_18
                       중년  ea_age_35

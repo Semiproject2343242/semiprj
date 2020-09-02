@@ -1,14 +1,14 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="board.model.vo.AddFile"%>
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
- 	Board b = (Board)request.getAttribute("board");
-	ArrayList<AddFile> fList = (ArrayList<AddFile>)request.getAttribute("fileList");
-	AddFile titleImg = fList.get(0);
-	System.out.println("대외커뮤.jsp에서의 board : " + b);
-	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
+	Board b = (Board)request.getAttribute("board");
+	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	FileVO titleImg = fList.get(0);
+// 	System.out.println("대외커뮤.jsp에서의 board : " + b);
+// 	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
 %>
 <!DOCTYPE html>
 <html>
@@ -104,8 +104,8 @@
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
-				<a href="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= titleImg.getChangeName() %>">
-					<img id="titleImg" src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				<a href="<%= request.getContextPath() %>/exteranl_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/exteranl_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
 				</a>
 			</div>
 			<div class="textArea">
@@ -137,13 +137,16 @@
           </tr>
            <tr>
             <th>첨부파일</th>
-				<td>
-            <% for(int i = 1; i< fList.size(); i++){ %>
-					<a href="<%= request.getContextPath()%>/thumbnail_uploadFiles/<%= fList.get(i).getChangeName() %>" download="<%= fList.get(i).getOriginName() %>">
-						<%= fList.get(i).getOriginName() %>&emsp;
-					</a>
-				<% } %>
-				</td>
+			 <td><%if(fList.isEmpty()) { %>
+                    	첨부파일 없음.
+                    <% } else { %>
+                    	<%for(int i=1; i < fList.size(); i++){ %>
+							<a href="<%= request.getContextPath() %>/notice_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
+								[ <%=i%><%=fList.get(i).getOriginName()%> ]
+							</a>
+						<% } %>
+					<% } %>
+			</td>
           </tr>
         </table>
         <table class="detail">
