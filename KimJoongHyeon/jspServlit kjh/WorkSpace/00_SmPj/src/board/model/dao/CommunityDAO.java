@@ -291,4 +291,52 @@ public class CommunityDAO {
 		
 		return list;
 	}
+
+	public int modifyBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=? WHERE B_NO = ?)";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setString(3, b.getLcName());
+			pstmt.setString(4, b.getTcName());
+			pstmt.setString(5, b.getCgName());
+			pstmt.setInt(6, b.getBoardNo());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int modifyAddFile(Connection conn, ArrayList<AddFile> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE FILES SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=? WHERE B_NO = ?)";
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+			AddFile af = fileList.get(i);
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1,  af.getOriginName());
+				pstmt.setString(2,  af.getChangeName());
+				pstmt.setString(3,  af.getFilePath());
+				pstmt.setInt(4, af.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

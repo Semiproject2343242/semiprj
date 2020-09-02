@@ -139,7 +139,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	            }
 	            fileList.add(af);
 	         }
-	         int result = new CommunityService().insertAddFile(b, fileList);
+	         int result = new CommunityService().modifyBoard(b, fileList);
 	         
 	         if(result>0) {
 	            response.sendRedirect("eaMain.cm");
