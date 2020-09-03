@@ -53,7 +53,7 @@ public class MyPageExternalServlet extends HttpServlet {
     		request.getRequestDispatcher(page).forward(request, response);
     	}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
-			request.setAttribute("msg", "게시판조회에 실패했습니다.");
+			request.setAttribute("msg", "회원조회에 실패했습니다.");
 		}		
     	
 	}

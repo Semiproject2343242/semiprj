@@ -1,5 +1,10 @@
+<%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+ 	Board b = (Board)request.getAttribute("board");
+	System.out.println("자유게시판.jsp에서의 board : " + b);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,75 +15,84 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항내용확인.css">
 
     <style>
+    section{
+  	width: 60%;
+  	}
+   	#filetext{
+	margin-top : 220px;
+  	}
     </style>
 </head>
 <body>
     <%@ include file="../Common/header.jsp" %>
+    <section>
+      <aside>
+        <h2><%= b.getBoardNo() %></h2>
+        <hr />
+        <h2>제목</h2>
+        <h2>카테고리</h2>
+        <h2 id="content">내용</h2>
+        <h2 id="filetext">첨부파일</h2>
+      </aside>
         <div id="main_section">
-            <div id="contents">
-                <h2 id="h21">NO.01</h1>
-                <h2 id="h22">자유게시판</h2>
-                <hr>
-                <h1 style="text-align: center">게시글 제목</h1>
-                <br>
-                <text id="text1"> 백성강 <br>2020.08.07 14:47 조회수 1 댓글 2</text>
-                <br>
-                <div id="buttons">
-                    <button class="button1"> &lt; 이전글</button>
-                    <button class="button1">다음글 &gt;</button>
-                    <button class="button1"><a href="<%= request.getContextPath() %>/fMain.cm">목록</a></button><br>
-                </div>
-                <br clear="all"> 
-                <br>   
-                <hr>
-                <div id="div1">
-                    <br>
-                    <text id="text2"> 내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.
-                        내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.
-                    </text>
-                    <br>
-                    <h2>참고자료 (1) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
-                    <input type="file" id="ea_write_file"><br><br>
-
-                    <!-- 댓글 --> 
-
-                    <div> <h2>댓글</h2> </div>
-                    <hr><br>
-
-                    <div id="comment">
-                        <img src="example/1.PNG" id="img1">
-                        <text id="text3"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                            댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
-                        </text>
-                        <text id="text4">
-                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
-                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                            <br>2020.08.07 14:47 
-                        </text>
-                    </div>
-        
-                    <div id="comment">
-                        <img src="example/1.PNG" id="img1">
-                        <text id="text3"> 백성강 
-                            <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                                댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                            </p>
-                        </text>
-                        <text id="text4">
-                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
-                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                            <br>2020.08.07 14:47 
-                        </text>
-                    </div>
-                    <br clear="all"><br>    
-                    <div>
-                        <textarea id="textarea" placeholder="댓글을 입력하세요."></textarea><br>
-                        <button id=button4>등록</button>
-                    </div>
-                </div>
-            </div>
+            <form action="modifyForm.qa" id="detailForm" name="detailForm">
+	        <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
+	        <input type="hidden" size="50" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
+	        <h2 align="center">자유 게시판</h2>
+	        <hr />
+	        <h2>
+		        <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
+		        <%= b.getBoardTitle() %>
+	        </h2>
+	        <h2>
+	        	<table>
+	        		<tr>
+	        			<td style="width: 60%">
+		        			<input type="hidden" name=category value="자유" />
+				        	자유
+	        			</td>
+	        			
+	        			<td>
+				        	등록 날짜
+	        			</td>
+	        			<td>
+				        	<%= b.getBoardModifyDate() %>
+							<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
+	        			</td>
+	        		</tr>
+	        	</table>
+	        </h2>
+	        <h2>
+		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>
+	        </h2>
+	        <h2>
+	        	<input type="file" id="file" disabled>
+	        </h2>
+	        <hr />
+	        <div align="right">
+				<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
+					<input type="submit" id="updateBtn" value="수정">
+					<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+				<% } %>
+				<input type="button" onclick="location.href='<%= request.getContextPath() %>/fmain.cm'" id="menuBtn" value="메뉴로">
+				<script>
+				function deleteBoard(){
+					var num = <%= b.getBoardNo() %>;
+					var result = window.confirm(num+'삭제?');
+					var wno = <%= b.getBoardWriterNo()%>;
+					console.log(wno);
+				    if(result){
+				    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+				    }
+				    else{
+				        alert('취소하셨습니다.');
+				    }
+				}
+		</script>
+			</div>
+		</form>
         </div>
-        <br clear="all"><br>
+       </section>
         <%@ include file="../Common/footer.jsp" %>
 </body>
 </html>

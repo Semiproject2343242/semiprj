@@ -87,7 +87,7 @@ section{
       <div class="select_box">
           <h3>
               <select class="categoty_select" name="ea_category">
-                  <option value="0" selected disabled hidden >선택해주세요.</option>
+                  <option value="선택" selected disabled hidden >선택</option>
                   <option value="공모전">공모전</option>
                   <option value="채용박람회/취업박람회">채용박람회/취업박람회</option>
                   <option value="경진대회">경진대회</option>
@@ -382,7 +382,7 @@ section{
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="ea_title_image" name = "ea_title_image" class=textline2></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="ea_title_image" name = "ea_title_image" class=textline2 required></td>
           </tr>
           <tr>
             <th>모집 일정</th>
@@ -399,18 +399,8 @@ section{
             <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ></textarea></td>
           </tr>
           <tr>
-            <th>내용 이미지 첨부</th>
-            <td colspan="3"><input type ="file"  multiple="multiple" id="ea_main_image" name = "ea_main_image" class=textline2></td>
-          </tr>
-          <tr>
             <th>참고자료</th>
             <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
-          </tr>
-          <tr> 
-            <th>연락처</th>
-            <td><input type ="tel" name = "ea_manager_phone" id="ea_manager_phone" placeholder="연락처" class=textline3 value=<%= loginUser.getMemberPhone()%> readonly></td>
-            <th>이메일</th>
-            <td><input type ="email" name = "ea_manager_email" id="ea_manager_email" placeholder="이메일" class=textline3  value=<%= loginUser.getMemberEmail()%> readonly></td>
           </tr>
         </table>
     </div>

@@ -20,6 +20,10 @@
   	#filetext{
   		margin-top : 220px;
   	}
+  	.sub1{
+  		width: 50%;
+		float:left;
+  	}
   </style>
   <body>
     <%@ include file="../Common/header.jsp" %>
@@ -30,50 +34,33 @@
         <h2>제목</h2>
         <h2>카테고리</h2>
         <h2 id="content">내용</h2>
-        <h2 id="filetext">첨부파일</h2>
       </aside>
-      
       <div id="main_section">
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
 	        <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
 	        <input type="hidden" size="50" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
 	        <h2 align="center">묻고 답하기</h2>
 	        <hr />
-	        <h2>
-		        <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
-		        <%= b.getBoardTitle() %>
-	        </h2>
-	        <h2>
-	        	<table>
-	        		<tr>
-	        			<td style="width: 60%">
-		        			<input type="hidden" name=category value="<%= b.getCgName() %>" />
-				        	<%= b.getCgName() %>
-	        			</td>
-	        			
-	        			<td>
-				        	등록 날짜
-	        			</td>
-	        			<td>
-				        	<%= b.getBoardModifyDate() %>
-							<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
-	        			</td>
-	        		</tr>
-	        	</table>
+       			<input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
+				<input type="hidden" name="writer" value="<%= b.getBoardWriter()%>">
+       			<input type="hidden" name=category value="<%= b.getCgName() %>" />
+
+       			<h2><div class="sub1"><%= b.getBoardTitle() %></div class="sub2"> <div>작성자 : <%= b.getBoardWriter()%></div></h2>
+
+	        	<h2><div class="sub1"><%= b.getCgName() %></div><div class="sub2">등록 날짜 : <%= b.getBoardModifyDate() %></div><h2>
+      			
+				<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
 	        </h2>
 	        <h2>
 		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>
 	        </h2>
-	        <h2>
-	        	<input type="file" id="file" disabled>
-	        </h2>
 	        <hr />
 	        <div align="right">
 				<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
-					<input type="submit" id="updateBtn" value="수정">
-					<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+					<input type="submit" class="btn" id="updateBtn" value="수정">
+					<input type="button" class="btn" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 				<% } %>
-				<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
+				<input type="button" class="btn" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
 				<script>
 				function deleteBoard(){
 					var num = <%= b.getBoardNo() %>;
@@ -87,10 +74,9 @@
 				        alert('취소하셨습니다.');
 				    }
 				}
-				</script>
-			
+		</script>
 			</div>
-		<form action="noticeUpdateForm.no" id="detailForm" name="detailForm">
+		</form>
       </div>
     </section>
     <%@ include file="../Common/footer.jsp" %>
