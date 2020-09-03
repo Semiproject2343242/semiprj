@@ -63,7 +63,7 @@ public class CommunityService {
 		return result;
 	}
 
-	public ArrayList selectTList(int i, PageInfo pi) {
+	public ArrayList selectExList(int i, PageInfo pi) {
 		Connection conn = getConnection();
 		
 		ArrayList list = null;
@@ -164,5 +164,22 @@ public class CommunityService {
 		close(conn);
 		
 		return result;
+	}
+
+	public ArrayList selectSpList(int i, PageInfo pi) {
+	Connection conn = getConnection();
+		
+		ArrayList list = null;
+		
+		CommunityDAO dao = new CommunityDAO();	
+		if(i == 1) {
+			list = dao.selectBListS(conn,pi);
+		} else {
+			list = dao.selectFList(conn);
+		}
+		
+		close(conn);
+		
+		return list;
 	}
 }

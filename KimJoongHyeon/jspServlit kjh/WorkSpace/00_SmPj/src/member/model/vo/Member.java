@@ -83,6 +83,19 @@ public class Member {
 		this.memberBoard = memberBoard;
 	}
 
+	public Member(String memberId, String memberPw, String memberName, String memberNickName, String memberGender,
+			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress) {
+		super();
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.memberName = memberName;
+		this.memberNickName = memberNickName;
+		this.memberGender = memberGender;
+		this.memberBirthDay = memberBirthDay;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+	}
 
 	public int getMemberNo() {
 		return memberNo;
