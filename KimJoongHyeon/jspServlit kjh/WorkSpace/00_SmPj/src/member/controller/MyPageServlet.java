@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -38,7 +39,8 @@ public class MyPageServlet extends HttpServlet {
 		ArrayList<Board> commuFreeList = memberService.selectMyRecentCommuFreeList(loginMemberNo);
 		ArrayList<Board> qaList = memberService.selectMyRecentQAList(loginMemberNo);
 		
-		System.out.println(member);
+		FileVO profile = memberService.selectProfile(loginMemberNo);
+		
     	String page = null;
     	if(member != null) {
     		page = "WEB-INF/views/Member/마이_페이지(메인).jsp";
@@ -47,12 +49,12 @@ public class MyPageServlet extends HttpServlet {
     		request.setAttribute("externalList", externalList);
     		request.setAttribute("commuFreeList", commuFreeList);
     		request.setAttribute("qaList", qaList);
+    		request.setAttribute("profile", profile);
     		request.getRequestDispatcher(page).forward(request, response);
     	}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
-		}		
-		
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

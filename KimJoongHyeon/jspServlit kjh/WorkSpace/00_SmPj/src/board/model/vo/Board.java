@@ -138,7 +138,7 @@ public class Board {
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, 
-			String tcName, String cgName) {
+			String tcName, String cgName ,Date reStratDate, Date reEndDate,Date	acStartDate,Date acEndDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -155,6 +155,10 @@ public class Board {
 		this.enrollState = enrollState;
 		this.tcName = tcName;
 		this.cgName = cgName;
+		this.reStratDate = reStratDate; 
+		this.reEndDate = reEndDate;  	
+		this.acStartDate = acStartDate; 
+		this.acEndDate = acEndDate;  	
 	}
 	
 	

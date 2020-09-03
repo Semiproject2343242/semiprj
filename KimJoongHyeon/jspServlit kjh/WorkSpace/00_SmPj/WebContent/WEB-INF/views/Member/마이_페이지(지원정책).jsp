@@ -92,7 +92,7 @@
 	            		<tbody>
 							<% if(list.isEmpty()){ %>
 							<tr>
-								<td colspan="6">글이 존재 하지 않습니다.</td>
+								<td colspan="7">글이 존재 하지 않습니다.</td>
 							</tr>
 						<% } else { %>
 						<%		for (Board b : list) { %>
