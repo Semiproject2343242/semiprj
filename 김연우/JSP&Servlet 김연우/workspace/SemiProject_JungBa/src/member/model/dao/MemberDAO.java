@@ -308,7 +308,11 @@ public class MemberDAO {
 									 rset.getString("LC_NAME"),
 									 rset.getString("ENROLL_STATE"),
 									 rset.getString("TC_NAME"),
-									 rset.getString("CG_NAME"));
+									 rset.getString("CG_NAME"),
+									 rset.getDate("RECRUIT_STARTDATE"),
+									 rset.getDate("RECRUIT_ENDDATE"),
+									 rset.getDate("ACTIVITY_STARTDATE"),
+									 rset.getDate("ACTIVITY_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -347,7 +351,11 @@ public class MemberDAO {
 									 rset.getString("LC_NAME"),
 									 rset.getString("ENROLL_STATE"),
 									 rset.getString("TC_NAME"),
-									 rset.getString("CG_NAME"));
+									 rset.getString("CG_NAME"),
+									 rset.getDate("RECRUIT_STARTDATE"),
+									 rset.getDate("RECRUIT_ENDDATE"),
+									 rset.getDate("ACTIVITY_STARTDATE"),
+									 rset.getDate("ACTIVITY_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {

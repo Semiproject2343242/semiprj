@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>회원가입</title>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
+        <script  src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
     </head>
     <style>
@@ -561,6 +561,20 @@
                               <tr>
                                  <td><label class="must">*</label> 이름</td>
                                  <td class="middletable"><input type="text" name="userName" required></td>
+                              </tr>
+                                  <tr>
+                                 <td><label class="must">*</label>닉네임</td>
+                                 <td class="middletable"><input type="text" name="nickName" required></td>
+                              </tr>
+                              <tr>
+                               <td><label class="must">*</label>성별</td>
+                              <td> <input type="radio" name="gender" value="남자" >남자
+                                  <input type="radio"  name="gender" value="여자" >여자</td>	
+                              </tr>
+                             
+                                  <tr>
+                                 <td><label class="must">*</label>생년월일</td>
+                                 <td class="middletable"><input type="date" name="userBirthday" required></td>
                               </tr>
                               
                               <tr>

@@ -2,16 +2,14 @@ package board.model.service;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.sun.xml.internal.ws.api.message.Attachment;
-
 import board.model.dao.BoardDAO;
-import board.model.dao.QuestionDAO;
-import board.model.vo.Board;
-import board.model.vo.FileVO;
+import board.model.vo.Reply;
 
 public class BoardService {
 
@@ -19,6 +17,37 @@ public class BoardService {
 		Connection conn = getConnection();
 			
 		int result = new BoardDAO().getListCount(conn,boardName);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	public ArrayList<Reply> selectReplyList(int bId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Reply> list = new BoardDAO().selectReplyList(conn, bId);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public int insertReply(Reply r) {
+		
+		Connection conn = getConnection();
+		
+		BoardDAO dao = new BoardDAO();
+		
+		int result = dao.insertReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		

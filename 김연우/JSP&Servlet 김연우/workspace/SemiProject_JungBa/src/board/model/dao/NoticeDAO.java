@@ -238,7 +238,7 @@ public class NoticeDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT, SEQ_BNO.CURRVAL)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT, SEQ_BNO.CURRVAL, NULL)";
 		
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
@@ -296,5 +296,80 @@ public class NoticeDAO {
 		}
 		return list;
 	}
+	
+	
+	///////////////////////////// 수정 사항  /////////////////////////////////
+	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' AND FILE_LEVEL=0 ORDER BY FILE_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				FileVO f = new FileVO();
+				f.setFileNo(rset.getInt("file_no"));
+				f.setOriginName(rset.getString("origin_name"));
+				f.setChangeName(rset.getString("change_name"));
+				f.setFilePath(rset.getString("file_path"));
+				f.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(f);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(Connection conn, int bId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' AND FILE_LEVEL=1 ORDER BY FILE_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				FileVO f = new FileVO();
+				f.setFileNo(rset.getInt("file_no"));
+				f.setOriginName(rset.getString("origin_name"));
+				f.setChangeName(rset.getString("change_name"));
+				f.setFilePath(rset.getString("file_path"));
+				f.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(f);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	///////////////////////////// 수정 사항  /////////////////////////////////
 	
 }

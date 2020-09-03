@@ -8,13 +8,10 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.sun.xml.internal.ws.api.message.Attachment;
-
-import board.model.dao.BoardDAO;
 import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
-import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
+import board.model.vo.Reply;
 
 public class QuestionService {
 	public ArrayList<Board> selectList(PageInfo pi){
@@ -66,7 +63,7 @@ public class QuestionService {
 	}
 
 	public int modifyBoard(Board b) {
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		int result = new QuestionDAO().modifyBoard(conn, b);
 		if(result > 0) {
@@ -75,7 +72,6 @@ Connection conn = getConnection();
 			rollback(conn);
 		}
 		close(conn);
-		
 		return result;
 	}
 
@@ -92,67 +88,12 @@ Connection conn = getConnection();
 		close(conn);
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	// FILE 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	public ArrayList selectFList() {
+
+	public ArrayList<Reply> selectReplyList(int bId) {
 		Connection conn = getConnection();
-		
-		ArrayList list = null;
-		
-		QuestionDAO dao = new QuestionDAO();
-		
-		list = dao.selectFList(conn);
-		
+		ArrayList<Reply> list = new QuestionDAO().selectReplyList(conn, bId);
 		close(conn);
 		return list;
-	}
-	
-	public int insertThumbnail(Board b, ArrayList<FileVO> fileList) {
-		Connection conn = getConnection();
-		
-		QuestionDAO dao = new QuestionDAO();
-		
-		int result1 = dao.insertNotice(conn, b);
-		int result2 = dao.insertFile(conn, fileList);
-		
-		if(result1 > 0 && result2 > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result1;
 	}
 
-	public ArrayList<FileVO> selectThumbnail(int bId) {
-		Connection conn = getConnection();
-		
-		int result = new QuestionDAO().updateCount(conn, bId);
-		
-		ArrayList<FileVO> list = null;
-		if(result > 0) {
-			list = new QuestionDAO().selectThumbnail(conn, bId);
-		
-			if(list != null) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return list;
-	}
-	
 }

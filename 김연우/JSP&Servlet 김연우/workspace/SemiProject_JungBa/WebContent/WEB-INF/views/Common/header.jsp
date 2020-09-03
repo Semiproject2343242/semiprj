@@ -18,8 +18,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: 250px;
-  /* background-color: #2979ff; */
+  height: 300px;
 }
 a {
   text-decoration: none;
@@ -27,9 +26,8 @@ a {
 }
 .header_top {
   width: 100%;
-  height: 30px;
+  height: 50px;
   background-color: rgb(15, 76, 130);
-  /* background-color: #c48b9f; */
 }
 .top {
   display: flex;
@@ -52,15 +50,40 @@ a {
   font-size: 60px;
 }
 .navbar {
-  padding-top: 50px;
   display: flex;
   width: 80%;
   margin: 0px auto;
+  margin-top: 20px;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #f8bbd0; */
 }
 
+.navbar_dropdown:hover .navbar_dropdown-content {
+	background-color: white;
+	display: block;
+}
+.navbar_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  max-width: 100px;
+  box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.2);
+  text-align: center;
+  font-size: 12px;
+}
+.navbar_dropdown-content a {
+  color: black;
+  padding: 5px 6px;
+  text-decoration: none;
+  display: inline-table;
+  
+}
+.navbar_dropdown-content a:hover{
+	 background-color: #f5f5f5;
+  	font-weight: bold;
+  	border-radius: 4px;
+}
 .navbar_menu {
   display: flex;
   list-style: none;
@@ -80,13 +103,9 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-  header {
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 250px;
-    /* background-color: #2979ff; */
-  }
+header {
+  height: auto;
+}
   .navbar {
     flex-direction: column;
     align-items: center;
@@ -130,21 +149,32 @@ a {
          <% if(loginUser == null) { %>
             <li><a href="<%=request.getContextPath()%>/insertForm.me" class="top_btn"><b>회원가입</b></a></li>
             <li><a href="<%=request.getContextPath()%>/loginPage.me" class="top_btn"><b>로그인</b></a></li>
-         </div>
          <% } else { %>
          	<li><label><%= loginUser.getMemberName() %>님의 방문을 환영합니다.</label></li>
-         	<li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
+         	<% if(loginUser.getMemberName().equals("관리자")) { %>
+         		<li><a href="<%=request.getContextPath()%>/adminPage.ad" class="top_btn"><b>관리자 페이지</b></a></li>
+         	<% } else { %>
+         		<li><a href="<%=request.getContextPath()%>/myPage.me" class="top_btn"><b>마이페이지</b></a></li>
+        	 <% } %>
          	<li><a href="<%=request.getContextPath()%>/logout.me" class="top_btn"><b>로그아웃</b></a></li>
          <% } %>
+         </div>
       </div>
-      <nav class="navbar">
+     <nav class="navbar">
          <div class="navbar_title">
             <a href="<%= request.getContextPath() %>"><span class="lagefont">정</span>부지원금<span class="lagefont">바</span>로 지금</a>
          </div>
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
             <li><a href="<%= request.getContextPath() %>/main.sp">지원정책</a></li>
-            <li><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</a></li>
+             <li class="navbar_dropdown">
+               <a href="<%= request.getContextPath() %>/fMain.cm" class="navbar_dropbtn">커뮤니티</a>
+             <div class='navbar_dropdown-content'>
+                 <a href="<%= request.getContextPath() %>/fMain.cm">자유게시판</a><br>
+                 <a href="<%= request.getContextPath() %>/spMain.cm">지원정책</a><br>
+                 <a href="<%= request.getContextPath() %>/eaMain.cm">대외활동</a>
+             </div>
+           </li>
             <li><a href="<%= request.getContextPath() %>/main.ea">대외활동</a></li>
             <li><a href="<%= request.getContextPath() %>/main.fa">묻고 답하기</a></li>
          </div>
