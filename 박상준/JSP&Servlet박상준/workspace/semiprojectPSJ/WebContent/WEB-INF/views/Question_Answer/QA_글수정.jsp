@@ -1,4 +1,3 @@
-<%@page import="oracle.net.aso.b"%>
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -43,7 +42,6 @@
         <h2>제목</h2>
         <h2>카테고리</h2>
         <h2>내용</h2>
-        <h2 id="filetext">첨부파일</h2>
       </aside>
       <div id="main_section">
 	      <form action="<%= request.getContextPath() %>/modify.qa" method="post">
@@ -64,12 +62,11 @@
 			  </select>
 			</h2>
 			<h2><textarea id="textarea" name="content" cols="100" rows="15" style="resize:none;"><%= b.getBoardContent() %></textarea></h2>
-			<h2><input type="file" name="file" /></h2>
 			<hr />
 			<h2>
 			  <div align="right">
-               <input type="submit" id="insertNoBtn" value="등록">
-               <input type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="취소">
+               <input type="submit" class="btn" id="insertNoBtn" value="등록">
+               <input type="button" class="btn" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="취소">
             </div>
 			</h2>
 	       </form>

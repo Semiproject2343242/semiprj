@@ -33,20 +33,21 @@ public class CommuFreeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	 request.getRequestDispatcher("WEB-INF/views/Community/대외활동글쓰기(커뮤니티).jsp").forward(request, response);
-	}	 
-	/*
-	 * int bId = Integer.parseInt(request.getParameter("bId")); Board board = new
-	 * CommunityService().selectBoard(bId);
-	 * 
-	 * String page = null; if(board != null) { page =
-	 * "WEB-INF/views/Community/자유게시판내용확인(커뮤니티).jsp"; request.setAttribute("board",
-	 * board); } else { page = "WEB-INF/views/Common/errorPage.jsp";
-	 * request.setAttribute("msg", "게시판 상세조회에 실패하였습니다."); }
-	 * 
-	 * request.getRequestDispatcher(page).forward(request, response); }
-	 */
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		Board board = new CommunityService().selectBoard(bId,"자유");
+		
+		String page = null;
+		if(board != null) {
+			page = "WEB-INF/views/Community/자유게시판내용확인(커뮤니티).jsp";
+			request.setAttribute("board", board);
+		} else {
+			page = "WEB-INF/views/Common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 상세조회에 실패하였습니다.");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

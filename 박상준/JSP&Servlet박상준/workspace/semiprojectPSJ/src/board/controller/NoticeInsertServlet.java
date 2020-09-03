@@ -1,6 +1,9 @@
 package board.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,54 +12,104 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+
 import board.model.service.NoticeService;
 import board.model.service.QuestionService;
 import board.model.vo.Board;
+import board.model.vo.FileVO;
+import common.MyFileRenamePolicy;
 import member.model.vo.Member;
 
-/**
- * Servlet implementation class NoticeInsertServlet
- */
+
 @WebServlet("/insert.no")
 public class NoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public NoticeInsertServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String title = request.getParameter("title"); //HTTP ¿äÃ»ÀÇ ÆÄ¶ó¹ÌÅÍ °ªÀ» ¾ò±â À§ÇØ »ç¿ëÇÏ´Â °ÍÀÌ request.getParameter() ¸Ş½îµåÀÔ´Ï´Ù.
-		String content = request.getParameter("content");
-		int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-		String category = request.getParameter("category");
+		if(ServletFileUpload.isMultipartContent(request)) {
+			int maxSize = 1024 * 1024 * 10; // 10MByteë¡œ ì „ì†¡íŒŒì¼ ìš©ëŸ‰ì„ ì œí•œ
+			String root = request.getSession().getServletContext().getRealPath("/"); // ì›¹ ì„œë²„ ì»¨í…Œì´ë„ˆ ê²½ë¡œ ì¶”ì¶œ
+			String savePath = root + "notice_uploadFiles/";
+			
+			File f = new File(savePath);
+			if(!f.exists()) {
+				f.mkdirs();
+			}
+		 	
+			MultipartRequest multiRequest 
+				= new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-		Board b = new Board(title, content, userId, category);
-		int result = new NoticeService().insertBoard(b);
+			
+			ArrayList<String> saveFiles = new ArrayList<String>();		// ë°”ë€ íŒŒì¼ì˜ ì´ë¦„ ì €ì¥
+			ArrayList<String> originFiles = new ArrayList<String>();	// ì›ë³¸ íŒŒì¼ì˜ ì´ë¦„ ì €ì¥
+			
+			Enumeration<String> files = multiRequest.getFileNames(); // í¼ì—ì„œ ì „ì†¡ëœ íŒŒì¼ ë¦¬ìŠ¤íŠ¸ë“¤ì˜ name ë°˜í™˜
+			while(files.hasMoreElements()) {
+				String name = files.nextElement();
+				System.out.println("files.nextElement : "+name);
+				System.out.println("multiRequest,getFilesystemName(name) : "+multiRequest.getFilesystemName(name));
+				// multiRequest.getFilesystemName() : MyRenameFilePolicyì˜ renameë©”ì†Œë“œì—ì„œ ì‘ì„±í•œëŒ€ë¡œ renameëœ íŒŒì¼ ëª…
+				if(multiRequest.getFilesystemName(name) != null) {
+					saveFiles.add(multiRequest.getFilesystemName(name));
+					originFiles.add(multiRequest.getOriginalFileName(name)); // getOriginalFileName() : ì‹¤ì œ ì‚¬ìš©ìê°€ ì—…ë¡œë“œ í• ë•Œì˜ íŒŒì¼ëª…
+				}
+			}
 		
-		if(result > 0) {
-			response.sendRedirect("main.no"); //JSP ÆäÀÌÁö¿¡¼­ Æ¯Á¤ÇÑ ÀÛ¾÷À» ¼öÇàÇÑ ÈÄ ÁöÁ¤ÇÑ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ°í ½ÍÀº °æ¿ì°¡ ÀÖÀ» °ÍÀÌ´Ù
-		} else {
-			request.setAttribute("msg", "°øÁö»çÇ× µî·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù."); //setAttribute(), getAttribute()¿¡¼­ ¼Ó¼º °ªÀ¸·Î »ç¿ëÇÏ´Â Å¸ÀÔÀº ObjectÀÔ´Ï´Ù. msge¿¡´Â ¼Ó¼º ÀÌ¸§À», °øÁö»çÇ× µå·Ï¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù ¿¡´Â ¼Ó¼º°ªÀ» ³Ö½À´Ï´Ù.
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
-			view.forward(request, response);
+			String title = multiRequest.getParameter("title"); //HTTP ìš”ì²­ì˜ íŒŒë¼ë¯¸í„° ê°’ì„ ì–»ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ request.getParameter() ë©”ì˜ë“œì…ë‹ˆë‹¤.
+			String content = multiRequest.getParameter("content");
+			int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+			String category = multiRequest.getParameter("category");
+			
+			System.out.println("title ê°’ : "+title);
+			System.out.println("content ê°’ : "+content);
+			System.out.println("userId ê°’ : "+userId);
+			System.out.println("category ê°’ : "+category);
+			
+			Board b = new Board(title, content, userId, category);
+			
+			ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+			for(int i = originFiles.size() - 1; i >= 0; i--) {
+				FileVO file = new FileVO();
+				file.setFilePath(savePath);
+				file.setOriginName(originFiles.get(i));
+				file.setChangeName(saveFiles.get(i));
+				
+				if(i == originFiles.size() - 1) {
+					file.setFileLevel(0);
+				}else {
+					file.setFileLevel(1);
+				}
+				
+				fileList.add(file);
+			}
+				
+			int result = new NoticeService().insertBoardAndFiles(b, fileList);
+			
+			if(result > 0) {
+				response.sendRedirect("main.no");
+			} else {
+				for(int i = 0; i<saveFiles.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+					failedFile.delete();
+				}
+				
+				request.setAttribute("msg", "ê³µì§€ì‚¬í•­ ë“±ë¡ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
+				view.forward(request, response);
+			}
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

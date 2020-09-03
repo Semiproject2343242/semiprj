@@ -1,11 +1,11 @@
-<%@page import="board.model.vo.AddFile"%>
-<%@page import="board.model.vo.Board"%>
+<%@page import="board.model.vo.FileVO"%>
+<%@page import="board.model.vo.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Board> bList = (ArrayList<Board>) request.getAttribute("bList");
-	ArrayList<AddFile> fList = (ArrayList<AddFile>) request.getAttribute("fList");
+	ArrayList<FileVO> fList = (ArrayList<FileVO>) request.getAttribute("fList");
 %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,50 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
-    
+    <style>
+.thumbnailArea {
+	width: 80%;
+	height: auto;
+	margin: 0px auto;
+	padding: 0px;
+}
+
+.thumb-list {
+	width: 80%;
+	margin: 20px;
+	display: flex;
+	line-height:15px; 
+	border-bottom: 1px solid silver;
+	border-radius: 7px;
+	align-items: center;
+}
+
+.thumb-list:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+#insertBtn {
+	float: right;
+	height: 100%;
+}
+.imageArea{
+	height: 100%;
+	margin: auto 0px;
+	align-items: "center";
+}
+.textArea_title{
+	width: 100%;
+}
+.textArea{
+	text-align: left;
+	margin-left : 30px;
+	width: 50%
+}
+.textArea1{
+	float: right;
+}
+</style>
 </style>
 <body>
    <%@ include file="../Common/header.jsp" %>
@@ -43,7 +86,7 @@
 			</h2>
 			<ul class="thumbnailArea">
 				<%if (bList.isEmpty()) {%>
-				등록된 사진이 없습니다.
+				등록된 게시글이 없습니다.
 				<%} else {%>
 				<%for (int i = 0; i < bList.size(); i++) {%>
 				<%Board b = bList.get(i);%>
@@ -51,7 +94,7 @@
 					<div class="imageArea">
 						<input type="hidden" value="<%=b.getBoardNo()%>">
 						<%for (int j = 0; j < fList.size(); j++) {%>
-						<%AddFile f = fList.get(j);%>
+						<%FileVO f = fList.get(j);%>
 						<%if (b.getBoardNo() == f.getBoardNo()) {%>
 						<img
 							src="<%=request.getContextPath()%>/thumbnail_uploadFiles/<%=f.getChangeName()%>"

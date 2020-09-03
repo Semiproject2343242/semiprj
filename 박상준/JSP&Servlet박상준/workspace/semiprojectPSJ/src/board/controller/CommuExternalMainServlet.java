@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.CommunityService;
 import board.model.vo.Board;
-import board.model.vo.AddFile;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 
 /**
@@ -44,9 +44,9 @@ public class CommuExternalMainServlet extends HttpServlet {
 		//페이징
 			
 	      //게시판 리스트 가져오기
-	      ArrayList<Board> bList = service.selectTList(1,pi); // 게시판 리스트 가져오기
-	      ArrayList<AddFile> fList = service.selectTList(2,pi); //파일 리스트 가져오기
-	      System.out.println(fList);
+	      ArrayList<Board> bList = service.selectExList(1,pi); // 게시판 리스트 가져오기
+	      ArrayList<FileVO> fList = service.selectExList(2,pi); //파일 리스트 가져오기
+	      System.out.println("fList : " +fList);
 	      String page = null;
 	      if(bList != null && fList != null) {
 	         request.setAttribute("bList", bList);

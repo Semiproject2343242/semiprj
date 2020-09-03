@@ -55,6 +55,7 @@ public class MyPageCommuFreeServlet extends HttpServlet {
     	}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
+			request.getRequestDispatcher(page).forward(request, response);
 		}	
     	
 	}
