@@ -1,27 +1,25 @@
 package board.model.service;
 
-import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import board.model.dao.BoardDAO;
+import board.model.dao.FreeDAO;
 import board.model.dao.NoticeDAO;
-import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
-import board.model.vo.Reply;
 
-public class QuestionService {
-	
+public class FreeService {
+
 	public int getListCount() {
 	Connection conn = getConnection();
 		
-		int result = new QuestionDAO().getListCount(conn);
+		int result = new FreeDAO().getListCount(conn);
 		
 		close(conn);
 		
@@ -29,20 +27,21 @@ public class QuestionService {
 	}
 	
 	
-	public ArrayList<Board> selectList(PageInfo pi){
+	public ArrayList<Board> selectList(PageInfo pi){ 
+
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new QuestionDAO().selectList(conn,pi);
+		ArrayList<Board> list = new FreeDAO().selectList(conn,pi);
 		
 		close(conn);
 		
 		return list;
 	}
 	
-	public int insertBoard(Board b) {
+	public int insertFree(Board b) {
 		Connection conn = getConnection();
 		
-		int result = new QuestionDAO().insertQA(conn, b);
+		int result = new FreeDAO().insertFree(conn, b);
 		
 		if(result > 0) {
 			commit(conn);
@@ -55,10 +54,11 @@ public class QuestionService {
 		return result;
 	}
 
+	
 	public Board selectBoard(int bId) {
 		Connection conn = getConnection();
 		
-		QuestionDAO dao = new QuestionDAO();
+		FreeDAO dao = new FreeDAO();
 		
 		int result = dao.updateCount(conn, bId);
 		Board board = null;
@@ -76,12 +76,12 @@ public class QuestionService {
 		
 		return board;
 	}
-	
+
 
 	public int deleteBoard(Board board) {
 		Connection conn = getConnection();
-		QuestionDAO qDAO = new QuestionDAO();
-		int result = qDAO.boardDelete(conn, board);
+		NoticeDAO nDAO = new NoticeDAO();
+		int result = nDAO.boardDelete(conn, board);
 		
 		if(result>0) {
 			commit(conn);
@@ -91,21 +91,22 @@ public class QuestionService {
 		close(conn);
 		return result;
 	}
-	
+
 
 	public int modifyBoard(Board b) {
 		Connection conn = getConnection();
 		
-		int result = new QuestionDAO().modifyBoard(conn, b);
+		int result = new NoticeDAO().modifyBoard(conn, b);
 		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
+		
 		return result;
 	}
-
+	
 	
 	public ArrayList<FileVO> selectFList() {
 		
@@ -113,7 +114,7 @@ public class QuestionService {
 		
 		ArrayList<FileVO> list = null;
 		
-		QuestionDAO dao = new QuestionDAO();
+		FreeDAO dao = new FreeDAO();
 		
 		list = dao.selectFList(conn);
 		
@@ -127,9 +128,9 @@ public class QuestionService {
 		
 		Connection conn = getConnection();
 		
-		QuestionDAO dao = new QuestionDAO();
+		FreeDAO dao = new FreeDAO();
 		
-		int result1 = dao.insertQA(conn, b);
+		int result1 = dao.insertFree(conn, b);
 		int result2 = dao.insertFile(conn, fileList);
 		
 		if(result1 > 0) {
@@ -148,7 +149,7 @@ public class QuestionService {
 		Connection conn = getConnection();
 		
 		ArrayList<FileVO> list = null;
-		list = new QuestionDAO().selectThumbnail(conn, bId);
+		list = new FreeDAO().selectThumbnail(conn, bId);
 		
 		if(list != null) {
 			commit(conn);
@@ -161,12 +162,14 @@ public class QuestionService {
 		return list;
 	}
 	
+	
+	
 	/////////////////////// 수정 사항 ///////////////////////////
 	public ArrayList<FileVO> selectImageList(int bId) {
 		Connection conn = getConnection();
 				
 		ArrayList<FileVO> list = null;
-		list = new QuestionDAO().selectImageList(conn, bId);
+		list = new FreeDAO().selectImageList(conn, bId);
 		
 		if(list != null) {
 			commit(conn);
@@ -185,7 +188,7 @@ public class QuestionService {
 				
 		ArrayList<FileVO> list = null;
 
-		list = new QuestionDAO().selectFileList(conn, bId);
+		list = new FreeDAO().selectFileList(conn, bId);
 		
 		if(list != null) {
 			commit(conn);

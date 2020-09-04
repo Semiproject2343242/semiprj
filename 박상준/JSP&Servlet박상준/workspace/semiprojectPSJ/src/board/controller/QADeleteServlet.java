@@ -39,7 +39,7 @@ public class QADeleteServlet extends HttpServlet {
 //		String content = request.getParameter("content");
 
 		Board board = new Board(no);
-		int result = new QuestionService().deliteBoard(board);
+		int result = new QuestionService().deleteBoard(board);
 		
 		if(result > 0) {
 			response.sendRedirect("main.qa");

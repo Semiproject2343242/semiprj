@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.BoardDAO;
+import board.model.dao.NoticeDAO;
+import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
 public class BoardService {
@@ -52,6 +55,62 @@ public class BoardService {
 		close(conn);
 		
 		return result;
+	}
+	
+	public ArrayList<FileVO> selectThumbnail(int bId) {
+		Connection conn = getConnection();
+		
+		ArrayList<FileVO> list = null;
+		list = new NoticeDAO().selectThumbnail(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	
+	/////////////////////// 수정 사항 ///////////////////////////
+	public ArrayList<FileVO> selectImageList(int bId) {
+		Connection conn = getConnection();
+				
+		ArrayList<FileVO> list = null;
+		list = new NoticeDAO().selectImageList(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(int bId) {
+		Connection conn = getConnection();
+				
+		ArrayList<FileVO> list = null;
+
+		list = new NoticeDAO().selectFileList(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
 	}
 	
 }

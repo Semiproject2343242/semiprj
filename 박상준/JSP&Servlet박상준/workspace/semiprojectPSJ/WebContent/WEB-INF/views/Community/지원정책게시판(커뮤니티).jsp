@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
-    <style>
+
 .thumbnailArea {
 	width: 80%;
 	height: auto;
@@ -58,7 +58,7 @@
 .textArea1{
 	float: right;
 }
-</style>
+
 </style>
 <body>
    <%@ include file="../Common/header.jsp" %>

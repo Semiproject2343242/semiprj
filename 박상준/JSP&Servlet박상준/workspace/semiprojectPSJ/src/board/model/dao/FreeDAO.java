@@ -1,12 +1,8 @@
 package board.model.dao;
 
 import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,18 +12,16 @@ import java.util.ArrayList;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
-import board.model.vo.Reply;
 
-public class QuestionDAO {
+public class FreeDAO {
 	
-
 	public int getListCount(Connection conn) {
 		Statement stmt = null;
 //		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
-		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = 'QA' AND B_ENABLE = 'Y'";
+		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = '자유' AND B_ENABLE = 'Y'";
 		//보드에서 게시판 삭제상태가 y 이며 whdfbrk qa 일경우 의 카운들?
 		try {
 			stmt= conn.createStatement();
@@ -46,35 +40,36 @@ public class QuestionDAO {
 		
 		return result;
 	}
-	
-	// 리스트 불러옴
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
+
+	//리스트 불러옴
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi){
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 		
 		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-		int endRow = startRow + pi.getBoardLimit() - 1;
+		int endRow = startRow + pi.getBoardLimit() - 1; 
 		
-		String query = "SELECT * FROM QALIST WHERE RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM FREELIST WHERE RNUM BETWEEN ? AND ? ORDER BY B_NO DESC"; 
+									
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			rset = pstmt.executeQuery();
+			rset = pstmt.executeQuery(); 
 			list = new ArrayList<Board>();
 			
-			while(rset.next()) {
+			while(rset.next()){
 				Board no = new Board(rset.getInt("B_NO"),				// 게시판 번호	
 									 rset.getString("B_TITLE"),  		// 게시판 제목	
 									 rset.getString("B_CONTENT"),		// 게시판 내용	
 									 rset.getDate("B_DATE"),			// 게시판 생성 날짜
 									 rset.getDate("B_RDATE"),			// 게시판 수정 날짜	
 									 rset.getInt("B_VIEW_COUNT"),		// 게시판 조회수
+									 rset.getInt("B_RECOMMEND"),		// 게시판 추천수
 									 rset.getInt("B_WRITER"),			// 게시판 글쓴이 회원 번호
 									 rset.getString("MEMBER_NICKNAME"),	// 게시판 글쓴이 회원	
-									 rset.getInt("B_REPLY_COUNT"),		// 게시판 댓글
-									 rset.getString("CG_NAME"));		// 카테고리 이름
+									 rset.getInt("B_REPLY_COUNT"));		// 게시판 댓글
 				list.add(no);
 			}
 		} catch (SQLException e) {
@@ -84,8 +79,9 @@ public class QuestionDAO {
 			close(pstmt);
 		}
 		return list;
+			
 	}
-
+	
 	
 	// 조회수 증가
 	public int updateCount(Connection conn, int bId) {
@@ -106,7 +102,7 @@ public class QuestionDAO {
 		
 		return result;
 	}
-
+	
 	
 	//글확인
 	public Board selectBoard(Connection conn, int bId) {
@@ -114,7 +110,7 @@ public class QuestionDAO {
 		ResultSet rset = null;
 		Board board = null;
 		
-		String query = "SELECT * FROM QADETAIL WHERE B_NO = ?";
+		String query = "SELECT * FROM FREEDETAIL WHERE B_NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -129,10 +125,10 @@ public class QuestionDAO {
 						 rset.getDate("B_DATE"),
 						 rset.getDate("B_RDATE"),
 						 rset.getInt("B_VIEW_COUNT"),
+						 rset.getInt("B_RECOMMEND"),
 						 rset.getInt("B_WRITER"),
 						 rset.getString("MEMBER_NICKNAME"),
-						 rset.getInt("B_REPLY_COUNT"),
-						 rset.getString("CG_NAME"));
+						 rset.getInt("B_REPLY_COUNT"));
 			}
 				
 		} catch (SQLException e) {
@@ -144,13 +140,14 @@ public class QuestionDAO {
 		
 		return board;
 	}
-
-	public int insertQA(Connection conn, Board b) {
+	
+	
+	public int insertFree(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME,RECRUIT_STARTDATE,RECRUIT_ENDDATE,ACTIVITY_STARTDATE,ACTIVITY_ENDDATE)";
-		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, 'QA', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?, NULL, NULL, NULL, NULL)";
+//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME, )";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, '자유', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?, NULL, NULL, NULL, NULL)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -211,7 +208,7 @@ public class QuestionDAO {
 		
 		return result;
 	}
-	
+
 	
 	public ArrayList<FileVO> selectFList(Connection conn) {
 		
@@ -269,8 +266,7 @@ public class QuestionDAO {
 		
 		return result;
 	}
-	
-	
+
 	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -307,6 +303,7 @@ public class QuestionDAO {
 	}
 	
 	
+	///////////////////////////// 수정 사항  /////////////////////////////////
 	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -377,7 +374,5 @@ public class QuestionDAO {
 		}
 		return list;
 	}
-	
-
 	
 }
