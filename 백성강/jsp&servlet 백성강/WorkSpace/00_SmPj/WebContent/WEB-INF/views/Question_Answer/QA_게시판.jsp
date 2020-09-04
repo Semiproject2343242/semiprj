@@ -22,7 +22,7 @@
     <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-           <h2>묻고 답하기</h2></a>
+           <h2>묻고 답하기</h2>
             <hr>
             <dl>
                <dt>
@@ -53,6 +53,7 @@
 	            </tr>
             <% } else { %>
             <% 		for(Board b : list){ %>
+            <% System.out.println(b); %>
           	<tr>
           		<td>
           			<input type="hidden" value="<%= b.getBoardNo() %>">
