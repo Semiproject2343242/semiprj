@@ -242,9 +242,16 @@
 						<ol>
 						<% if(supportList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else { %>
+						<% } else if(supportList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = supportList.get(i); %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } else { %>
+							<% for (Board b : supportList) { %>
 								<li>
 									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
@@ -261,7 +268,7 @@
 						<ol>
 						<% if(externalList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else { %>
+						<% } else if(externalList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = externalList.get(i); %>
 								<li>
@@ -269,6 +276,13 @@
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>
+						<% } else { %>
+							<% for (Board b : externalList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
 						<% } %>
 						</ol>
 					</div>
@@ -282,14 +296,21 @@
 						<ol>
 						<% if(commuFreeList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else { %>
+						<% } else if(commuFreeList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = commuFreeList.get(i); %>
 								<li>
 									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
-							<% } %>
+							<% } %>							
+						<% } else { %>
+							<% for (Board b : commuFreeList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
 						<% } %>
 						</ol>
 					</div>
@@ -301,14 +322,21 @@
 						<ol>
 						<% if(qaList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else { %>
+						<% } else if(qaList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = qaList.get(i); %>
 								<li>
 									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
-							<% } %>
+							<% } %>						
+						<% } else { %>
+							<% for (Board b : qaList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
 						<% } %>
 						</ol>
 					</div>

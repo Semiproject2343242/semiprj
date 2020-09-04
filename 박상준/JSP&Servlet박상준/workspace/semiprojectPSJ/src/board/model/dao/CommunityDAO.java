@@ -290,7 +290,7 @@ public class CommunityDAO {
 		
 		return result;
 	}
-
+	
 	public int insertAddFile(Connection conn, ArrayList<FileVO> fileList) {
 		PreparedStatement pstmt = null;
 		int result = 0;
