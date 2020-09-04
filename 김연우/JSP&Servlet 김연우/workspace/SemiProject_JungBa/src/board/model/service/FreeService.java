@@ -8,17 +8,18 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import board.model.dao.FreeDAO;
 import board.model.dao.NoticeDAO;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 
-public class NoticeService {
-	
+public class FreeService {
+
 	public int getListCount() {
 	Connection conn = getConnection();
 		
-		int result = new NoticeDAO().getListCount(conn);
+		int result = new FreeDAO().getListCount(conn);
 		
 		close(conn);
 		
@@ -30,17 +31,17 @@ public class NoticeService {
 
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new NoticeDAO().selectList(conn,pi);
+		ArrayList<Board> list = new FreeDAO().selectList(conn,pi);
 		
 		close(conn);
 		
 		return list;
 	}
 	
-	public int insertNotice(Board b) {
+	public int insertFree(Board b) {
 		Connection conn = getConnection();
 		
-		int result = new NoticeDAO().insertNotice(conn, b);
+		int result = new FreeDAO().insertFree(conn, b);
 		
 		if(result > 0) {
 			commit(conn);
@@ -57,7 +58,7 @@ public class NoticeService {
 	public Board selectBoard(int bId) {
 		Connection conn = getConnection();
 		
-		NoticeDAO dao = new NoticeDAO();
+		FreeDAO dao = new FreeDAO();
 		
 		int result = dao.updateCount(conn, bId);
 		Board board = null;
@@ -113,7 +114,7 @@ public class NoticeService {
 		
 		ArrayList<FileVO> list = null;
 		
-		NoticeDAO dao = new NoticeDAO();
+		FreeDAO dao = new FreeDAO();
 		
 		list = dao.selectFList(conn);
 		
@@ -127,9 +128,9 @@ public class NoticeService {
 		
 		Connection conn = getConnection();
 		
-		NoticeDAO dao = new NoticeDAO();
+		FreeDAO dao = new FreeDAO();
 		
-		int result1 = dao.insertNotice(conn, b);
+		int result1 = dao.insertFree(conn, b);
 		int result2 = dao.insertFile(conn, fileList);
 		
 		if(result1 > 0) {
@@ -148,7 +149,7 @@ public class NoticeService {
 		Connection conn = getConnection();
 		
 		ArrayList<FileVO> list = null;
-		list = new NoticeDAO().selectThumbnail(conn, bId);
+		list = new FreeDAO().selectThumbnail(conn, bId);
 		
 		if(list != null) {
 			commit(conn);
@@ -168,7 +169,7 @@ public class NoticeService {
 		Connection conn = getConnection();
 				
 		ArrayList<FileVO> list = null;
-		list = new NoticeDAO().selectImageList(conn, bId);
+		list = new FreeDAO().selectImageList(conn, bId);
 		
 		if(list != null) {
 			commit(conn);
@@ -187,7 +188,7 @@ public class NoticeService {
 				
 		ArrayList<FileVO> list = null;
 
-		list = new NoticeDAO().selectFileList(conn, bId);
+		list = new FreeDAO().selectFileList(conn, bId);
 		
 		if(list != null) {
 			commit(conn);
@@ -200,5 +201,4 @@ public class NoticeService {
 		return list;
 	}
 	
-	/////////////////////// 수정 사항 ///////////////////////////
 }

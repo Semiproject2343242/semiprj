@@ -34,13 +34,9 @@ public class QAInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		
-		System.out.println("여기로 오긴 오냐");
-		
+				
 		if(ServletFileUpload.isMultipartContent(request)) {
-			
-			System.out.println("음.. insert.qa로 오긴 오는군 여기는 오냐");
-			
+						
 			int maxSize = 1024 * 1024 * 10; // 10MByte로 전송파일 용량을 제한
 			String root = request.getSession().getServletContext().getRealPath("/"); // 웹 서버 컨테이너 경로 추출
 			String savePath = root + "UploadFolder/QA_uploadFiles/";
