@@ -17,7 +17,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.NoticeService;
-import board.model.service.QuestionService;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
 import common.MyFileRenamePolicy;
@@ -120,28 +119,6 @@ public class NoticeInsertServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
-				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
-				view.forward(request, response);
-			}
-			
-		// 파일을 안올렸을때
-		}else {
-			
-			MultipartRequest multiRequest = new MultipartRequest(request, "UTF-8");
-			
-			String title = multiRequest.getParameter("title"); //HTTP 요청의 파라미터 값을 얻기 위해 사용하는 것이 request.getParameter() 메쏘드입니다.
-			String content = multiRequest.getParameter("content");
-			int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-			String category = multiRequest.getParameter("category");
-			
-			Board b = new Board(title, content, userId, category);
-			
-			int result = new NoticeService().insertNotice(b);
-			
-			if(result > 0) {
-				response.sendRedirect("main.no");
-			} else {
 				request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
 				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
 				view.forward(request, response);
