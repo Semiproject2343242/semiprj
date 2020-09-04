@@ -37,7 +37,7 @@ public class NoticeService {
 		return list;
 	}
 	
-	public int insertBoard(Board b) {
+	public int insertNotice(Board b) {
 		Connection conn = getConnection();
 		
 		int result = new NoticeDAO().insertNotice(conn, b);
@@ -121,7 +121,8 @@ public class NoticeService {
 		return list;
 	}
 
-
+	
+	// file을 안올렸을때 어떻게 할지 결정해야함
 	public int insertBoardAndFiles(Board b, ArrayList<FileVO> fileList) {
 		
 		Connection conn = getConnection();
@@ -131,7 +132,7 @@ public class NoticeService {
 		int result1 = dao.insertNotice(conn, b);
 		int result2 = dao.insertFile(conn, fileList);
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result1 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -166,4 +167,55 @@ public class NoticeService {
 		return list;
 	}
 	
+	
+	
+	/////////////////////// 수정 사항 ///////////////////////////
+	public ArrayList<FileVO> selectImageList(int bId) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDAO().updateCount(conn, bId);
+		
+		ArrayList<FileVO> list = null;
+		if(result > 0) {
+			list = new NoticeDAO().selectImageList(conn, bId);
+		
+			if(list != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(int bId) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDAO().updateCount(conn, bId);
+		
+		ArrayList<FileVO> list = null;
+		if(result > 0) {
+			list = new NoticeDAO().selectFileList(conn, bId);
+		
+			if(list != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	/////////////////////// 수정 사항 ///////////////////////////
 }
