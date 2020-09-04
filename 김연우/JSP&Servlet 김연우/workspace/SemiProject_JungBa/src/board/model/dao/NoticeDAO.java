@@ -302,7 +302,6 @@ public class NoticeDAO {
 	}
 	
 	
-	///////////////////////////// 수정 사항  /////////////////////////////////
 	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -374,6 +373,81 @@ public class NoticeDAO {
 		return list;
 	}
 	
-	///////////////////////////// 수정 사항  /////////////////////////////////
+	
+	public int modifyFile(Connection conn, ArrayList<FileVO> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE FILES SET ORIGIN_NAME = ?, CHANGE_NAME = ?, UPLOAD_DATE=SYSDATE, FILE_PATH = ? WHERE B_NO = ? AND FILE_LEVEL = ?";
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				FileVO af = fileList.get(i);
+				System.out.println("af"+i+" : " + af);
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1,  af.getOriginName());
+				pstmt.setString(2,  af.getChangeName());
+				pstmt.setString(3,  af.getFilePath());
+				pstmt.setInt(4, af.getBoardNo());
+				pstmt.setInt(5, af.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+//	public int modifyImage(Connection conn, ArrayList<FileVO> fileList) {
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		String query = "UPDATE FILES SET ORIGIN_NAME = ?, CHANGE_NAME = ?, UPLOAD_DATE=SYSDATE, FILE_PATH = ? WHERE B_NO = ? AND FILE_LEVEL = ?";
+//		try {
+//			for(int i = 0; i < fileList.size(); i++) {
+//				FileVO af = fileList.get(i);
+//				System.out.println("af"+i+" : " + af);
+//				pstmt = conn.prepareStatement(query);
+//				pstmt.setString(1,  af.getOriginName());
+//				pstmt.setString(2,  af.getChangeName());
+//				pstmt.setString(3,  af.getFilePath());
+//				pstmt.setInt(4, af.getBoardNo());
+//				pstmt.setInt(5, af.getFileLevel());
+//				
+//				result += pstmt.executeUpdate();
+//			}
+//		} catch (SQLException e) {
+//				e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
+	
+	
+	public int AddFile(Connection conn, ArrayList<FileVO> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,?,NULL)";
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+			FileVO af = fileList.get(i);
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1,  af.getOriginName());
+				pstmt.setString(2,  af.getChangeName());
+				pstmt.setString(3,  af.getFilePath());
+				pstmt.setInt(4, af.getFileLevel());
+				pstmt.setInt(5, af.getBoardNo());
+				
+				result += pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 }
