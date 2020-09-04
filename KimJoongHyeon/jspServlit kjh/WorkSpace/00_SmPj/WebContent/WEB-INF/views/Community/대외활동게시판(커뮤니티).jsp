@@ -38,21 +38,31 @@
         margin-top: 20px;
         margin-right: 20px;
     }
+
+.serachList{
+	width: 610px;
+	height : 955px;
+  	overflow:hidden;
+	position:relative;
+	margin: 50px auto;
+}
 .thumbnailArea {
-	width: 80%;
-	height: auto;
+	column-width: 600px;
+	height : 955px;
+	top:0;
+    left:0;
 	margin: 0px auto;
 	padding: 0px;
+	position :absolute;
 }
-
 .board_list {
-	width: 80%;
-	margin: 20px;
+	width: 600px;
+	height: 170px;
+	margin-bottom: 20px;
 	display: flex;
-	line-height:15px; 
+	line-height:20px; 
 	border-bottom: 1px solid silver;
-	border-radius: 7px;
-	align-items: center;
+	border-radius: 5px;
 }
 
 .thumb-list:hover {
@@ -63,6 +73,20 @@
 #insertBtn {
 	float: right;
 	height: 100%;
+}
+ #btnBack{
+	 position: absolute;
+	 top: 1050px;
+	 left: 260px;
+	 cursor: pointer;
+	 z-index: 1;
+}
+#btnNext{
+  position: absolute;
+  top: 1050px;
+  right: 120px;
+  cursor: pointer;
+  z-index: 1;
 }
 .imageArea{
 	height: 100%;
@@ -80,6 +104,7 @@
 .textArea1{
 	float: right;
 }
+      
 </style>
 <body>
 	<%@ include file="../Common/header.jsp"%>
@@ -414,21 +439,15 @@
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
 		</div>
 		<br clear="all">
-		<div id="serachList" align="center">
+			<input type="button" id="btnBack" value="<<">
+		<div class="serachList" align="center">
 			<ul class="thumbnailArea" id=boardArea>
 				
 			</ul>
 		</div>
+			<input type="button" id="btnNext" value=">>">
 		<script>
-		$('#btnReset').click(function(){
-			$("input[type=checkbox]").prop("checked",false);
-			$(".select_btn").css('background', 'RGB(221,228,236)');
-			$('#ea_category').val('선택');
-		});
-			
-			
-		
-		$(function(){
+		$(function(){//페이지 생성될때 리스트 불러오기
 			$.ajax({
 	            url:'eaSearchList.cm',
 	            data: {
@@ -437,7 +456,7 @@
 	               var boardArea = $("#boardArea");
 	               if(data.length>0){
 	                  var boardSize = 0;
-	  	                	console.log(data.lenght);
+	  	              console.log(data);
 	                  for(var i=0;i<data.length; i++){
 						var input="<li class='board_list' id='board_list"+i+"'><div class='imageArea' id='imageArea"+i+"'>"
 						+"</div><div class='textArea' id='textArea"+i+"'><h3>"
@@ -452,6 +471,7 @@
 	                  	getAdoptImage(data[i].boardNo,data.length,i);
 	                  	$('#board_list'+i).attr("onclick","location.href='eaDetail.cm?bId="+data[i].boardNo+"'");
 	                  }
+						getlistCount();
 	               }else{
 	            	   var input="등록된 게시판이 없습니다.";
 	               }
@@ -461,7 +481,7 @@
 	            }
 			});
 		});
-		$('#btnSearch').click(function(){
+		$('#btnSearch').click(function(){// 검색 눌렀을때 리스트 불러오기
    			var age = document.getElementsByName("ck_ea_age");
           	var checkAge = [];
           	for(var i = 0; i < age.length; i++){
@@ -492,7 +512,7 @@
 	  	               if(data.length>0){
 	  	                  var boardSize = 0;
 	  	                  for(var i=0;i<data.length; i++){
-	  	                	console.log(data.lenght);
+	  	                	console.log("검색결과 : " + data.lenght);
 	  						var input="<li class='board_list' id='board_list"+i+"'><div class='imageArea' id='imageArea"+i+"'>"
 	  						+"</div><div class='textArea' id='textArea"+i+"'><h3>"
 	  						+data[i].boardNo+"."
@@ -506,8 +526,8 @@
 	  	                  	getAdoptImage(data[i].boardNo,data.length,i);
 	  	                  	$('#board_list'+i).attr("onclick","location.href='eaDetail.cm?bId="+data[i].boardNo+"'");
 	  	                  }
+	  	                getlistCount();
 	  	               }else{
-	    				console.log(data.length);
 	  	            	   var input="등록된 게시판이 없습니다.";
 	  						boardArea.append(input);
 	  	               }
@@ -517,9 +537,8 @@
   	               alert("ajax 콘텐츠 에러 발생")
   	            }
 	      		});
-	      		
       	});
-		function getAdoptImage(boardNo,length,i){
+		function getAdoptImage(boardNo,length,i){//리스트에 맞게 이미지 가져오기
 	         $.ajax({
 	            url: 'eaSearchIeage.cm',
 	            success: function(data){
@@ -537,6 +556,50 @@
 	            }
 	         });
 	      }
+		$('#btnReset').click(function(){//초기화 버튼
+			$("input[type=checkbox]").prop("checked",false);
+			$(".select_btn").css('background', 'RGB(221,228,236)');
+			$('#ea_category').val('선택');
+		});
+		
+		function getlistCount(){
+			var imgs;
+			var img_count;
+			var img_position = 1;
+			
+			imgs = $(".thumbnailArea");
+			img_count = imgs.children().length; //ul의 자식, 즉 li의 갯수
+			
+			maxPage = Math.ceil(img_count)/5;
+			 $(".thumbnailArea").css({'left':'0px'});
+			console.log("최대 페이지" + maxPage);
+			$('#btnBack').click(function(){
+				back();
+			});
+			
+			$('#btnNext').click(function(){
+				next();
+			});
+		 function back() {
+		        if(1<img_position){
+		          imgs.animate({
+		            left:'+=610px'
+		          });
+		          img_position--;
+					console.log("이전 :"+img_position);
+		        }
+		      }
+		      function next() {
+		        if(maxPage>img_position){
+		          imgs.animate({
+		            left:'-=610px'
+		          });
+		          img_position++;
+					console.log("다음 :"+img_position);
+		        }
+		      }
+		}
+		
       </script>
 	</div>		
 			

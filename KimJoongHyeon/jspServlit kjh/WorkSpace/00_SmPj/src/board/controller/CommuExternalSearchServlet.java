@@ -40,14 +40,7 @@ public class CommuExternalSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CommunityService service = new CommunityService();
-		//페이징
-		int currentPage = 1;
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		PageInfo pi = Page.PageInfo("대외", currentPage, "/eaSearchList.cm");
-		//페이징
-				
+
 		String[] agearr = request.getParameterValues("age[]");
         String[] localarr = request.getParameterValues("local[]");
         ArrayList<Board> bList = new ArrayList<Board>(); // 게시판 리스트 가져오기
@@ -59,37 +52,12 @@ public class CommuExternalSearchServlet extends HttpServlet {
 		 System.out.println("local : " +localarr );
         
         if(agearr == null && localarr==null && (category==null || category.equals("선택"))) {
-        	bList = service.selectExList(1,pi); // 게시판 리스트 가져오기
+        	bList = service.selectExList(1); // 게시판 리스트 가져오기
         }else {
-            String age = "";
-    		 if(agearr != null) {
-    			for (int i = 0; i< agearr.length; i++) {
-    				System.out.println("agearr"+"["+i+"]"+agearr[i]);
-    				if(i == agearr.length -1)
-    					age += agearr[i];
-    				else
-    					age += agearr[i] + ",";
-    			}
-    		 }
-    		 
-    		String local = "";
-    		 if(localarr != null) {
-    			for (int i = 0; i< localarr.length; i++) {
-    				System.out.println(localarr[i]);
-    				if(i == localarr.length -1)
-    					local += localarr[i];
-    				else
-    					local += localarr[i] + ",";
-    			}
-    		 }
-    		 System.out.println("category : " + category);
-    		 System.out.println("age : " + age);
-    		 System.out.println("local : " +local );
-    		 bList = service.selectExSearchList(1,pi,category,agearr,localarr); // 게시판 리스트 가져오기
+		 bList = service.selectExSearchList(1,category,agearr,localarr); // 게시판 리스트 가져오기
         }
-        request.setAttribute("pi", pi);
-		 response.setContentType("application/json; charset=UTF-8");
-			new Gson().toJson(bList, response.getWriter());
+        response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(bList, response.getWriter());
 	}
 
 	/**

@@ -140,21 +140,15 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public ArrayList selectBList(Connection conn, PageInfo pi) {
+	public ArrayList selectBList(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
-		
-		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-		int endRow = startRow + pi.getBoardLimit() - 1;
-		
-		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
+
+		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' ORDER BY B_NO DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -430,17 +424,15 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public ArrayList selectSearchBList(Connection conn, PageInfo pi, String category, String[] agearr, String[] localarr) {
+	public ArrayList selectSearchBList(Connection conn, String category, String[] agearr, String[] localarr) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 		
-		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-		int endRow = startRow + pi.getBoardLimit() - 1;
 		String local = "";
 		
-//		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
-		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ?";
+//		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' ORDER BY B_NO DESC";
+		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' ";
 
 		//1.지역만 선택 됐을경우
 		if(category.equals("선택") && agearr==null && localarr != null) {//카테고리 대상선택 null 지역만 선택했을경우!
@@ -460,11 +452,9 @@ public class CommunityDAO {
 			
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
 				
 				for (int i = 0; i< localarr.length; i++) {
-					pstmt.setString(3+i, localarr[i]);
+					pstmt.setString(1+i, localarr[i]);
 				}
 				rset = pstmt.executeQuery();
 				
@@ -495,11 +485,9 @@ public class CommunityDAO {
 			
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
 				
 				for (int i = 0; i< agearr.length; i++) {
-					pstmt.setString(3+i, agearr[i]);
+					pstmt.setString(1+i, agearr[i]);
 				}
 				rset = pstmt.executeQuery();
 				
@@ -514,12 +502,10 @@ public class CommunityDAO {
 			}
 		}else if(agearr==null && localarr==null && !(category.equals("선택"))) {//3.카테고리만 선택했을경우
 			System.out.println("3.카테고리만 선택 됐을경우");
-			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? AND CG_NAME IN (?)  ORDER BY B_NO DESC";
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)  ORDER BY B_NO DESC";
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				pstmt.setString(3, category);
+				pstmt.setString(1, category);
 				rset = pstmt.executeQuery();
 				
 				list = new ArrayList<Board>();
@@ -560,14 +546,12 @@ public class CommunityDAO {
 			System.out.println(query);
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
 				for (int i = 0; i< agearr.length; i++) {
-					pstmt.setString(3+i, agearr[i]);
+					pstmt.setString(1+i, agearr[i]);
 				}
 				
 				for (int i = 0; i< localarr.length; i++) {
-					pstmt.setString(3+i+agearr.length, localarr[i]);
+					pstmt.setString(1+i+agearr.length, localarr[i]);
 				}
 				
 				rset = pstmt.executeQuery();
@@ -583,7 +567,7 @@ public class CommunityDAO {
 			}
 		}else if(agearr == null && localarr != null && !(category.equals("선택"))) {//5.지역과 카테고리가 선택됐을경우
 			System.out.println("5.지역과 카테고리가 선택됐을경우");
-			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? AND CG_NAME IN (?)";
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)";
 			if(localarr.length == 1) {//하나밖에 없을때
 				query += " AND LC_NAME LIKE('%'||?||'%')";
 			}else{
@@ -599,11 +583,9 @@ public class CommunityDAO {
 			
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				pstmt.setString(3, category);
+				pstmt.setString(1, category);
 				for (int i = 0; i< localarr.length; i++) {
-					pstmt.setString(4+i, localarr[i]);
+					pstmt.setString(2+i, localarr[i]);
 				}
 				rset = pstmt.executeQuery();
 				
@@ -618,7 +600,7 @@ public class CommunityDAO {
 			}
 		}else if(agearr != null && localarr == null && !(category.equals("선택"))) {//6.대상과 카테고리가 선택됐을경우
 			System.out.println("6.대상과 카테고리가 선택됐을경우");
-			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? AND CG_NAME IN (?)";
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)";
 			if(agearr.length == 1) {//하나밖에 없을때
 				query += " AND TC_NAME LIKE('%'||?||'%')";
 			}else{
@@ -634,11 +616,9 @@ public class CommunityDAO {
 			
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				pstmt.setString(3, category);
+				pstmt.setString(1, category);
 				for (int i = 0; i< agearr.length; i++) {
-					pstmt.setString(4+i, agearr[i]);
+					pstmt.setString(2+i, agearr[i]);
 				}
 				rset = pstmt.executeQuery();
 				
@@ -653,7 +633,7 @@ public class CommunityDAO {
 			}
 		}else {//7.전부 선택했을경우
 			System.out.println("7.전부 선택됐을경우");
-			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? AND CG_NAME IN (?)";
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)";
 			if(agearr.length == 1) {//하나밖에 없을때
 				query += " AND TC_NAME LIKE('%'||?||'%')";
 			}else{
@@ -680,15 +660,13 @@ public class CommunityDAO {
 			
 			try {
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				pstmt.setString(3, category);
+				pstmt.setString(1, category);
 				for (int i = 0; i< agearr.length; i++) {
-					pstmt.setString(4+i, agearr[i]);
+					pstmt.setString(2+i, agearr[i]);
 				}
 				
 				for (int i = 0; i< localarr.length; i++) {
-					pstmt.setString(4+i+agearr.length, localarr[i]);
+					pstmt.setString(2+i+agearr.length, localarr[i]);
 				}
 				rset = pstmt.executeQuery();
 				
