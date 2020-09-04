@@ -11,8 +11,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/side.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항글쓰기.css"/>
 
-    <script src="../resources/js/slides.js"></script>
-
     <style>
     </style>
 </head>
