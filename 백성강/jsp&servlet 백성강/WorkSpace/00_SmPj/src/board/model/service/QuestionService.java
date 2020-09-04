@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
+import board.model.vo.Reply;
 
 public class QuestionService {
 	public ArrayList<Board> selectList(PageInfo pi){
@@ -71,7 +72,6 @@ public class QuestionService {
 			rollback(conn);
 		}
 		close(conn);
-		
 		return result;
 	}
 
@@ -87,6 +87,13 @@ public class QuestionService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<Reply> selectReplyList(int bId) {
+		Connection conn = getConnection();
+		ArrayList<Reply> list = new QuestionDAO().selectReplyList(conn, bId);
+		close(conn);
+		return list;
 	}
 
 }

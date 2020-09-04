@@ -10,8 +10,6 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();	
 	String pageName = pi.getPageName();
-	
-	System.out.println(pi);
 %>
 <!DOCTYPE html>
 <html>

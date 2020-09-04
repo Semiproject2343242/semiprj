@@ -25,6 +25,7 @@ aside {
 	display: block;
 	width: 200px;
 	line-height: 40px;
+	margin-left: 5px;
 }
 
 #main_section {
@@ -57,10 +58,14 @@ hr {
     background-color: gray;
 }
 
-   		/* pagination 설정부  */
+/* pagination 설정부  */
 .com{text-indent : 20px;}
 
-
+ 	.btn{
+  		background-color : #E3F2FD;
+  		margin : 10px 2px;
+  		padding: 10px;
+  	}
 .contentsTable{text-align:center; font-size:12pt;}
 .contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
 .contentsTable tbody{background-color:#F7F7F7}

@@ -14,7 +14,7 @@
     <title>마이페이지 내가 쓴 글(대외활동)</title>
     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 </head>
 <style>
     #bottomContent {
@@ -115,10 +115,25 @@
                 </div>
             </div>
         </div>
-
-
     </section>
     <%@ include file="../Common/footer.jsp" %>
+    <script>
+	    $(function(){
+	    	<%if(!list.isEmpty()){%> 
+	        	$('tbody td').mouseenter(function(){
+	            	$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	            	$(this).parent().css('background', 'none');
+	            }).click(function(){
+	                var bId = $(this).parent().children().children('input').val();
+	            <% if(loginUser != null){%>
+	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	            <% }else{ %>
+	            		alert('회원만 이용할 수 있는 서비스입니다.')
+	            <% } %>
+	         });
+	         <% } %>
+		});
+    </script>
 </body>
-
 </html>

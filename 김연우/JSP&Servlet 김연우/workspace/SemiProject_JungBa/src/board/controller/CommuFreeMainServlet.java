@@ -10,29 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.CommunityService;
+import board.model.service.FreeService;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
-/**
- * Servlet implementation class CommuFreeMainServlet
- */
+
 @WebServlet("/fMain.cm")
 public class CommuFreeMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public CommuFreeMainServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CommunityService cServuce = new CommunityService();
+		FreeService service = new FreeService();
 		
 		//페이징
 		int currentPage = 1;
@@ -42,7 +36,7 @@ public class CommuFreeMainServlet extends HttpServlet {
 		PageInfo pi = Page.PageInfo("자유", currentPage, "/fMain.cm");
 		//페이징
 		
-		ArrayList<Board> list =  cServuce.selectList(pi);
+		ArrayList<Board> list =  service.selectList(pi);
 				
 		String page = null;
 		if(list != null) {
@@ -59,11 +53,7 @@ public class CommuFreeMainServlet extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

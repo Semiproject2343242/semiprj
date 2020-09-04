@@ -175,29 +175,6 @@ public class MemberService {
 	}
 	
 	
-	//////////////////////// 추후 수정 예정 /////////////////////////////
-	public int deleteProfile(int fileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result = dao.deleteProfile(conn, fileNo, loginMemberNo);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-
-		return result;
-	}
-	///////////////////////////////////////////////////////////////
-	
-	
-	
 	public int deleteProfile(int loginMemberNo) {
 		
 		Connection conn = getConnection();
@@ -216,33 +193,6 @@ public class MemberService {
 
 		return result;
 	}
-	
-	
-	
-	
-	//////////////////////// 추후 수정 예정 /////////////////////////////
-	public int updateProfile(FileVO profile, int originalFileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result1 = dao.deleteProfile(conn, originalFileNo, loginMemberNo);
-		int result2 = dao.insertProfile(conn, profile, loginMemberNo);
-		
-		if(result1 > 0 && result2 > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result1;
-	}
-	////////////////////////////////////////////////////////////////
-	
-
 	
 	
 	public int updateProfile(FileVO profile, int loginMemberNo) {

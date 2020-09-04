@@ -2,8 +2,10 @@ package board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +18,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.CommunityService;
-import board.model.vo.AddFile;
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import common.MyFileRenamePolicy;
 import member.model.vo.Member;
 
@@ -41,14 +43,13 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
 	      
 	      // encType 이 multipart/form-data 로 전송되었는지 확인
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "thumbnail_uploadFiles/";
+	         String savePath = root + "support_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         
@@ -103,6 +104,64 @@ public class CommuSupportInsertServlet extends HttpServlet {
  					local += localarr[i] + ",";
  			}
  		 }
+ 		 
+ 		 
+	 		String strsp_res_date = multiRequest.getParameter("sp_res_date"); 
+	 		Date sp_res_date = null;
+	 		if(strsp_res_date != "") {
+	 			String[] dateArr = strsp_res_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			sp_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			sp_res_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ree_date = multiRequest.getParameter("sp_ree_date"); 
+	 		Date sp_ree_date = null;
+	 		if(strea_ree_date != "") {
+	 			String[] dateArr = strea_ree_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			sp_ree_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			sp_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_acs_date = multiRequest.getParameter("sp_acs_date"); 
+	 		Date sp_acs_date = null;
+	 		if(strea_acs_date != "") {
+	 			String[] dateArr = strea_acs_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			sp_acs_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			sp_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strsp_ace_date = multiRequest.getParameter("sp_ace_date"); 
+	 		Date sp_ace_date = null;
+	 		if(strsp_ace_date != "") {
+	 			String[] dateArr = strsp_ace_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			sp_ace_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			sp_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		 
  		
          Board b = new Board();
          
@@ -113,13 +172,15 @@ public class CommuSupportInsertServlet extends HttpServlet {
          b.setCgName(category);
          b.setTcName(age);
          b.setLcName(local);
+         b.setReStratDate(sp_res_date);
+         b.setReEndDate(sp_ree_date);
          System.out.println(b);
          System.out.println(originFiles);
          System.out.println(saveFiles);
          
-         ArrayList<AddFile> fileList = new ArrayList<AddFile>();
+         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
          for(int i  = originFiles.size() - 1; i>=0; i--) {
-        	 AddFile af = new AddFile();
+        	 FileVO af = new FileVO();
         	 af.setFilePath(savePath);
         	 af.setOriginName(originFiles.get(i));
         	 af.setChangeName(saveFiles.get(i));

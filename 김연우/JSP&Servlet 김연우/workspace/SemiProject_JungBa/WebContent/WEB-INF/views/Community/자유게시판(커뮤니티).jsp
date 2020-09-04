@@ -20,7 +20,7 @@
    <%@ include file="../Common/header.jsp" %>
     <section>
          <aside>
-           <h2 ><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</h2></a>
+           <h2 ><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</h2></a>
             <hr>
             <div>
             <dl>
@@ -46,7 +46,7 @@
                 <tbody>
                   <% if(list.isEmpty()){ %>
 	            <tr>
-	               <td colspan="6">글이 존재 하지 않습니다.</td>
+	               <td colspan="5">글이 존재 하지 않습니다.</td>
 	            </tr>
             <% } else { %>
             <% 		for(Board b : list){ %>
@@ -67,7 +67,7 @@
 	                <tr>
 	                <td colspan="5"></td>
 	                <td>
-	                    <button onclick="location.href='<%= request.getContextPath()  %>/mainForm.qa'">글쓰기</button>
+	                    <button onclick="location.href='<%= request.getContextPath()  %>/fInsertForm.cm'">글쓰기</button>
 	                </td>
 	                </tr>
                 </tfoot>
@@ -76,18 +76,20 @@
 		</div>
         <script>
          $(function(){
-            $('tbody td').mouseenter(function(){
-               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
-            }).mouseout(function(){
-               $(this).parent().css('background', 'none');
-            }).click(function(){
-               var bId = $(this).parent().children().children('input').val();
-               <% if(loginUser != null){%>
-                  location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
-               <% }else{ %>
-                  alert('회원만 이용할 수 있는 서비스입니다.')
-               <% } %>
-            })
+        	<%if(!list.isEmpty()){%> 
+	            $('tbody td').mouseenter(function(){
+	               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	               $(this).parent().css('background', 'none');
+	            }).click(function(){
+	               var bId = $(this).parent().children().children('input').val();
+	               <% if(loginUser != null){%>
+	                  location.href = '<%= request.getContextPath() %>/fDetail.cm?bId=' + bId;
+	               <% }else{ %>
+	                  alert('회원만 이용할 수 있는 서비스입니다.')
+	               <% } %>
+	            })
+	        <% } %>
          })
       </script>
     </section>

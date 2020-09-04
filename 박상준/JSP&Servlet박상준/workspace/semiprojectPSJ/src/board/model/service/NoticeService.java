@@ -9,8 +9,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.NoticeDAO;
-import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 
 public class NoticeService {
@@ -37,7 +37,7 @@ public class NoticeService {
 		return list;
 	}
 	
-	public int insertBoard(Board b) {
+	public int insertNotice(Board b) {
 		Connection conn = getConnection();
 		
 		int result = new NoticeDAO().insertNotice(conn, b);
@@ -105,5 +105,117 @@ public class NoticeService {
 		
 		return result;
 	}
+	
+	
+	public ArrayList<FileVO> selectFList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<FileVO> list = null;
+		
+		NoticeDAO dao = new NoticeDAO();
+		
+		list = dao.selectFList(conn);
+		
+		close(conn);
+		return list;
+	}
 
+	
+	// file을 안올렸을때 어떻게 할지 결정해야함
+	public int insertBoardAndFiles(Board b, ArrayList<FileVO> fileList) {
+		
+		Connection conn = getConnection();
+		
+		NoticeDAO dao = new NoticeDAO();
+		
+		int result1 = dao.insertNotice(conn, b);
+		int result2 = dao.insertFile(conn, fileList);
+		
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+	
+	
+	public ArrayList<FileVO> selectThumbnail(int bId) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDAO().updateCount(conn, bId);
+		
+		ArrayList<FileVO> list = null;
+		if(result > 0) {
+			list = new NoticeDAO().selectThumbnail(conn, bId);
+		
+			if(list != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	
+	/////////////////////// 수정 사항 ///////////////////////////
+	public ArrayList<FileVO> selectImageList(int bId) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDAO().updateCount(conn, bId);
+		
+		ArrayList<FileVO> list = null;
+		if(result > 0) {
+			list = new NoticeDAO().selectImageList(conn, bId);
+		
+			if(list != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(int bId) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDAO().updateCount(conn, bId);
+		
+		ArrayList<FileVO> list = null;
+		if(result > 0) {
+			list = new NoticeDAO().selectFileList(conn, bId);
+		
+			if(list != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	/////////////////////// 수정 사항 ///////////////////////////
 }

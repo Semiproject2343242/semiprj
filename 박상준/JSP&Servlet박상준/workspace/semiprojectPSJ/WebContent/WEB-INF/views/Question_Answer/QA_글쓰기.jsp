@@ -22,17 +22,16 @@
         <h2>제목</h2>
         <h2>카테고리</h2>
         <h2>내용</h2>
-        <h2 id="filetext">첨부파일</h2>
       </aside>
       <div id="main_section">
 	      <form action="<%= request.getContextPath() %>/insert.qa" method="post">
-			<h2>질문하기</h2>
+			 <h2 style="text-align: center;">질문하기</h2>
 			<hr />
 			<h2>
 			<input type="text" size="50" name="title" placeholder="제목을 입력해주세요.">
 			</h2>
 			<h2>
-			  <select name="category">
+			  <select name="category" class="combo_category">
 			    <option value="이용관련">이용관련</option>
 			    <option value="회원관련">회원관련</option>
 			    <option value="게시글등록">게시글 등록</option>
@@ -42,7 +41,6 @@
 			  </select>
 			</h2>
 			<h2><textarea id="textarea" name="content" placeholder="내용을 입력해주세요." cols="100" rows="15" style="resize:none;"></textarea></h2>
-			<h2><input type="file" name="file" /></h2>
 			<hr />
 			<h2>
 			  <div align="right">

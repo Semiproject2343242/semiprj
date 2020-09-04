@@ -1,4 +1,3 @@
-<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.PageInfo"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,10 +5,6 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-	
-	//////////////// FILE 테스트 /////////////////
-	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fList");
-	////////////////////////////////////////////
 %>
     
 <!DOCTYPE html>
@@ -57,17 +52,11 @@
 	               <td colspan="6">글이 존재 하지 않습니다.</td>
 	            </tr>
             <% } else { %>
-            	<%	for(int i = 0; i < fList.size(); i++){ %>
-            		<% Board b = list.get(i); %>
+            <% 		for(Board b : list){ %>
+            <% System.out.println(b); %>
           	<tr>
           		<td>
           			<input type="hidden" value="<%= b.getBoardNo() %>">
-          			<% for(int j = 0; j < fList.size(); j++){ %>
-						<% FileVO f = fList.get(i); %>
-							<% if(b.getBoardNo() == f.getBoardNo()){ %>
-								<img src="<%= request.getContextPath() %>/thumbnail_uploadFiles/<%= f.getChangeName() %>" width="200px" height="150px">
-						<% } %>
-					<% } %>	
           			<%= b.getBoardNo() %>
           		</td>
           		<td><%= b.getCgName() %></td>

@@ -1,9 +1,12 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
  	Board b = (Board)request.getAttribute("board");
 	System.out.println("공지사항내용확인.jsp에서의 board : " + b);
+	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
 %>
 <!DOCTYPE html>
 <html>
@@ -78,9 +81,16 @@
                     	</div>
                     <br>
 
-                    <h2> 참고자료 (1) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
-                    <input type="file" id="ea_write_file"><br><br>
-
+                    <h2> 참고자료 (<%= fileList.size() %>) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
+                    <%if(fileList.isEmpty()) { %>
+                    	첨부파일 없음.
+                    <% } else { %>
+                    	<%for(int i=0; i < fileList.size(); i++){ %>
+							<a href="<%= request.getContextPath() %>/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
+								<%=fileList.get(i).getOriginName()%>
+							</a><br>
+						<% } %>
+					<% } %>
                     <!-- 댓글 --> 
 
                     <div> <h2>댓글</h2> </div>

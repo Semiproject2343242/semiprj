@@ -8,15 +8,27 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.sun.xml.internal.ws.api.message.Attachment;
-
 import board.model.dao.BoardDAO;
+import board.model.dao.NoticeDAO;
 import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
+import board.model.vo.Reply;
 
 public class QuestionService {
+	
+	public int getListCount() {
+	Connection conn = getConnection();
+		
+		int result = new QuestionDAO().getListCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 	public ArrayList<Board> selectList(PageInfo pi){
 		Connection conn = getConnection();
 		
@@ -25,6 +37,22 @@ public class QuestionService {
 		close(conn);
 		
 		return list;
+	}
+	
+	public int insertBoard(Board b) {
+		Connection conn = getConnection();
+		
+		int result = new QuestionDAO().insertQA(conn, b);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 	public Board selectBoard(int bId) {
@@ -48,41 +76,12 @@ public class QuestionService {
 		
 		return board;
 	}
+	
 
-	public int insertBoard(Board b) {
+	public int deleteBoard(Board board) {
 		Connection conn = getConnection();
-		
-		int result = new QuestionDAO().insertNotice(conn, b);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result;
-	}
-
-	public int modifyBoard(Board b) {
-Connection conn = getConnection();
-		
-		int result = new QuestionDAO().modifyBoard(conn, b);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		
-		return result;
-	}
-
-	public int deliteBoard(Board board) {
-		Connection conn = getConnection();
-		QuestionDAO nDAO = new QuestionDAO();
-		int result = nDAO.boardDelete(conn, board);
+		QuestionDAO qDAO = new QuestionDAO();
+		int result = qDAO.boardDelete(conn, board);
 		
 		if(result>0) {
 			commit(conn);
@@ -93,17 +92,26 @@ Connection conn = getConnection();
 		return result;
 	}
 	
-	
-	
-	
-	
-	
-	// FILE 테스트!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	public ArrayList selectFList() {
+
+	public int modifyBoard(Board b) {
 		Connection conn = getConnection();
 		
-		ArrayList list = null;
+		int result = new QuestionDAO().modifyBoard(conn, b);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
+	public ArrayList<FileVO> selectFList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<FileVO> list = null;
 		
 		QuestionDAO dao = new QuestionDAO();
 		
@@ -112,16 +120,19 @@ Connection conn = getConnection();
 		close(conn);
 		return list;
 	}
+
 	
-	public int insertThumbnail(Board b, ArrayList<FileVO> fileList) {
+	// file을 안올렸을때 어떻게 할지 결정해야함
+	public int insertBoardAndFiles(Board b, ArrayList<FileVO> fileList) {
+		
 		Connection conn = getConnection();
 		
 		QuestionDAO dao = new QuestionDAO();
 		
-		int result1 = dao.insertNotice(conn, b);
+		int result1 = dao.insertQA(conn, b);
 		int result2 = dao.insertFile(conn, fileList);
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result1 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -131,21 +142,53 @@ Connection conn = getConnection();
 		
 		return result1;
 	}
-
+	
+	
 	public ArrayList<FileVO> selectThumbnail(int bId) {
 		Connection conn = getConnection();
 		
-		int result = new QuestionDAO().updateCount(conn, bId);
-		
 		ArrayList<FileVO> list = null;
-		if(result > 0) {
-			list = new QuestionDAO().selectThumbnail(conn, bId);
+		list = new QuestionDAO().selectThumbnail(conn, bId);
 		
-			if(list != null) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	/////////////////////// 수정 사항 ///////////////////////////
+	public ArrayList<FileVO> selectImageList(int bId) {
+		Connection conn = getConnection();
+				
+		ArrayList<FileVO> list = null;
+		list = new QuestionDAO().selectImageList(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(int bId) {
+		Connection conn = getConnection();
+				
+		ArrayList<FileVO> list = null;
+
+		list = new QuestionDAO().selectFileList(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
 		} else {
 			rollback(conn);
 		}
