@@ -70,10 +70,9 @@
    <%@ include file="../Common/header.jsp" %> 
  <!----------------------------------------header------------------------------------------->
     <section>
-        <!-- <from> -->
+         <%-- <form action="<%= request.getContextPath() %>/search.ea" method="post"> --%>
             <h1 align="center">대외활동 검색</h1>
             <!-- <div id=External_mainbox> -->
-    <%--         <form action="<%= request.getContextPath() %>/Search.ea" method="post"> --%>
 				<div class="writerinformanion_box">
 				      <ul class="writertext">
 				          <th>
@@ -97,12 +96,13 @@
 				          </h3>
 				          <h3>
 				       		  	<div>
-					                <button class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
-					                <button class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
-					                <button class="select_btn" id="ea_age_50">장년<br>(50~64세) </button>
-					                <button class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
+					                <button type="button" class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
+					                <button type="button" class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
+					                <button type="button" class="select_btn" id="ea_age_50">장년<br>(50~64세) </button>
+					                <button type="button" class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
 				              	</div>
 				              	<div id="ea_age">
+				              		<input type="hidden" id="userId1" value="abcd">
 						            <input type="checkbox" name="ck_ea_age" id="ck_ea_age_18" value="청년"">
 						            <input type="checkbox" name="ck_ea_age" id="ck_ea_age_35" value="중년">
 						            <input type="checkbox" name="ck_ea_age" id="ck_ea_age_50" value="장년">
@@ -148,31 +148,32 @@
 				          </h3>
 				          <h3 id = "ea_areatable_div">
 				            <div>
-				                 <button class = "select_btn" id= "GP">가평군</button>
-				                 <button class = "select_btn" id= "GY">고양시</button>
-				                 <button class = "select_btn" id= "GC">과천시</button>
-				                 <button class = "select_btn" id= "GM">광명시</button>
-				                 <button class = "select_btn" id= "GJ">광주시</button>
-				                 <button class = "select_btn" id= "GL">구리시</button>
-				                 <button class = "select_btn" id= "GP2">군포시</button>
+				                 <button type="button" class = "select_btn" id= "GP">가평군</button>
+				                 <button type="button" class = "select_btn" id= "GY">고양시</button>
+				                 <button type="button" class = "select_btn" id= "GC">과천시</button>
+				                 <button type="button" class = "select_btn" id= "GM">광명시</button>
+				                 <button type="button" class = "select_btn" id= "GJ">광주시</button>
+				                 <button type="button" class = "select_btn" id= "GL">구리시</button>
+				                 <button type="button" class = "select_btn" id= "GP2">군포시</button>
 				                 <br>
-				                 <button class = "select_btn" id= "GP3">김포시</button>
-				                 <button class = "select_btn" id= "NYJ">남양주시</button>
-				                 <button class = "select_btn" id= "DDC">동두천시</button>
-				                 <button class = "select_btn" id= "BC">부천시</button>
-				                 <button class = "select_btn" id= "SN">성남시</button>
-				                 <button class = "select_btn" id= "SW">수원시</button>
-				                 <button class = "select_btn" id= "SH">시흥시</button>
+				                 <button type="button" class = "select_btn" id= "GP3">김포시</button>
+				                 <button type="button" class = "select_btn" id= "NYJ">남양주시</button>
+				                 <button type="button" class = "select_btn" id= "DDC">동두천시</button>
+				                 <button type="button" class = "select_btn" id= "BC">부천시</button>
+				                 <button type="button" class = "select_btn" id= "SN">성남시</button>
+				                 <button type="button" class = "select_btn" id= "SW">수원시</button>
+				                 <button type="button" class = "select_btn" id= "SH">시흥시</button>
 				                 <br>
-				                 <button class = "select_btn" id= "AS">안산시</button>
-				                 <button class = "select_btn" id= "AY">안양시</button>
-				                 <button class = "select_btn" id= "PJ">파주시</button>
-				                 <button class = "select_btn" id= "PT">평택시</button>
-				                 <button class = "select_btn" id= "PC">포천시</button>
-				                 <button class = "select_btn" id= "HN">하남시</button>
-				                 <button class = "select_btn" id= "HS">화성시</button>
+				                 <button type="button" class = "select_btn" id= "AS">안산시</button>
+				                 <button type="button" class = "select_btn" id= "AY">안양시</button>
+				                 <button type="button" class = "select_btn" id= "PJ">파주시</button>
+				                 <button type="button" class = "select_btn" id= "PT">평택시</button>
+				                 <button type="button" class = "select_btn" id= "PC">포천시</button>
+				                 <button type="button" class = "select_btn" id= "HN">하남시</button>
+				                 <button type="button" class = "select_btn" id= "HS">화성시</button>
 				            </div>
 				            <div id="ea_areatable">
+				            	<input type="hidden" id="userId2" value="abcd">
 					            <input type="checkbox" name="ck_lc" value="가평군">
 					            <input type="checkbox" name="ck_lc" id="ck_GY" value="고양시">
 					            <input type="checkbox" name="ck_lc" id="ck_GC" value="과천시">
@@ -376,8 +377,10 @@
                     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
                	 	<div class = "sp_button">
                     	<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="p_sp_search_reset">
-                    	<input type='button' class='result_btn' id='button' name='btn' value='검색' style="float: right;" id="p_sp_search_submit" onclick="location.href='<%= request.getContextPath()  %>/search.ea'">
+                    	<input type='submit' class='result_btn' id='button' name='btn' value='검색' style="float: right;" id="p_sp_search_submit" >
+                    	<%-- onclick="location.href='<%= request.getContextPath()  %>/search.ea'" --%>
                 	</div>
+                	 <!-- </form> -->
                    <br><br><br>
                    <div class="sp_search_result_table">
                         <h1>검색되었습니다.</h1><br>
@@ -400,37 +403,60 @@
                     </div>
 
  			        <script>
-/*  			       $('#button').click(function(){
- 			    	  var count = 1;
- 			       }) */
-			        $(function(){
-			        	<%if(!list.isEmpty()){%> 
-				            $('tbody td').mouseenter(function(){
-				               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'}); // 커서 올리면 흑색
-				            }).mouseout(function(){
-				               $(this).parent().css('background', 'none'); //벗어나면
-				            }).click(function(){
-				               var bId = $(this).parent().children().children('input').val(); // 버튼을 누르면 bId에 데이터 값 저장-> 값을 /q_detail.no에 보내줌
-				               <% if(loginUser != null){%> //로그인 시 가능
-				                  location.href = '<%= request.getContextPath() %>/detail.no?bId=' + bId; 
-				               <% }else{ %>
-				                  alert('회원만 이용할 수 있는 서비스입니다.')
-				               <% } %>
-				            })
-				        <% } %>      
-			         })
-			      	</script>
-		            <ul align="center">
-		                <div class = "pagination">
-		                    <a href="#" title = "이전" class="pre"><</a>
-		                    <a href="#" class="active">1</a>
-		                    <a href="#">2</a>
-		                    <a href="#">3</a>
-		                    <a href="#">4</a>
-		                    <a href="#">5</a>
-		                    <a href="#" title = "다음" class="next">></a>
-		                </div>
-		            </ul>
+	 			  	 $("#button").click(function(){
+	 			  	    // 사용자 ID를 갖고 온다.
+	 			  	    var userId1 = $("#userId1").val();
+	 			  	    var userId2 = $("#userId2").val();
+	 					
+	 			  	    // name이 같은 체크박스의 값들을 배열에 담는다.
+	 			  	    var checkboxValues1 = [];
+	 			  	    $("input[name='ck_ea_age']:checked").each(function(i) {
+	 			  	        checkboxValues1.push($(this).val());
+	 			  	    });
+	 			  	 var checkboxValues1 = [];
+	 			  	    $("input[name='ck_lc']:checked").each(function(i) {
+	 			  	        checkboxValues2.push($(this).val());
+	 			  	    });
+	 			  	    
+	 			  	// 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
+	 			  	 var allData = { "userId1": userId1, "checkArray1": checkboxValues1 , "userId2": userId2, "checkArray2": checkboxValues2 };
+
+	 					$.ajax({
+	 						url: 'search.ea',
+	 						type: 'GET',
+	 						data: allData,
+	 						success : function(data){
+	 							console.log(data);
+	 							var resultStr =""; // 하나잡아줄거 만듬
+
+	 					        success:function(data){
+	 					            alert("완료!");
+	 					            window.opener.location.reload();
+	 					            self.close();
+	 					        }
+	 					    });
+	 					}
+	 			  	  });
+	 			  	 	</script>
+						<script>
+				        $(function(){
+				        	<%if(!list.isEmpty()){%> 
+					            $('tbody td').mouseenter(function(){
+					               $(this).parent().css({'background':'darkgray', 'cursor':'pointer'}); // 커서 올리면 흑색
+					            }).mouseout(function(){
+					               $(this).parent().css('background', 'none'); //벗어나면
+					            }).click(function(){
+					               var bId = $(this).parent().children().children('input').val(); // 버튼을 누르면 bId에 데이터 값 저장-> 값을 /q_detail.no에 보내줌
+					               <% if(loginUser != null){%> //로그인 시 가능
+					                  location.href = '<%= request.getContextPath() %>/detail.no?bId=' + bId; 
+					               <% }else{ %>
+					                  alert('회원만 이용할 수 있는 서비스입니다.')
+					               <% } %>
+					            })
+					        <% } %>      
+				         });
+				      	</script>
+		     <%@ include file="../Common/page.jsp"%>
         </section>
     <%@ include file="../Common/footer.jsp" %>
 </body>

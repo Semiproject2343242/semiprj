@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
+import board.model.vo.Reply;
 
 public class QuestionDAO {
-	
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -115,8 +115,8 @@ public class QuestionDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
-		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, 'QA', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?)";
+//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜, 수정날짜, 조회수, 추천수, 삭제여부, 글쓴이번호, 댓글수, AC_SATA, LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME,RECRUIT_STARTDATE,RECRUIT_ENDDATE,ACTIVITY_STARTDATE,ACTIVITY_ENDDATE)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL, 'QA', ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, NULL, NULL, DEFAULT, NULL, NULL, ?, NULL, NULL, NULL, NULL)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -176,6 +176,39 @@ public class QuestionDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Reply> selectReplyList(Connection conn, int bId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reply> list = null;
+		
+		String query = "selectReplyList=SELECT * FROM RLIST WHERE REF_BID=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Reply>();
+			while(rset.next()) {
+				list.add(new Reply(rset.getInt("reply_id"),
+									rset.getString("reply_content"),
+									rset.getInt("ref_bid"),
+									rset.getString("nickname"),
+									rset.getDate("create_date"),
+									rset.getDate("modify_date"),
+									rset.getString("status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 	
 }

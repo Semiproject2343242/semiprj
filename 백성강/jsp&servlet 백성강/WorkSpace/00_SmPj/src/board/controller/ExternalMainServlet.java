@@ -48,7 +48,8 @@ public class ExternalMainServlet extends HttpServlet {
 		
 		//페이징
 		ArrayList<Board> list = new ExternalService().selectList(pi); 
-
+		System.out.println("list : " +list);
+		System.out.println("pi : " + pi);
 		String page = null;
 		
 /*		if(result==0) 

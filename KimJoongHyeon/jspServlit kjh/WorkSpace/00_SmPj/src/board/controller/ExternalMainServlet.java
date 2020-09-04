@@ -44,7 +44,7 @@ public class ExternalMainServlet extends HttpServlet {
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageInfo pi = Page.PageInfo("대외활동", currentPage, "/main.ea");
+		PageInfo pi = Page.PageInfo("대외", currentPage, "/main.ea");
 		
 		//페이징
 		ArrayList<Board> list = new ExternalService().selectList(pi); 

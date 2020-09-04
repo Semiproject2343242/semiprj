@@ -97,6 +97,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         String title = multiRequest.getParameter("ea_title");
 	         String content = multiRequest.getParameter("ea_text_contents");
 	         String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
+	         System.out.println(titleImage);
 	         int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 	 		 String age = "";
 	 		 if(agearr != null) {
@@ -208,7 +209,6 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	        			 fileList.add(af);
 	        		 }
 	        	 }else{
-	        		 System.out.println(originFiles.size());
 	        		 for(int i  = originFiles.size() - 1; i>=0; i--) {
 	        			 FileVO af = new FileVO();
 	        			 af.setFilePath(savePath);
