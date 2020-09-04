@@ -1,11 +1,14 @@
-<%@page import="oracle.net.aso.b"%>
+<%@page import="board.model.vo.FileVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="oracle.net.aso.*"%>
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board"); 
 	System.out.println("공지사항글수정 에서의 Board : " + b);	
-
+	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	
 	String categoryStr = b.getCgName();
 	String[] category = new String[2];
 	String[] splitStr = categoryStr.split(",");
@@ -61,7 +64,13 @@
             	</select>
             	
             	<textarea id="textarea" name="content" style="resize:none; "> <%= b.getBoardContent() %></textarea><br>
-            	<input type="file" id="file"><br>
+            	
+            	<div id="fileArea">
+					<input type="file" id="file1" multiple="multiple" name="file1">
+					<input type="file" id="file2" multiple="multiple" name="file2">
+					<input type="file" id="file3" multiple="multiple" name="file3">
+				</div>
+            	
             	<div id="buttons1">
                 	<input type="submit" id="insertNoBtn" value="등록">
                 	<input type="button" onclick="location.href='javascript:history.go(-1);'" id="cancelBtn" value="취소">

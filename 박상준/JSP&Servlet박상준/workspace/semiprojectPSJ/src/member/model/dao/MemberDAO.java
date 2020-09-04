@@ -139,6 +139,7 @@ public class MemberDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -383,7 +384,7 @@ public class MemberDAO {
 			pstmt.setInt(1, loginMemberNo);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Board>();
-			
+			//자유게시판 테이블 다시 만들었죠? 연우씨가준거아 없구나
 			while(rset.next()) {
 				Board bo = new Board(rset.getInt("B_NO"),
 									 rset.getString("B_TITLE"),
@@ -391,6 +392,7 @@ public class MemberDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));

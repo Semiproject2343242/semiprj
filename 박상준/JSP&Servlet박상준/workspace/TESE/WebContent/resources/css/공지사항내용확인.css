@@ -11,15 +11,16 @@
         #p1{font-size:15px}
         #buttons{float: right; text-align: right; margin-right:5%;}
         .button1{height:30px; width:100px}
-        #div1{width:85%; height: auto; margin-left:5%}
+        #div1{width:90%; height: auto; margin-left:5%}
         #img{width:400px ; height:300px; }
         #img1{float:left; width:90px; height:90px;}
         #span1{color:red}
 
         /* 댓글 */
-        #comment{float: left;}
+       
         #text3{float: left;text-align: left; height:auto; width:70%; margin-left:1%; font-size:20px} 
         #text4{float: right;text-align: right; height:auto; font-size:18px}
         #textarea{float: left; width:80%; height:100px; margin-left:10%}
         #button4{float: right; width:8% ; height:60px; margin-top:20px}
+        
 

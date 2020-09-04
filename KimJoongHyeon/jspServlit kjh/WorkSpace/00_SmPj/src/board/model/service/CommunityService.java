@@ -63,14 +63,14 @@ public class CommunityService {
 		return result;
 	}
 
-	public ArrayList selectExList(int i, PageInfo pi) {
+	public ArrayList selectExList(int i) {
 		Connection conn = getConnection();
 		
 		ArrayList list = null;
 		
 		CommunityDAO dao = new CommunityDAO();	
 		if(i == 1) {
-			list = dao.selectBList(conn,pi);
+			list = dao.selectBList(conn);
 		} else {
 			list = dao.selectFList(conn);
 		}
@@ -151,7 +151,6 @@ public class CommunityService {
 		Connection conn = getConnection();
 		
 		CommunityDAO dao = new CommunityDAO();
-		System.out.println("왔다감");
 		int result = dao.AddFile(conn, fileList);
 		
 		if(result>0) {
@@ -175,6 +174,25 @@ public class CommunityService {
 		if(i == 1) {
 			list = dao.selectBListS(conn,pi);
 		} else {
+			list = dao.selectFList(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectExSearchList(int i, String category, String[] agearr, String[] localarr) {
+Connection conn = getConnection();
+		
+		ArrayList list = null;
+		
+		CommunityDAO dao = new CommunityDAO();	
+		if(i == 1) {
+			System.out.println("리스트 가져오기 실행");
+			list = dao.selectSearchBList(conn,category,agearr,localarr);
+		} else {
+			System.out.println("파일 가져오기 실행");
 			list = dao.selectFList(conn);
 		}
 		

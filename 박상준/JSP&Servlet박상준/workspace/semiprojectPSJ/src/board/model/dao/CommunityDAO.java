@@ -102,6 +102,7 @@ public class CommunityDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -290,7 +291,7 @@ public class CommunityDAO {
 		
 		return result;
 	}
-
+	
 	public int insertAddFile(Connection conn, ArrayList<FileVO> fileList) {
 		PreparedStatement pstmt = null;
 		int result = 0;

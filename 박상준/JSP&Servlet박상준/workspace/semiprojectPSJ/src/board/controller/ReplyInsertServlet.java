@@ -38,7 +38,17 @@ public class ReplyInsertServlet extends HttpServlet {
 		int result = service.insertReply(reply);
 		
 		if(result > 0) {
-			response.sendRedirect("detail.no?bId="+bId);
+			// 임시로 만든 댓글 로직임
+			
+			// 공지사항 댓글 테스트 시 주석 풀기
+//			response.sendRedirect("detail.no?bId="+bId);
+			
+			// Q/A 댓글 테스트 시 주석 풀기
+			response.sendRedirect("q_detail.qa?bId="+bId);
+			
+			// 자유게시판 댓글 테스트 시 주석 풀기
+//			response.sendRedirect("fDetail.cm"+bId);
+			
 		} else {			
 			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");

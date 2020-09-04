@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>회원가입</title>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
+        <script  src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
     </head>
     <style>
@@ -546,8 +546,8 @@
                            <table>
                               <tr>
                                  <td width="200px"><label class="must">*</label> 아이디</td>
-                                 <td class="middletable"><input type="text" maxlength="13" name="joinUserId" required></td>
-                                 <td width="200px"><input type="button" id="idCheck" value="중복확인"></td>
+                                 <td class="middletable"><input type="text" maxlength="13"  name="joinUserId"  id="joinUserId" required></td>
+                                 <td width="200px"><label id="idResult"></label></td>
                               </tr>
                               <tr>
                                  <td><label class="must">*</label> 비밀번호</td>
@@ -561,6 +561,23 @@
                               <tr>
                                  <td><label class="must">*</label> 이름</td>
                                  <td class="middletable"><input type="text" name="userName" required></td>
+                              </tr>
+                                  <tr>
+                                 <td><label class="must">*</label>닉네임</td>
+                                 <td class="middletable"><input type="text" name="nickName" id="nickName" required></td>
+                                 <td width="200px">
+                                 	<input style=" margin-left:-30%;background-color:skyblue; color:white; font-size:15px;" type="button" id="nickNameCheck" value="중복확인" >
+                                 </td>
+                              </tr>
+                              <tr>
+                               <td><label class="must">*</label>성별</td>
+                              <td> <input type="radio" name="gender" value="M" >남자
+                                  <input type="radio"  name="gender" value="W" >여자</td>	
+                              </tr>
+                             
+                                  <tr>
+                                 <td><label class="must">*</label>생년월일</td>
+                                 <td class="middletable"><input type="date" name="userBirthday" required></td>
                               </tr>
                               
                               <tr>
@@ -581,17 +598,82 @@
                               </tr>
                              
                            </table>
-                           
-                        
-                           
                            <div class="btns" id="signUpBtns">
                               <input id="signUpBtn" type="submit" value="가입하기">
                               <input type="button" id="goMain" onclick="goMain();" value="메인으로">
                            </div>
-                        </form>
+                        </form>         
                      </div>
-                  
-
+                     
+                     <script>
+/*              		 	var isUsable = false;
+            		 	var isIdChecked = false;
+            		 	
+            			$('#joinUserId').on('change paste keyup', function(){ //change paste keyup은 키 변경시
+            				isIdChecked = false;
+            			}); */
+            			
+            			$('#joinUserId').change(function(){
+            				var userId = $('#joinUserId');
+            				
+            				if(!userId || userId.val().length <4 ){
+            					alert('아이디는 최소 4자리 이상이어야 합니다.');
+            					userId.focus();
+            				}else{
+            					$.ajax({
+            						url: "<%= request.getContextPath() %>/checkId.me",
+            						type: 'post', 
+            						data: {userId:userId.val()},
+            						success: function(data){
+            							console.log(data);
+            							
+            							if(data =="success"){
+            								$('#idResult').text('사용가능합니다.');
+            								$('#idResult').css({'color':'green', 'float':'left','display':'inline-block'});
+/*             								isUsable = true;
+            								isIdCheck=true; */
+            							}else{
+            								$('#idResult').text(' 사용 불 가능합니다.');
+            								$('#idResult').css({'color':'red', 'float':'left','display':'inline-block'});
+            								userId.focus();
+/*             								isUsable = true;
+            								isIdCheck=true; */
+            							}
+            							
+            						}
+            					});
+            					
+            				}
+            			});
+            			</script>
+            			<script>	
+	            		 	$('#nickNameCheck').click(function(){
+	            				var nickName = $('#nickName');
+	            				console.log(nickName);
+	            				
+	            				if(!nickName || nickName.val().length <3 ){
+	            					alert('닉네임는 최소 3자리 이상이어야 합니다.');
+	            					nickName.focus();
+	            				}else{  
+	            					$.ajax({
+	            						url: "<%= request.getContextPath() %>/checkNickName.me",
+	            						type: 'post', 
+	            						data: {nickName:nickName.val()},
+	            						success: function(data){
+	            							console.log(data);
+	            							
+	            							if(data =="success"){
+	            								alert(' 사용가능합니다.');
+	            							}else{
+	            								alert(' 사용 불 가능합니다.');
+	            								nickName.focus();
+	            							}
+	            							
+	            						}
+	            					});		
+	            				  }  
+	            			})
+            			</script>
                         </div>
 
                     </div>

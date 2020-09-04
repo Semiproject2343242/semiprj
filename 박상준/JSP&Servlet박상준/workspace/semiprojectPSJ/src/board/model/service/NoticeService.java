@@ -77,7 +77,7 @@ public class NoticeService {
 	}
 
 
-	public int deliteBoard(Board board) {
+	public int deleteBoard(Board board) {
 		Connection conn = getConnection();
 		NoticeDAO nDAO = new NoticeDAO();
 		int result = nDAO.boardDelete(conn, board);
@@ -147,17 +147,11 @@ public class NoticeService {
 	public ArrayList<FileVO> selectThumbnail(int bId) {
 		Connection conn = getConnection();
 		
-		int result = new NoticeDAO().updateCount(conn, bId);
-		
 		ArrayList<FileVO> list = null;
-		if(result > 0) {
-			list = new NoticeDAO().selectThumbnail(conn, bId);
+		list = new NoticeDAO().selectThumbnail(conn, bId);
 		
-			if(list != null) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
+		if(list != null) {
+			commit(conn);
 		} else {
 			rollback(conn);
 		}
@@ -172,18 +166,12 @@ public class NoticeService {
 	/////////////////////// 수정 사항 ///////////////////////////
 	public ArrayList<FileVO> selectImageList(int bId) {
 		Connection conn = getConnection();
-		
-		int result = new NoticeDAO().updateCount(conn, bId);
-		
+				
 		ArrayList<FileVO> list = null;
-		if(result > 0) {
-			list = new NoticeDAO().selectImageList(conn, bId);
+		list = new NoticeDAO().selectImageList(conn, bId);
 		
-			if(list != null) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
+		if(list != null) {
+			commit(conn);
 		} else {
 			rollback(conn);
 		}
@@ -196,18 +184,13 @@ public class NoticeService {
 	
 	public ArrayList<FileVO> selectFileList(int bId) {
 		Connection conn = getConnection();
-		
-		int result = new NoticeDAO().updateCount(conn, bId);
-		
+				
 		ArrayList<FileVO> list = null;
-		if(result > 0) {
-			list = new NoticeDAO().selectFileList(conn, bId);
+
+		list = new NoticeDAO().selectFileList(conn, bId);
 		
-			if(list != null) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
+		if(list != null) {
+			commit(conn);
 		} else {
 			rollback(conn);
 		}

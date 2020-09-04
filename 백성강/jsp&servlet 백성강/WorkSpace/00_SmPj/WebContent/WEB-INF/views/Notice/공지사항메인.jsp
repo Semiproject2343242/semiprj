@@ -44,6 +44,7 @@
           			<%= b.getBoardNo() %>
           		</td>
           		<td><%= b.getCgName() %></td>
+          		<td><%= b.getBoardTitle() %></td>
           		<td><%= b.getBoardWriter() %></td>
           		<td><%= b.getBoardCreateDate()  %></td>
           		<td><%= b.getBoardViewCount()  %></td>
@@ -53,7 +54,6 @@
                 </tbody>
                 <tfoot>
 	                <tr>
-	                
 	                <td colspan="5"></td>
 	                <td>
 	                	<% if(loginUser != null){ %>

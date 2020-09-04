@@ -25,7 +25,7 @@ public class NoticeDeleteServlet extends HttpServlet {
      */
     public NoticeDeleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stubrr편---안
     }
 
 	/**
@@ -36,7 +36,7 @@ public class NoticeDeleteServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 
 		Board board = new Board(no);
-		int result = new NoticeService().deliteBoard(board);
+		int result = new NoticeService().deleteBoard(board);
 		
 		if(result > 0) {
 			response.sendRedirect("main.no");

@@ -1,11 +1,17 @@
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Member member = (Member)request.getAttribute("member");
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>관리자(대외 활동 신청)</title>
+    <title>정부 지원금 바로 지금</title>
     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
@@ -38,17 +44,19 @@
     <%@ include file="../Common/header.jsp" %>
     <section>
         <aside>
-            <h2><a href="#">관리자</h2></a>
+            <h2><a href="${pageContext.request.contextPath}/adminPage.ad">
+            	관리자
+            </h2></a>
             <hr>
             <div>
                 <dl>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/memList.ad">
                             <h3>회원 목록 조회</h3>
                         </a></dt>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/spList.ad">
                             <h3>정보 공유 신청</h3>
                         </a></dt>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/eaList.ad">
                             <h3>대외 활동 신청</h3>
                         </a></dt>
                 </dl>
@@ -70,80 +78,63 @@
                     <button type="submit">검색</button>
                 </div>
                 <div id="tableDiv">
-                    <table id="infoTable">
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>카테고리</th>
-                            <th>작성자</th>
-                            <th>게시 날짜</th>
-                            <th>조회수</th>
-                            <th>승인상태</th>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><a href="#">제목1</a></td>
-                            <td>카테고리1</td>
-                            <td>김중현</td>
-                            <td>2020.01.01</td>
-                            <td>123</td>
-                            <td>N</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><a href="#">제목2</a></td>
-                            <td>카테고리2</td>
-                            <td>박상준</td>
-                            <td>2020.02.02</td>
-                            <td>4</td>
-                            <td>Y</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">제목3</a></td>
-                            <td>카테고리3</td>
-                            <td>이규호</td>
-                            <td>2020.03.03</td>
-                            <td>13</td>
-                            <td>N</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#">제목4</a></td>
-                            <td>카테고리4</td>
-                            <td>백성강</td>
-                            <td>2020.04.04</td>
-                            <td>128</td>
-                            <td>N</td>
-                        </tr>
-                                                <tr>
-                            <td>1</td>
-                            <td><a href="#">제목5</a></td>
-                            <td>카테고리5</td>
-                            <td>김연우</td>
-                            <td>2020.05.05</td>
-                            <td>8</td>
-                            <td>Y</td>
-                        </tr>
+                	<table class="contentsTable" width="800px" align="center">
+	                	<thead>
+	                        <tr>
+	                            <th>번호</th>
+	                            <th>제목</th>
+	                            <th>카테고리</th>
+	                            <th>작성자</th>
+	                            <th>게시 날짜</th>
+	                            <th>조회수</th>
+	                            <th>승인상태</th>
+	                        </tr>
+	            		</thead>
+	            		<tbody>
+							<% if(list.isEmpty()){ %>
+							<tr>
+								<td colspan="7">글이 존재 하지 않습니다.</td>
+							</tr>
+						<% } else { %>
+						<%		for (Board b : list) { %>
+							<tr>
+								<td><input type="hidden" value="<%=b.getBoardNo()%>">
+									<%=b.getBoardNo()%></td>
+								<td><%=b.getBoardTitle()%></td>
+								<td><%=b.getCgName() %></td>
+								<td><input type="hidden" value="<%=b.getBoardWriterNo()%>">
+									<%=b.getBoardWriter()%></td>
+								<td><%=b.getBoardCreateDate()%></td>
+								<td><%=b.getBoardViewCount()%></td>
+								<td><input type="hidden" value="<%=b.getEnrollState()%>">
+									<%=b.getEnrollState()%></td>
+							</tr>
+						<%		} %>
+						<%	} %>
+						</tbody>
                     </table>
+                    <%@ include file="../Common/page.jsp" %>
                 </div>
             </div>
-
-            <ul align="center">
-                <div class = "pagination">
-                    <a href="#" title = "이전" class="pre"><</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#" title = "다음" class="next">></a>
-                </div>
-            </ul>
-
         </div>
-
-
+    <script>
+	    $(function(){
+	    	<%if(!list.isEmpty()){%> 
+	        	$('tbody td').mouseenter(function(){
+	            	$(this).parent().css({'background':'darkgray', 'cursor':'pointer'});
+	            }).mouseout(function(){
+	            	$(this).parent().css('background', 'none');
+	            }).click(function(){
+	                var bId = $(this).parent().children().children('input').val();
+	            <% if(loginUser != null){%>
+	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	            <% }else{ %>
+	            		alert('회원만 이용할 수 있는 서비스입니다.')
+	            <% } %>
+	         });
+	         <% } %>
+		});
+    </script>
     </section>
     <%@ include file="../Common/footer.jsp" %>
 </body>

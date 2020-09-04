@@ -200,9 +200,9 @@
 		<div id="main_section" align="center">
 			<div class="box" style="background: #BDBDBD;">
 				<%if(profile == null) { %>
-					<img class="profile" src="${pageContext.request.contextPath}/member_profile/profileDefault.png">
+					<img class="profile" src="${pageContext.request.contextPath}/UploadFolder/member_profile/profileDefault.png">
 				<% } else { %>
-					<img class="profile" src="<%= request.getContextPath() %>/member_profile/<%=profile.getChangeName()%>">
+					<img class="profile" src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%=profile.getChangeName()%>">
 				<% } %>
 			</div>
 	
