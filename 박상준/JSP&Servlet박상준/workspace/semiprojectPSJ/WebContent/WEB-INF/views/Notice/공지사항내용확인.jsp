@@ -21,6 +21,12 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항내용확인.css">
 
     <style>
+   .comment {
+    position: relative;
+    line-height:normal;
+}
+    .replyContent{width:680px}
+    
     </style>
 </head>
 <body>
@@ -109,23 +115,30 @@
                     <hr><br>
 
                     <div id="comment">
+                   
                     <% if(replyList.isEmpty()){ %>
-                    	<text class="text3"><p class="p1">댓글이 없습니다.</p></text>
+                     	<text class="text3"><p class="p1">댓글이 없습니다.</p></text>
                     <% } else { %>
                     	<% for(int i = 0; i < replyList.size(); i++) { %>
-                    	<img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>" id="profile">
+                    	 <table>
+                    	<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>" height="60" width="60" loading="lazy" id="profile"></td>
                        	<text class="text3">
-                       		<p><%= replyList.get(i).getReplyWriter() %></p>
-                       		<p><%= replyList.get(i).getReplyContent() %></p>
+                       		<td><p class = replyWriter><%= replyList.get(i).getReplyWriter() %></p>
+                       		<p class = replyContent><%= replyList.get(i).getReplyContent() %></p></td>
                        	</text>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
                     	<text class="text4">
-                    		<p><a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a></p>
                     		<!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                    		<p>게시일 : <%= replyList.get(i).getCreateDate() %></p> <!-- 게시 날짜 -->
+                    		<td><p>게시일 : <%= replyList.get(i).getCreateDate() %></p> <!-- 게시 날짜 -->
                     		<p>수정일 : <%= replyList.get(i).getModifyDate() %></p> <!-- 수정 날짜 -->
+                    		<div class = replyIDU align="right"><p> <a href> 삭제 </a> <a href> 수정 </a></p></div></td>
                     	</text>
                         <% } %>
                    	<% } %>
+                   	</table>
                     </div>
         			
                     <br clear="all"><br>
@@ -143,7 +156,7 @@
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>
         
-        <script>
+   <script>
         
 //		$(function(){
 //			$('#addReply').click(function(){
