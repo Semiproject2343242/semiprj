@@ -43,14 +43,13 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
 	      
 	      // encType 이 multipart/form-data 로 전송되었는지 확인
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "thumbnail_uploadFiles/";
+	         String savePath = root + "support_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         
@@ -173,6 +172,8 @@ public class CommuSupportInsertServlet extends HttpServlet {
          b.setCgName(category);
          b.setTcName(age);
          b.setLcName(local);
+         b.setReStratDate(sp_res_date);
+         b.setReEndDate(sp_ree_date);
          System.out.println(b);
          System.out.println(originFiles);
          System.out.println(saveFiles);

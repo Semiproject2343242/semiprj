@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.BoardService;
 import board.model.service.NoticeService;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
+import board.model.vo.Reply;
 
 
 @WebServlet("/detail.no")
@@ -29,14 +31,18 @@ public class NoticeDetailServlet extends HttpServlet {
 		
 		NoticeService service = new NoticeService();
 		Board board = service.selectBoard(bId);
-		ArrayList<FileVO> fileList = service.selectThumbnail(bId);
-		
+		ArrayList<FileVO> imageList = service.selectImageList(bId);
+		ArrayList<FileVO> fileList = service.selectFileList(bId);
+		ArrayList<Reply> replyList = new BoardService().selectReplyList(bId);
+				
 		String page = null;
 		
 		if(board != null) {
 			page = "WEB-INF/views/Notice/공지사항내용확인.jsp";
 			request.setAttribute("board", board);
+			request.setAttribute("imageList", imageList);
 			request.setAttribute("fileList", fileList);
+			request.setAttribute("replyList", replyList);
 		} else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
 			request.setAttribute("msg", "공지사항 상세조회에 실패하였습니다.");

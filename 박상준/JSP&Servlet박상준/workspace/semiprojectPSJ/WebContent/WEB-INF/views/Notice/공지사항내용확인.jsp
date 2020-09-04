@@ -1,14 +1,15 @@
+<%@page import="board.model.vo.Reply"%>
 <%@page import="java.util.ArrayList"%>
-
 <%@page import="board.model.vo.FileVO"%>
-
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
  	Board b = (Board)request.getAttribute("board");
 	System.out.println("공지사항내용확인.jsp에서의 board : " + b);
+	ArrayList<FileVO> imageList = (ArrayList<FileVO>)request.getAttribute("imageList");
 	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	ArrayList<Reply> replyList = (ArrayList<Reply>)request.getAttribute("replyList");
 %>
 <!DOCTYPE html>
 <html>
@@ -72,15 +73,24 @@
 						}
 					</script>
                 </div>
+                </form>
                 <br clear="all"> 
                 <br>   
                 <hr>
                 <div id="div1">
                     <br>
-                    	<textarea cols="125" rows="40" name="content" style="resize:none; font-size:130%; border:none " readonly><%= b.getBoardContent() %></textarea>
-                    	<div style="text-align: center">
-                        	<img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
-                    	</div>
+                    <textarea cols="125" name="content" style="resize:none; font-size:130%; border:none " readonly><%= b.getBoardContent() %></textarea>
+                    <div style="text-align: center">
+                    <%if(imageList.isEmpty()) {%>
+                    
+                   	<% } else { %>
+                   		<%for(int i=0; i < imageList.size(); i++) { %>
+                   			<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=imageList.get(i).getChangeName()%>">
+								<img src="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%= imageList.get(i).getChangeName() %>" width="300px" height="80%">
+							</a><br>
+						<% } %>
+					<% } %>
+                   	</div>
                     <br>
 
                     <h2> 참고자료 (<%= fileList.size() %>) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
@@ -88,7 +98,7 @@
                     	첨부파일 없음.
                     <% } else { %>
                     	<%for(int i=0; i < fileList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
+							<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
 								<%=fileList.get(i).getOriginName()%>
 							</a><br>
 						<% } %>
@@ -99,28 +109,72 @@
                     <hr><br>
 
                     <div id="comment">
-                        <img src="example/1.PNG" id="img1">
-                        <text id="text3"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                            댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
-                        </text>
-                        <text id="text4">
-                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
-                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                            <br><%= b.getBoardModifyDate() %> <!-- 날짜 -->
-                        </text>
+                    <% if(replyList.isEmpty()){ %>
+                    	<text class="text3"><p class="p1">댓글이 없습니다.</p></text>
+                    <% } else { %>
+                    	<% for(int i = 0; i < replyList.size(); i++) { %>
+                    	<img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>" id="profile">
+                       	<text class="text3">
+                       		<p><%= replyList.get(i).getReplyWriter() %></p>
+                       		<p><%= replyList.get(i).getReplyContent() %></p>
+                       	</text>
+                    	<text class="text4">
+                    		<p><a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a></p>
+                    		<!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
+                    		<p>게시일 : <%= replyList.get(i).getCreateDate() %></p> <!-- 게시 날짜 -->
+                    		<p>수정일 : <%= replyList.get(i).getModifyDate() %></p> <!-- 수정 날짜 -->
+                    	</text>
+                        <% } %>
+                   	<% } %>
                     </div>
-        
-                    <br clear="all"><br>    
-                    <div>
-                        <textarea id="textarea" placeholder="댓글을 입력하세요."></textarea><br>
-                        <button id=button4>등록</button>
-                    </div>
+        			
+                    <br clear="all"><br>
+                        
+                    <form action="replyInsert.re">
+	                    <div>
+	                        <textarea id="textarea" name="replyContent" placeholder="댓글을 입력하세요."></textarea><br>
+	                        <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
+	                        <input type="submit" value="등록">
+	                    </div>
+                    </form>
                 </div>
             </div>
-          </form>
         </div>
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>
+        
+        <script>
+        
+//		$(function(){
+//			$('#addReply').click(function(){
+//				
+//				var bId = <%= b.getBoardNo() %>
+//				var content = $('#textarea').val();
+//				
+//				$.ajax({
+//					type: "POST",
+//					url: "replyInsert.re",
+//					data: {content:content, bId:bId},
+//					success: function(data){
+//							alert("댓글이 정상적으로 등록되었습니다.");
+//							$("#textarea").val("");
+//							selectReplyList();
+//					}
+//				});
+//			});
+//		});
+//		
+//		function selectReplyList(){
+//			$.ajax({
+//				type: "get",
+//				url: "replyList.re",
+//				success: function(){
+//					
+//				}
+//			});
+//		}
+		
+	</script>
 </body>
 </html>
 

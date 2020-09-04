@@ -38,7 +38,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10; // 10MByte로 전송파일 용량을 제한
 			String root = request.getSession().getServletContext().getRealPath("/"); // 웹 서버 컨테이너 경로 추출
-			String savePath = root + "notice_uploadFiles/";
+			String savePath = root + "UploadFolder/notice_uploadFiles/";
 			
 			File f = new File(savePath);
 			if(!f.exists()) {
@@ -56,7 +56,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				System.out.println("files.nextElement : "+name);
-				System.out.println("multiRequest,getFilesystemName(name) : "+multiRequest.getFilesystemName(name));
+				System.out.println("multiRequest.getFilesystemName(name) : "+multiRequest.getFilesystemName(name));
 				// multiRequest.getFilesystemName() : MyRenameFilePolicy의 rename메소드에서 작성한대로 rename된 파일 명
 				if(multiRequest.getFilesystemName(name) != null) {
 					saveFiles.add(multiRequest.getFilesystemName(name));
@@ -83,10 +83,28 @@ public class NoticeInsertServlet extends HttpServlet {
 				file.setOriginName(originFiles.get(i));
 				file.setChangeName(saveFiles.get(i));
 				
-				if(i == originFiles.size() - 1) {
+				String extension3 = file.getOriginName().substring(file.getOriginName().length()-3);
+				String extension4 = file.getOriginName().substring(file.getOriginName().length()-4);
+				
+				// 파일 하나일때
+				if(i == originFiles.size() - 1 && (extension3.equals("jpg") || extension3.equals("JPG") 
+						|| extension4.equals("jpeg") || extension4.equals("JPEG") || extension3.equals("png") 
+						|| extension3.equals("PNG") || extension3.equals("gif") || extension3.equals("GIF")
+						|| extension3.equals("bmp") || extension3.equals("BMP"))) {
+					file.setFileLevel(0);
+					System.out.println("file.getOriginName : "+file.getOriginName());
+					System.out.println("file.getOriginName().substring(file.getOriginName().length()-3) : "+file.getOriginName().substring(file.getOriginName().length()-3));
+				
+				// 파일 여러개 일때
+				}else if(extension3.equals("jpg") || extension3.equals("JPG") || extension4.equals("jpeg") 
+						|| extension4.equals("JPEG") || extension3.equals("png") || extension3.equals("PNG") 
+						|| extension3.equals("gif") || extension3.equals("GIF") || extension3.equals("bmp") 
+						|| extension3.equals("BMP")) {
 					file.setFileLevel(0);
 				}else {
 					file.setFileLevel(1);
+					System.out.println("file.getOriginName : "+file.getOriginName());
+					System.out.println("file.getOriginName().substring(file.getOriginName().length()-3) : "+file.getOriginName().substring(file.getOriginName().length()-3));
 				}
 				
 				fileList.add(file);
@@ -102,6 +120,28 @@ public class NoticeInsertServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
+				request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
+				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
+				view.forward(request, response);
+			}
+			
+		// 파일을 안올렸을때
+		}else {
+			
+			MultipartRequest multiRequest = new MultipartRequest(request, "UTF-8");
+			
+			String title = multiRequest.getParameter("title"); //HTTP 요청의 파라미터 값을 얻기 위해 사용하는 것이 request.getParameter() 메쏘드입니다.
+			String content = multiRequest.getParameter("content");
+			int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+			String category = multiRequest.getParameter("category");
+			
+			Board b = new Board(title, content, userId, category);
+			
+			int result = new NoticeService().insertNotice(b);
+			
+			if(result > 0) {
+				response.sendRedirect("main.no");
+			} else {
 				request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
 				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
 				view.forward(request, response);
