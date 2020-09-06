@@ -6,21 +6,21 @@
     pageEncoding="UTF-8"%>
 <%
  	Board b = (Board)request.getAttribute("board");
-	System.out.println("자유게시판.jsp에서의 board : " + b);
+	System.out.println("질문확인.jsp에서의 board : " + b);
 	ArrayList<FileVO> imageList = (ArrayList<FileVO>)request.getAttribute("imageList");
 	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
 	ArrayList<Reply> replyList = (ArrayList<Reply>)request.getAttribute("replyList");
 %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>정부지원금 바로지금</title>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
- 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-
-    <style>
-     section{
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+  </head>
+  <style>
+  section{
   	width: 950px;
   }
   	#filetext{
@@ -42,16 +42,18 @@
   		float:left;
   		text-align:right;
   	}
+  	  	#comment{
+  		text-align:top;
+  		}
   	.replyIWC{width: 430px;}
-	.udlbtn{background-color:sky; width:70px; height:40px; margin:10px;}
-    </style>
-</head>
-<body>
+  	.udlbtn{background-color:sky; width:70px; height:40px; margin:10px;}
+  </style>
+  <body>
     <%@ include file="../Common/header.jsp" %>
     <section>
       <aside>
         <h2><%= b.getBoardNo() %></h2>
-        <hr />
+        <hr>
         <h2>제목</h2>
         <h2>카테고리</h2>
         <h2 id="content">내용</h2>
@@ -60,7 +62,7 @@
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
 	        <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
 	        <input type="hidden" size="50" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
-	        <h2 align="center">자유게시판</h2>
+	        <h2 align="center">묻고 답하기</h2>
 	        <hr>
        			<input type="hidden" name="title"  value="<%= b.getBoardTitle() %>" />
 				<input type="hidden" name="writer" value="<%= b.getBoardWriter()%>">
@@ -72,19 +74,19 @@
       			
 				<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
 	        </h4>
-		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>
+		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>	       
 		</form>
         <br clear="all"> 
         <br>   
         <hr>
-         <div id="div1">
+        <div id="div1">
             <div style="text-align: center">
             <%if(imageList.isEmpty()) {%>
                	이미지 자료 없음.
            	<% } else { %>
            		<%for(int i=0; i < imageList.size(); i++) { %>
-           			<a href="<%= request.getContextPath() %>/UploadFolder/FR_uploadFiles/<%=imageList.get(i).getChangeName()%>">
-					<img src="<%= request.getContextPath() %>/UploadFolder/FR_uploadFiles/<%= imageList.get(i).getChangeName() %>" width="300px" height="80%">
+           			<a href="<%= request.getContextPath() %>/UploadFolder/QA_uploadFiles/<%=imageList.get(i).getChangeName()%>">
+					<img src="<%= request.getContextPath() %>/UploadFolder/QA_uploadFiles/<%= imageList.get(i).getChangeName() %>" width="300px" height="80%">
 					</a><br>
 				<% } %>
 			<% } %>
@@ -96,34 +98,33 @@
               	첨부파일 없음.
             <% } else { %>
                	<%for(int i=0; i < fileList.size(); i++){ %>
-					<a href="<%= request.getContextPath() %>/UploadFolder/Free_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
+					<a href="<%= request.getContextPath() %>/UploadFolder/QA_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
 						<%=fileList.get(i).getOriginName()%>
 					</a><br>
 				<% } %>
 			<% } %>
-           <div align="right" style="background-color:skyblue;">
+			 <div align="right" style="background-color:skyblue;">
 				<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
 					<input type="submit" class="udlbtn" id="updateBtn" value="수정">
 					<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 				<% } %>
-				<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/fmain.cm'" id="menuBtn" value="메뉴로">
-				
+				<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
 				<script>
-				function deleteBoard(){
-					var num = <%= b.getBoardNo() %>;
-					var result = window.confirm(num+'삭제?');
-					var wno = <%= b.getBoardWriterNo()%>;
-					console.log(wno);
-				    if(result){
-				    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
-				    }
-				    else{
-				        alert('취소하셨습니다.');
-				    }
-				}
-			</script>
-		</div>
-		<br><br>
+					function deleteBoard(){
+						var num = <%= b.getBoardNo() %>;
+						var result = window.confirm(num+'삭제?');
+						var wno = <%= b.getBoardWriterNo()%>;
+						console.log(wno);
+					    if(result){
+					    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+					    }
+					    else{
+					        alert('취소하셨습니다.');
+					    }
+					}
+				</script>
+			</div>
+			<br><br>
                 <!-- 댓글 --> 
 
                 <div> <h2>댓글</h2> </div>
@@ -135,7 +136,7 @@
                 <% } else { %>
                    	<% for(int i = 0; i < replyList.size(); i++) { %>
                   	<table>
-                  	<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>"  width="80" height="80"  id="profile" style="float:top;")><td>
+                  	<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>"  width="70" height="70"  id="profile" style="float:top;")><td>
                    	<text class="text3">
                    		<td style="margin:0px; vartical-align:top;">
                    		<p class="replyIWC"><h3><%= replyList.get(i).getReplyWriter() %></h3></p>
@@ -172,6 +173,5 @@
         <%@ include file="../Common/footer.jsp" %>
         <script>
         </script>
-</body>
+  </body>
 </html>
-

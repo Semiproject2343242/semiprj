@@ -1,12 +1,12 @@
 <%@page import="board.model.vo.Reply"%>
-<%@page import="board.model.vo.FileVO"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
  	Board b = (Board)request.getAttribute("board");
-	System.out.println("자유게시판.jsp에서의 board : " + b);
+	System.out.println("공지사항내용확인.jsp에서의 board : " + b);
 	ArrayList<FileVO> imageList = (ArrayList<FileVO>)request.getAttribute("imageList");
 	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
 	ArrayList<Reply> replyList = (ArrayList<Reply>)request.getAttribute("replyList");
@@ -17,10 +17,12 @@
     <meta charset="UTF-8">
     <title>정부지원금 바로지금</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
- 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-
-    <style>
-     section{
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
+    
+ 	
+   <style>
+   
+  section{
   	width: 950px;
   }
   	#filetext{
@@ -44,9 +46,9 @@
   	}
   	.replyIWC{width: 430px;}
 	.udlbtn{background-color:sky; width:70px; height:40px; margin:10px;}
-    </style>
-</head>
-<body>
+  
+  </style>
+  <body>
     <%@ include file="../Common/header.jsp" %>
     <section>
       <aside>
@@ -60,7 +62,7 @@
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
 	        <input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
 	        <input type="hidden" size="50" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
-	        <h2 align="center">자유게시판</h2>
+	        <h2 align="center">공지사항</h2>
 	        <hr>
        			<input type="hidden" name="title"  value="<%= b.getBoardTitle() %>" />
 				<input type="hidden" name="writer" value="<%= b.getBoardWriter()%>">
@@ -73,18 +75,19 @@
 				<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
 	        </h4>
 		        <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>
+	        
 		</form>
         <br clear="all"> 
         <br>   
         <hr>
-         <div id="div1">
+        <div id="div1">
             <div style="text-align: center">
             <%if(imageList.isEmpty()) {%>
                	이미지 자료 없음.
            	<% } else { %>
            		<%for(int i=0; i < imageList.size(); i++) { %>
-           			<a href="<%= request.getContextPath() %>/UploadFolder/FR_uploadFiles/<%=imageList.get(i).getChangeName()%>">
-					<img src="<%= request.getContextPath() %>/UploadFolder/FR_uploadFiles/<%= imageList.get(i).getChangeName() %>" width="300px" height="80%">
+           			<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=imageList.get(i).getChangeName()%>">
+					<img src="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%= imageList.get(i).getChangeName() %>" width="300px" height="80%">
 					</a><br>
 				<% } %>
 			<% } %>
@@ -96,34 +99,34 @@
               	첨부파일 없음.
             <% } else { %>
                	<%for(int i=0; i < fileList.size(); i++){ %>
-					<a href="<%= request.getContextPath() %>/UploadFolder/Free_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
+					<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
 						<%=fileList.get(i).getOriginName()%>
 					</a><br>
 				<% } %>
 			<% } %>
-           <div align="right" style="background-color:skyblue;">
+			<div align="right" style="background-color:skyblue;">
 				<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
 					<input type="submit" class="udlbtn" id="updateBtn" value="수정">
-					<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+					<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">	
 				<% } %>
-				<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/fmain.cm'" id="menuBtn" value="메뉴로">
+				<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
 				
 				<script>
-				function deleteBoard(){
-					var num = <%= b.getBoardNo() %>;
-					var result = window.confirm(num+'삭제?');
-					var wno = <%= b.getBoardWriterNo()%>;
-					console.log(wno);
-				    if(result){
-				    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
-				    }
-				    else{
-				        alert('취소하셨습니다.');
-				    }
-				}
-			</script>
-		</div>
-		<br><br>
+					function deleteBoard(){
+						var num = <%= b.getBoardNo() %>;
+						var result = window.confirm(num+'삭제?');
+						var wno = <%= b.getBoardWriterNo()%>;
+						console.log(wno);
+					    if(result){
+					    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+					    }
+					    else{
+					        alert('취소하셨습니다.');
+					    }
+					}
+				</script>
+			</div>
+			<br><br>
                 <!-- 댓글 --> 
 
                 <div> <h2>댓글</h2> </div>
@@ -171,7 +174,8 @@
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>
         <script>
-        </script>
+	</script>
 </body>
 </html>
+
 

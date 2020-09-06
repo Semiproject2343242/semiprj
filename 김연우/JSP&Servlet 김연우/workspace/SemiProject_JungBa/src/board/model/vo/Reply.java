@@ -21,6 +21,11 @@ public class Reply {
 	}
 	
 	
+	public Reply(int replyNo) {
+		super();
+		this.replyNo = replyNo;
+	}
+	
 	// replyInsert를 위한 생성자
 	public Reply(int replyWriterNo, int refBid, String replyContent) {
 		super();
