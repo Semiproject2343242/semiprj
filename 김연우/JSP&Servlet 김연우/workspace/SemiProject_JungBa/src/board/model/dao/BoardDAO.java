@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
@@ -116,6 +117,29 @@ public class BoardDAO {
 
 		return result;
 	}
+	
+	public int deleteReply(Connection conn, int replyNo) {
+
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+				
+		String query = "UPDATE REPLY SET REPLY_ENABLE='N' WHERE REPLY_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, replyNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 	
 	public ArrayList<FileVO> selectFList(Connection conn) {

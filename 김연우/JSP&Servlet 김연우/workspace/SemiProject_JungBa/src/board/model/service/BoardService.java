@@ -57,6 +57,24 @@ public class BoardService {
 		return result;
 	}
 	
+	public int deleteReply(int replyNo) {
+		
+		Connection conn = getConnection();
+		
+		BoardDAO dao = new BoardDAO();
+		
+		int result = dao.deleteReply(conn, replyNo);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}	
+	
+	
 	public ArrayList<FileVO> selectThumbnail(int bId) {
 		Connection conn = getConnection();
 		

@@ -243,13 +243,9 @@ li:hover {
 	               $(this).css('none');
 	            }).click(function(){
 	            	 var bId = $(this).parent().children().children('input').val();
-	               <%if (loginUser != null) {%>
-<%-- 	                  location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId; --%>
-			<%} else {%>
-				alert('회원만 이용할 수 있는 서비스입니다.')
-			<%}%>
-			})
-			})
+	                  location.href = '<%=request.getContextPath()%>/detail.no?bId='+ bId;
+			});
+			});
 		</script>
 			<div class="list_type_a">
 				<div class="area_title">
@@ -277,13 +273,9 @@ li:hover {
 	               $(this).css('none');
 	            }).click(function(){
 	            	 var bId = $(this).parent().children().children('input').val();
-	               <%if (loginUser != null) {%>
-<%-- 	                  location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId; --%>
-			<%} else {%>
-				alert('회원만 이용할 수 있는 서비스입니다.')
-			<%}%>
-			})
-			})
+ 	                  location.href = '<%=request.getContextPath()%>/detail.sp?bId='+ bId;
+			});
+			});
 		</script>
 		</div>
 			<div class="list_type_b">
@@ -312,13 +304,9 @@ li:hover {
 	               $(this).css('none');
 	            }).click(function(){
 	            	 var bId = $(this).parent().children().children('input').val();
-	               <%if (loginUser != null) {%>
-	                  location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId;
-			<%} else {%>
-				alert('회원만 이용할 수 있는 서비스입니다.')
-			<%}%>
-			})
-			})
+	                  location.href = '<%=request.getContextPath()%>/detail.ea?bId='+ bId;
+			});
+			});
 		</script>
 			<div class="list_type_b">
 				<div class="area_title">
@@ -357,52 +345,17 @@ li:hover {
 	       	 	var bName = $(this).children('.area_list_title').val();
 	       	 	switch(bName){
 	       	 	case "자유":
-<%-- 	       	 	location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId; --%>
-	       	 	location.href = '<%=request.getContextPath()%>/fMain.cm';
+	       	 	location.href = '<%=request.getContextPath()%>/fDetail.cm?bId='+bId;
 	       	 	break;
 	       	 	case "지원":
-	       	 		location.href = '<%=request.getContextPath()%>/spMain.cm';
+	       	 		location.href = '<%=request.getContextPath()%>/spDetail.cm?bId='+bId;
 	       	 	break;
 	       	 	case "대외":
-	       	 		location.href = '<%=request.getContextPath()%>/eaMain.cm';
+	       	 		location.href = '<%=request.getContextPath()%>/eaDetail.cm?bId='+bId;
 	       	 	break;
 	       	 	}
-			})
-		})
-		</script>
-			<div class="list_type_b">
-				<div class="area_title">
-					<a href="#"><h3>QA_TEST용</h3></a>
-				</div>
-				<ul id="qa_title">
-					<% if (qaList.isEmpty()) { %>
-						<li><a href="#" class="area_list_qa">조회된 리스트가 없습니다.</a></li>
-					<% } else { %>
-						<% for (Board b : qaList) { %>
-						<li class="area_list">
-						<input type="hidden" value="<%=b.getBoardNo()%>">
-							<div class="area_list_title"><%=b.getBoardTitle()%></div>
-							<div class="area_date"><%=b.getBoardCreateDate()%></div>
-						</li>
-						<% } %>
-					<% } %>
-				</ul>
-			</div>
-		<script>
-        $(function(){
-            $('#qa_title .area_list').mouseenter(function(){
-               $(this).css({'cursor':'pointer'});
-            }).mouseout(function(){
-	               $(this).css('none');
-	            }).click(function(){
-		               var bId = $(this).parent().children().children('input').val();
-		               <%if (loginUser != null) {%>
-		                  location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId;
-						<%} else {%>
-							alert('회원만 이용할 수 있는 서비스입니다.')
-						<%}%>
-					})
-		})
+			});
+		});
 		</script>
 	</section>
 	<br>

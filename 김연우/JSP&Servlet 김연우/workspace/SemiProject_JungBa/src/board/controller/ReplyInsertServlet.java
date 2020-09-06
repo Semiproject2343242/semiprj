@@ -53,12 +53,6 @@ public class ReplyInsertServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-		
-		
-//		response.setContentType("application/json; charset=UTF-8");
-//		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-//		gson.toJson(replyList, response.getWriter());
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

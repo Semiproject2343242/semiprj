@@ -1,29 +1,22 @@
-<%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); %>
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>게시판 기본틀</title>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-  
+<meta charset="UTF-8">
+<title>정부 지원금 바로 지금</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/body.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
- section{
-        display: block;
-    }
-
-  .writertext{
+.writertext{
       line-height: 70px;
       list-style: none;
   }
     .serach_box{
-    	float:rights;
         background-color: RGB(248,248,248);
         display: flex;
     }
@@ -32,39 +25,130 @@
         line-height: 70px;
     }
     .select_btn{
-        height: 50px;
+        height: 40px;
         width: 100px;
         background-color:  RGB(221,228,236);
     }
     .categoty_select{
-        height: 40px;
+        height: 30px;
     }
-    .result_btn{
-        height: 50px;
-        width: 100px;
-        margin-top: 30px;
-        margin-right: 30px;
-    }
+ .result_btn{
+	padding: 15px 15px; 
+	border-radius : 3px; 
+	width:80px; 
+	text-align:center;
+	margin: 0px 5px;
+ }
+ .result_btn:hover{background-color:  rgb(194, 194, 194);}
+
+
+.serachList{
+	width: 610px;
+	height : 955px;
+  	overflow:hidden;
+	position:relative;
+	margin: 50px auto;
 }
+.thumbnailArea {
+	column-width: 600px;
+	height : 955px;
+	top:0;
+    left:0;
+	margin: 0px auto;
+	padding: 0px;
+	position :absolute;
+}
+.board_list {
+	width: 600px;
+	height: 170px;
+	margin-bottom: 20px;
+	display: flex;
+	line-height:20px; 
+	border-bottom: 1px solid silver;
+	border-radius: 5px;
+}
+
+.thumb-list:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+#insertBtn {
+	float: right;
+}
+ #btnBack{
+	 position: absolute;
+	 top: 1050px;
+	 left: 260px;
+	 cursor: pointer;
+	 z-index: 1;
+}
+#btnNext{
+  position: absolute;
+  top: 1050px;
+  right: 120px;
+  cursor: pointer;
+  z-index: 1;
+}
+.imageArea{
+	height: 80%;
+	margin: auto 0px;
+	align-items: "center";
+}
+.textArea_title{
+	width: 100%;
+}
+.textArea{
+	text-align: left;
+	margin-left : 30px;
+	width: 50%
+}
+.textArea1{
+	float: right;
+}
+      
 </style>
 <body>
-   <%@ include file="../Common/header.jsp" %> 
- <!----------------------------------------header------------------------------------------->
-    <section>
-            <h1 align="center">대외활동 검색</h1>
-	<div class="serach_box">
-      <ul class="writertext">
-          <th>
-              <li><h3>카테고리</h3></li>
-              <li><h3>대상</h3></li>
-              <li><h3>지역</h3></li>
-          </th>
-      </ul>
+	<%@ include file="../Common/header.jsp"%>
+	<section>
+		<aside>
+			<h2>
+				<a href="<%=request.getContextPath()%>/main.cm">커뮤니티
+			</h2>
+			</a>
+			<hr>
+			<div>
+				<dl>
+					<dt>
+						<a href="<%=request.getContextPath()%>/fMain.cm"><h3>자유게시판</h3></a>
+					</dt>
+					<dt>
+						<a href="<%=request.getContextPath()%>/spMain.cm"><h3>지원정책
+								게시판</h3></a>
+					</dt>
+					<dt>
+						<a href="<%=request.getContextPath()%>/eaMain.cm"><h3>대외활동
+								게시판</h3></a>
+					</dt>
+
+				</dl>
+			</div>
+		</aside>
+		<div id="main_section">
+		<h2 align="center">대외 활동</h2>
+		<div class="serach_box">
+	      <ul class="writertext">
+	          <th>
+	              <li><h6>카테고리</h6></li>
+	              <li><h6>대상</h6></li>
+	              <li><h6>지역</h6></li>
+	          </th>
+	      </ul>
       <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
       <div class="select_box">
-          <h6>
-              <select class="categoty_select" name="ea_category">
-                  <option value="선택" selected disabled hidden >선택</option>
+          <h3>
+              <select class="categoty_select" name="ea_category" id="ea_category">
+                  <option value="선택" selected>선택</option>
                   <option value="공모전">공모전</option>
                   <option value="채용박람회/취업박람회">채용박람회/취업박람회</option>
                   <option value="경진대회">경진대회</option>
@@ -72,8 +156,8 @@
                   <option value="서포터즈">서포터즈</option>
                   <option value="관람/전시/체험">관람/전시/체험</option>
               </select>
-          </h6>
-          <h6>
+          </h3>
+          <h3>
               <div>
                   <button type="button"class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
                   <button type="button"class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
@@ -123,8 +207,8 @@
                   });
                });
            </script>
-          </h6>
-          <h6 id = "ea_areatable_div">
+          </h3>
+          <h3 id = "ea_areatable_div">
               <div id= "ea_areatable">
 	              <button type="button" class = "select_btn" id= "GP">가평군</button>
 	              <button type="button" class = "select_btn" id= "GY">고양시</button>
@@ -346,28 +430,182 @@
                      });
                });
            </script>
-          </h6>
+          </h3>
       </div>
 	</div>
-	<br clear="all">	    
-      <div class = "sp_button">
-		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="p_sp_search_reset">
-		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit" onclick="location.href='<%= request.getContextPath()  %>/search.ea'">
-	</div>  
-                    <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
-	
-	<div id="result_table">
-	
-	</div>
-	
-	
-	
-	<%@ include file="../Common/page.jsp"%>
-        </section>
-    <%@ include file="../Common/footer.jsp" %>
+	  <div class = "sp_button">
+		<%if (loginUser != null) {%>
+		<input type="button" class="result_btn" onclick="location.href='eaInsertForm.cm'"id="insertBtn" value="작성하기">
+		<%}%>
+		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
+		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
+		</div>
+		<br clear="all">
+			<input type="button" id="btnBack" value="<<">
+		<div class="serachList" align="center">
+			<ul class="thumbnailArea" id=boardArea>
+				
+			</ul>
+		</div>
+			<input type="button" id="btnNext" value=">>">
+		<script>
+		$(function(){//페이지 생성될때 리스트 불러오기
+			$.ajax({
+	            url:'SearchList.ea',
+	            data: {
+				},
+	            success: function(data){
+	               var boardArea = $("#boardArea");
+	               if(data.length>0){
+	                  var boardSize = 0;
+	  	              console.log(data);
+	                  for(var i=0;i<data.length; i++){
+						var input="<li class='board_list' id='board_list"+i+"'><div class='imageArea' id='imageArea"+i+"'>"
+						+"</div><div class='textArea' id='textArea"+i+"'><h3>"
+						+data[i].boardNo+"."
+						+data[i].boardTitle+"</h3><p><b>접수상태 </b>"
+						+data[i].acState+"</p><p><b>지원대상 </b>"
+						+data[i].tcName+"</p><p><b>지역 </b>"
+						+data[i].lcName+"</p></div><div class='textArea1' id='textArea1"+i+"'><b>조회수 </b>"
+						+data[i].boardViewCount+"</p><p><b>추전수 </b>"
+						+data[i].boardReCommend+"</p></div></li>";
+						boardArea.append(input);
+	                  	getAdoptImage(data[i].boardNo,data.length,i);
+	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	                  }
+						getlistCount();
+	               }else{
+	            	   var input="등록된 게시판이 없습니다.";
+	               }
+	            },
+	            error: function(data){
+	               alert("ajax 콘텐츠 에러 발생")
+	            }
+			});
+		});
+		$('#btnSearch').click(function(){// 검색 눌렀을때 리스트 불러오기
+   			var age = document.getElementsByName("ck_ea_age");
+          	var checkAge = [];
+          	for(var i = 0; i < age.length; i++){
+             	if(age[i].checked == true){
+              		checkAge.push(age[i].value);
+              	}
+          	}
+          	var local = document.getElementsByName("ck_lc");
+          	var checkLocal = [];
+          	for(var i = 0; i < local.length; i++){
+       	 		if(local[i].checked == true){
+              		checkLocal.push(local[i].value);
+              	}
+          	}
+   			$.ajax({
+   				url: 'SearchList.ea',
+    			data: {cate:$('#ea_category').val(),
+						age: checkAge,
+    					local:checkLocal
+   						},
+    			success: function(data){
+    				 var boardArea = $("#boardArea");
+    				$('#boardArea').empty();
+    				if(data==null){
+    					  var input="등록된 게시판이 없습니다.";
+	  						boardArea.append(input);
+    				}else{
+	  	               if(data.length>0){
+	  	                  var boardSize = 0;
+	  	                  for(var i=0;i<data.length; i++){
+	  	                	console.log("검색결과 : " + data.lenght);
+	  						var input="<li class='board_list' id='board_list"+i+"'><div class='imageArea' id='imageArea"+i+"'>"
+	  						+"</div><div class='textArea' id='textArea"+i+"'><h3>"
+	  						+data[i].boardNo+"."
+	  						+data[i].boardTitle+"</h3><p><b>접수상태 </b>"
+	  						+data[i].acState+"</p><p><b>지원대상 </b>"
+	  						+data[i].tcName+"</p><p><b>지역 </b>"
+	  						+data[i].lcName+"</p></div><div class='textArea1' id='textArea1"+i+"'><b>조회수 </b>"
+	  						+data[i].boardViewCount+"</p><p><b>추전수 </b>"
+	  						+data[i].boardReCommend+"</p></div></li>"
+	  						boardArea.append(input);
+	  	                  	getAdoptImage(data[i].boardNo,data.length,i);
+	  	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	  	                  }
+	  	                getlistCount();
+	  	               }else{
+	  	            	   var input="등록된 게시판이 없습니다.";
+	  						boardArea.append(input);
+	  	               }
+    				}
+  	            },
+  	            error: function(data){
+  	               alert("ajax 콘텐츠 에러 발생")
+  	            }
+	      		});
+      	});
+		function getAdoptImage(boardNo,length,i){//리스트에 맞게 이미지 가져오기
+	         $.ajax({
+	            url: 'SearchIeage.ea',
+	            success: function(data){
+	            	  var input=""; 
+	                  for (var j = 0; j < data.length; j++) {
+	                  var imageArea = $("#imageArea"+i);
+		                  if(boardNo == data[j].boardNo){
+		                  	input="<img src='/UploadFolder/exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	imageArea.prepend(input);
+	                  }
+	                  }
+	            },
+	            error: function(data){
+	               alert("ajax 이미지 에러 발생");
+	            }
+	         });
+	      }
+		$('#btnReset').click(function(){//초기화 버튼
+			$("input[type=checkbox]").prop("checked",false);
+			$(".select_btn").css('background', 'RGB(221,228,236)');
+			$('#ea_category').val('선택');
+		});
+		
+		function getlistCount(){
+			var imgs;
+			var img_count;
+			var img_position = 1;
+			
+			imgs = $(".thumbnailArea");
+			img_count = imgs.children().length; //ul의 자식, 즉 li의 갯수
+			
+			maxPage = Math.ceil(img_count)/5;
+			 $(".thumbnailArea").css({'left':'0px'});
+			console.log("최대 페이지" + maxPage);
+			$('#btnBack').click(function(){
+				back();
+			});
+			
+			$('#btnNext').click(function(){
+				next();
+			});
+		 function back() {
+		        if(1<img_position){
+		          imgs.animate({
+		            left:'+=610px'
+		          });
+		          img_position--;
+					console.log("이전 :"+img_position);
+		        }
+		      }
+		      function next() {
+		        if(maxPage>img_position){
+		          imgs.animate({
+		            left:'-=610px'
+		          });
+		          img_position++;
+					console.log("다음 :"+img_position);
+		        }
+		      }
+		}
+		
+      </script>
+	</div>		
+			
+	</section>
+	<%@ include file="../Common/footer.jsp"%>
 </body>
 </html>
-
-
-
- 

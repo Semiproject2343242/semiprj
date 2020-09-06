@@ -38,7 +38,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10; // 10MByte로 전송파일 용량을 제한
 			String root = request.getSession().getServletContext().getRealPath("/"); // 웹 서버 컨테이너 경로 추출
-			String savePath = root + "notice_uploadFiles/";
+			String savePath = root + "/UploadFolder/notice_uploadFiles/";
 			
 			File f = new File(savePath);
 			if(!f.exists()) {

@@ -162,7 +162,7 @@ header {
       </div>
      <nav class="navbar">
          <div class="navbar_title">
-            <a href="<%= request.getContextPath() %>"><span class="lagefont">정</span>부지원금<span class="lagefont">바</span>로 지금</a>
+            <a href="<%= request.getContextPath() %>/Main.mi"><span class="lagefont">정</span>부지원금<span class="lagefont">바</span>로 지금</a>
          </div>
          <div class="navbar_menu">
             <li><a href="<%= request.getContextPath() %>/main.no">공지사항</a></li>
