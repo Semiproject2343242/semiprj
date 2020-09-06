@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.BoardService;
 import board.model.service.QuestionService;
 import board.model.vo.Board;
 
@@ -34,12 +35,8 @@ public class QADeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int no = Integer.parseInt(request.getParameter("no"));
-//		int writerNo = Integer.parseInt(request.getParameter("WriterNo"));
-//		String title = request.getParameter("title");
-//		String content = request.getParameter("content");
 
-		Board board = new Board(no);
-		int result = new QuestionService().deliteBoard(board);
+		int result = new BoardService().deliteBoard(no);
 		
 		if(result > 0) {
 			response.sendRedirect("main.qa");

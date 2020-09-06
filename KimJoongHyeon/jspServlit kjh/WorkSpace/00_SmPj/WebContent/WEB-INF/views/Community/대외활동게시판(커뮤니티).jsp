@@ -16,28 +16,30 @@
       line-height: 70px;
       list-style: none;
   }
-    .serach_box{
-        background-color: RGB(248,248,248);
-        display: flex;
-    }
-    .select_box{
-        margin: 16px;
-        line-height: 70px;
-    }
-    .select_btn{
-        height: 40px;
-        width: 100px;
-        background-color:  RGB(221,228,236);
-    }
-    .categoty_select{
-        height: 30px;
-    }
-    .result_btn{
-        height: 30px;
-        width: 100px;
-        margin-top: 20px;
-        margin-right: 20px;
-    }
+ .serach_box{
+     background-color: RGB(248,248,248);
+     display: flex;
+ }
+ .select_box{
+     margin: 16px;
+     line-height: 70px;
+ }
+ .select_btn{
+     height: 40px;
+     width: 100px;
+     background-color:  RGB(221,228,236);
+ }
+ .categoty_select{
+     height: 30px;
+ }
+ .result_btn{
+	padding: 15px 15px; 
+	border-radius : 3px; 
+	width:80px; 
+	text-align:center;
+	margin: 0px 5px;
+ }
+ .result_btn:hover{background-color:  rgb(194, 194, 194);}
 
 .serachList{
 	width: 610px;
@@ -72,7 +74,6 @@
 
 #insertBtn {
 	float: right;
-	height: 100%;
 }
  #btnBack{
 	 position: absolute;
@@ -89,7 +90,7 @@
   z-index: 1;
 }
 .imageArea{
-	height: 100%;
+	height: 80%;
 	margin: auto 0px;
 	align-items: "center";
 }
@@ -133,7 +134,7 @@
 			</div>
 		</aside>
 		<div id="main_section">
-		<h2 align="center">대외 활동</h2>
+		<h2 align="center">대외 활동-커뮤니티</h2>
 		<div class="serach_box">
 	      <ul class="writertext">
 	          <th>
@@ -433,7 +434,7 @@
 	</div>
 	  <div class = "sp_button">
 		<%if (loginUser != null) {%>
-		<input type="button" class="result_btn" onclick="location.href='eaInsertForm.cm'"id="insertBtn" value="작성하기">
+		<input type="button" class='result_btn' onclick="location.href='eaInsertForm.cm'"id="insertBtn" value="작성하기">
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
@@ -546,7 +547,7 @@
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='/UploadFolder/exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }
