@@ -40,8 +40,8 @@
             	<!-- 파일 업로드 하는 부분 -->
 				<div id="fileArea">
 					사진 첨부<input type="file" id="file1" multiple="multiple" name="imageFile"><br>
-					첨부 파일<input type="file" id="file2" multiple="multiple" name="uploadfile1"><br>
-					첨부 파일<input type="file" id="file3" multiple="multiple" name="uploadfile2"><br>
+					첨부 파일<input type="file" id="file2" multiple="multiple" name="uploadFile1"><br>
+					첨부 파일<input type="file" id="file3" multiple="multiple" name="uploadFile2"><br>
 				</div>
             	<div id="buttons1">
                 	<input type="submit" id="button1" value="등록">

@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
-import board.model.vo.Reply;
-import member.model.vo.Member;
 
-@WebServlet("/replyInsert.re")
-public class ReplyInsertServlet extends HttpServlet {
+@WebServlet("/replyDelete.re")
+public class ReplyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ReplyInsertServlet() {
+    public ReplyDeleteServlet() {
         super();
     }
 
@@ -24,16 +23,11 @@ public class ReplyInsertServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		int loginMemberNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		int bId = Integer.parseInt(request.getParameter("boardNo"));
-		String content = request.getParameter("replyContent");
+		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
 		String bName = request.getParameter("bName");
 		
-		Reply reply = new Reply(loginMemberNo, bId, content);
-		
-		BoardService service = new BoardService();
-		
-		int result = service.insertReply(reply);
+		int result = new BoardService().deleteReply(replyNo);
 		
 		if(result > 0) {
 			if(bName.equals("공지사항")) {
@@ -43,10 +37,9 @@ public class ReplyInsertServlet extends HttpServlet {
 			} else if(bName.equals("자유")) {
 				response.sendRedirect("fDetail.cm?bId="+bId);
 			}
-
-		} else {			
-			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
+		} else {
+			request.setAttribute("msg", "삭제에 실패하였습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
 		

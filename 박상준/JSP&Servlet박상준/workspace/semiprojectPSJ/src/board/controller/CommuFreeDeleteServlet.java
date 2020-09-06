@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
 
-@WebServlet("/delete.qa")
-public class QADeleteServlet extends HttpServlet {
+@WebServlet("/fdelete.cm")
+public class CommuFreeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public QADeleteServlet() {
+    public CommuFreeDeleteServlet() {
         super();
     }
 
@@ -25,7 +26,7 @@ public class QADeleteServlet extends HttpServlet {
 		int result = new BoardService().deleteBoard(no);
 		
 		if(result > 0) {
-			response.sendRedirect("main.qa");
+			response.sendRedirect("fMain.cm");
 		} else {
 			request.setAttribute("msg", "삭제에 실패하였습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp");

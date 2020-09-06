@@ -15,9 +15,7 @@ import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
-/**
- * Servlet implementation class CommuFreeDetailServlet
- */
+
 @WebServlet("/fDetail.cm")
 public class CommuFreeDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,13 +28,13 @@ public class CommuFreeDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int bId = Integer.parseInt(request.getParameter("bId"));
-		//ㅇㅕㄴㅇㅜㅆㅣㄱㅏ ㅈㅏㅇㅠ ㄱㅔㅅㅣㅍㅏㄴ ㅅㅓㅂㅣㅅㅡ ㄷㅏㅅㅣ ㅁㅏㄴㄷㅡㄹㅇㅓㅆㄷㅏㄱㅗ ㅎㅐㅆㄴㅡㄴㄷㅔ ㅇㅏㅅㅣㄴㅏㅇㅛ? 네네 연
-		// 지금 이거 연우씨 깃허브에서 가져온거에요 자유게시판이랑 Q/A랑ㅇ공지ㅏ항 ㄱㅡㄴㄷㅔ ㅈㅣㄱㅡㅁ ㅅㅓㅂㅣㅅㅡㄱㅏ ㅇㅓㅂㅅㅇㅡㄴㅣ
-		// ㅅㅓㅂㅣㅅㅡㄷㅗ ㄱㅏㅈㅕ ㅇㅗㅅㅔㅇㅛ 네네
-		FreeService service = new FreeService();
-		Board board = service.selectBoard(bId);
-		ArrayList<FileVO> imageList = service.selectImageList(bId);
-		ArrayList<FileVO> fileList = service.selectFileList(bId);
+		
+		BoardService bService = new BoardService();
+		FreeService fService = new FreeService();
+		
+		Board board = fService.selectBoard(bId);
+		ArrayList<FileVO> imageList = bService.selectImageList(bId);
+		ArrayList<FileVO> fileList = bService.selectFileList(bId);
 		ArrayList<Reply> replyList = new BoardService().selectReplyList(bId);
 		
 		String page = null;
