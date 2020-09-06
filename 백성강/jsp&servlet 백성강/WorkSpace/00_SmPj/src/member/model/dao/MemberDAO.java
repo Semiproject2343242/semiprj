@@ -590,5 +590,27 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int deleteMember(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE MEMBER SET MEMBER.MEMBER_ENABLE='N' WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+//			pstmt.setString(2, memberId.getMemberPw());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+
+		return result;
+	}
+
 	
 }

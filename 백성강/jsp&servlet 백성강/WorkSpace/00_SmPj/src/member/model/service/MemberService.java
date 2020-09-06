@@ -284,5 +284,15 @@ public class MemberService {
 		
 		return result;
 	}
+
+	public int deleteMember(String memberId) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().deleteMember(conn, memberId);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 }

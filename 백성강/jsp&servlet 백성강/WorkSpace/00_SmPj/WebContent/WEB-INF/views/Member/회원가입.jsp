@@ -600,7 +600,7 @@
                            </table>
                            <div class="btns" id="signUpBtns">
                               <input id="signUpBtn" type="submit" value="가입하기">
-                              <input type="button" id="goMain" onclick="goMain();" value="메인으로">
+                              <input type="button" id="goMain" onclick="location.href='javascript:history.go(-1);'" value="메인으로">
                            </div>
                         </form>         
                      </div>
