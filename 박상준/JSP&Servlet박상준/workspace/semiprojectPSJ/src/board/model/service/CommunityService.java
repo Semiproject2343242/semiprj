@@ -62,6 +62,7 @@ public class CommunityService {
 		
 		return result;
 	}
+	
 
 	public ArrayList selectExList(int i, PageInfo pi) {
 		Connection conn = getConnection();
@@ -181,5 +182,22 @@ public class CommunityService {
 		close(conn);
 		
 		return list;
+	}
+	
+	public int insertSpBoard(Board b) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDAO().insertNotice(conn, b);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+			System.out.println("Rollback!!!!!!!!!!!!!!!");
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 }

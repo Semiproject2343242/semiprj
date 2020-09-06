@@ -6,17 +6,7 @@
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board"); 
-	System.out.println("공지사항글수정 에서의 Board : " + b);	
-	
-	String categoryStr = b.getCgName();
-	String[] category = new String[2];
-	String[] splitStr = categoryStr.split(",");
-	for(int i = 0; i < splitStr.length; i++){
-		switch(splitStr[i]){
-		case "필독" : category[0] = "selected"; break; 
-		case "공지" : category[1] = "selected"; break; 
-	}
-} 
+	System.out.println("자유게시판 글수정 에서의 Board : " + b);	
 %>
 <!DOCTYPE html>
 <html>
@@ -40,27 +30,21 @@
 		   <h2>NO.1<%= b.getBoardNo() %></h2>
 		   <hr>
            <h2>제목</h2>
-           <h2>카테고리</h2>
            <h2>내용</h2>
            <br><br><br><br><br><br>
         </aside>
         <div id="main_section">
   		
         
-            <form action="<%= request.getContextPath() %>/modify.no" method="post">
+            <form action="<%= request.getContextPath() %>/fmodify.cm" method="post">
             	<input type="hidden" name="no" value="<%= b.getBoardNo() %>">
             	
-            	<h2 style="text-align: center;">공지사항 수정하기</h2> <hr>
+            	<h2 style="text-align: center;">자유게시판 게시글 수정하기</h2> <hr>
             
            	 	<input type="text" id="text1" name="title" value="<%= b.getBoardTitle() %>">
            	 	
            	 	<br clear="all"> 
-           	 	
-            	<select id="select1" name="category" >
-               	 	<option value="필독" <%= category[0] %>>필독</option>
-                	<option value="공지"<%= category[1] %>>공지</option>
-            	</select>
-            	
+           	 	            	
             	<textarea id="textarea" name="content" style="resize:none; "> <%= b.getBoardContent() %></textarea><br>
             	
             	<div id="buttons1">

@@ -15,9 +15,7 @@ import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
-/**
- * Servlet implementation class CommuFreeDetailServlet
- */
+
 @WebServlet("/fDetail.cm")
 public class CommuFreeDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,10 +29,12 @@ public class CommuFreeDetailServlet extends HttpServlet {
 		
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		
-		FreeService service = new FreeService();
-		Board board = service.selectBoard(bId);
-		ArrayList<FileVO> imageList = service.selectImageList(bId);
-		ArrayList<FileVO> fileList = service.selectFileList(bId);
+		BoardService bService = new BoardService();
+		FreeService fService = new FreeService();
+		
+		Board board = fService.selectBoard(bId);
+		ArrayList<FileVO> imageList = bService.selectImageList(bId);
+		ArrayList<FileVO> fileList = bService.selectFileList(bId);
 		ArrayList<Reply> replyList = new BoardService().selectReplyList(bId);
 		
 		String page = null;
