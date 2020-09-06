@@ -8,8 +8,8 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import board.model.dao.BoardDAO;
 import board.model.dao.CommunityDAO;
-import board.model.dao.QuestionDAO;
 import board.model.vo.*;
 
 public class CommunityService {
@@ -104,7 +104,7 @@ public class CommunityService {
 		Connection conn = getConnection();
 		
 		ArrayList<FileVO> list = null;
-		list  = new CommunityDAO().selectFile(conn, bId);
+		list  = new BoardDAO().selectFile(conn, bId);
 		
 		if(list != null) {
 			commit(conn);

@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지(메인)</title>
+<title>정부 지원금 바로 지금</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 </head>

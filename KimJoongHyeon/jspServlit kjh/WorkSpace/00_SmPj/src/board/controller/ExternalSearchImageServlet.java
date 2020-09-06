@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import board.model.service.CommunityService;
+import board.model.service.ExternalService;
+import board.model.vo.*;
+
 /**
- * Servlet implementation class CommuExternalMainServlet
+ * Servlet implementation class ExternalSearch
  */
-@WebServlet("/main.ea")
-public class ExternalMainServlet extends HttpServlet {
+@WebServlet("/SearchIeage.ea")
+public class ExternalSearchImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ExternalMainServlet() {
+    public ExternalSearchImageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +34,13 @@ public class ExternalMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	      String page = null;
-          page = "WEB-INF/views/External_Activities/대외활동검색메인.jsp";
-	      request.getRequestDispatcher(page).forward(request, response);
+		ExternalService service = new ExternalService();
+        ArrayList<FileVO> fList = new ArrayList<FileVO>(); //파일 리스트 가져오기
+     	
+        fList = service.selectExList(2); //파일 리스트 가져오기
+     	
+     	response.setContentType("application/json; charset=UTF-8");
+     	new Gson().toJson(fList, response.getWriter());
 	}
 
 	/**
