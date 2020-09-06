@@ -6,14 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
 public class BoardDAO {
-
+	
+	// 게시판 별 게시글 갯수
 	public int getListCount(Connection conn, String boardName) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -37,8 +37,31 @@ public class BoardDAO {
 		}
 		return result;
 	}
-
 	
+	
+	// 게시글 삭제
+	public int boardDelete(Connection conn, int bId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+				
+		String query = "UPDATE BOARD SET BOARD.B_ENABLE='N' WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	// 게시글 조회수
 	public int updateCount(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -59,6 +82,7 @@ public class BoardDAO {
 	}
 	
 	
+	// 댓글 목록
 	public ArrayList<Reply> selectReplyList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -93,6 +117,8 @@ public class BoardDAO {
 		return list;
 	}
 
+	
+	// 댓글 작성
 	public int insertReply(Connection conn, Reply r) {
 
 		PreparedStatement pstmt = null;
@@ -118,34 +144,31 @@ public class BoardDAO {
 	}
 	
 	
-	public ArrayList<FileVO> selectFList(Connection conn) {
+	// 댓글 삭제
+	public int deleteReply(Connection conn, int replyNo) {
+
+		PreparedStatement pstmt = null;
 		
-		Statement stmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE STATUS='Y' AND FILE_LEVEL=0";
+		int result = 0;
+				
+		String query = "UPDATE REPLY SET REPLY_ENABLE='N' WHERE REPLY_NO = ?";
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, replyNo);
 			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				list.add(new FileVO(rset.getInt("b_no"), 
-									rset.getString("change_name")));
-			}
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
+		}finally {
+			close(pstmt);
 		}
-		return list;
+		
+		return result;
 	}
 	
 	
+	// 파일 등록
 	public int insertFile(Connection conn, ArrayList<FileVO> fileList) {
 
 		PreparedStatement pstmt = null;
@@ -176,6 +199,7 @@ public class BoardDAO {
 	}
 	
 	
+	// 썸네일 가져오기
 	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -212,6 +236,7 @@ public class BoardDAO {
 	}
 	
 	
+	// 이미지 목록
 	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -248,6 +273,7 @@ public class BoardDAO {
 	}
 	
 	
+	// 파일 목록
 	public ArrayList<FileVO> selectFileList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;

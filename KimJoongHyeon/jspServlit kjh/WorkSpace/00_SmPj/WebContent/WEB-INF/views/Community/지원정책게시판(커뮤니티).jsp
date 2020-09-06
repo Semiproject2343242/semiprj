@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>게시판 기본틀</title>
+    <title>정부 지원금 바로 지금</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>

@@ -311,40 +311,40 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public ArrayList<FileVO> selectFile(Connection conn, int bId) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1,  bId);
-			
-			rset = pstmt.executeQuery();
-			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				FileVO af = new FileVO();
-				af.setFileNo(rset.getInt("file_no"));
-				af.setOriginName(rset.getString("origin_name"));
-				af.setChangeName(rset.getString("change_name"));
-				af.setFilePath(rset.getString("file_path"));
-				af.setUploadDate(rset.getDate("upload_date"));
-				
-				list.add(af);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	}
+//	public ArrayList<FileVO> selectFile(Connection conn, int bId) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		ArrayList<FileVO> list = null;
+//		
+//		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
+//		
+//		try {
+//			pstmt = conn.prepareStatement(query);
+//			pstmt.setInt(1,  bId);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			list = new ArrayList<FileVO>();
+//			
+//			while(rset.next()) {
+//				FileVO af = new FileVO();
+//				af.setFileNo(rset.getInt("file_no"));
+//				af.setOriginName(rset.getString("origin_name"));
+//				af.setChangeName(rset.getString("change_name"));
+//				af.setFilePath(rset.getString("file_path"));
+//				af.setUploadDate(rset.getDate("upload_date"));
+//				
+//				list.add(af);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return list;
+//	}
 
 	public int modifyBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;

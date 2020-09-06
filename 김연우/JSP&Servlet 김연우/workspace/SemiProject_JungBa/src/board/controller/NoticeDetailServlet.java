@@ -29,11 +29,13 @@ public class NoticeDetailServlet extends HttpServlet {
 		
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		
-		NoticeService service = new NoticeService();
-		Board board = service.selectBoard(bId);
-		ArrayList<FileVO> imageList = service.selectImageList(bId);
-		ArrayList<FileVO> fileList = service.selectFileList(bId);
-		ArrayList<Reply> replyList = new BoardService().selectReplyList(bId);
+		BoardService bService = new BoardService();
+		NoticeService nService = new NoticeService();
+		
+		Board board = nService.selectBoard(bId);
+		ArrayList<FileVO> imageList = bService.selectImageList(bId);
+		ArrayList<FileVO> fileList = bService.selectFileList(bId);
+		ArrayList<Reply> replyList = bService.selectReplyList(bId);
 				
 		String page = null;
 		

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.CommunityService;
 import board.model.service.FreeService;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
@@ -26,6 +25,7 @@ public class CommuFreeMainServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		FreeService service = new FreeService();
 		
 		//페이징

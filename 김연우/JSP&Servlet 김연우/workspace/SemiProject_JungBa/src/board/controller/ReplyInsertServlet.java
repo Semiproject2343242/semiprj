@@ -1,9 +1,6 @@
 package board.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,12 +49,6 @@ public class ReplyInsertServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
 			view.forward(request, response);
 		}
-		
-		
-		
-//		response.setContentType("application/json; charset=UTF-8");
-//		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-//		gson.toJson(replyList, response.getWriter());
 		
 	}
 
