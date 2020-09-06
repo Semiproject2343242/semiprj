@@ -7,6 +7,7 @@
 <%
 	Board b = (Board)request.getAttribute("board"); 
 	System.out.println("공지사항글수정 에서의 Board : " + b);	
+	ArrayList<FileVO> imageList = (ArrayList<FileVO>)request.getAttribute("imgaeList");
 	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
 	
 	String categoryStr = b.getCgName();
@@ -46,10 +47,14 @@
            <h2>카테고리</h2>
            <h2>내용</h2>
            <br><br><br><br><br><br>
-           <h2>첨부파일</h2>
+           <h2>현재 첨부파일</h2>
+           <h2>첨부파일 수정</h2>
+           <h2>첨부파일 추가</h2>
         </aside>
         <div id="main_section">
-            <form action="<%= request.getContextPath() %>/modify.no" method="post">
+  		
+        
+            <form action="<%= request.getContextPath() %>/modify.no" method="post" encType="multipart/form-data">
             	<input type="hidden" name="no" value="<%= b.getBoardNo() %>">
             	
             	<h2 style="text-align: center;">공지사항 수정하기</h2> <hr>

@@ -8,6 +8,7 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import board.model.dao.CommunityDAO;
 import board.model.dao.NoticeDAO;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
@@ -92,18 +93,48 @@ public class NoticeService {
 	}
 
 
-	public int modifyBoard(Board b) {
+//	public int modifyBoard(Board b) {
+//		Connection conn = getConnection();
+//		
+//		int result = new NoticeDAO().modifyBoard(conn, b);
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		
+//		return result;
+//	}
+	
+
+	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
-		int result = new NoticeDAO().modifyBoard(conn, b);
-		if(result > 0) {
-			commit(conn);
+		NoticeDAO dao = new NoticeDAO();
+		int result2 = 0; 
+		System.out.println("b : " + b);
+		int result1 = dao.modifyBoard(conn,b);
+		
+		System.out.println("fileList : " + fileList.size());
+		System.out.println("result1 : " + result1);
+		result2 = result1;
+		if(fileList.size()==0 && result1 > 0) {
+			result2 = result1;
 		}else {
-			rollback(conn);
+			result2 = dao.modifyFile(conn, fileList);
 		}
+		
+		if(result1 >0 && result2 >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			System.out.println("modifyBoard Rollback!!!!!!!!!!!!!!!");
+		}
+		
 		close(conn);
 		
-		return result;
+		return result1;
 	}
 	
 	
@@ -163,7 +194,6 @@ public class NoticeService {
 	
 	
 	
-	/////////////////////// 수정 사항 ///////////////////////////
 	public ArrayList<FileVO> selectImageList(int bId) {
 		Connection conn = getConnection();
 				
@@ -200,5 +230,25 @@ public class NoticeService {
 		return list;
 	}
 	
-	/////////////////////// 수정 사항 ///////////////////////////
+	
+	public int AddFile(Board b, ArrayList<FileVO> fileList) {
+		Connection conn = getConnection();
+		
+		NoticeDAO dao = new NoticeDAO();
+		System.out.println("왔다감");
+		int result = dao.AddFile(conn, fileList);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			System.out.println("AddFile Rollback!!!!!!!!!!!!!!!");
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 }

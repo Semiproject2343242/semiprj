@@ -155,6 +155,7 @@
 	            <div>
 	                <textarea id="textarea" name="replyContent" placeholder="댓글을 입력하세요."></textarea><br>
 	                <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
+	                <input type="hidden" name="bName" value="자유">
 	                <input type="submit" value="등록">
 	            </div>
             </form>

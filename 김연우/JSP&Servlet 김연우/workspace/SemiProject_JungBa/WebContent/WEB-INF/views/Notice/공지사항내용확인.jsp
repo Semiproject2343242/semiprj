@@ -26,13 +26,17 @@
 <body>
     <%@ include file="../Common/header.jsp" %>
         <div id="main_section">
-			<form action="modifyForm.no" id="detailForm" name="detailForm">
-			
-			<input type="hidden" name="no" value="<%= b.getBoardNo() %>">
-	        <input type="hidden" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
-	        <input type="hidden" name="category" value="<%= b.getCgName() %>" />
-	        <input type="hidden" name="title"  value="<%= b.getBoardTitle() %>" />
+			<form action="modifyForm.no" id="detailForm" name="detailForm" method="post" encType="multipart/form-data">	        
 	        
+	        <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
+    		<input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
+    		<input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
+			<input type="hidden" name="category" value="<%= b.getCgName() %>" />
+			<input type="hidden" name="viewCount" value="<%= b.getBoardViewCount() %>" />
+			<input type="hidden" name="reCommend" value="<%= b.getBoardReCommend() %>" />
+			<input type="hidden" name="writer" value="<%= b.getBoardWriter() %>" />
+	        <input type="hidden" name="replyCount" value="<%= replyList.size() %>" />
+            
             <div id="contents">
                 <!-- <h2 id="h21" >NO.01</h1> -->
                 <!-- 넘버  -->
@@ -73,7 +77,6 @@
 						}
 					</script>
                 </div>
-			</form>
             <br clear="all"> 
             <br>   
             <hr>
@@ -126,19 +129,18 @@
                    	</text>
                     <% } %>
                	<% } %>
-                </div>
-        			
+               	</form>	
                 <br clear="all"><br>
-                        
-                <form action="replyInsert.re">
-	                <div>
-	                    <textarea id="textarea" name="replyContent" placeholder="댓글을 입력하세요."></textarea><br>
-	                    <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
-	                    <input type="submit" value="등록">
-	                </div>
-                </form>
-            </div>
-        </div>
+		        </div>
+		            <form action="replyInsert.re">
+			            <div>
+			                <textarea id="textarea" name="replyContent" placeholder="댓글을 입력하세요."></textarea><br>
+			                <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
+			                <input type="hidden" name="bName" value="공지사항">			                
+			                <input type="submit" value="등록">
+			            </div>
+		            </form>        
+		        
 
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>
