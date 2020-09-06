@@ -14,7 +14,6 @@ import com.google.gson.GsonBuilder;
 
 import board.model.service.BoardService;
 import board.model.vo.Reply;
-import member.model.vo.Member;
 
 
 @WebServlet("/replyList.re")
