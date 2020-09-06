@@ -125,7 +125,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			ea_res_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
 	 		
-	 		String strea_ree_date = multiRequest.getParameter("ea_ree_date"); 
+	 		String strea_ree_date = multiRequest.getParameter("ea_res_date"); 
 	 		Date ea_ree_date = null;
 	 		if(strea_ree_date != "") {
 	 			String[] dateArr = strea_ree_date.split("-");

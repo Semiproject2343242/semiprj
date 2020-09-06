@@ -102,7 +102,7 @@
 					<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
 						<%=fileList.get(i).getOriginName()%>
 					</a><br>
-				<% } %>
+				<% } %> 
 			<% } %>
 			<div align="right" style="background-color:skyblue;">
 				<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>

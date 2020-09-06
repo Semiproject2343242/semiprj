@@ -77,6 +77,7 @@
       <ul class="writertext">
           <th>
               <li class="infomation-item"><h3>카테고리</h3></li>
+              <li class="infomation-item"><h3>취업상태</h3></li>
               <li class="infomation-item"><h3>대상</h3></li>
               <li class="infomation-item"><h3>지역</h3></li>
           </th>

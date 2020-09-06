@@ -78,6 +78,7 @@
       <ul class="writertext">
           <th>
               <li class="infomation-item"><h3>카테고리</h3></li>
+              <li class="infomation-item"><h3>취업상태</h3></li>
               <li class="infomation-item"><h3>대상</h3></li>
               <li class="infomation-item"><h3>지역</h3></li>
           </th>
@@ -96,6 +97,37 @@
                   <option value="6">교통/주거</option>
               </select>
           </h3>
+          <h3>
+          	<div>
+          		 <button class="select_btn" id="sp_em">재직중</button>
+                  <button class="select_btn" id="sp_nem">구직중</button>
+           	</div>
+           	<div id="ck_sp_emState">
+				<input type="checkbox" name="ck_sp_em" id="ck_sp_em" value="청년">
+				<input type="checkbox" name="ck_sp_em" id="ck_sp_nem" value="중년">
+            </div>
+          </h3>
+          <script>
+          	$(function(){
+          		$("#ck_sp_emState").hide();
+                 $("#sp_em").click(function(){
+                    $("#ck_sp_em").click();
+                    if($("#ck_sp_em").is(":checked") == true){
+                   	 $(this).css({'background':'darkgray'});
+                    }else{
+                   	 $(this).css('background', 'RGB(221,228,236)');
+                    }
+                 });
+                 $("#sp_nem").click(function(){
+                    $("#ck_sp_nem").click();
+                    if($("#ck_sp_nem").is(":checked") == true){
+                   	 $(this).css({'background':'darkgray'});
+                    }else{
+                   	 $(this).css('background', 'RGB(221,228,236)');
+                    }
+                 });
+          	})
+          </script>
           <h3>
               <div>
                   <button class="select_btn" id="sp_age_18">청년<br>(18~34세) </button>
