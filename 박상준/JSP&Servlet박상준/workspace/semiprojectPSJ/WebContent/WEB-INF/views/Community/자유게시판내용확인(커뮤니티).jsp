@@ -96,7 +96,7 @@
               	첨부파일 없음.
             <% } else { %>
                	<%for(int i=0; i < fileList.size(); i++){ %>
-					<a href="<%= request.getContextPath() %>/UploadFolder/FR_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
+					<a href="<%= request.getContextPath() %>/UploadFolder/Free_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
 						<%=fileList.get(i).getOriginName()%>
 					</a><br>
 				<% } %>
