@@ -30,6 +30,19 @@ public class NoticeService {
 	}
 	
 	
+	// 공지사항 검색 게시글 갯수
+	public int getSearchListCount(String opt, String word) {
+
+		Connection conn = getConnection();
+		
+		int result = new NoticeDAO().getSearchListCount(conn, opt, word);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
 	// 공지사항 게시글 목록
 	public ArrayList<Board> selectList(PageInfo pi){ 
 
@@ -124,6 +137,18 @@ public class NoticeService {
 		return result1;
 	}	
 	
+	
+	// 공지사항 검색 게시글 목록
+	public ArrayList<Board> searchList(String opt, String word, PageInfo pi){ 
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new NoticeDAO().searchList(conn, opt, word, pi);
+		
+		close(conn);
+		
+		return list;
+	}
 
 	// 파일 수정 로직
 //	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {

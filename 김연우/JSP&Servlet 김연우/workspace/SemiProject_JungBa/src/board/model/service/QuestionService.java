@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.BoardDAO;
+import board.model.dao.NoticeDAO;
 import board.model.dao.QuestionDAO;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
@@ -27,6 +28,20 @@ public class QuestionService {
 		close(conn);
 		
 		return result;
+	}
+	
+	
+	// Q/A 검색 게시글 갯수
+	public int getSearchListCount(String opt, String word) {
+
+		Connection conn = getConnection();
+		
+		int result = new QuestionDAO().getSearchListCount(conn, opt, word);
+		
+		close(conn);
+		
+		return result;
+		
 	}
 	
 	
@@ -121,6 +136,19 @@ public class QuestionService {
 		close(conn);
 		
 		return result1;
+	}
+	
+	
+	// 공지사항 검색 게시글 목록
+	public ArrayList<Board> searchList(String opt, String word, PageInfo pi){ 
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new QuestionDAO().searchList(conn, opt, word, pi);
+		
+		close(conn);
+		
+		return list;
 	}
 	
 }

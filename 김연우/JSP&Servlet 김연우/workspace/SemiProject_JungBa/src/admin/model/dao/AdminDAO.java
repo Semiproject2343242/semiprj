@@ -272,7 +272,9 @@ public class AdminDAO {
 									 rset.getString("ENROLL_STATE"),
 									 rset.getString("EM_STATE"),
 									 rset.getString("TC_NAME"),
-									 rset.getString("CG_NAME"));
+									 rset.getString("CG_NAME"),
+									 rset.getDate("RECRUIT_STARTDATE"),
+									 rset.getDate("RECRUIT_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {

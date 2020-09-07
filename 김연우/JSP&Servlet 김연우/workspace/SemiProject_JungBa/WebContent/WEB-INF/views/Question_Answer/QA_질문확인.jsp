@@ -18,54 +18,28 @@
     <title>정부지원금 바로지금</title>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/게시판내용확인.css" />
   </head>
   <style>
-  section{
-  	width: 950px;
-  }
-  	#filetext{
-  		margin-top : 220px;
-  	}
-  	.sub1{
-  		width: 80%;
-		float:left;
-  	}
-	.sub2{
-		text-align:right;
-	}
-  	.sub3{
-  		width:33%;
-  		float:left;
-  	}
-  	.sub4{
-  		width:33%;
-  		float:left;
-  		text-align:right;
-  	}
-  	  	#comment{
-  		text-align:top;
-  		}
-  	.replyIWC{width: 430px;}
-  	.udlbtn{background-color:sky; width:70px; height:40px; margin:10px;}
   </style>
   <body>
     <%@ include file="../Common/header.jsp" %>
     <section>
-      <aside>
-        <h2><%= b.getBoardNo() %></h2>
-        <hr />
-        <h2>제목</h2>
-        <h2>카테고리</h2>
-        <h2 id="content">내용</h2>
-      </aside>
+     <aside>
+	    	<h2><%= b.getBoardNo() %></h2>
+	        <hr />
+	      	<div class=baside><h2>제목</h2></div>
+	        <div class=baside><h2>카테고리</h2></div>
+	        <div class=baside><h2 id="content">내용</h2></div>
+	    </aside>
       <div id="main_section">
       	<form action="modifyForm.qa" id="detailForm" name="detailForm">
-      	
-    	    <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
+      	    <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
     		<input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
     		<input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
 			<input type="hidden" name="category" value="<%= b.getCgName() %>" />
-	        
+	         <h2 align="center">Q/A 게시판</h2>
+	        <hr>
        		<div class="sub1"><h4><%= b.getBoardTitle() %></h4></div><div class="sub2"><h4> 작성자 : <%= b.getBoardWriter()%></h4></div>
 
 	        <div class="sub3"><h4><%= b.getCgName() %></h4></div><div class="sub4"><h4> 등록 날짜 : <%= b.getBoardModifyDate()%></h4></div><div class="sub4"><h4> 수정 날짜 : <%= b.getBoardModifyDate() %></h4></div><br>

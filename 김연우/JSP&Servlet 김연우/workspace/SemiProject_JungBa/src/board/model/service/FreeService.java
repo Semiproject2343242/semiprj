@@ -30,6 +30,20 @@ public class FreeService {
 	}
 	
 	
+	// 자유게시판 검색 게시글 갯수
+	public int getSearchListCount(String opt, String word) {
+
+		Connection conn = getConnection();
+		
+		int result = new FreeDAO().getSearchListCount(conn, opt, word);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	
 	// 자유게시판 글 목록
 	public ArrayList<Board> selectList(PageInfo pi){ 
 
@@ -122,6 +136,19 @@ public class FreeService {
 		close(conn);
 		
 		return result1;
+	}
+	
+	
+	// 자유게시판 검색 게시글 목록
+	public ArrayList<Board> searchList(String opt, String word, PageInfo pi){ 
+
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new FreeDAO().searchList(conn, opt, word, pi);
+		
+		close(conn);
+		
+		return list;
 	}
 	
 }
