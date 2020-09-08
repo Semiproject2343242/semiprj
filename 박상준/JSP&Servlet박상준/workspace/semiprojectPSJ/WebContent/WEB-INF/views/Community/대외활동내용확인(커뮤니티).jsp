@@ -14,7 +14,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Layout01</title>
+    <title>정부지원금 바로 지금</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
@@ -102,14 +102,18 @@
 	<input type="hidden" name="ea_acs_date" value="<%= b.getAcStartDate() %>" />
 	<input type="hidden" name="ea_ace_date" value="<%= b.getAcEndDate() %>" />
     <% System.out.println(b.getReEndDate()); %>
-    <h4>대외활동 -<%=b.getCgName()%></h4>
+    <h4>대외활동 -<%=b.getCgName()%>
+    	<% if(loginUser != null && loginUser.getMemberNickName().equals("운영자")) { %>
+			<input type="button" style="float:right" value="등록하기" onclick="enrollBoard();">
+		<%} %>
+    </h4>
     <hr>
     <h3><%=b.getBoardNo()%>.<%= b.getBoardTitle() %></h3>
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
-				<a href="<%= request.getContextPath() %>/exteranl_uploadFiles/<%= titleImg.getChangeName() %>">
-					<img id="titleImg" src="<%= request.getContextPath() %>/exteranl_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				<a href="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
 				</a>
 			</div>
 			<div class="textArea">
@@ -145,7 +149,7 @@
                     	첨부파일 없음.
                     <% } else { %>
                     	<%for(int i=1; i < fList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/notice_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
+							<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
 								[ <%=i%><%=fList.get(i).getOriginName()%> ]
 							</a>
 						<% } %>
@@ -174,7 +178,19 @@
 					var wno = <%= b.getBoardWriterNo()%>;
 					console.log(wno);
 				    if(result){
-				    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+				    	location.href="<%= request.getContextPath() %>/eaDelete.cm?no="+num;
+				    }
+				    else{
+				        alert('취소하셨습니다.');
+				    }
+				}
+				
+				function enrollBoard(){
+					var num = <%= b.getBoardNo() %>;
+					var result = window.confirm(num+'등록하시겠습니까?');
+					var wno = <%= b.getBoardWriterNo()%>;
+				    if(result){
+				    	location.href="<%= request.getContextPath() %>/enroll.bo?no="+num;
 				    }
 				    else{
 				        alert('취소하셨습니다.');

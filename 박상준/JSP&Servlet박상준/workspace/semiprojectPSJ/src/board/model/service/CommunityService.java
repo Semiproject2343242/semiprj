@@ -118,7 +118,23 @@ public class CommunityService {
 		
 		return list;
 	}
-
+	public ArrayList<FileVO> selectSpFile(int bId) {
+		Connection conn = getConnection();
+		
+		ArrayList<FileVO> list = null;
+		list  = new CommunityDAO().selectFile(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		}else {
+			rollback(conn);
+			System.out.println("selectFile Rollback!!!!!!!!!!!!!!!");
+		}
+		
+		close(conn);
+		
+		return list;
+	}
 	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -152,7 +168,6 @@ public class CommunityService {
 		Connection conn = getConnection();
 		
 		CommunityDAO dao = new CommunityDAO();
-		System.out.println("왔다감");
 		int result = dao.AddFile(conn, fileList);
 		
 		if(result>0) {
@@ -166,7 +181,8 @@ public class CommunityService {
 		
 		return result;
 	}
-
+	//지원정책부분
+	
 	public ArrayList selectSpList(int i, PageInfo pi) {
 	Connection conn = getConnection();
 		
@@ -183,7 +199,7 @@ public class CommunityService {
 		
 		return list;
 	}
-	
+
 	public int insertSpBoard(Board b) {
 		Connection conn = getConnection();
 		
@@ -200,4 +216,25 @@ public class CommunityService {
 		
 		return result;
 	}
+	
+	public int insertSpAddFile(Board b, ArrayList<FileVO> fileList) {
+		Connection conn = getConnection();
+		
+		CommunityDAO dao = new CommunityDAO();
+		
+		int result1 = dao.insertSpBoard(conn,b);
+		int result2 = dao.insertAddFile(conn, fileList);
+		
+		if(result1 > 0 && result2 >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			System.out.println("insertAddFile Rollback!!!!!!!!!!!!!!!");
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+
 }

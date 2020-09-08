@@ -116,8 +116,6 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	 					local += localarr[i] + ",";
 	 			}
 	 		 }
-	 		
-	 		 
 	 		String strsp_res_date = multiRequest.getParameter("sp_res_date"); 
 	 		Date sp_res_date = null;
 	 		if(strsp_res_date != "") {

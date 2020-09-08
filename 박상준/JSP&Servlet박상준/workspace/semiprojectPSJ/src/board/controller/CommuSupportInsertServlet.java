@@ -75,11 +75,10 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	               originFiles.add(multiRequest.getOriginalFileName(name));
 	            }
 	         }
-		request.setCharacterEncoding("UTF-8");
 		 String category = multiRequest.getParameter("sp_category");
-         String[] agearr = multiRequest.getParameterValues("ck_sp_age");
+		 String[] emStatearr = multiRequest.getParameterValues("ck_sp_em");
+		 String[] agearr = multiRequest.getParameterValues("ck_sp_age");
          String[] localarr = multiRequest.getParameterValues("ck_lc");
-         String[] emStatearr = multiRequest.getParameterValues("ck_sp_emState");
          String title = multiRequest.getParameter("sp_title");
          String content = multiRequest.getParameter("sp_text_contents");
          String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
@@ -87,30 +86,33 @@ public class CommuSupportInsertServlet extends HttpServlet {
  		 String age = "";
  		 if(agearr != null) {
  			for (int i = 0; i< agearr.length; i++) {
- 				if(i == agearr.length -1)
+ 				if(i == agearr.length -1) {
  					age += agearr[i];
- 				else
+ 				}else
  					age += agearr[i] + ",";
+ 				System.out.print("타냐3");
  			}
  		 }
  		 
  		String local = "";
 		 if(localarr != null) {
 			for (int i = 0; i< localarr.length; i++) {
-				if(i == localarr.length -1)
+				if(i == localarr.length -1) {
 					local += localarr[i];
-				else
+				}else
 					local += localarr[i] + ",";
+				System.out.print("타냐4");
 			}
 		 }
 		 
 		 String emState = "";
  		 if(emStatearr != null) {
  			for (int i = 0; i< emStatearr.length; i++) {
- 				if(i == emStatearr.length -1)
+ 				if(i == emStatearr.length -1) {
  					emState += emStatearr[i];
- 				else
+ 				}else
  					emState += emStatearr[i] + ",";
+ 				System.out.print("타냐5");
  			}
  		 }
  		 
@@ -128,7 +130,6 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	 		}else {
 	 			sp_res_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
-	 		
 	 		String strsp_ree_date = multiRequest.getParameter("sp_res_date"); 
 	 		Date sp_ree_date = null;
 	 		if(strsp_ree_date != "") {
@@ -151,9 +152,9 @@ public class CommuSupportInsertServlet extends HttpServlet {
          b.setBoardWriter(bWriter);
          b.setBoardWriterNo(userId);
          b.setCgName(category);
+         b.setEmState(emState);
          b.setTcName(age);
          b.setLcName(local);
-			/* b.setEmState(emState); */
          b.setReStratDate(sp_res_date);
          b.setReEndDate(sp_ree_date);
          
@@ -171,7 +172,8 @@ public class CommuSupportInsertServlet extends HttpServlet {
             }
             fileList.add(af);
          }
-         int result = new CommunityService().insertAddFile(b, fileList);
+         System.out.println("b : " + b);
+         int result = new CommunityService().insertSpAddFile(b, fileList);
          
          if(result>0) {
             response.sendRedirect("spMain.cm");
