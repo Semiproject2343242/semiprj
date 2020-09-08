@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import board.model.dao.BoardDAO;
+import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
@@ -26,21 +27,6 @@ public class BoardService {
 		return result;
 	}
 	
-	
-	// 게시글 삭제
-	public int deleteBoard(int bId) {
-		Connection conn = getConnection();
-		BoardDAO dao = new BoardDAO();
-		int result = dao.boardDelete(conn, bId);
-		
-		if(result>0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
 	
 	
 	// 댓글 목록
@@ -151,6 +137,29 @@ public class BoardService {
 		close(conn);
 		
 		return list;
+	}
+
+
+	// 게시글 삭제
+	public int deleteBoard(int bId) {
+		Connection conn = getConnection();
+		BoardDAO dao = new BoardDAO();
+		int result = dao.boardDelete(conn, bId);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+
+	public int enrollBoard(Board board) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
