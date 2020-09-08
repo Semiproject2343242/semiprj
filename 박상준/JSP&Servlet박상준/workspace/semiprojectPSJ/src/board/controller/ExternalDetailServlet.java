@@ -3,28 +3,26 @@ package board.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.service.QuestionService;
-import board.model.vo.Board;
+import board.model.service.ExternalService;
+import board.model.vo.*;
 
 /**
- * Servlet implementation class QADeleteServlet
+ * Servlet implementation class CommuExternalDetailServlet
  */
-@WebServlet("/delete.qa")
-public class QADeleteServlet extends HttpServlet {
+@WebServlet("/detail.ea")
+public class ExternalDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QADeleteServlet() {
+    public ExternalDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +31,22 @@ public class QADeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		int no = Integer.parseInt(request.getParameter("no"));
-
-		int result = new BoardService().deleteBoard(no);
-		
-		if(result > 0) {
-			response.sendRedirect("main.qa");
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		ExternalService service = new ExternalService();
+		Board board = service.selectBoard(bId);
+		ArrayList<FileVO> fileList = service.selectFile(bId);
+//		ArrayList<Reply> replyList = new CommunityService().selectReplyList(bId);
+		String page = null;
+		if(board != null) {
+			page = "WEB-INF/views/External_Activities/대외활동내용확인.jsp";
+			request.setAttribute("board", board);
+			request.setAttribute("fileList", fileList);
+//			request.setAttribute("replyList", replyList);
 		} else {
-			request.setAttribute("msg", "삭제에 실패하였습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp");
-			view.forward(request, response);
+			page = "WEB-INF/views/Common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 상세조회에 실패하였습니다.");
 		}
-		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

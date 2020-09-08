@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import board.model.vo.Board;
 import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
@@ -308,5 +309,23 @@ public class BoardDAO {
 		}
 		return list;
 	}
-	
+	public int boardEnroll(Connection conn, Board board) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+				
+		String query = "UPDATE BOARD SET ENROLL_STATE='Y' WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
