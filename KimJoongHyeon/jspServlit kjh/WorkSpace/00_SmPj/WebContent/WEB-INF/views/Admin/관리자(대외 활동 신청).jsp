@@ -106,7 +106,7 @@
 									<%=b.getBoardWriter()%></td>
 								<td><%=b.getBoardCreateDate()%></td>
 								<td><%=b.getBoardViewCount()%></td>
-								<td><input type="hidden" value="<%=b.getEnrollState()%>">
+								<td><input type="hidden" id="id" value="<%=b.getEnrollState()%>">
 									<%=b.getEnrollState()%></td>
 							</tr>
 						<%		} %>
@@ -126,8 +126,10 @@
 	            	$(this).parent().css('background', 'none');
 	            }).click(function(){
 	                var bId = $(this).parent().children().children('input').val();
+	                var enroll = $(this).parent().children().children('#id').val();
+	        		console.log("enroll : " + enroll);
 	            <% if(loginUser != null){%>
-	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+<%-- 	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId; --%>
 	            <% }else{ %>
 	            		alert('회원만 이용할 수 있는 서비스입니다.')
 	            <% } %>

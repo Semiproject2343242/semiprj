@@ -535,7 +535,7 @@
 						+data[i].boardReCommend+"</p></div></li>";
 						boardArea.append(input);
 	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	                  	$('#board_list'+i).attr("onclick","location.href='detail.ea?bId="+data[i].boardNo+"'");
 	                  }
 						getlistCount();
 	               }else{
@@ -606,7 +606,7 @@
 	  						+data[i].boardReCommend+"</p></div></li>"
 	  						boardArea.append(input);
 	  	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	  	                  	$('#board_list'+i).attr("onclick","location.href='Detail.sp?bId="+data[i].boardNo+"'");
+	  	                  	$('#board_list'+i).attr("onclick","location.href='detail.sp?bId="+data[i].boardNo+"'");
 	  	                  }
 	  	                getlistCount();
 	  	               }else{

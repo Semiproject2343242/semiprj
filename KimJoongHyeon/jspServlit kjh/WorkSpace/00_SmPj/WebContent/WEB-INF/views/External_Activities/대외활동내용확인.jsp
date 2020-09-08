@@ -51,6 +51,10 @@
 	    margin: 0px;
 	    width: 100%;
   	}
+  	.writer_table th{
+  		text-align: right;
+  	}
+  	
   
   	.writer_text{
       margin-left: 80px;
