@@ -66,7 +66,7 @@ public class CommuFreeInsertServlet extends HttpServlet {
 					originFiles.add(multiRequest.getOriginalFileName(name)); // getOriginalFileName() : 실제 사용자가 업로드 할때의 파일명
 				}
 			}
-
+			System.out.print("타냐?");
 			String title = multiRequest.getParameter("title"); //HTTP 요청의 파라미터 값을 얻기 위해 사용하는 것이 request.getParameter() 메쏘드입니다.
 			String content = multiRequest.getParameter("content");
 			int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();

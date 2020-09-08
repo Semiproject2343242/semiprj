@@ -103,8 +103,8 @@
                   <button class="select_btn" id="sp_nem">구직중</button>
            	</div>
            	<div id="ck_sp_emState">
-				<input type="checkbox" name="ck_sp_em" id="ck_sp_em" value="청년">
-				<input type="checkbox" name="ck_sp_em" id="ck_sp_nem" value="중년">
+				<input type="checkbox" name="ck_sp_em" id="ck_sp_em" value="재직중">
+				<input type="checkbox" name="ck_sp_em" id="ck_sp_nem" value="구직중">
             </div>
           </h3>
           <script>
@@ -127,6 +127,7 @@
                     }
                  });
           	})
+          	system.out.print("타냐?");
           </script>
           <h3>
               <div>
@@ -145,8 +146,8 @@
                $(function(){
                   $("#ck_sp_age").hide();
                   $("#sp_age_18").click(function(){
-                     $("#ck_ea_age_18").click();
-                     if($("#ck_ea_age_18").is(":checked") == true){
+                     $("#ck_sp_age_18").click();
+                     if($("#ck_sp_age_18").is(":checked") == true){
                     	 $(this).css({'background':'darkgray'});
                      }else{
                     	 $(this).css('background', 'RGB(221,228,236)');
@@ -407,37 +408,30 @@
     </div>
     <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
     <div class="writer_box">
-        <table class="writer_table">
+     <table class="writer_table">
           <tr>
-            <th width="10%">제목</th>
-            <td width="80%"><input type ="text" id="ea_title" name = "제목" placeholder="제목을 입력하세요." class=textline1></td>
+            <th width="15%">제목</th>
+            <td width="50%" colspan="3"><input type ="text" name = "sp_title" placeholder="제목을 입력하세요." class=textline1></td>
+          </tr>
+          <tr>
+            <th>메인 이미지 첨부</th>
+            <td colspan="3"><input type ="file" multiple="multiple" id="sp_title_image" name = "sp_title_image" class=textline2 required></td>
           </tr>
           <tr>
             <th>모집 일정</th>
-            <td><input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1>
-              ~ <input type ="date" id="ea_re_date"name = "모집일정"  class=dateline1> 까지</td>
-          </tr>
-          <tr>
-            <th>접수 방법</th>
-            <td><textarea class="form-control" id="ea_re_apply" rows="8" name="접수방법" id="ea_text_apply" placeholder="내용을 입력해 주세요" ></textarea></td>
-          </tr>
-          <tr>
-            <th>이미지 첨부</th>
-            <td><input type ="file" name = "이미지" class=textline2></td>
-          </tr>
-          <tr>
-            <th>홈페이지</th>
-            <td><input type ="text" name = "홈페이지" id="ea_com_url" placeholder="url을 입력하세요." class=textline1></td>
+            <td colspan="3"><input type ="date" id="sp_res_date"name = "sp_res_date"  class=dateline1>
+              ~ <input type ="date" id="ea_ree_date"name = "sp_ree_date"  class=dateline1> 까지</td>
           </tr>
           <tr>
             <th>내용</th>
-            <td><textarea class="form-control" name="내용" id="ea_text_Contents" placeholder="내용을 입력해 주세요" ></textarea></td>
+            <td><textarea class="form-control" name="sp_text_contents" id="sp_text_Contents" placeholder="내용을 입력해 주세요" ></textarea></td>
           </tr>
         </table>
+
     </div>
-    <div class = "ea_button">
-        <button id = ea_submit class="result_btn">등록</button>
-        <button id = ea_cancle class="result_btn">취소</button>
+    <div class = "sp_button">
+        <button id = sp_submit class="result_btn">등록</button>
+        <button id = sp_cancle class="result_btn">취소</button>
     </div>
   <!-- </from> -->
 </section>  

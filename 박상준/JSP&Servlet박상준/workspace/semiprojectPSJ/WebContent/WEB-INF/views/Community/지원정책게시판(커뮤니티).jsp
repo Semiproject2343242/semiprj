@@ -116,6 +116,13 @@
 							<b>지역 </b>
 							<%=b.getLcName()%></p>
 					</div>
+						<div class="textArea1">
+						<b>조회수 </b>
+						<%=b.getBoardViewCount()%></p>
+						<p>
+						<b>추전수 </b>
+						<%=b.getBoardReCommend()%></p>
+					</div>
 				</li>
 				<%}%>
 				<%}%>

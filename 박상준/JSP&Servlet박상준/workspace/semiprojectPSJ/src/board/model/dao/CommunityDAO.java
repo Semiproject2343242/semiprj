@@ -62,6 +62,7 @@ public class CommunityDAO {
 						   rset.getString("AC_STATE"),
 						   rset.getString("LC_NAME"),
 						   rset.getString("ENROLL_STATE"),
+						   rset.getString("EM_STATE"),
 						   rset.getString("TC_NAME"),
 						   rset.getString("CG_NAME"),
 						   rset.getDate("RECRUIT_STARTDATE"),
@@ -238,7 +239,7 @@ public class CommunityDAO {
 		}
 		return list;
 	}
-	public ArrayList selectFList(Connection conn) {
+	public ArrayList<FileVO> selectFList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<FileVO> list = null;
@@ -334,7 +335,6 @@ public class CommunityDAO {
 				result += pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -448,7 +448,6 @@ public class CommunityDAO {
 				result += pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 		} finally {
 			close(pstmt);
