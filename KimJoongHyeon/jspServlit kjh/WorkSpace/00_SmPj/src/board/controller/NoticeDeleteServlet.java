@@ -36,7 +36,7 @@ public class NoticeDeleteServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 
 		Board board = new Board(no);
-		int result = new NoticeService().deliteBoard(board);
+		int result = new NoticeService().deleteBoard(board);
 		
 		if(result > 0) {
 			response.sendRedirect("main.no");

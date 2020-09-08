@@ -14,10 +14,40 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
+import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
 import board.model.vo.Reply;
 
 public class QuestionDAO {
+	
+
+	public int getListCount(Connection conn) {
+		Statement stmt = null;
+//		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = 'QA' AND B_ENABLE = 'Y'";
+		//보드에서 게시판 삭제상태가 y 이며 whdfbrk qa 일경우 의 카운들?
+		try {
+			stmt= conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
+	}
+	
+	// 리스트 불러옴
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -35,17 +65,17 @@ public class QuestionDAO {
 			list = new ArrayList<Board>();
 			
 			while(rset.next()) {
-				Board bo = new Board(rset.getInt("B_NO"),
-									 rset.getString("B_TITLE"),
-									 rset.getString("B_CONTENT"),
-									 rset.getDate("B_DATE"),
-									 rset.getDate("B_RDATE"),
-									 rset.getInt("B_VIEW_COUNT"),
-									 rset.getInt("B_WRITER"),
-									 rset.getString("MEMBER_NICKNAME"),
-									 rset.getInt("B_REPLY_COUNT"),
-									 rset.getString("CG_NAME"));
-				list.add(bo); 
+				Board no = new Board(rset.getInt("B_NO"),				// 게시판 번호	
+									 rset.getString("B_TITLE"),  		// 게시판 제목	
+									 rset.getString("B_CONTENT"),		// 게시판 내용	
+									 rset.getDate("B_DATE"),			// 게시판 생성 날짜
+									 rset.getDate("B_RDATE"),			// 게시판 수정 날짜	
+									 rset.getInt("B_VIEW_COUNT"),		// 게시판 조회수
+									 rset.getInt("B_WRITER"),			// 게시판 글쓴이 회원 번호
+									 rset.getString("MEMBER_NICKNAME"),	// 게시판 글쓴이 회원	
+									 rset.getInt("B_REPLY_COUNT"),		// 게시판 댓글
+									 rset.getString("CG_NAME"));		// 카테고리 이름
+				list.add(no);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,6 +86,8 @@ public class QuestionDAO {
 		return list;
 	}
 
+	
+	// 조회수 증가
 	public int updateCount(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -75,6 +107,8 @@ public class QuestionDAO {
 		return result;
 	}
 
+	
+	//글확인
 	public Board selectBoard(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -111,7 +145,7 @@ public class QuestionDAO {
 		return board;
 	}
 
-	public int insertNotice(Connection conn, Board b) {
+	public int insertQA(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -136,6 +170,26 @@ public class QuestionDAO {
 		
 	}
 
+	public int boardDelete(Connection conn, Board board) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+				
+		String query = "UPDATE BOARD SET BOARD.B_ENABLE='N' WHERE B_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	public int modifyBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -157,58 +211,173 @@ public class QuestionDAO {
 		
 		return result;
 	}
-
-	public int boardDelete(Connection conn, Board board) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-				
-		String query = "UPDATE BOARD SET BOARD.B_ENABLE='N' WHERE B_NO = ?";
+	
+	
+	public ArrayList<FileVO> selectFList(Connection conn) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE STATUS='Y' AND FILE_LEVEL=0";
 		
 		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, board.getBoardNo());
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
 			
-			result = pstmt.executeUpdate();
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				list.add(new FileVO(rset.getInt("b_no"), 
+									rset.getString("change_name")));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
+	}
+	
+	
+	public int insertFile(Connection conn, ArrayList<FileVO> fileList) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT, SEQ_BNO.CURRVAL, NULL)";
+		
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				FileVO a = fileList.get(i);
+				
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, a.getOriginName());
+				pstmt.setString(2, a.getChangeName());
+				pstmt.setString(3, a.getFilePath());
+				pstmt.setInt(4, a.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		
 		return result;
 	}
-
-	public ArrayList<Reply> selectReplyList(Connection conn, int bId) {
+	
+	
+	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<Reply> list = null;
+		ArrayList<FileVO> list = null;
 		
-		String query = "selectReplyList=SELECT * FROM RLIST WHERE REF_BID=?";
+		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' ORDER BY FILE_NO";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bId);
 			
 			rset = pstmt.executeQuery();
-			list = new ArrayList<Reply>();
-			while(rset.next()) {
-				list.add(new Reply(rset.getInt("reply_id"),
-									rset.getString("reply_content"),
-									rset.getInt("ref_bid"),
-									rset.getString("nickname"),
-									rset.getDate("create_date"),
-									rset.getDate("modify_date"),
-									rset.getString("status")));
-			}
 			
-		} catch (SQLException e) {
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				FileVO f = new FileVO();
+				f.setFileNo(rset.getInt("file_no"));
+				f.setOriginName(rset.getString("origin_name"));
+				f.setChangeName(rset.getString("change_name"));
+				f.setFilePath(rset.getString("file_path"));
+				f.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(f);
+			}
+		}catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
 	}
+	
+	
+	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' AND FILE_LEVEL=0 ORDER BY FILE_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				FileVO f = new FileVO();
+				f.setFileNo(rset.getInt("file_no"));
+				f.setOriginName(rset.getString("origin_name"));
+				f.setChangeName(rset.getString("change_name"));
+				f.setFilePath(rset.getString("file_path"));
+				f.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(f);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(Connection conn, int bId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<FileVO> list = null;
+		
+		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' AND FILE_LEVEL=1 ORDER BY FILE_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<FileVO>();
+			
+			while(rset.next()) {
+				FileVO f = new FileVO();
+				f.setFileNo(rset.getInt("file_no"));
+				f.setOriginName(rset.getString("origin_name"));
+				f.setChangeName(rset.getString("change_name"));
+				f.setFilePath(rset.getString("file_path"));
+				f.setUploadDate(rset.getDate("upload_date"));
+				
+				list.add(f);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+
 	
 }

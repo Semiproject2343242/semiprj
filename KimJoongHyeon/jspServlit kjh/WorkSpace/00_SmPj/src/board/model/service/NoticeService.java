@@ -8,6 +8,7 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import board.model.dao.CommunityDAO;
 import board.model.dao.NoticeDAO;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
@@ -37,7 +38,7 @@ public class NoticeService {
 		return list;
 	}
 	
-	public int insertBoard(Board b) {
+	public int insertNotice(Board b) {
 		Connection conn = getConnection();
 		
 		int result = new NoticeDAO().insertNotice(conn, b);
@@ -77,7 +78,7 @@ public class NoticeService {
 	}
 
 
-	public int deliteBoard(Board board) {
+	public int deleteBoard(Board board) {
 		Connection conn = getConnection();
 		NoticeDAO nDAO = new NoticeDAO();
 		int result = nDAO.boardDelete(conn, board);
@@ -92,18 +93,48 @@ public class NoticeService {
 	}
 
 
-	public int modifyBoard(Board b) {
+//	public int modifyBoard(Board b) {
+//		Connection conn = getConnection();
+//		
+//		int result = new NoticeDAO().modifyBoard(conn, b);
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
+//		
+//		return result;
+//	}
+	
+
+	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
-		int result = new NoticeDAO().modifyBoard(conn, b);
-		if(result > 0) {
-			commit(conn);
+		NoticeDAO dao = new NoticeDAO();
+		int result2 = 0; 
+		System.out.println("b : " + b);
+		int result1 = dao.modifyBoard(conn,b);
+		
+		System.out.println("fileList : " + fileList.size());
+		System.out.println("result1 : " + result1);
+		result2 = result1;
+		if(fileList.size()==0 && result1 > 0) {
+			result2 = result1;
 		}else {
-			rollback(conn);
+			result2 = dao.modifyFile(conn, fileList);
 		}
+		
+		if(result1 >0 && result2 >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			System.out.println("modifyBoard Rollback!!!!!!!!!!!!!!!");
+		}
+		
 		close(conn);
 		
-		return result;
+		return result1;
 	}
 	
 	
@@ -121,7 +152,8 @@ public class NoticeService {
 		return list;
 	}
 
-
+	
+	// file을 안올렸을때 어떻게 할지 결정해야함
 	public int insertBoardAndFiles(Board b, ArrayList<FileVO> fileList) {
 		
 		Connection conn = getConnection();
@@ -131,7 +163,7 @@ public class NoticeService {
 		int result1 = dao.insertNotice(conn, b);
 		int result2 = dao.insertFile(conn, fileList);
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result1 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -146,17 +178,11 @@ public class NoticeService {
 	public ArrayList<FileVO> selectThumbnail(int bId) {
 		Connection conn = getConnection();
 		
-		int result = new NoticeDAO().updateCount(conn, bId);
-		
 		ArrayList<FileVO> list = null;
-		if(result > 0) {
-			list = new NoticeDAO().selectThumbnail(conn, bId);
+		list = new NoticeDAO().selectThumbnail(conn, bId);
 		
-			if(list != null) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
+		if(list != null) {
+			commit(conn);
 		} else {
 			rollback(conn);
 		}
@@ -165,5 +191,64 @@ public class NoticeService {
 		
 		return list;
 	}
+	
+	
+	
+	public ArrayList<FileVO> selectImageList(int bId) {
+		Connection conn = getConnection();
+				
+		ArrayList<FileVO> list = null;
+		list = new NoticeDAO().selectImageList(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public ArrayList<FileVO> selectFileList(int bId) {
+		Connection conn = getConnection();
+				
+		ArrayList<FileVO> list = null;
+
+		list = new NoticeDAO().selectFileList(conn, bId);
+		
+		if(list != null) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public int AddFile(Board b, ArrayList<FileVO> fileList) {
+		Connection conn = getConnection();
+		
+		NoticeDAO dao = new NoticeDAO();
+		System.out.println("왔다감");
+		int result = dao.AddFile(conn, fileList);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			System.out.println("AddFile Rollback!!!!!!!!!!!!!!!");
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	
 }

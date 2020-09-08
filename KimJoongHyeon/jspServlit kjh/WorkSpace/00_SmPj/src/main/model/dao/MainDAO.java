@@ -33,7 +33,6 @@ public class MainDAO {
 						 rset.getString("MEMBER_NICKNAME"),	// 게시판 글쓴이 회원	
 						 rset.getInt("B_REPLY_COUNT"),		// 게시판 댓글
 						 rset.getString("CG_NAME"));		// 카테고리 이름
-				System.out.println(bo);
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -70,12 +69,11 @@ public class MainDAO {
 									 rset.getString("AC_STATE"),
 									 rset.getString("LC_NAME"),
 									 rset.getString("ENROLL_STATE"),
+									 rset.getString("EM_STATE"),
 									 rset.getString("TC_NAME"),
 									 rset.getString("CG_NAME"),
 									 rset.getDate("RECRUIT_STARTDATE"),
-									 rset.getDate("RECRUIT_ENDDATE"),
-									 rset.getDate("ACTIVITY_STARTDATE"),
-									 rset.getDate("ACTIVITY_ENDDATE"));
+									 rset.getDate("RECRUIT_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {

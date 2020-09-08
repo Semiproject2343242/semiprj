@@ -48,7 +48,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "thumbnail_uploadFiles/";
+	         String savePath = root + "UploadFolder/support_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         

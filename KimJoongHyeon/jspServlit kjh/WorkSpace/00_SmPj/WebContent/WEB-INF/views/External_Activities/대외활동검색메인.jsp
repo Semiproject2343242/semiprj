@@ -434,8 +434,8 @@
       </div>
 	</div>
 	  <div class = "sp_button">
-		<%if (loginUser != null) {%>
-		<input type="button" class="result_btn" onclick="location.href='eaInsertForm.cm'"id="insertBtn" value="작성하기">
+		<%if(loginUser!=null && loginUser.getMemberNickName().equals("운영자")) {%>
+		<input type="button" class="result_btn" onclick="location.href='insertForm.ea'"id="insertBtn" value="작성하기">
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
@@ -471,7 +471,7 @@
 						+data[i].boardReCommend+"</p></div></li>";
 						boardArea.append(input);
 	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	                  	$('#board_list'+i).attr("onclick","location.href='detail.ea?bId="+data[i].boardNo+"'");
 	                  }
 						getlistCount();
 	               }else{
@@ -526,7 +526,7 @@
 	  						+data[i].boardReCommend+"</p></div></li>"
 	  						boardArea.append(input);
 	  	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	  	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	  	                  	$('#board_list'+i).attr("onclick","location.href='detail.ea?bId="+data[i].boardNo+"'");
 	  	                  }
 	  	                getlistCount();
 	  	               }else{
