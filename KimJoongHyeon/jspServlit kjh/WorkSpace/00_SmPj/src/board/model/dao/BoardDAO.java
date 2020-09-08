@@ -14,7 +14,8 @@ import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
 public class BoardDAO {
-
+	
+	// �Խ��� �� �Խñ� ����
 	public int getListCount(Connection conn, String boardName) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -38,8 +39,8 @@ public class BoardDAO {
 		}
 		return result;
 	}
-
 	
+	// �Խñ� ��ȸ��
 	public int updateCount(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -60,6 +61,7 @@ public class BoardDAO {
 	}
 	
 	
+	// ��� ���
 	public ArrayList<Reply> selectReplyList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -94,6 +96,8 @@ public class BoardDAO {
 		return list;
 	}
 
+	
+	// ��� �ۼ�
 	public int insertReply(Connection conn, Reply r) {
 
 		PreparedStatement pstmt = null;
@@ -118,6 +122,8 @@ public class BoardDAO {
 		return result;
 	}
 	
+	
+	// ��� ����
 	public int deleteReply(Connection conn, int replyNo) {
 
 		PreparedStatement pstmt = null;
@@ -200,6 +206,7 @@ public class BoardDAO {
 	}
 	
 	
+	// ����� ��������
 	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -236,6 +243,7 @@ public class BoardDAO {
 	}
 	
 	
+	// �̹��� ���
 	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;
@@ -272,6 +280,7 @@ public class BoardDAO {
 	}
 	
 	
+	// ���� ���
 	public ArrayList<FileVO> selectFileList(Connection conn, int bId) {
 		
 		PreparedStatement pstmt = null;

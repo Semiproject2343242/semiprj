@@ -27,6 +27,7 @@ public class Board {
 	private Date 	acEndDate;   		// 활동 끝 날짜				// B_DATE
 	public Board() {}
 
+	
 	//자유게시글 글쓰기
 	public Board(String boardTitle, String boardContent, int boardWriterNo) {
 		super();
@@ -50,6 +51,8 @@ public class Board {
 		this.boardWriter = boardWriter;
 		this.boardReply = boardReply;
 	}
+	
+	
 	//QA 삭제
 	public Board(int boardNo) {
 		super();
@@ -95,6 +98,7 @@ public class Board {
 		this.boardReply = boardReply;
 	}
 
+	
 	//Q/A 리스트,공지사항
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply,String cgName) {
@@ -115,7 +119,7 @@ public class Board {
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
-			String tcName, String cgName,Date reStratDate, Date reEndDate) {
+			String tcName, String cgName, Date reStratDate, Date reEndDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -133,8 +137,8 @@ public class Board {
 		this.emState = emState;
 		this.tcName = tcName;
 		this.cgName = cgName;
-		this.reStratDate = reStratDate; 
-		this.reEndDate = reEndDate;  	
+		this.reStratDate = reStratDate;
+		this.reEndDate = reEndDate;
 	}
 
 	//myPage 대외활동 리스트

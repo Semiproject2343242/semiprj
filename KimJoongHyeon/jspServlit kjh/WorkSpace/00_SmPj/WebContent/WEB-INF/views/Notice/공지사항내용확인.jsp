@@ -18,33 +18,10 @@
     <title>정부지원금 바로지금</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
  	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항내용확인.css">
+ 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/게시판내용확인.css" />
+    
 
-    <style>
-	  section{
-	  	width: 950px;
-	  }
-	  	#filetext{
-	  		margin-top : 220px;
-	  	}
-	  	.sub1{
-	  		width: 80%;
-			float:left;
-	  	}
-		.sub2{
-			text-align:right;
-		}
-	  	.sub3{
-	  		width:33%;
-	  		float:left;
-	  	}
-	  	.sub4{
-	  		width:33%;
-	  		float:left;
-	  		text-align:right;
-	  	}
-	  	.replyIWC{width: 430px;}
-		.udlbtn{background-color:sky; width:70px; height:40px; margin:10px;}     
+    <style>  
     </style>
 </head>
 <body>
@@ -53,27 +30,22 @@
     	<aside>
 	    	<h2><%= b.getBoardNo() %></h2>
 	        <hr />
-	        <h2>제목</h2>
-	        <h2>카테고리</h2>
-	        <h2 id="content">내용</h2>
+	       <div class=baside><h2>제목</h2></div>
+	        <div class=baside><h2>카테고리</h2></div>
+	        <div class=baside><h2 id="content">내용</h2></div>
 	    </aside>
         <div id="main_section">
-			<form action="modifyForm.no" id="detailForm" name="detailForm" method="post" encType="multipart/form-data">	        
+			<form action="modifyForm.no" id="detailForm" name="detailForm" method="post">	        
 	        
 	        <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
     		<input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
     		<input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
 			<input type="hidden" name="category" value="<%= b.getCgName() %>" />
-			<input type="hidden" name="viewCount" value="<%= b.getBoardViewCount() %>" />
-			<input type="hidden" name="reCommend" value="<%= b.getBoardReCommend() %>" />
-			<input type="hidden" name="writer" value="<%= b.getBoardWriter() %>" />
-	        <input type="hidden" name="replyCount" value="<%= replyList.size() %>" />
-            
+             <h2 align="center">공지사항</h2>
+	        <hr>
        		<div class="sub1"><h4><%= b.getBoardTitle() %></h4></div><div class="sub2"><h4> 작성자 : <%= b.getBoardWriter()%></h4></div>
 
 	        <div class="sub3"><h4><%= b.getCgName() %></h4></div><div class="sub4"><h4> 등록 날짜 : <%= b.getBoardModifyDate()%></h4></div><div class="sub4"><h4> 수정 날짜 : <%= b.getBoardModifyDate() %></h4></div><br>
-      			
-			<input type="hidden" name="date" value="<%= b.getBoardCreateDate()%>">
 
 		    <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>            
 	        
@@ -104,20 +76,22 @@
 					<% } %>
 				<% } %>
 				<div align="right" style="background-color:skyblue;">
-					<% if(loginUser != null && b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
+					<% if(loginUser != null){ %>
+					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
 						<input type="submit" class="udlbtn" id="updateBtn" value="수정">
 						<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">	
+					<% } %>
 					<% } %>
 					<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
 					
 					<script>
 						function deleteBoard(){
 							var num = <%= b.getBoardNo() %>;
-							var result = window.confirm(num+'삭제?');
+							var result = window.confirm(num+'게시글을 삭제하시겠습니까?');
 							var wno = <%= b.getBoardWriterNo()%>;
 							console.log(wno);
 						    if(result){
-						    	location.href="<%= request.getContextPath() %>/delete.qa?no="+num;
+						    	location.href="<%= request.getContextPath() %>/delete.no?no="+num;
 						    }
 						    else{
 						        alert('취소하셨습니다.');
@@ -132,6 +106,7 @@
 
             <div> <h2>댓글</h2> </div>
             <hr><br>
+
             <div id="comment" 	style="line-height:20px; margin: 0px; padding:0px;">
             <% if(replyList.isEmpty()){ %>
                	<text class="text3"><p class="p1">댓글이 없습니다.</p></text>
@@ -155,8 +130,10 @@
 	               		<td class="replyDU" style="width:200px; float:right;">
 	               			<div><p style="float:right; margin:0px;">게시일 : <%= replyList.get(i).getCreateDate() %></p></div> <!-- 게시 날짜 -->
 	               			<div><p style="float:right; margin:0px;">수정일 : <%= replyList.get(i).getModifyDate() %></p></div> <!-- 수정 날짜 -->
-	               			<% if((replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) && loginUser != null) || loginUser.getMemberNickName().equals("운영자")) { %>
-								<div><p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)">	
+	               			<%if(loginUser != null){ %>
+		               			<% if(replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+									<div><p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)"></p></div>
+								<% } %>
 							<% } %>
 						<script>
 							function deleteReply(replyNo){

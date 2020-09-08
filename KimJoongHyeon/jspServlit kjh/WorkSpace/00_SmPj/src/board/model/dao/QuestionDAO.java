@@ -1,12 +1,7 @@
 package board.model.dao;
 
 import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,21 +9,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
-import board.model.vo.FileVO;
 import board.model.vo.PageInfo;
-import board.model.vo.Reply;
 
 public class QuestionDAO {
 	
-
+	// Q/A 게시글 갯수
 	public int getListCount(Connection conn) {
 		Statement stmt = null;
-//		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
 		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = 'QA' AND B_ENABLE = 'Y'";
-		//보드에서 게시판 삭제상태가 y 이며 whdfbrk qa 일경우 의 카운들?
 		try {
 			stmt= conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -47,7 +38,75 @@ public class QuestionDAO {
 		return result;
 	}
 	
-	// 리스트 불러옴
+	
+	// 공지사항 검색 게시글 갯수
+	public int getSearchListCount(Connection conn, String opt, String word) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = null;
+		int result = 0;
+		
+		try {
+			
+			if(opt.equals("all")) {
+				query = "SELECT COUNT(*) FROM (SELECT * FROM QALIST WHERE B_TITLE LIKE ? OR B_CONTENT LIKE ? OR MEMBER_NICKNAME LIKE ? OR CG_NAME LIKE ?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setString(2, "%" + word + "%");
+				pstmt.setString(3, "%" + word + "%");
+				pstmt.setString(4, "%" + word + "%");
+				
+			} else if (opt.equals("writer")) {
+				query = "SELECT COUNT(*) FROM (SELECT * FROM QALIST WHERE MEMBER_NICKNAME LIKE ?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				
+			} else if (opt.equals("title")) {
+				query = "SELECT COUNT(*) FROM (SELECT * FROM QALIST WHERE B_TITLE LIKE ?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+			
+			} else if (opt.equals("content")) {
+				query = "SELECT COUNT(*) FROM (SELECT * FROM QALIST WHERE B_CONTENT LIKE ?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				
+			} else if (opt.equals("title_content")) {
+				query = "SELECT COUNT(*) FROM (SELECT * FROM QALIST WHERE B_TITLE LIKE ? OR B_CONTENT LIKE ?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setString(2, "%" + word + "%");
+				
+			} else if (opt.equals("category")) {
+				query = "SELECT COUNT(*) FROM (SELECT * FROM QALIST WHERE CG_NAME LIKE ?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				
+			} else {
+				query = "SELECT COUNT(*) FROM NOTICELIST";
+				pstmt = conn.prepareStatement(query);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	
+	// Q/A 게시글 목록
 	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -87,28 +146,7 @@ public class QuestionDAO {
 	}
 
 	
-	// 조회수 증가
-	public int updateCount(Connection conn, int bId) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = "UPDATE BOARD SET B_VIEW_COUNT = B_VIEW_COUNT+1 WHERE B_NO=?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bId);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
-	
-	//글확인
+	// Q/A 게시글 확인
 	public Board selectBoard(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -145,7 +183,9 @@ public class QuestionDAO {
 		return board;
 	}
 
-	public int insertQA(Connection conn, Board b) {
+	
+	// Q/A 게시글 등록
+	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -170,26 +210,8 @@ public class QuestionDAO {
 		
 	}
 
-	public int boardDelete(Connection conn, Board board) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-				
-		String query = "UPDATE BOARD SET BOARD.B_ENABLE='N' WHERE B_NO = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, board.getBoardNo());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
+	
+	// Q/A 게시글 수정
 	public int modifyBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -211,173 +233,138 @@ public class QuestionDAO {
 		
 		return result;
 	}
-	
-	
-	public ArrayList<FileVO> selectFList(Connection conn) {
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE STATUS='Y' AND FILE_LEVEL=0";
-		
-		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
-			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				list.add(new FileVO(rset.getInt("b_no"), 
-									rset.getString("change_name")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		return list;
-	}
-	
-	
-	public int insertFile(Connection conn, ArrayList<FileVO> fileList) {
 
-		PreparedStatement pstmt = null;
-		int result = 0;
+	
+	// 검색된 리스트 반환
+	public ArrayList<Board> searchList(Connection conn, String opt, String word, PageInfo pi){
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT, SEQ_BNO.CURRVAL, NULL)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;		
+		String query = null;
+		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
 		
 		try {
-			for(int i = 0; i < fileList.size(); i++) {
-				FileVO a = fileList.get(i);
-				
+			
+			if(opt.equals("all")) {
+				query = "SELECT * FROM "
+						+ "(SELECT ROWNUM RNUM, Q.* "
+						+ "FROM (SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,B_WRITER,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+						+ 	"FROM BOARD "
+						+ 		"JOIN MEMBER ON(MEMBER_NO = B_WRITER) "
+						+ 	"WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' AND (B_TITLE LIKE ?  OR B_CONTENT LIKE ? OR MEMBER_NICKNAME LIKE ? OR CG_NAME LIKE ?) "
+						+ 	"ORDER BY B_NO DESC) Q) "
+						+ "WHERE RNUM BETWEEN ? AND ?";
 				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, a.getOriginName());
-				pstmt.setString(2, a.getChangeName());
-				pstmt.setString(3, a.getFilePath());
-				pstmt.setInt(4, a.getFileLevel());
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setString(2, "%" + word + "%");
+				pstmt.setString(3, "%" + word + "%");
+				pstmt.setString(4, "%" + word + "%");
+				pstmt.setInt(5, startRow);
+				pstmt.setInt(6, endRow);
 				
-				result += pstmt.executeUpdate();
+			} else if (opt.equals("writer")) {
+				query = "SELECT * FROM "
+						+ "(SELECT ROWNUM RNUM, Q.* "
+						+ "FROM (SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,B_WRITER,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+						+	"FROM BOARD "
+						+		"JOIN MEMBER ON(MEMBER_NO = B_WRITER) "
+						+	"WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' AND MEMBER_NICKNAME LIKE ? " 
+						+	"ORDER BY B_NO DESC) Q) "
+						+ "WHERE RNUM BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+			} else if (opt.equals("title")) {
+				query = "SELECT * FROM "
+						+ "(SELECT ROWNUM RNUM, Q.* "
+						+ "FROM (SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,B_WRITER,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+						+ 	"FROM BOARD "
+						+		"JOIN MEMBER ON(MEMBER_NO = B_WRITER) "
+						+	"WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' AND B_TITLE LIKE ? "
+						+	"ORDER BY B_NO DESC) Q) "
+						+ "WHERE RNUM BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			
+			} else if (opt.equals("content")) {
+				query = "SELECT * FROM "
+						+ "(SELECT ROWNUM RNUM, Q.* "
+						+ "FROM (SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,B_WRITER,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+						+	"FROM BOARD "
+						+		"JOIN MEMBER ON(MEMBER_NO = B_WRITER) "
+						+	"WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' AND B_CONTENT LIKE ? "
+						+	"ORDER BY B_NO DESC) Q) "
+						+ "WHERE RNUM BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+			} else if (opt.equals("title_content")) {
+				query = "SELECT * FROM "
+						+ "(SELECT ROWNUM RNUM, Q.* "
+						+ "FROM (SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,B_WRITER,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+						+	"FROM BOARD "
+						+		"JOIN MEMBER ON(MEMBER_NO = B_WRITER) "
+						+	"WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' AND (B_TITLE LIKE ? OR B_CONTENT LIKE ?) "
+						+	"ORDER BY B_NO DESC) Q) "
+						+ "WHERE RNUM BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setString(2, "%" + word + "%");
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+				
+			} else if (opt.equals("category")) {
+				query = "SELECT * FROM "
+						+ "(SELECT ROWNUM RNUM, Q.* "
+						+ "FROM (SELECT B_NO,B_TITLE,B_CONTENT,B_DATE,B_RDATE,B_VIEW_COUNT,B_WRITER,MEMBER_NICKNAME,B_REPLY_COUNT,CG_NAME "
+						+	"FROM BOARD "
+						+		"JOIN MEMBER ON(MEMBER_NO = B_WRITER) "
+						+	"WHERE BOARD.B_ENABLE='Y' AND B_NAME='QA' AND CG_NAME LIKE ? "
+						+	"ORDER BY B_NO DESC) Q) "
+						+ "WHERE RNUM BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, "%" + word + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+			} else {
+				query = "SELECT * FROM QALIST WHERE RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
+				pstmt = conn.prepareStatement(query);
+			}
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			
+			while (rset.next()) {
+				Board no = new Board(rset.getInt("B_NO"), 						// 게시판 번호
+									 rset.getString("B_TITLE"), 				// 게시판 제목
+									 rset.getString("B_CONTENT"), 				// 게시판 내용
+									 rset.getDate("B_DATE"), 					// 게시판 생성 날짜
+									 rset.getDate("B_RDATE"), 					// 게시판 수정 날짜
+									 rset.getInt("B_VIEW_COUNT"), 				// 게시판 조회수
+									 rset.getInt("B_WRITER"),					// 게시판 글쓴이 회원 번호
+									 rset.getString("MEMBER_NICKNAME"), 		// 게시판 글쓴이 회원
+									 rset.getInt("B_REPLY_COUNT"), 				// 게시판 댓글
+									 rset.getString("CG_NAME")); 				// 카테고리 이름
+				list.add(no);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-	
-	
-	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' ORDER BY FILE_NO";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bId);
-			
-			rset = pstmt.executeQuery();
-			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				FileVO f = new FileVO();
-				f.setFileNo(rset.getInt("file_no"));
-				f.setOriginName(rset.getString("origin_name"));
-				f.setChangeName(rset.getString("change_name"));
-				f.setFilePath(rset.getString("file_path"));
-				f.setUploadDate(rset.getDate("upload_date"));
-				
-				list.add(f);
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+		}finally {
 			close(rset);
 			close(pstmt);
 		}
 		return list;
 	}
-	
-	
-	public ArrayList<FileVO> selectImageList(Connection conn, int bId) {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' AND FILE_LEVEL=0 ORDER BY FILE_NO DESC";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bId);
-			
-			rset = pstmt.executeQuery();
-			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				FileVO f = new FileVO();
-				f.setFileNo(rset.getInt("file_no"));
-				f.setOriginName(rset.getString("origin_name"));
-				f.setChangeName(rset.getString("change_name"));
-				f.setFilePath(rset.getString("file_path"));
-				f.setUploadDate(rset.getDate("upload_date"));
-				
-				list.add(f);
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
-	
-	
-	public ArrayList<FileVO> selectFileList(Connection conn, int bId) {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE B_NO = ? AND STATUS = 'Y' AND FILE_LEVEL=1 ORDER BY FILE_NO DESC";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bId);
-			
-			rset = pstmt.executeQuery();
-			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				FileVO f = new FileVO();
-				f.setFileNo(rset.getInt("file_no"));
-				f.setOriginName(rset.getString("origin_name"));
-				f.setChangeName(rset.getString("change_name"));
-				f.setFilePath(rset.getString("file_path"));
-				f.setUploadDate(rset.getDate("upload_date"));
-				
-				list.add(f);
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
-	
-
 	
 }

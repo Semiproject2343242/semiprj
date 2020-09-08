@@ -17,25 +17,16 @@ import board.model.vo.PageInfo;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
-/**
- * Servlet implementation class MemberListServlet
- */
 @WebServlet("/memList.ad")
 public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public MemberListServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member)session.getAttribute("loginUser");
 		String loginMemberId = loginMember.getMemberId();
@@ -44,39 +35,21 @@ public class MemberListServlet extends HttpServlet {
 				
 		AdminService adminService = new AdminService();
 		
-		//페이징을 위한 변수들
-		int listCount;		// 총 게시글 개수
-		int currentPage;	// 현재 페이지
-		int pageLimit;		// 한 페이지에서 표시되는 페이징 
-		int boardLimit;		// 한 페이지에서 보일 게시글 최대 개수
-		int maxPage;		// 최대 페이지 중 가장 마지막 페이지
-		int startPage;		// 페이징된 페이지 중 시작 페이지
-		int endPage;		// 페이징된 페이지 중 마지막 페이지
+		int listCount = adminService.getMemberListCount();
 		
-		listCount = adminService.getMemberListCount();
-		
-		currentPage = 1;
+		//페이징
+		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		pageLimit = 10;
-		boardLimit = 10;
-		
-		maxPage = (int)Math.ceil((double)listCount/boardLimit);
-		
-		startPage = ( currentPage -1)/ pageLimit * pageLimit + 1;
-		
-		endPage = startPage + pageLimit - 1;
-		if(maxPage < endPage) { //페이지 수가 10개가 안될때
-			endPage = maxPage;
-		}
-		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = Page.pageInfo2(listCount, currentPage, "/memList.ad");
+		//페이징
 		
 		ArrayList<Member> list =  adminService.selectMemberList(pi);
 		
     	String page = null;
+    	
     	if(member != null) {
     		page = "WEB-INF/views/Admin/관리자(회원 목록 조회).jsp";
     		request.setAttribute("member", member);
@@ -89,11 +62,7 @@ public class MemberListServlet extends HttpServlet {
 		}		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

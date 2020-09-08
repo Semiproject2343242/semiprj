@@ -1,8 +1,11 @@
+<%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	Member member = (Member)request.getAttribute("member");
+	FileVO profile = (FileVO)request.getAttribute("profile");
 	ArrayList<Board> supportList = (ArrayList<Board>)request.getAttribute("supportList");
 	ArrayList<Board> externalList = (ArrayList<Board>)request.getAttribute("externalList");
 	ArrayList<Board> commuFreeList = (ArrayList<Board>)request.getAttribute("commuFreeList");
@@ -13,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정부 지원금 바로 지금</title>
+<title>마이 페이지(메인)</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 </head>
@@ -70,6 +73,89 @@
 .box_title h3 {
 	color: white;
 }
+
+/*파일 업로드 관련 */
+.where {
+	display: block;
+	margin: 25px 15px;
+	font-size: 11px;
+	color: #000;
+	text-decoration: none;
+	font-family: verdana;
+	font-style: italic;
+}
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+/* named upload */
+.filebox .upload-name {
+	display: inline-block;
+	padding: .5em .75em;
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
+/* imaged preview */
+.filebox .upload-display { /* 이미지가 표시될 지역 */
+	margin-bottom: 5px;
+}
+
+@media ( min-width : 768px) {
+	.filebox .upload-display {
+		display: inline-block;
+		margin-right: 5px;
+		margin-bottom: 0;
+	}
+}
+
+.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */
+	display: inline-block;
+	width: 54px;
+	padding: 2px;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+.filebox .upload-display img { /* 추가될 이미지 */
+	display: block;
+	max-width: 100%;
+	width: 100% \9;
+	height: auto;
+}
 </style>
 
 <body>
@@ -85,7 +171,7 @@
                             <h3>회원 목록 조회</h3>
                         </a></dt>
                     <dt><a href="${pageContext.request.contextPath}/spList.ad">
-                            <h3>정보 공유 신청</h3>
+                            <h3>지원 정책 신청</h3>
                         </a></dt>
                     <dt><a href="${pageContext.request.contextPath}/eaList.ad">
                             <h3>대외 활동 신청</h3>
@@ -96,9 +182,37 @@
 
 		<div id="main_section" align="center">
 			<div class="box" style="background: #BDBDBD;">
-				<img class="profile" src="${pageContext.request.contextPath}/Media/Music2.jpg">
+				<%if(profile == null) { %>
+					<img class="profile" src="${pageContext.request.contextPath}/UploadFolder/member_profile/profileDefault.png">
+				<% } else { %>
+					<img class="profile" src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%=profile.getChangeName()%>">
+				<% } %>
 			</div>
-			<input type="button" value="Edit">
+
+			<div class="filebox bs3-primary preview-image">
+	           	<%if(profile == null) { %>
+	           	<form action = "<%= request.getContextPath() %>/insertProfile.me" method="post" encType="multipart/form-data">
+		           	<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+		            <label for="input_file">프로필 업로드</label> 
+		            <input type="file" id="input_file" class="upload-hidden" name="profileFile"><br>
+		           	<input type="submit" value="업로드">
+		    	</form>
+	            <% } else { %>
+	           	<form action = "<%= request.getContextPath() %>/updateProfile.me" method="post" encType="multipart/form-data">
+	            	<input type="hidden" value="<%=profile.getFileNo()%>" name="originalFileNo">
+	            	<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+		            <label for="input_file">프로필 수정</label> 
+		            <input type="file" id="input_file" class="upload-hidden" name="profileFile"><br>
+		            <input type="submit" value="업로드">
+		        </form>
+		        <form action = "<%= request.getContextPath() %>/deleteProfile.me" method="post" encType="multipart/form-data">
+		        	<input type="hidden" value="<%=profile.getFileNo()%>" name="originalFileNo">
+		        	<input type="submit" value="프로필 삭제"><br>
+		        </form>
+		        <% } %> 
+		
+	     	</div>			
+			
 
 			<div class="my_board">
 				<h1 align='left'>최근 게시글</h1>
@@ -127,7 +241,7 @@
 							<a href="#"><h3>대외활동</h3></a>
 						</div>
 						<ol>
-						<% if(supportList.isEmpty()) { %>
+						<% if(externalList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else { %>
 							<% for (Board b : externalList) { %>
@@ -147,7 +261,7 @@
 							<a href="#"><h3>자유게시판</h3></a>
 						</div>
 						<ol>
-						<% if(supportList.isEmpty()) { %>
+						<% if(commuFreeList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else { %>
 							<% for (Board b : commuFreeList) { %>
@@ -165,7 +279,7 @@
 							<a href="#"><h3>Q / A</h3></a>
 						</div>
 						<ol>
-						<% if(supportList.isEmpty()) { %>
+						<% if(qaList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else { %>
 							<% for (Board b : qaList) { %>
@@ -184,6 +298,58 @@
 	</section>
 
 	<%@ include file="../Common/footer.jsp"%>
+	
+	<script>
+	$(document).ready(function(){
+		   var fileTarget = $('.filebox .upload-hidden');
+
+		    fileTarget.on('change', function(){
+		        if(window.FileReader){
+		            // 파일명 추출
+		            var filename = $(this)[0].files[0].name;
+		        } 
+
+		        else {
+		            // Old IE 파일명 추출
+		            var filename = $(this).val().split('/').pop().split('\\').pop();
+		        };
+
+		        $(this).siblings('.upload-name').val(filename);
+		    });
+
+		    //preview image 
+		    var imgTarget = $('.preview-image .upload-hidden');
+
+		    imgTarget.on('change', function(){
+		        var parent = $(this).parent();
+		        parent.children('.upload-display').remove();
+
+		        if(window.FileReader){
+		            //image 파일만
+		            if (!$(this)[0].files[0].type.match(/image\//)) return;
+		            
+		            var reader = new FileReader();
+		            reader.onload = function(e){
+		                var src = e.target.result;
+		                parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+		            }
+		            reader.readAsDataURL($(this)[0].files[0]);
+		        }
+
+		        else {
+		            $(this)[0].select();
+		            $(this)[0].blur();
+		            var imgSrc = document.selection.createRange().text;
+		            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+
+		            var img = $(this).siblings('.upload-display').find('img');
+		            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+		        }
+		    });
+		    
+		});
+ 
+	</script>	
 </body>
 
 </html>
