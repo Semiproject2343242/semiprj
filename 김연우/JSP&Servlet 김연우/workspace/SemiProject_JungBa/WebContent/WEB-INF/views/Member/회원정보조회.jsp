@@ -103,13 +103,13 @@
             <hr>
             <div>
                 <dl>
-                    <dt><a href="${pageContext.request.contextPath}/memList.ad">
+                    <dt><a href="#">
                             <h3>회원 목록 조회</h3>
                         </a></dt>
-                    <dt><a href="${pageContext.request.contextPath}/spList.ad">
+                    <dt><a href="#">
                             <h3>정보 공유 신청</h3>
                         </a></dt>
-                    <dt><a href="${pageContext.request.contextPath}/eaList.ad">
+                    <dt><a href="#">
                             <h3>대외 활동 신청</h3>
                         </a></dt>
                 </dl>

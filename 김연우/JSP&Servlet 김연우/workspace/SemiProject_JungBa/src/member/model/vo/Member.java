@@ -27,9 +27,11 @@ public class Member {
 		this.memberPw = memberPw;
 	}
 	
+	
+	// selectMemberList
 	public Member(int memberNo, String memberId, String memberName, String memberNickName, String memberGender,
-			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress, Date memberRegDate,
-			int memberBoard) {
+			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress, Date memberRegDate, 
+			String memberEnable, String memberGrade, int memberBoard) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -41,6 +43,8 @@ public class Member {
 		this.memberEmail = memberEmail;
 		this.memberAddress = memberAddress;
 		this.memberRegDate = memberRegDate;
+		this.memberEnable = memberEnable;
+		this.memberGrade = memberGrade;
 		this.memberBoard = memberBoard;
 	}
 

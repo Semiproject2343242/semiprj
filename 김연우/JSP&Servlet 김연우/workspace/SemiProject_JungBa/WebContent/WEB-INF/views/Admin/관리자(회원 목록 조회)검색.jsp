@@ -4,6 +4,16 @@
     <%
 	Member member = (Member)request.getAttribute("member");
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	String searchWord = (String)request.getAttribute("searchWord");
+	String opt = (String)request.getAttribute("selectedOpt");
+	String[] selectedOpt = new String[4];
+	
+	switch(opt){
+		case "전체" : selectedOpt[0] = "selected"; break;
+		case "회원 번호" : selectedOpt[1] = "selected"; break;
+		case "아이디" : selectedOpt[2] = "selected"; break;
+		case "닉네임" : selectedOpt[3] = "selected"; break;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -65,20 +75,20 @@
                 <div id="subTitle"><b>회원 목록 조회</b></div>
             </h2>
             <hr>
+            <h3 align="center">검색어 : <%= searchWord %></h3>
             <div id="bottomContent">
             	<form action = "<%= request.getContextPath() %>/searchMember.ad">
                 <div id="searchDiv">
                     <select name="opt">
-                    	<option value="전체">전체 검색</option>
-                        <option value="회원 번호">회원 번호</option>
-                        <option value="아이디">아이디</option>
-                        <option value="닉네임">닉네임</option>
+                    	<option value="전체" <%= selectedOpt[0] %>>전체 검색</option>
+                        <option value="회원 번호" <%= selectedOpt[1] %>>회원 번호</option>
+                        <option value="아이디" <%= selectedOpt[2] %>>아이디</option>
+                        <option value="닉네임" <%= selectedOpt[3] %>>닉네임</option>
                     </select>
-                    <input type="search" name="word" value="" placeholder="검색어를 입력하세요">
+                    <input type="search" name="word" value="<%= searchWord %>" placeholder="검색어를 입력하세요">
                     <button type="submit">검색</button>
                 </div>
                 </form>
-                </div>
                 <div id="tableDiv">
                 	<table class="contentsTable" width="100%" align="center">
 	                	<thead>
@@ -119,7 +129,7 @@
 						<%	} %>
 						</tbody>
                     </table>
-                    <%@ include file="../Common/page.jsp" %>
+                    <%@ include file="../Common/searchPage.jsp" %>
                 </div>
             </div>
         </div>

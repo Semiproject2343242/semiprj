@@ -94,9 +94,9 @@
 	               <% }else{ %>
 	                  alert('회원만 이용할 수 있는 서비스입니다.')
 	               <% } %>
-	            })
+	            });
 	        <% } %>
-         })
+         });
       </script>
     </section>
 	<%@ include file="../Common/footer.jsp" %>

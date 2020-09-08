@@ -5,6 +5,14 @@
 <%
 	Member member = (Member)request.getAttribute("member");
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	String opt = (String)request.getAttribute("selectedOpt");
+	String[] selectedOpt = new String[3];
+	
+	switch(opt){
+		case "전체" : selectedOpt[0] = "selected"; break;
+		case "승인 대기" : selectedOpt[1] = "selected"; break;
+		case "승인 완료" : selectedOpt[2] = "selected"; break;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -66,19 +74,20 @@
         <div id="main_section" align="center">
             <h2>
                 <div id="subTitle"><b>대외 활동 신청</b></div>
+                <p><%= opt %> 목록</p>
             </h2>
             <hr>
             <div id="bottomContent">
-            	<form action = "<%= request.getContextPath() %>/searchExternal.ad">
+           		<form action = "<%= request.getContextPath() %>/searchExternal.ad">
                 <div id="searchDiv">
                     <select name="opt">
-                    	<option value="전체">전체 목록</option>
-                        <option value="승인 대기">승인 대기</option>
-                        <option value="승인 완료">승인 완료</option>
+                    	<option value="전체" <%= selectedOpt[0] %>>전체 목록</option>
+                        <option value="승인 대기" <%= selectedOpt[1] %>>승인 대기</option>
+                        <option value="승인 완료" <%= selectedOpt[2] %>>승인 완료</option>
                     </select>
                     <button type="submit">검색</button>
                 </div>
-                </form>
+            	</form>    
                 <div id="tableDiv">
                 	<table class="contentsTable" width="800px" align="center">
 	                	<thead>
@@ -115,7 +124,7 @@
 						<%	} %>
 						</tbody>
                     </table>
-                    <%@ include file="../Common/page.jsp" %>
+                    <%@ include file="../Common/searchPage.jsp" %>
                 </div>
             </div>
         </div>
@@ -134,7 +143,7 @@
 	            			location.href = '<%= request.getContextPath() %>/eaDetail.cm?bId=' + bId;
 	            		} else {
 	            			location.href = '<%= request.getContextPath() %>/detail.ea?bId=' + bId;
-	            		}        		
+	            		}      
 	            <% }else{ %>
 	            		alert('회원만 이용할 수 있는 서비스입니다.')
 	            <% } %>
