@@ -154,12 +154,13 @@ COMMIT;
 CREATE OR REPLACE VIEW MEMBERLIST
 AS                      
 SELECT ROWNUM RNUM,MEMBER.*
-FROM ( SELECT MEMBER_NO,MEMBER_ID,MEMBER_NAME,MEMBER_NICKNAME,MEMBER_GENDER,MEMBER_BIRTHDAY,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_ADDRESS,MEMBER_REGDATE,
+FROM ( SELECT MEMBER_NO,MEMBER_ID,MEMBER_NAME,MEMBER_NICKNAME,MEMBER_GENDER,MEMBER_BIRTHDAY,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_ADDRESS,MEMBER_REGDATE,MEMBER_ENABLE,MEMBER_GRADE, 
 (SELECT COUNT(*) 
     FROM BOARD B
     WHERE M.MEMBER_NO=B.B_WRITER) MEMBER_BOARD
 FROM MEMBER M
-WHERE MEMBER_GRADE='user') MEMBER;
+WHERE MEMBER_GRADE='user'
+ORDER BY MEMBER_NO DESC) MEMBER;
 
 COMMIT;
 
@@ -388,7 +389,16 @@ INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user7', 'user7', 'USER7', '유저07', 
 INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user8', 'user8', 'USER8', '유저08', 'W', '90/01/08', '010-8888-8888', 'user8@nate.com', '서울특별시 강동구', SYSDATE, default, default);
 INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user9', 'user9', 'USER9', '유저09', 'M', '90/01/09', '010-9999-9999', 'user9@nate.com', '서울특별시 동작구', SYSDATE, default, default);
 INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user10', 'user10', 'USER10', '유저10', 'M', '90/01/10', '010-1010-1010', 'user10@nate.com', '서울특별시 강북구', SYSDATE, default, default);
-
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user11', 'user11', 'USER11', '유저11', 'M', '90/01/02', '010-1111-1111', 'user2@nate.com', '서울특별시 관악구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user12', 'user12', 'USER12', '유저12', 'M', '90/01/02', '010-2222-2222', 'user2@nate.com', '서울특별시 관악구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user13', 'user13', 'USER13', '유저13', 'W', '90/01/03', '010-3333-3333', 'user3@nate.com', '서울특별시 노원구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user14', 'user14', 'USER14', '유저14', 'W', '90/01/04', '010-4444-4444', 'user4@nate.com', '서울특별시 종로구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user15', 'user15', 'USER15', '유저15', 'W', '90/01/05', '010-5555-5555', 'user5@nate.com', '서울특별시 서대문구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user16', 'user16', 'USER16', '유저16', 'M', '90/01/06', '010-6666-6666', 'user6@nate.com', '서울특별시 광진구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user17', 'user17', 'USER17', '유저17', 'W', '90/01/07', '010-7777-7777', 'user7@nate.com', '서울특별시 강서구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user18', 'user18', 'USER18', '유저18', 'W', '90/01/08', '010-8888-8888', 'user8@nate.com', '서울특별시 강동구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user19', 'user19', 'USER19', '유저19', 'M', '90/01/09', '010-9999-9999', 'user9@nate.com', '서울특별시 동작구', SYSDATE, default, default);
+INSERT INTO MEMBER VALUES(SEQ_MNO.NEXTVAL, 'user20', 'user20', 'USER20', '유저20', 'M', '90/01/10', '010-1010-1010', 'user10@nate.com', '서울특별시 강북구', SYSDATE, default, default);
 
 -- 공지사항 게시글 생성
 INSERT INTO BOARD

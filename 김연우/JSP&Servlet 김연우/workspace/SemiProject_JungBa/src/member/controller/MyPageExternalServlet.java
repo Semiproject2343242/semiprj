@@ -36,11 +36,13 @@ public class MyPageExternalServlet extends HttpServlet {
 				
 		MemberService memberService = new MemberService();
 		
+		int listCount = memberService.getListCount("대외", loginMemberNo);
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageInfo pi = Page.PageInfo("대외", currentPage, "/myPageExternal.me");
+		PageInfo pi = Page.pageInfo2(listCount, currentPage, "/myPageExternal.me");
 		
 		ArrayList<Board> list = memberService.selectMyExternalList(loginMemberNo, pi);
 		
