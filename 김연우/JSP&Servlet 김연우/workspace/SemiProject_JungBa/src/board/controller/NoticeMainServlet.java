@@ -10,31 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.NoticeService;
-import board.model.service.QuestionService;
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
-/**
- * Servlet implementation class NoticeMainServlet
- */
 @WebServlet("/main.no")
 public class NoticeMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public NoticeMainServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//db한테 넘길만한게 없어서 그냥 넘어간다
-		NoticeService qServuce = new NoticeService();
 		
 		//페이징
 		int currentPage = 1;
@@ -54,16 +41,12 @@ public class NoticeMainServlet extends HttpServlet {
 			request.setAttribute("pi", pi);//페이징	
 		}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
-			request.setAttribute("msg", "Q/A 게시판 조회에 실패하였습니다.");
+			request.setAttribute("msg", "공지사항 게시판 조회에 실패하였습니다.");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

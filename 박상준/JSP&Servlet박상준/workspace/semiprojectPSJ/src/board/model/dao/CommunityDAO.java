@@ -62,6 +62,7 @@ public class CommunityDAO {
 						   rset.getString("AC_STATE"),
 						   rset.getString("LC_NAME"),
 						   rset.getString("ENROLL_STATE"),
+						   rset.getString("EM_STATE"),
 						   rset.getString("TC_NAME"),
 						   rset.getString("CG_NAME"),
 						   rset.getDate("RECRUIT_STARTDATE"),
@@ -224,12 +225,11 @@ public class CommunityDAO {
 								   rset.getString("AC_STATE"),
 								   rset.getString("LC_NAME"),
 								   rset.getString("ENROLL_STATE"),
+								   rset.getString("EM_STATE"),
 								   rset.getString("TC_NAME"),
 								   rset.getString("CG_NAME"),
 								   rset.getDate("RECRUIT_STARTDATE"),
-								   rset.getDate("RECRUIT_ENDDATE"),
-								   rset.getDate("ACTIVITY_STARTDATE"),
-								   rset.getDate("ACTIVITY_ENDDATE")));
+								   rset.getDate("RECRUIT_ENDDATE")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -239,7 +239,7 @@ public class CommunityDAO {
 		}
 		return list;
 	}
-	public ArrayList selectFList(Connection conn) {
+	public ArrayList<FileVO> selectFList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<FileVO> list = null;
@@ -292,6 +292,32 @@ public class CommunityDAO {
 		return result;
 	}
 	
+	public int insertSpBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'지원',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,?,?,?,?,?,NULL,NULL)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setInt(3, b.getBoardWriterNo());
+			pstmt.setString(4, b.getLcName());
+			pstmt.setString(5, b.getEmState());
+			pstmt.setString(6, b.getTcName());
+			pstmt.setString(7, b.getCgName());
+			pstmt.setDate(8, b.getReStratDate());
+			pstmt.setDate(9, b.getReEndDate());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public int insertAddFile(Connection conn, ArrayList<FileVO> fileList) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -309,7 +335,6 @@ public class CommunityDAO {
 				result += pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -423,7 +448,6 @@ public class CommunityDAO {
 				result += pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 		} finally {
 			close(pstmt);

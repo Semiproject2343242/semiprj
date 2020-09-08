@@ -27,13 +27,17 @@ public class QAQuestionServlet extends HttpServlet {
 		
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		
-		QuestionService service = new QuestionService();
-		Board board = service.selectBoard(bId);
-		ArrayList<FileVO> imageList = service.selectImageList(bId);
-		ArrayList<FileVO> fileList = service.selectFileList(bId);
-		ArrayList<Reply> replyList = new BoardService().selectReplyList(bId);
+		BoardService bService = new BoardService();
+		QuestionService qService = new QuestionService();
+		
+		
+		Board board = qService.selectBoard(bId);
+		ArrayList<FileVO> imageList = bService.selectImageList(bId);
+		ArrayList<FileVO> fileList = bService.selectFileList(bId);
+		ArrayList<Reply> replyList = bService.selectReplyList(bId);
 		
 		String page = null;
+		
 		if(board != null) {
 			page = "WEB-INF/views/Question_Answer/QA_질문확인.jsp";
 			request.setAttribute("board", board);

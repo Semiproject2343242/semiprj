@@ -44,8 +44,9 @@ public class CommuSupportMainServlet extends HttpServlet {
 			//페이징
 				
 		      //게시판 리스트 가져오기
-		      ArrayList<Board> bList = service.selectSpList(1,pi); // 게시판 리스트 가져오기
-		      ArrayList<FileVO> fList = service.selectSpList(2,pi); //파일 리스트 가져오기
+
+			ArrayList<Board> bList = service.selectSpList(1,pi); // 게시판 리스트 가져오기
+			ArrayList<FileVO> fList = service.selectSpList(2,pi); //파일 리스트 가져오기
 		      System.out.println(fList);
 		      String page = null;
 		      if(bList != null && fList != null) {

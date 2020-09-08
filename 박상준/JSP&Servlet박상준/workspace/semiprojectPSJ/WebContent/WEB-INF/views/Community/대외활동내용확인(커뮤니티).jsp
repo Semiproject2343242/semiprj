@@ -7,8 +7,6 @@
 	Board b = (Board)request.getAttribute("board");
 	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
 	FileVO titleImg = fList.get(0);
-	System.out.println("대외커뮤.jsp에서의 board : " + b);
-	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
 %>
 <!DOCTYPE html>
 <html>
@@ -145,7 +143,7 @@
                     	첨부파일 없음.
                     <% } else { %>
                     	<%for(int i=1; i < fList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/notice_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
+							<a href="<%= request.getContextPath() %>/external_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
 								[ <%=i%><%=fList.get(i).getOriginName()%> ]
 							</a>
 						<% } %>

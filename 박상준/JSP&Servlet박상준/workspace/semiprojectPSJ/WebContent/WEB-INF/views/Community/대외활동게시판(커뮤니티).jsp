@@ -69,18 +69,9 @@
 			<hr>
 			<div>
 				<dl>
-					<dt>
-						<a href="<%=request.getContextPath()%>/fMain.cm"><h3>자유게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/spMain.cm"><h3>지원정책
-								게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/eaMain.cm"><h3>대외활동
-								게시판</h3></a>
-					</dt>
-
+					<dt><a href="<%=request.getContextPath()%>/fMain.cm"><h3>자유게시판</h3></a></dt>				
+					<dt><a href="<%=request.getContextPath()%>/spMain.cm"><h3>지원정책	 게시판</h3></a></dt>
+					<dt><a href="<%=request.getContextPath()%>/eaMain.cm"><h3>대외활동 게시판</h3></a></dt> 
 				</dl>
 			</div>
 		</aside>

@@ -14,47 +14,7 @@
 
 </head>
 <style>
-    .thumbnailArea {
-	width: 80%;
-	height: auto;
-	margin: 0px auto;
-	padding: 0px;
-}
-
-.thumb-list {
-	width: 80%;
-	margin: 20px;
-	display: flex;
-	line-height:15px; 
-	border-bottom: 1px solid silver;
-	border-radius: 7px;
-	align-items: center;
-}
-
-.thumb-list:hover {
-	opacity: 0.8;
-	cursor: pointer;
-}
-
-#insertBtn {
-	float: right;
-	height: 100%;
-}
-.imageArea{
-	height: 100%;
-	margin: auto 0px;
-	align-items: "center";
-}
-.textArea_title{
-	width: 100%;
-}
-.textArea{
-	text-align: left;
-	margin-left : 30px;
-	width: 50%
-}
-.textArea1{
-	float: right;
+    
 </style>
 <body>
    <%@ include file="../Common/header.jsp" %>
