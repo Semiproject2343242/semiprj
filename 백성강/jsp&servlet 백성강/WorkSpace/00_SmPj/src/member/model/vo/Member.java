@@ -104,8 +104,20 @@ public class Member {
 		this.memberEmail = memberEmail;
 		this.memberAddress = memberAddress;
 	}
+	// 회원수정을 위해 사용
+	public Member(String memberId, String memberName, String memberNickName, String memberGender, Date memberBirthDay,
+			String memberPhone, String memberEmail, String memberAddress) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberNickName = memberNickName;
+		this.memberGender = memberGender;
+		this.memberBirthDay = memberBirthDay;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+	}
 
-	
 	public int getMemberNo() {
 		return memberNo;
 	}

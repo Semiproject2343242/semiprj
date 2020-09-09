@@ -645,5 +645,38 @@ public class MemberDAO {
 		return member;
 	}
 
+	public Member kakaoLogin(Connection conn, Member member) {
+		// loginMember = SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?
+		
+				PreparedStatement pstmt = null;
+				ResultSet rset = null;
+				Member loginUser = null;
+				System.out.println("카카오 : "+member);
+				String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ? AND MEMBER_EMAIL = ?";
+				
+				try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setString(1, member.getMemberId());
+					pstmt.setString(2, member.getMemberPw());
+					rset = pstmt.executeQuery();
+
+					if (rset.next()) {
+						loginUser = new Member(rset.getInt("MEMBER_NO"), rset.getString("MEMBER_ID"),
+								rset.getString("MEMBER_PW"), rset.getString("MEMBER_NAME"), rset.getString("MEMBER_NICKNAME"),
+								rset.getString("MEMBER_GENDER"), rset.getDate("MEMBER_BIRTHDAY"), rset.getString("MEMBER_PHONE"),
+								rset.getString("MEMBER_EMAIL"),rset.getString("MEMBER_ADDRESS"),rset.getDate("MEMBER_REGDATE"), 
+								rset.getString("MEMBER_ENABLE"), rset.getString("MEMBER_GRADE"));
+					}
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					close(rset);
+					close(pstmt);
+				}
+
+				return loginUser;
+	}
+
 	
 }

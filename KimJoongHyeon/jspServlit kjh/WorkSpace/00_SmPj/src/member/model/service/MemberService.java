@@ -249,5 +249,14 @@ public class MemberService {
 		
 		return member;
 	}
+
+	public Member kakoLogin(Member member) {
+			Connection conn = getConnection();
+
+			Member loginUser = new MemberDAO().kakaoLogin(conn, member);
+			close(conn);
+
+			return loginUser;
+	}
 	
 }

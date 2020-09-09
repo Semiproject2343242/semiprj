@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -45,19 +46,22 @@ public class InsertServlet extends HttpServlet {
 			memberBirthDay = new Date(new GregorianCalendar().getTimeInMillis());
 		}
 		
-		
-	
 		String memberPhone = request.getParameter("phone");
 		String memberEmail = request.getParameter("email");
 		String memberAddress = request.getParameter("address");
 	
 		
 		Member member = new Member(memberId, memberPw, memberName, memberNickName, memberGender, memberBirthDay, memberPhone, memberEmail,memberAddress);
+		Member loginUser = new MemberService().loginMember(member);
+		
 		System.out.println(member);
 		
 		int result = new MemberService().insertMember(member);
 		
 		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(600);
+			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect(request.getContextPath());
 		} else {
 			request.getSession().setAttribute("msg", "페이지 요청 실패");
