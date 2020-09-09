@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import board.model.service.SupportService;
+import board.model.service.CommunityService;
 import board.model.vo.Board;
-import board.model.vo.FileVO;
 
 /**
- * Servlet implementation class CommuSupportSearchServlet
+ * Servlet implementation class ExternalSearch
  */
 @WebServlet("/spSearchList.cm")
 public class CommuSupportSearchServlet extends HttpServlet {
@@ -34,25 +33,29 @@ public class CommuSupportSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SupportService service = new SupportService();
-		
-		String[] emStatearr = request.getParameterValues("emState[]");
+		CommunityService service = new CommunityService();
+
+		String[] acarr = request.getParameterValues("acState[]");
+		String[] emarr = request.getParameterValues("emState[]");
 		String[] agearr = request.getParameterValues("age[]");
         String[] localarr = request.getParameterValues("local[]");
         ArrayList<Board> bList = new ArrayList<Board>(); // 게시판 리스트 가져오기
-        ArrayList<FileVO> fList = new ArrayList<FileVO>(); //파일 리스트 가져오기
         String category = request.getParameter("cate");
-       
         
-        if(agearr == null && localarr==null && emStatearr ==null &&(category==null || category.equals("선택"))) {
+        System.out.println("category : " + category);
+		 System.out.println("age : " + agearr);
+		 System.out.println("local : " +localarr );
+		 System.out.println("acarr : " +acarr );
+		 System.out.println("emarr : " +emarr );
+        
+        if(acarr == null && emarr == null &&agearr == null && localarr==null && (category==null || category.equals("선택"))) {
         	bList = service.selectSpList(1); // 게시판 리스트 가져오기
         }else {
-		 bList = service.selectSpSearchList(1,category,emStatearr,agearr,localarr); // 게시판 리스트 가져오기
+		 bList = service.selectSpSearchList(1,acarr,emarr,category,agearr,localarr); // 게시판 리스트 가져오기
         }
         response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(bList, response.getWriter());
-	} 
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

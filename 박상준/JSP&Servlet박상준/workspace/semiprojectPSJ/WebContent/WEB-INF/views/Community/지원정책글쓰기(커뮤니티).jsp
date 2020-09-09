@@ -87,14 +87,14 @@
       <!-- <div class="writertext-answer"> -->
       <div class="select_box">
           <h3>
-              <select class="categoty_select" id="sp_category">
+              <select class="categoty_select" id="sp_category" name="sp_category">
                   <option value="선택" selected disabled hidden >선택해주세요.</option>
-                  <option value="1">재직지원</option>
-                  <option value="2">취업지원</option>
-                  <option value="3">기업지원</option>
-                  <option value="4">창업지원</option>
-                  <option value="5">생활/금융</option>
-                  <option value="6">교통/주거</option>
+                  <option value="재직지원">재직지원</option>
+                  <option value="취업지원">취업지원</option>
+                  <option value="기업지원">기업지원</option>
+                  <option value="창업지원">창업지원</option>
+                  <option value="생활/금융">생활/금융</option>
+                  <option value="교통/주거">교통/주거</option>
               </select>
           </h3>
           <h3>

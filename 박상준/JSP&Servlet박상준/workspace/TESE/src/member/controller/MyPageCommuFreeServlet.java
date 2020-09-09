@@ -36,11 +36,14 @@ public class MyPageCommuFreeServlet extends HttpServlet {
 		
 		MemberService memberService = new MemberService();
 		
+		int listCount = memberService.getListCount("자유", loginMemberNo);
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageInfo pi = Page.PageInfo("자유", currentPage, "/myPageCommuFree.me");
+		
+		PageInfo pi = Page.pageInfo2(listCount, currentPage, "/myPageCommuFree.me");
 		
 		ArrayList<Board> list = memberService.selectMyCommuFreeList(loginMemberNo, pi);
 		
@@ -55,6 +58,7 @@ public class MyPageCommuFreeServlet extends HttpServlet {
     	}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
 			request.setAttribute("msg", "회원조회에 실패했습니다.");
+			request.getRequestDispatcher(page).forward(request, response);
 		}	
     	
 	}

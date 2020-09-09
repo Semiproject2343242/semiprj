@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("loginUser", loginUser);
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getHeader("referer"));
 			
 		} else {
 			request.setAttribute("msg", "로그인 실패");

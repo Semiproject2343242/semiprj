@@ -1,37 +1,37 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>정부 지원금 바로 지금</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<title>정부 지원금 바로 지금</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/body.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
-
 .writertext{
       line-height: 70px;
       list-style: none;
   }
- .serach_box{
-     background-color: RGB(248,248,248);
-     display: flex;
- }
- .select_box{
-     margin: 16px;
-     line-height: 70px;
- }
- .select_btn{
-     height: 40px;
-     width: 100px;
-     background-color:  RGB(221,228,236);
- }
- .categoty_select{
-     height: 30px;
- }
+    .serach_box{
+        background-color: RGB(248,248,248);
+        display: flex;
+    }
+    .select_box{
+        margin: 16px;
+        line-height: 70px;
+    }
+    .select_btn{
+        height: 40px;
+        width: 100px;
+        background-color:  RGB(221,228,236);
+    }
+    .categoty_select{
+        height: 30px;
+    }
  .result_btn{
 	padding: 15px 15px; 
 	border-radius : 3px; 
@@ -40,6 +40,7 @@
 	margin: 0px 5px;
  }
  .result_btn:hover{background-color:  rgb(194, 194, 194);}
+
 
 .serachList{
 	width: 610px;
@@ -105,9 +106,10 @@
 .textArea1{
 	float: right;
 }
+      
 </style>
 <body>
-   <%@ include file="../Common/header.jsp" %>
+	<%@ include file="../Common/header.jsp"%>
 	<section>
 		<aside>
 			<h2>
@@ -133,61 +135,93 @@
 			</div>
 		</aside>
 		<div id="main_section">
-		<h2 align="center">지원 정책-커뮤니티</h2>
+		<h2 align="center">지원 정책</h2>
 		<div class="serach_box">
 	      <ul class="writertext">
 	          <th>
-	              <li><h6>카테고리</h6></li>
-	              <li><h6>취업상태</h6></li>
-	              <li><h6>대상</h6></li>
-	              <li><h6>지역</h6></li>
+	            <li><h6>카테고리:</h6></li>
+                <li><h6>접수상태:</h6></li>
+                <li><h6>취업상태:</h6></li>
+                <li><h6>대상별:</h6></li>
+                <li><h6>지역별:</h6></li>
 	          </th>
 	      </ul>
       <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
-       <div class="select_box">
+      <div class="select_box">
           <h3>
-              <select class="categoty_select" id="sp_category">
-                  <option value="" selected disabled hidden >선택해주세요.</option>
-                  <option value="1">재직지원</option>
-                  <option value="2">취업지원</option>
-                  <option value="3">기업지원</option>
-                  <option value="4">창업지원</option>
-                  <option value="5">생활/금융</option>
-                  <option value="6">교통/주거</option>
+              <select class="categoty_select" name="sp_category" id="sp_category">
+                  <option value="선택" selected>선택</option>
+                  <option value="재직지원">재직지원</option>
+                  <option value="취업지원">취업지원</option>
+                  <option value="기업지원">기업지원</option>
+                  <option value="창업지원">창업지원</option>
+                  <option value="생활/금융">생활/금융</option>
+                  <option value="교통/주거">교통/주거</option>
               </select>
           </h3>
-          <h3>
-          	<div>
-          		 <button class="select_btn" id="sp_em">재직중</button>
-                  <button class="select_btn" id="sp_nem">구직중</button>
-           	</div>
-           	<div id="ck_sp_emState">
-				<input type="checkbox" name="ck_sp_em" id="ck_sp_em" value="재직중">
-				<input type="checkbox" name="ck_sp_em" id="ck_sp_nem" value="구직중">
-            </div>
-          </h3>
-          <script>
-          	$(function(){
-          		$("#ck_sp_emState").hide();
-                 $("#sp_em").click(function(){
-                    $("#ck_sp_em").click();
-                    if($("#ck_sp_em").is(":checked") == true){
-                   	 $(this).css({'background':'darkgray'});
-                    }else{
-                   	 $(this).css('background', 'RGB(221,228,236)');
-                    }
-                 });
-                 $("#sp_nem").click(function(){
-                    $("#ck_sp_nem").click();
-                    if($("#ck_sp_nem").is(":checked") == true){
-                   	 $(this).css({'background':'darkgray'});
-                    }else{
-                   	 $(this).css('background', 'RGB(221,228,236)');
-                    }
-                 });
-          	});
-          </script>
-          <h3>
+           <h3 class="sp_Receipt_status">
+               <div>
+                   <button class = "select_btn" id="receipt" >접수중</button>
+                   <button class = "select_btn" id="receiptEnd">마감</button>
+               </div>
+               <div id="ck_acState">
+				<input type="checkbox" name="ck_acState" id="ck_receipt" value="접수중"">
+				<input type="checkbox" name="ck_acState" id="ck_receiptEnd" value="마감">
+            	</div>
+            	<script>
+               $(function(){
+                  $("#ck_acState").hide();
+                  $("#receipt").click(function(){
+                     $("#ck_receipt").click();
+                     if($("#ck_receipt").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+                  $("#receiptEnd").click(function(){
+                     $("#ck_receiptEnd").click();
+                     if($("#ck_receiptEnd").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+               });
+           </script>
+           </h3>
+           <h3 class="sp_Employment_status">
+               <div>
+                   <button class = "select_btn" id="noWork">구직중</button>
+                   <button class = "select_btn" id="working">재직중</button>
+               </div>
+               <div id="ck_emState">
+				<input type="checkbox" name="ck_emState" id="ck_noWork" value="구직중">
+				<input type="checkbox" name="ck_emState" id="ck_working" value="재직중">
+            	</div>
+            	<script>
+               $(function(){
+                  $("#ck_emState").hide();
+                  $("#noWork").click(function(){
+                     $("#ck_noWork").click();
+                     if($("#ck_noWork").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+                  $("#working").click(function(){
+                     $("#ck_working").click();
+                     if($("#ck_working").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  });
+               });
+           </script>
+           </h3>
+           <h3>
               <div>
                   <button type="button"class="select_btn" id="sp_age_18">청년<br>(18~34세) </button>
                   <button type="button"class="select_btn" id="sp_age_35">중년<br>(35~49세) </button>
@@ -465,7 +499,7 @@
 	</div>
 	  <div class = "sp_button">
 		<%if (loginUser != null) {%>
-		<input type="button" class='result_btn' onclick="location.href='spInsertForm.cm'"id="insertBtn" value="작성하기">
+		<input type="button" class="result_btn" onclick="location.href='spInsertForm.cm'"id="insertBtn" value="작성하기">
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
@@ -514,6 +548,20 @@
 			});
 		});
 		$('#btnSearch').click(function(){// 검색 눌렀을때 리스트 불러오기
+			var acState = document.getElementsByName("ck_acState");
+          	var checkAcState = [];
+          	for(var i = 0; i < acState.length; i++){
+             	if(acState[i].checked == true){
+             		checkAcState.push(acState[i].value);
+              	}
+          	}
+          	var emState = document.getElementsByName("ck_emState");
+          	var checkEmState = [];
+          	for(var i = 0; i < emState.length; i++){
+             	if(emState[i].checked == true){
+             		checkEmState.push(emState[i].value);
+              	}
+          	}
    			var age = document.getElementsByName("ck_sp_age");
           	var checkAge = [];
           	for(var i = 0; i < age.length; i++){
@@ -531,6 +579,8 @@
    			$.ajax({
    				url: 'spSearchList.cm',
     			data: {cate:$('#sp_category').val(),
+    					acState:checkAcState,
+    					emState:checkEmState,
 						age: checkAge,
     					local:checkLocal
    						},
@@ -578,7 +628,7 @@
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='/UploadFolder/exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='/UploadFolder/support_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }
@@ -636,10 +686,6 @@
 	</div>		
 			
 	</section>
-   <%@ include file="../Common/footer.jsp" %>
+	<%@ include file="../Common/footer.jsp"%>
 </body>
 </html>
-
-
-
- 

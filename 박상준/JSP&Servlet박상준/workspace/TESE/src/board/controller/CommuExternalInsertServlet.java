@@ -48,7 +48,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "exteranl_uploadFiles/";
+	         String savePath = root + "/UploadFolder/exteranl_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         
@@ -111,7 +111,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			}
 	 		 }
 	 		
-	 		String strea_res_date = request.getParameter("ea_res_date"); 
+	 		String strea_res_date = multiRequest.getParameter("ea_res_date"); 
 	 		Date ea_res_date = null;
 	 		if(strea_res_date != "") {
 	 			String[] dateArr = strea_res_date.split("-");
@@ -125,7 +125,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			ea_res_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
 	 		
-	 		String strea_ree_date = request.getParameter("ea_ree_date"); 
+	 		String strea_ree_date = multiRequest.getParameter("ea_ree_date"); 
 	 		Date ea_ree_date = null;
 	 		if(strea_ree_date != "") {
 	 			String[] dateArr = strea_ree_date.split("-");
@@ -139,7 +139,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			ea_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
 	 		
-	 		String strea_acs_date = request.getParameter("ea_acs_date"); 
+	 		String strea_acs_date = multiRequest.getParameter("ea_acs_date"); 
 	 		Date ea_acs_date = null;
 	 		if(strea_acs_date != "") {
 	 			String[] dateArr = strea_acs_date.split("-");
@@ -153,7 +153,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			ea_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
 	 		
-	 		String strea_ace_date = request.getParameter("ea_ace_date"); 
+	 		String strea_ace_date = multiRequest.getParameter("ea_ace_date"); 
 	 		Date ea_ace_date = null;
 	 		if(strea_ace_date != "") {
 	 			String[] dateArr = strea_ace_date.split("-");
@@ -167,9 +167,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	 			ea_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
 	 		 
-	 		 
 	         Board b = new Board();
-	         
 	         b.setBoardTitle(title);
 	         b.setBoardContent(content);
 	         b.setBoardWriter(bWriter);
@@ -177,10 +175,11 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
-//	         System.out.println(b);
-//	         System.out.println(originFiles);
-//	         System.out.println(saveFiles);
-	         
+	         b.setReStratDate(ea_res_date);
+	         b.setReEndDate(ea_ree_date);
+	         b.setAcStartDate(ea_acs_date);
+	         b.setAcEndDate(ea_ace_date);
+	        
 	         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 	         for(int i  = originFiles.size() - 1; i>=0; i--) {
 	        	 FileVO af = new FileVO();

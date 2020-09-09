@@ -36,11 +36,13 @@ public class MyPageSupportServlet extends HttpServlet {
 				
 		MemberService memberService = new MemberService();
 		
+		int listCount = memberService.getListCount("지원", loginMemberNo);
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageInfo pi = Page.PageInfo("지원", currentPage, "/myPageSupport.me");
+		PageInfo pi = Page.pageInfo2(listCount, currentPage, "/myPageSupport.me");
 		
 		ArrayList<Board> list = memberService.selectMySupportList(loginMemberNo, pi);
 		
