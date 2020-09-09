@@ -50,7 +50,7 @@ public class ExternalModifyServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "/UploadFolder/exteranl_uploadFiles/";
+	         String savePath = root + "/UploadFolder/external_uploadFiles/";
 	         
 	         System.out.println("savePath : "+savePath);
 	         
