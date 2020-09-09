@@ -68,14 +68,6 @@
             </h2>
             <hr>
             <div id="bottomContent">
-                <div id="searchDiv">
-                    <select id="selectedOption">
-                        <option>승인 대기</option>
-                        <option>승인 완료</option>
-                    </select>
-                    <input id="search" type="search">
-                    <button type="submit">검색</button>
-                </div>
                 <div id="tableDiv">
                     <table class="contentsTable" width="800px" align="center">
                         <thead>
