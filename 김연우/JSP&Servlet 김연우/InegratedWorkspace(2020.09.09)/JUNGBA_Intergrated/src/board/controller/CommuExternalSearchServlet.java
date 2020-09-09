@@ -1,7 +1,6 @@
 package board.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,15 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.google.gson.Gson;
 
 import board.model.service.CommunityService;
-import board.model.service.ExternalService;
 import board.model.vo.Board;
-import board.model.vo.FileVO;
-import board.model.vo.PageInfo;
 
 /**
  * Servlet implementation class ExternalSearch
@@ -44,7 +38,6 @@ public class CommuExternalSearchServlet extends HttpServlet {
 		String[] agearr = request.getParameterValues("age[]");
         String[] localarr = request.getParameterValues("local[]");
         ArrayList<Board> bList = new ArrayList<Board>(); // 게시판 리스트 가져오기
-        ArrayList<FileVO> fList = new ArrayList<FileVO>(); //파일 리스트 가져오기
         String category = request.getParameter("cate");
         
         System.out.println("category : " + category);

@@ -5,6 +5,19 @@
     pageEncoding="UTF-8"%>
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+
+	String searchWord = (String)request.getAttribute("searchWord");
+	String opt = (String)request.getAttribute("selectedOpt");
+	String[] selectedOpt = new String[6];
+	
+	switch(opt){
+		case "all" : selectedOpt[0] = "selected"; break;
+		case "writer" : selectedOpt[1] = "selected"; break;
+		case "title" : selectedOpt[2] = "selected"; break;
+		case "content" : selectedOpt[3] = "selected"; break;
+		case "title_content" : selectedOpt[4] = "selected"; break;
+		case "category" : selectedOpt[5] = "selected"; break;
+	}
 %>
     
 <!DOCTYPE html>
@@ -35,6 +48,7 @@
         </aside>
         <div id="main_section">
             <h2 align="center">Q/A</h2>
+            <h3 align="center">검색어 : <%= searchWord %></h3>
             <table class="contentsTable" width="800px" align="center">
                 <thead>
                     <tr>
@@ -69,19 +83,19 @@
             <% } %>
                 </tbody>
                 <tfoot>
-                	<tr>
+	                <tr>
 	                <td colspan="2"></td>
 	                <td>
 	                <form action = "<%= request.getContextPath() %>/search.qa">
 	                	<select name="opt"> <!-- 검색 컬럼 -->
-	                		<option value="all">전체 목록</option>
-	                		<option value="writer">작성자</option>
-	                		<option value="title">제목</option>
-	                		<option value="content">내용</option>
-	                		<option value="title_content">제목+내용</option>
-	                		<option value="category">카테고리</option>
+	                		<option value="all" <%= selectedOpt[0] %>>전체 목록</option>
+	                		<option value="writer" <%= selectedOpt[1] %>>작성자</option>
+	                		<option value="title" <%= selectedOpt[2] %>>제목</option>
+	                		<option value="content" <%= selectedOpt[3] %>>내용</option>
+	                		<option value="title_content" <%= selectedOpt[4] %>>제목+내용</option>
+	                		<option value="category" <%= selectedOpt[5] %>>카테고리</option>
 	                	</select>
-	                	<input type="text" name="word" value="" placeholder="검색어를 입력하세요">
+	                	<input type="text" name="word" value="<%= searchWord %>" placeholder="검색어를 입력하세요">
 	           			<button type="submit">검색</button>
 	           		</form>
 	           		</td>
@@ -94,7 +108,7 @@
 	                </tr>
                 </tfoot>
             </table>
- 		<%@ include file="../Common/page.jsp" %>
+ 		<%@ include file="../Common/searchPage.jsp" %>
 		</div>
         <script>
         $(function(){
