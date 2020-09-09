@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.dao.MemberDAO;
 import member.model.service.MemberService;
@@ -34,6 +35,12 @@ public class UpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("업데이트 서블릿 입니다.");
+		
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginUser");
+
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("myId");
@@ -65,13 +72,20 @@ public class UpdateServlet extends HttpServlet {
 		
 		Member m = new Member(id,name,nickName,gender,birthday,phone,email,address);
 		int result = new MemberService().updateInfo(m);	
+
 		
 		String page = null;
 		System.out.println(result);
 		if(result > 0) {
-			/* Member member = new Member(m.getMemberId(), m.getMemberPw()); */
+			System.out.println("result > 0 다음 내용");
 			
-			/* Member loginUser = new MemberService().loginMember(member); */
+			Member member = new Member(loginMember.getMemberId(), loginMember.getMemberPw()); 
+			Member loginUser = new MemberService().loginMember(member);
+			System.out.println("login" + loginUser);
+			
+			session.setMaxInactiveInterval(600);
+			session.setAttribute("loginUser", loginUser);
+			
 			request.getRequestDispatcher("WEB-INF/views/Member/회원정보.jsp").forward(request, response);
 			/* request.setAttribute("loginUser", loginUser); */
 		} else {

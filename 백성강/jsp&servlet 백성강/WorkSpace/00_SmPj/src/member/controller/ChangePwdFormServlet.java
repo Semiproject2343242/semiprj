@@ -1,7 +1,6 @@
 package member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class SearchPwdServlet2
+ * Servlet implementation class ChangePwdFormServlet
  */
-@WebServlet("/SearchPwdServlet2.me")
-public class SearchPwdServlet2 extends HttpServlet {
+@WebServlet("/changePwdForm.me")
+public class ChangePwdFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPwdServlet2() {
+    public ChangePwdFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,8 +46,7 @@ public class SearchPwdServlet2 extends HttpServlet {
 				int result = new MemberService().modifyPwdMember(m);
 				
 				if(result > 0) {
-					request.setAttribute("msg", "비밀번호가 재설정 되었습니다.");
-					page = "WEB-INF/views/Member/비밀번호찾기_성공_알림창.jsp";
+					page = "WEB-INF/views/Member/비밀번호변경.jsp";
 				} else {
 					request.setAttribute("msg", "비밀번호가 재설정에 실패하였습니다.");
 					page = "WEB-INF/views/Common/errorPage.jsp";
@@ -62,7 +60,6 @@ public class SearchPwdServlet2 extends HttpServlet {
 			page = "WEB-INF/views/Common/errorPage.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**

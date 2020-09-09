@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="member.model.vo.Member"%>
-<%
-	 Member m = (Member)request.getAttribute("m"); 
-%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,28 +27,63 @@
 <body>
 	<%@ include file="../Common/header.jsp" %>
 	    <section>
+		    <aside>
+				<h2>마이페이지</h2>
+				<hr>
+				<div>
+					<h2>나의게시물</h2>
+					<dl>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageSupport.me">
+								<h3>지원정책 게시판</h3>
+							</a>
+						</dt>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageExternal.me">
+								<h3>대외활동 게시판</h3>
+							</a>
+						</dt>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageCommuFree.me">
+								<h3>자유게시판</h3>
+							</a>
+						</dt>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageQA.me">
+								<h3>Q / A</h3>
+							</a>
+						</dt>
+					</dl>
+				</div>		
+				<a href="${pageContext.request.contextPath}/memberInfo.me">
+					<h2>회원정보</h2>
+				</a>
+				<a href="${pageContext.request.contextPath}/changePwdForm.me">
+					<h2>비밀번호 변경</h2>
+				</a>
+				<a href="${pageContext.request.contextPath}/deleteForm.me">
+					<h2>회원탈퇴</h2>
+				</a>
+			</aside>
+		
         	<div id="main_section">
             	<section id=pw_serch_Section>
-	            	<form action="<%=request.getContextPath()%>/SearchPwdServlet2.me" method="post">
+	            	<form action="<%=request.getContextPath()%>/changePwdForm.me" method="post">
+	            	<input type="hidden" name="id" value="<%= loginUser.getMemberId() %>">
 		            	<div class="box">
 		            		<br>
-							<h1><%= m.getMemberId() %>님</h1>
-							<input type="hidden" name="id" value="<%= m.getMemberId() %>">
-							<h1> 새로운 비밀번호를 입력해주세요.</h1>
+							<h1><%= loginUser.getMemberId() %>님</h1>
+							<h1> 현재 비밀번호를 입력해주세요.</h1>
 							<table align="center" >	
 								<tr>
 									<td>비밀번호 : </td>
 									<td align="left" ><input style="width:200px" type="password"  id="userPwd1" name="userPwd1" placeholder="비밀번호를 입력해주세요"></td>
-									<td><label id="pwd1Result"></label></td>
+									<td style="width:180px"><label   id="pwd1Result"></label></td>
 								</tr>
-								<tr>
-									<td></td>
-									<td colspan=2><span class="info">6~12자로 영어와 숫자, !*$만 가능합니다.(영어로 시작)</span></td>
-							  	</tr>
 								<tr>
 									<td>비밀번호 확인:</td>
 									<td align="left"><input style="width:200px" type="password" width="200px" id="userPwd2" name="userPwd2" placeholder="비밀번호를 다시 입력해주세요"></td>
-									<td><label id="pwd2Result"></label></td>
+									<td ><label   id="pwd2Result"></label></td>
 								</tr>
 							</table>
 							<p>
@@ -60,22 +92,8 @@
 		                    </p>
 		                    <br>
 						</div>
-					</form>
-						
-					<script>
-						$("#userPwd1").change(function(){
-							var regExp = /^[a-zA-Z]([a-zA-Z0-9\!\*\$]){5,11}$/;
-							
-							if(!regExp.test($(this).val())){
-								$("#pwd1Result").text("불가능한 비밀번호 입니다.").css("color","red");
-								isPw = false;
-							}else{
-								$("#pwd1Result").text("가능한 비밀번호 입니다.").css("color","green");
-								$(this).css("background","initial");
-								isPw = true;
-							}
-						});
-
+					</form>			
+					<script>				
 						$("#userPwd2").keyup(function(){
 							if($("#userPwd1").val() != $(this).val()){
 								$("#pwd2Result").text("비밀번호 불일치").css("color","red");

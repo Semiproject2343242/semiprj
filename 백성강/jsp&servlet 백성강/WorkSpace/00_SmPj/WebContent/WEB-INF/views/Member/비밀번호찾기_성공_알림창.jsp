@@ -9,10 +9,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	a{border:1px border black;}
+</style>
 <body>
 	<h1 align="center"><%= msg %></h1>
 	<div align="center">
-		<button onclick="Location.href='<%= request.getContextPath() %>'">확인</button>
+		<a href="<%= request.getContextPath() %>">홈으로</a>
 	</div>
 </body>
 </html>

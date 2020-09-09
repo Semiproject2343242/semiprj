@@ -1,4 +1,4 @@
-package board.controller;
+package member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -28,6 +28,7 @@ public class MemberInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.getRequestDispatcher("WEB-INF/views/Member/회원정보.jsp").forward(request, response);
+		
 	}
 
 	/**

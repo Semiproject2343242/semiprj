@@ -16,16 +16,31 @@
       width: 100%;
     }
     .box{
-    	width:50%;
+    	width:65%;
    		text-align: center;
    		background-color: rgb(248, 248, 248); ;
-   		border:1px solid black;
+
    	}
     #topic{
         border-bottom:1.5px solid black;
     }
-  
-  
+    table{
+		border-spacing: 0px 0px;
+    }
+    tr td{
+    	 border: 1px solid #444444;
+    	 /* border-bottom: 1px solid #444444; */
+    }
+    
+    td:nth-child(2) {
+   		 background-color: #bbdefb;
+   		 width:300px;
+  	}
+  	
+  	td:nth-child(1) {
+    	background-color: #e3f2fd;
+    	width:170px;
+  	}
 </style>
 <body>
    <%@ include file="../Common/header.jsp" %>
@@ -36,7 +51,7 @@
 			<div >
 				<h2>나의게시물</h2>
 				<dl>
-					<dt>
+					<dt >
 						<a href="${pageContext.request.contextPath}/myPageSupport.me">
 							<h3>지원정책 게시판</h3>
 						</a>
@@ -71,10 +86,10 @@
                 <h2 align="center">회원정보</h2>
                 
                 <form action="<%= request.getContextPath() %>/updateForm.me" method="post" id="updateForm" name="updateForm">
-                    <table align="center">
+                    <table id='table' align="center">
                         <tr>
-                            <td >아이디</td>
-                            <td><%= loginUser.getMemberId() %></td>
+                            <td style="width:150px;">아이디</td>
+                            <td style="width:200px"><%= loginUser.getMemberId() %></td>
                         </tr>
                         <tr>
                             <td> 이름 </td>
@@ -86,7 +101,8 @@
                         </tr>
                         <tr>
                         	<td> 성별 </td>
-                        	<td><%= loginUser.getMemberGender() %> </td>
+                        	<td> <%= loginUser.getMemberGender() %>
+                        	</td>
                         </tr>
                         <tr>
                             <td> 생년월일 </td>
@@ -104,18 +120,16 @@
                             <td> 주소 </td>
                             <td><%= loginUser.getMemberAddress() %> </td>
                         </tr>
-                    
                     </table>
-                    
-                    <br>
-
+					<br>
                     <div class="btns" align="center">
 						<input type="submit" style="width: 60pt; height: 30pt" value="수정">
 		            	<input type="button" style="width: 60pt; height: 30pt" onclick="location.href='javascript:history.go(-1);'" value="취소">
                     </div>
-                    <br>
+					<br>
                 </form>
             	</div>
+            	<br>
         	</div>
     </section>
    <%@ include file="../Common/footer.jsp" %>

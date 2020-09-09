@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="member.model.vo.Member"%>
-<%
-	 Member m = (Member)request.getAttribute("m"); 
-%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,19 +27,58 @@
 <body>
 	<%@ include file="../Common/header.jsp" %>
 	    <section>
+		    <aside>
+				<h2>마이페이지</h2>
+				<hr>
+				<div>
+					<h2>나의게시물</h2>
+					<dl>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageSupport.me">
+								<h3>지원정책 게시판</h3>
+							</a>
+						</dt>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageExternal.me">
+								<h3>대외활동 게시판</h3>
+							</a>
+						</dt>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageCommuFree.me">
+								<h3>자유게시판</h3>
+							</a>
+						</dt>
+						<dt>
+							<a href="${pageContext.request.contextPath}/myPageQA.me">
+								<h3>Q / A</h3>
+							</a>
+						</dt>
+					</dl>
+				</div>		
+				<a href="${pageContext.request.contextPath}/memberInfo.me">
+					<h2>회원정보</h2>
+				</a>
+				<a href="${pageContext.request.contextPath}/changePwdForm.me">
+					<h2>비밀번호 변경</h2>
+				</a>
+				<a href="${pageContext.request.contextPath}/deleteForm.me">
+					<h2>회원탈퇴</h2>
+				</a>
+			</aside>
+		
         	<div id="main_section">
             	<section id=pw_serch_Section>
-	            	<form action="<%=request.getContextPath()%>/SearchPwdServlet2.me" method="post">
+	            	<form action="<%=request.getContextPath()%>/changePwd.me" method="post">
+	            	<input type="hidden" name="id" value="<%= loginUser.getMemberId() %>">
 		            	<div class="box">
 		            		<br>
-							<h1><%= m.getMemberId() %>님</h1>
-							<input type="hidden" name="id" value="<%= m.getMemberId() %>">
+							<h1><%= loginUser.getMemberId() %>님</h1>
 							<h1> 새로운 비밀번호를 입력해주세요.</h1>
 							<table align="center" >	
 								<tr>
 									<td>비밀번호 : </td>
 									<td align="left" ><input style="width:200px" type="password"  id="userPwd1" name="userPwd1" placeholder="비밀번호를 입력해주세요"></td>
-									<td><label id="pwd1Result"></label></td>
+									<td style="width:180px"><label id="pwd1Result"></label></td>
 								</tr>
 								<tr>
 									<td></td>
@@ -63,7 +99,7 @@
 					</form>
 						
 					<script>
-						$("#userPwd1").change(function(){
+						$("#userPwd1").keyup(function(){
 							var regExp = /^[a-zA-Z]([a-zA-Z0-9\!\*\$]){5,11}$/;
 							
 							if(!regExp.test($(this).val())){
@@ -75,7 +111,14 @@
 								isPw = true;
 							}
 						});
-
+						
+						$("#userPwd1").change(function(){
+							var regExp = /^[a-zA-Z]([a-zA-Z0-9\!\*\$]){5,11}$/;
+							if(!regExp.test($(this).val())){
+								$(this).focus().css("background","red");
+							}
+						});
+						
 						$("#userPwd2").keyup(function(){
 							if($("#userPwd1").val() != $(this).val()){
 								$("#pwd2Result").text("비밀번호 불일치").css("color","red");
