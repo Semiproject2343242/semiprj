@@ -22,15 +22,34 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		String memberEmail = request.getParameter("email");
+		String membername = request.getParameter("name");
 		String memberId = request.getParameter("userId");
 		String memberPw = request.getParameter("userPwd");
 		
-//		System.out.println("LoginServlet userId : " + memberId);
-//		System.out.println("LoginServlet userPwd : " + memberPw);
+		System.out.println("LoginServlet userId : " + memberId);
+		System.out.println("LoginServlet userPwd : " + memberPw);
+		System.out.println("LoginServlet email : " + memberEmail);
+		System.out.println("LoginServlet name : " + membername);
 		
-		Member member = new Member(memberId, memberPw);
-		Member loginUser = new MemberService().loginMember(member);
+		Member member = null;
+		Member loginUser = null;
 		
+		if(memberEmail != "") {
+			System.out.println("카카오 로그인");
+			member = new Member(membername,memberEmail);
+			loginUser = new MemberService().kakoLogin(member);
+			System.out.println("loginUser : " + loginUser);
+			if(loginUser == null) {
+				request.setAttribute("msg", "회원 정보가 없습니다. 회원가입 해주세요");
+				RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
+				view.forward(request, response);
+			}
+		}else {
+			System.out.println("일반 로그인");
+			member = new Member(memberId, memberPw);
+			loginUser = new MemberService().loginMember(member);
+		}
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(600);
