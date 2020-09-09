@@ -698,5 +698,35 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int updateInfo(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+		
+		String query = "UPDATE MEMBER SET MEMBER.MEMBER_NAME=?, MEMBER.MEMBER_NICKNAME=? , MEMBER.MEMBER_GENDER=? , MEMBER.MEMBER_BIRTHDAY=?, MEMBER.MEMBER_PHONE=?, MEMBER.MEMBER_EMAIL=?, MEMBER.MEMBER_ADDRESS = ? WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getMemberNickName());
+			pstmt.setString(3, m.getMemberGender());
+			pstmt.setDate(4, (Date) m.getMemberBirthDay());
+			pstmt.setString(5, m.getMemberPhone());
+			pstmt.setString(6, m.getMemberEmail());
+			pstmt.setString(7, m.getMemberAddress());
+			pstmt.setString(8, m.getMemberId());
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+
+		return result;
+	}
+
 	
 }

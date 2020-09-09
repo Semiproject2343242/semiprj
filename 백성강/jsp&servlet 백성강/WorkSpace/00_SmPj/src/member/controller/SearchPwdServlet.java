@@ -37,13 +37,13 @@ public class SearchPwdServlet extends HttpServlet {
 		
 		String name = request.getParameter("userName");
 		String id = request.getParameter("userId");
-		String phone = request.getParameter("userPhone");
+		String phoneA = request.getParameter("userPhone");
 		String email = request.getParameter("userEmail");
 		String radio = request.getParameter("pwsearchradio");
 		
 		System.out.println("name:" +name);
 		System.out.println("id:" + id);
-		System.out.println("phone:" +phone);
+		System.out.println("phone:" +phoneA);
 		System.out.println("email:" +email);
 		System.out.println("radio:" +radio);
 		
@@ -63,21 +63,30 @@ public class SearchPwdServlet extends HttpServlet {
 		      	      if(list != null ) {
 		      	    	page = "WEB-INF/views/Member/비밀번호찾기2.jsp"; //비밀번호 jsp 하나더 생성
 		      	    	request.setAttribute("m", m);  	
-		      	      }
+		      	      } else {
+			    			page = "WEB-INF/views/Common/errorPage.jsp";
+			    			request.setAttribute("msg", "비밀번호 찾기에 실패하였습니다.");
+			    	    }
 		      	} else {
 					page = "WEB-INF/views/Common/errorPage.jsp";
 					request.setAttribute("msg", "비밀번호 찾기에 실패하였습니다.");
 			    }
-		      	
 	      	}
      	} else if(radio.equals("phone")) {
      		System.out.println("5");
+    		String phone1=phoneA.substring(0,3);
+    		String phone2=phoneA.substring(3,7);
+    		String phone3=phoneA.substring(7,11);
+    		phone1 += ("-"); phone1 += phone2; phone1 += ("-"); phone1 += phone3;
 	      	for(Member m : list) {
-	      		if(phone.equals(m.getMemberPhone()) && id.equals(m.getMemberId()) ){
+	      		if(phone1.equals(m.getMemberPhone()) && id.equals(m.getMemberId()) ){
 	      	      	if(list != null ) {
 		      	    	page = "WEB-INF/views/Member/비밀번호찾기2.jsp"; //비밀번호 jsp 하나더 생성
 		      	    	request.setAttribute("m", m);  	
-	      	      	}
+	      	      	} else {
+		    			page = "WEB-INF/views/Common/errorPage.jsp";
+		    			request.setAttribute("msg", "비밀번호 찾기에 실패하였습니다.");
+		    	    }
 	      		} else {
 	    			page = "WEB-INF/views/Common/errorPage.jsp";
 	    			request.setAttribute("msg", "비밀번호 찾기에 실패하였습니다.");

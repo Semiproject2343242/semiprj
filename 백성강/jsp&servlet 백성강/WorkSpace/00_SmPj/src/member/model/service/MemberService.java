@@ -320,7 +320,17 @@ public class MemberService {
 	public int modifyPwdMember(Member m) {
 		Connection conn = getConnection();
 		
-		int result = new MemberDAO(). modifyPwdMember(conn, m);
+		int result = new MemberDAO().modifyPwdMember(conn, m);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateInfo(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().updateInfo(conn, m);
 		
 		close(conn);
 		
