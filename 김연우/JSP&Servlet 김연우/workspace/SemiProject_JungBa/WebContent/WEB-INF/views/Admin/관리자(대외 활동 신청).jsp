@@ -54,7 +54,7 @@
                             <h3>회원 목록 조회</h3>
                         </a></dt>
                     <dt><a href="${pageContext.request.contextPath}/spList.ad">
-                            <h3>정보 공유 신청</h3>
+                            <h3>지원 정책 신청</h3>
                         </a></dt>
                     <dt><a href="${pageContext.request.contextPath}/eaList.ad">
                             <h3>대외 활동 신청</h3>
@@ -69,14 +69,16 @@
             </h2>
             <hr>
             <div id="bottomContent">
+            	<form action = "<%= request.getContextPath() %>/searchExternal.ad">
                 <div id="searchDiv">
-                    <select id="selectedOption">
-                        <option>승인 대기</option>
-                        <option>승인 완료</option>
+                    <select name="opt">
+                    	<option value="전체">전체 목록</option>
+                        <option value="승인 대기">승인 대기</option>
+                        <option value="승인 완료">승인 완료</option>
                     </select>
-                    <input id="search" type="search">
                     <button type="submit">검색</button>
                 </div>
+                </form>
                 <div id="tableDiv">
                 	<table class="contentsTable" width="800px" align="center">
 	                	<thead>
@@ -106,7 +108,7 @@
 									<%=b.getBoardWriter()%></td>
 								<td><%=b.getBoardCreateDate()%></td>
 								<td><%=b.getBoardViewCount()%></td>
-								<td><input type="hidden" value="<%=b.getEnrollState()%>">
+								<td><input id="enroll" type="hidden" value="<%=b.getEnrollState()%>">
 									<%=b.getEnrollState()%></td>
 							</tr>
 						<%		} %>
@@ -126,8 +128,13 @@
 	            	$(this).parent().css('background', 'none');
 	            }).click(function(){
 	                var bId = $(this).parent().children().children('input').val();
+	                var enroll = $(this).parent().children().children('#enroll').val();
 	            <% if(loginUser != null){%>
-	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	            		if(enroll == 'N'){
+	            			location.href = '<%= request.getContextPath() %>/eaDetail.cm?bId=' + bId;
+	            		} else {
+	            			location.href = '<%= request.getContextPath() %>/detail.ea?bId=' + bId;
+	            		}        		
 	            <% }else{ %>
 	            		alert('회원만 이용할 수 있는 서비스입니다.')
 	            <% } %>

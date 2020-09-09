@@ -1,0 +1,48 @@
+section {
+  display: flex;
+  line-height: 100px;
+}
+
+aside {
+  float: left;
+  display: block;
+  width: 200px;
+  line-height: 100px;
+}
+
+h2 {
+  margin: 0px;
+}
+#main_section {
+  width: 100%;
+}
+
+#title {
+  width: 80%;
+  height: 40px;
+}
+
+#category {
+  width: 200px;
+  height: 40px;
+}
+#filetext {
+  margin-top: 150px;
+}
+
+#textarea {
+  width: 80%;
+  height: 200px;
+  resize: none;
+}
+
+hr {
+  height: 3px;
+  background-color: black;
+  margin: 0px;
+  border: 1px;
+}
+
+#buttons {
+  text-align: center;
+}

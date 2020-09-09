@@ -114,7 +114,70 @@ public class MemberDAO {
 
 		return member;
 	}
+	
 
+	public Member selectMember(Connection conn, int memberNo) {
+		
+		// selectMember = SELECT * FROM MEMBER WHERE MEMBER_ID = ?
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_NO = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				member = new Member(rset.getInt("MEMBER_NO"), rset.getString("MEMBER_ID"),
+						rset.getString("MEMBER_PW"), rset.getString("MEMBER_NAME"), rset.getString("MEMBER_NICKNAME"),
+						rset.getString("MEMBER_GENDER"), rset.getDate("MEMBER_BIRTHDAY"), rset.getString("MEMBER_PHONE"),
+						rset.getString("MEMBER_EMAIL"),rset.getString("MEMBER_ADDRESS"),rset.getDate("MEMBER_REGDATE"), 
+						rset.getString("MEMBER_ENABLE"), rset.getString("MEMBER_GRADE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return member;
+	}
+	
+	
+	// 게시판 별 게시글 갯수
+	public int getListCount(Connection conn, String boardName, int mNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = ? AND B_WRITER = ? AND B_ENABLE = 'Y'";
+		
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setString(1, boardName);
+			pstmt.setInt(2, mNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
 	public ArrayList<Board> selectMyCommuFreeList(Connection conn, int loginMemberNo, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -139,6 +202,7 @@ public class MemberDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -210,21 +274,24 @@ public class MemberDAO {
 			
 			while(rset.next()) {
 				Board bo = new Board(rset.getInt("B_NO"),
-									 rset.getString("B_TITLE"),
-									 rset.getString("B_CONTENT"),
-									 rset.getDate("B_DATE"),
-									 rset.getDate("B_RDATE"),
-									 rset.getInt("B_VIEW_COUNT"),
-									 rset.getInt("B_RECOMMEND"),
-									 rset.getInt("B_WRITER"),
-									 rset.getString("MEMBER_NICKNAME"),
-									 rset.getInt("B_REPLY_COUNT"),
-									 rset.getString("AC_STATE"),
-									 rset.getString("LC_NAME"),
-									 rset.getString("ENROLL_STATE"),
-									 rset.getString("EM_STATE"),
-									 rset.getString("TC_NAME"),
-									 rset.getString("CG_NAME"));
+						 rset.getString("B_TITLE"),
+						 rset.getString("B_CONTENT"),
+						 rset.getDate("B_DATE"),
+						 rset.getDate("B_RDATE"),
+						 rset.getInt("B_VIEW_COUNT"),
+						 rset.getInt("B_RECOMMEND"),
+						 rset.getInt("B_WRITER"),
+						 rset.getString("MEMBER_NICKNAME"),
+						 rset.getInt("B_REPLY_COUNT"),
+						 rset.getString("AC_STATE"),
+						 rset.getString("LC_NAME"),
+						 rset.getString("ENROLL_STATE"),
+						 rset.getString("TC_NAME"),
+						 rset.getString("CG_NAME"),
+						 rset.getDate("RECRUIT_STARTDATE"),
+						 rset.getDate("RECRUIT_ENDDATE"),
+						 rset.getDate("ACTIVITY_STARTDATE"),
+						 rset.getDate("ACTIVITY_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -255,21 +322,24 @@ public class MemberDAO {
 			
 			while(rset.next()) {
 				Board bo = new Board(rset.getInt("B_NO"),
-									 rset.getString("B_TITLE"),
-									 rset.getString("B_CONTENT"),
-									 rset.getDate("B_DATE"),
-									 rset.getDate("B_RDATE"),
-									 rset.getInt("B_VIEW_COUNT"),
-									 rset.getInt("B_RECOMMEND"),
-									 rset.getInt("B_WRITER"),
-									 rset.getString("MEMBER_NICKNAME"),
-									 rset.getInt("B_REPLY_COUNT"),
-									 rset.getString("AC_STATE"),
-									 rset.getString("LC_NAME"),
-									 rset.getString("ENROLL_STATE"),
-									 rset.getString("EM_STATE"),
-									 rset.getString("TC_NAME"),
-									 rset.getString("CG_NAME"));
+						 rset.getString("B_TITLE"),
+						 rset.getString("B_CONTENT"),
+						 rset.getDate("B_DATE"),
+						 rset.getDate("B_RDATE"),
+						 rset.getInt("B_VIEW_COUNT"),
+						 rset.getInt("B_RECOMMEND"),
+						 rset.getInt("B_WRITER"),
+						 rset.getString("MEMBER_NICKNAME"),
+						 rset.getInt("B_REPLY_COUNT"),
+						 rset.getString("AC_STATE"),
+						 rset.getString("LC_NAME"),
+						 rset.getString("ENROLL_STATE"),
+						 rset.getString("TC_NAME"),
+						 rset.getString("CG_NAME"),
+						 rset.getDate("RECRUIT_STARTDATE"),
+						 rset.getDate("RECRUIT_ENDDATE"),
+						 rset.getDate("ACTIVITY_STARTDATE"),
+						 rset.getDate("ACTIVITY_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -386,6 +456,7 @@ public class MemberDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -466,7 +537,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, 0, DEFAULT, DEFAULT, NULL, ?,NULL)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, 0, DEFAULT, DEFAULT, NULL, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -487,7 +558,6 @@ public class MemberDAO {
 	}
 	
 	
-	////////////////////////추후 수정 예정 /////////////////////////////
 	public int deleteProfile(Connection conn, int fileNo, int loginMemberNo) {
 		
 		PreparedStatement pstmt = null;
@@ -511,7 +581,6 @@ public class MemberDAO {
 		return result;
 		
 	}
-	///////////////////////////////////////////////////////////////
 	
 	
 	public int deleteProfile(Connection conn, int loginMemberNo) {
@@ -534,6 +603,47 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+	public Member overlapCheck(Connection conn, String userId, String userNickName) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String query="";
+		
+		if(userNickName=="") {
+			query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+		}else {
+			query = "SELECT * FROM MEMBER WHERE MEMBER_NICKNAME = ?";
+		}
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(userNickName=="") {
+				pstmt.setString(1, userId);
+			}else {
+				pstmt.setString(1, userNickName);
+			}
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				member = new Member(rset.getInt("MEMBER_NO"), rset.getString("MEMBER_ID"),
+						rset.getString("MEMBER_PW"), rset.getString("MEMBER_NAME"), rset.getString("MEMBER_NICKNAME"),
+						rset.getString("MEMBER_GENDER"), rset.getDate("MEMBER_BIRTHDAY"), rset.getString("MEMBER_PHONE"),
+						rset.getString("MEMBER_EMAIL"),rset.getString("MEMBER_ADDRESS"),rset.getDate("MEMBER_REGDATE"), 
+						rset.getString("MEMBER_ENABLE"), rset.getString("MEMBER_GRADE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return member;
 	}
 
 	

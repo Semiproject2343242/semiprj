@@ -54,7 +54,33 @@ public class MemberService {
 		return member;
 		
 	}
+	
+	
+	public Member selectMember(int memberNo) {
+		
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().selectMember(conn, memberNo);
+				
+		close(conn);
 
+		return member;
+		
+	}
+	
+
+	public int getListCount(String boardName, int mNo) {
+		
+		Connection conn = getConnection();
+			
+		int result = new MemberDAO().getListCount(conn,boardName,mNo);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 	public ArrayList<Board> selectMyCommuFreeList(int loginMemberNo, PageInfo pi) {
 		
 		Connection conn = getConnection();
@@ -175,29 +201,6 @@ public class MemberService {
 	}
 	
 	
-	//////////////////////// 추후 수정 예정 /////////////////////////////
-	public int deleteProfile(int fileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result = dao.deleteProfile(conn, fileNo, loginMemberNo);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-
-		return result;
-	}
-	///////////////////////////////////////////////////////////////
-	
-	
-	
 	public int deleteProfile(int loginMemberNo) {
 		
 		Connection conn = getConnection();
@@ -218,33 +221,6 @@ public class MemberService {
 	}
 	
 	
-	
-	
-	//////////////////////// 추후 수정 예정 /////////////////////////////
-	public int updateProfile(FileVO profile, int originalFileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result1 = dao.deleteProfile(conn, originalFileNo, loginMemberNo);
-		int result2 = dao.insertProfile(conn, profile, loginMemberNo);
-		
-		if(result1 > 0 && result2 > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result1;
-	}
-	////////////////////////////////////////////////////////////////
-	
-
-	
-	
 	public int updateProfile(FileVO profile, int loginMemberNo) {
 		
 		Connection conn = getConnection();
@@ -263,6 +239,16 @@ public class MemberService {
 		close(conn);
 		
 		return result1;
+	}
+
+	public Member overlapCheck(String userId, String userNickName) {
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().overlapCheck(conn, userId,userNickName);
+		
+		close(conn);
+		
+		return member;
 	}
 	
 }

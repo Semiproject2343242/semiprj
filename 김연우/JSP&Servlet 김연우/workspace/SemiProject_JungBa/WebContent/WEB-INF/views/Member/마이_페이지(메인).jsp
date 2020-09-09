@@ -228,7 +228,7 @@
 		        </form>
 		        <% } %> 
 		
-	            </div>
+	     	</div>
 			
 			
 			<div class="my_board">

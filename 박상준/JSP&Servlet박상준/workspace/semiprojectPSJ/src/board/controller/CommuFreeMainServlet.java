@@ -25,6 +25,7 @@ public class CommuFreeMainServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		FreeService service = new FreeService();
 		
 		//페이징

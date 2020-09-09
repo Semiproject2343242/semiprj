@@ -1,25 +1,36 @@
+<%@page import="board.model.vo.FileVO"%>
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%
+	Member member = (Member)request.getAttribute("member");
+	FileVO profile = (FileVO)request.getAttribute("profile");
+	ArrayList<Board> supportList = (ArrayList<Board>)request.getAttribute("supportList");
+	ArrayList<Board> externalList = (ArrayList<Board>)request.getAttribute("externalList");
+	ArrayList<Board> commuFreeList = (ArrayList<Board>)request.getAttribute("commuFreeList");
+	ArrayList<Board> qaList = (ArrayList<Board>)request.getAttribute("qaList");
+%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>정부 지원금 바로 지금</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+    <title>관리자(회원 목록 조회)</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
-<link rel="stylesheet" type="text/css" href="../../../resources/css/body.css">>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 </head>
 <style>
 
     .box {
-        margin-top: 30px;
+        margin-top: 40px;
+        margin-right: 50px;
         width: 300px;
         height: 300px;
         border-radius: 70%;
         overflow: hidden;
         float: left;
-        margin-left: 50px;
     }
 
     .profile {
@@ -29,9 +40,15 @@
     }
 
     #topContents {
-        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
-
+	
+	#memInfo {
+		float: left;
+	}
+	
     #infoTable {
         border-spacing: 10px;
     }
@@ -86,13 +103,13 @@
             <hr>
             <div>
                 <dl>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/memList.ad">
                             <h3>회원 목록 조회</h3>
                         </a></dt>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/spList.ad">
                             <h3>정보 공유 신청</h3>
                         </a></dt>
-                    <dt><a href="#">
+                    <dt><a href="${pageContext.request.contextPath}/eaList.ad">
                             <h3>대외 활동 신청</h3>
                         </a></dt>
                 </dl>
@@ -101,30 +118,34 @@
 
         <div id="main_section" align="center">
             <h2>
-            <div id="subTitle"><b>user01님의 회원 상세 조회</b></div>
+            <div id="subTitle"><b><%=member.getMemberNickName() %>님의 회원 상세 조회</b></div>
             </h2>
             <hr>
             <div id="topContents">
-                <div class="box" style="background: #BDBDBD;">
-                    <img class="profile" src="../Media/Music2.jpg">
-                </div>
+				<div class="box" style="background: #BDBDBD;">
+					<%if(profile == null) { %>
+						<img class="profile" src="${pageContext.request.contextPath}/UploadFolder/member_profile/profileDefault.png">
+					<% } else { %>
+						<img class="profile" src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%=profile.getChangeName()%>">
+					<% } %>
+				</div>
                 <div id="memInfo">
                     <table id="infoTable">
                         <tr>
                             <td>이름(Name) : </td>
-                            <td>김연우</td>
+                            <td><%= member.getMemberName() %></td>
                         </tr>
                         <tr>
                             <td>아이디(ID) : </td>
-                            <td>Rudy</td>
+                            <td><%= member.getMemberId() %></td>
                         </tr>
                         <tr>
                             <td>휴대전화(Phone) : </td>
-                            <td>010-1234-5678</td>
+                            <td><%= member.getMemberPhone() %></td>
                         </tr>
                         <tr>
                             <td>이메일(E-mail) : </td>
-                            <td>Rudy@nate.com</td>
+                            <td><%= member.getMemberEmail() %></td>
                         </tr>
                         <tr>
                             <td>성별(Gender) : </td>
@@ -132,129 +153,128 @@
                         </tr>
                         <tr>
                             <td>주소(Address) : </td>
-                            <td>서울시 강남구</td>
+                            <td><%= member.getMemberAddress() %></td>
                         </tr>
                         <tr>
                             <td>생년월일(BirthDay) : </td>
-                            <td>19900101</td>
+                            <td><%= member.getMemberBirthDay() %></td>
                         </tr>
                     </table>
                 </div>
+            </div>
 
-                <br clear="all">
+            <br clear="all">
 
-                <div id="boardContents">
-                    <div class="board_area">
-                        <div class="board_box">
-                            <div class="box_title">
-                                <a href="#">
-                                    <h3>공지사항</h3>
-                                </a>
-                            </div>
-                            <ol>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글1</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글2</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글3</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글4</a>
-                                    <div>날짜</div>
-                                </li>
-                            </ol>
-                        </div>
-
-                        <div class="board_box">
-                            <div class="box_title">
-                                <a href="#">
-                                    <h3>공지사항</h3>
-                                </a>
-                            </div>
-                            <ol>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글1</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글2</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글3</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글4</a>
-                                    <div>날짜</div>
-                                </li>
-                            </ol>
-                        </div>
+            <div id="boardContents">
+                <div class="board_area">
+                    <div class="board_box">
+						<div class="box_title">
+							<a href="#"><h3>지원정책</h3></a>
+						</div>
+						<ol>
+						<% if(supportList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else if(supportList.size() >= 3) { %>
+							<% for (int i = 0; i < 4; i++) { %>
+								<% Board b = supportList.get(i); %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } else { %>
+							<% for (Board b : supportList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } %>
+	                    </ol>
                     </div>
-                    <div class="board_area">
-                        <div class="board_box">
-                            <div class="box_title">
-                                <a href="#">
-                                    <h3>공지사항</h3>
-                                </a>
-                            </div>
-                            <ol>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글1</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글2</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글3</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글4</a>
-                                    <div>날짜</div>
-                                </li>
-                            </ol>
-                        </div>
 
-                        <div class="board_box">
-                            <div class="box_title">
-                                <a href="#">
-                                    <h3>공지사항</h3>
-                                </a>
-                            </div>
-                            <ol>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글1</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글2</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글3</a>
-                                    <div>날짜</div>
-                                </li>
-                                <li>
-                                    <a href="#" class="area_title">공지사항 최신글4</a>
-                                    <div>날짜</div>
-                                </li>
-                            </ol>
-                        </div>
+	                <div class="board_box">
+						<div class="box_title">
+							<a href="#"><h3>대외활동</h3></a>
+						</div>
+						<ol>
+						<% if(externalList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else if(externalList.size() >= 3) { %>
+							<% for (int i = 0; i < 4; i++) { %>
+								<% Board b = externalList.get(i); %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>
+						<% } else { %>
+							<% for (Board b : externalList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
+						<% } %>
+						</ol>
+		            </div>
+                </div>
+                    
+				<div class="board_area">
+					<div class="board_box">
+						<div class="box_title">
+							<a href="#"><h3>자유게시판</h3></a>
+						</div>
+						<ol>
+						<% if(commuFreeList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else if(commuFreeList.size() >= 3) { %>
+							<% for (int i = 0; i < 4; i++) { %>
+								<% Board b = commuFreeList.get(i); %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>							
+						<% } else { %>
+							<% for (Board b : commuFreeList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
+						<% } %>
+						</ol>
+					</div>
+				
+					<div class="board_box">
+						<div class="box_title">
+							<a href="#"><h3>Q / A</h3></a>
+						</div>
+						<ol>
+						<% if(qaList.isEmpty()) { %>
+							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
+						<% } else if(qaList.size() >= 3) { %>
+							<% for (int i = 0; i < 4; i++) { %>
+								<% Board b = qaList.get(i); %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
+						<% } else { %>
+							<% for (Board b : qaList) { %>
+								<li>
+									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<div><%= b.getBoardCreateDate() %></div>
+								</li>
+							<% } %>						
+						<% } %>
+						</ol>
                     </div>
                 </div>
             </div>
-        </div>
-
-
+        </div>      
     </section>
     <%@ include file="../Common/footer.jsp" %>
 </body>

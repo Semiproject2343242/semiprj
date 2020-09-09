@@ -37,7 +37,7 @@ public class CommuSupportDetailServlet extends HttpServlet {
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		CommunityService service = new CommunityService();
 		Board board = service.selectBoard(bId,"지원");
-		ArrayList<FileVO> fileList = service.selectFile(bId);
+		ArrayList<FileVO> fileList = service.selectSpFile(bId);
 //		ArrayList<Reply> replyList = new CommunityService().selectReplyList(bId);
 		
 		String page = null;

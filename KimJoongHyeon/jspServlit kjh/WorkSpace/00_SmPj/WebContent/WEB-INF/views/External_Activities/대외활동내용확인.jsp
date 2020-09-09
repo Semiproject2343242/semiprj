@@ -1,20 +1,18 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="board.model.vo.FileVO"%>
-<%@page import="board.model.vo.Board"%>
+<%@page import="board.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board");
 	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	ArrayList<Reply> replyList = (ArrayList<Reply>)request.getAttribute("replyList");
 	FileVO titleImg = fList.get(0);
-	System.out.println("대외커뮤.jsp에서의 board : " + b);
-	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>정부지원금 바로지금</title>
+    <title>정부지원금 바로 지금</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
@@ -53,6 +51,10 @@
 	    margin: 0px;
 	    width: 100%;
   	}
+  	.writer_table th{
+  		text-align: right;
+  	}
+  	
   
   	.writer_text{
       margin-left: 80px;
@@ -80,6 +82,7 @@
 	    margin: 30px;
   	}
 .detailImg{width:250px; height:180px;}
+		.udlbtn{background-color:sky; width:70px; height:40px; margin:10px;}   
     </style>
 </head>
 <body>
@@ -105,6 +108,7 @@
     <h4>대외활동 -<%=b.getCgName()%></h4>
     <hr>
     <h3><%=b.getBoardNo()%>.<%= b.getBoardTitle() %></h3>
+    <h4>작성자 : <%=b.getBoardWriter()%></h4>
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
@@ -160,9 +164,9 @@
 		</table>
     </div>
     <div align="right">
-				<input type="button" onclick="location.href='<%= request.getContextPath() %>/eaMain.cm'" id="menuBtn" value="메뉴로">
+				<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.ea'" id="menuBtn" value="메뉴로">
 				<% if(loginUser != null) { %>
-					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
+					<% if(loginUser.getMemberNickName().equals("운영자")) { %>
 						<input type="submit" id="updateBtn" value="수정">
 						<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 					<% } %>
@@ -181,8 +185,70 @@
 				    }
 				}
 		</script>
-			</div>
+	</div>
   </form>
+  	<!-- 댓글 --> 
+    <div> <h2>댓글</h2> </div>
+    <hr><br>
+    <div id="comment" 	style="line-height:20px; margin: 0px; padding:0px;">
+    <% if(replyList.isEmpty()){ %>
+    	<text class="text3"><p class="p1">댓글이 없습니다.</p></text>
+    <% } else { %>
+    	<% for(int i = 0; i < replyList.size(); i++) { %>
+     	<table>
+        	<% if(replyList.get(i).getProfileImageName() == null) { %>
+         		<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/profileDefault.png"  width="80" height="80"  id="profile" style="float:top;")></td>
+       		<% } else { %>  	
+         		<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>"  width="80" height="80"  id="profile" style="float:top;")></td>
+       		<% } %>   	
+      		<text class="text3">
+          		<td style="margin:0px; vartical-align:top; width:80%">
+	          		<p class="replyIWC"><h3><%= replyList.get(i).getReplyWriter() %></h3></p>
+	          		<p class="replyIWC"><%= replyList.get(i).getReplyContent() %></p>
+          		</td>
+          	</text>
+         	<text class="text4">
+             		
+			<!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
+         	<td class="replyDU" style="width:200px; float:right;">
+          		<div><p style="float:right; margin:0px;">게시일 : <%= replyList.get(i).getCreateDate() %></p></div> <!-- 게시 날짜 -->
+          		<div><p style="float:right; margin:0px;">수정일 : <%= replyList.get(i).getModifyDate() %></p></div> <!-- 수정 날짜 -->
+          		<% if(loginUser != null){ %>
+	          		<% if(replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+						<p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)">	
+					<% } %>
+				<% } %>
+				<script>
+				function deleteReply(replyNo){
+					var result = window.confirm(replyNo+' 댓글을 삭제하시겠습니까?');
+					var boardNo = <%= b.getBoardNo() %>
+		
+	    			if(result){
+	    				location.href="<%= request.getContextPath() %>/replyDelete.re?replyNo="+replyNo+"&boardNo="+boardNo+"&bName=대외";
+	    			} else{
+	        			alert('취소하셨습니다.');
+	    			}
+				}
+				</script>   							
+          </td>
+          </text>
+        </table>
+              <% } %>
+         	<% } %>
+    </div>             
+                    
+    <br clear="all"><br>
+    	<% if(loginUser != null){%>        
+        	<form action="replyInsert.re">
+           		<div>
+	            	<textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
+	              	<input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
+	         		<input type="hidden" name="bName" value="대외">	
+	                <input type="submit" class= replySubmit value="등록" style="float:right;" >
+           		</div>
+          </form>
+        <%} %>
+    <br clear="all"><br>
   </div>
 </section>  
     <%@ include file="../Common/footer.jsp" %>
