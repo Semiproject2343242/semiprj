@@ -1,27 +1,23 @@
-package member.controller;
+package member;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-
 /**
- * Servlet implementation class CheckIdServlet
+ * Servlet implementation class SearchPwdFormServlet
  */
-@WebServlet("/checkId.me")
-public class CheckIdServlet extends HttpServlet {
+@WebServlet("/searchPwdForm.me")
+public class SearchPwdFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckIdServlet() {
+    public SearchPwdFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +26,7 @@ public class CheckIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		System.out.println("userId: " +userId);
-		int result = new MemberService().checkId(userId);
-		
-      	PrintWriter out = response.getWriter();
-      	System.out.println("여긴 서브릿");
-      	if(result >0) {
-      		out.append("fail");
-      	}else {
-      		out.append("success");
-      	}
-      	out.flush();
-      	out.close();
+		request.getRequestDispatcher("WEB-INF/views/Member/비밀번호찾기.jsp").forward(request, response);
 	}
 
 	/**

@@ -566,7 +566,8 @@
                                  <td><label class="must">*</label>닉네임</td>
                                  <td class="middletable"><input type="text" name="nickName" id="nickName" required></td>
                                  <td width="200px">
-                                 	<input style=" margin-left:-30%;background-color:skyblue; color:white; font-size:15px;" type="button" id="nickNameCheck" value="중복확인" >
+                                 	<input style=" margin-left:-30%;background-color:skyblue; color:white; 
+                                 	font-size:15px;" type="button" id="nickNameCheck" value="중복확인" >
                                  </td>
                               </tr>
                               <tr>

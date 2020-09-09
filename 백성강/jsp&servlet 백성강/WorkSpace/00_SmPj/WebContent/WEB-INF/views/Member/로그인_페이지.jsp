@@ -38,7 +38,6 @@ table{
 <%@ include file="../Common/header.jsp" %>
 
    <section id=loginSection>
-      <div>
          <form action="<%=request.getContextPath()%>/login.me" method="post">
          <div class="loginbox">
             <h1 style="margin:0px;">로그인</h1>
@@ -52,11 +51,10 @@ table{
                </tr>
             </table>
             <p align="center" id="ptag">
-               <a href="<%=request.getContextPath()%>/serchIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/searchPwdForm.me">비밀번호 찾기</a> | <a href="<%=request.getContextPath()%>/insertForm.me">회원가입</a>
+               <a href="<%=request.getContextPath()%>/searchIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/searchPwdForm.me">비밀번호 찾기</a> | <a href="<%=request.getContextPath()%>/insertForm.me">회원가입</a>
             </p>
          </div>
          </form>
-      </div>
    </section>
 
    <hr>

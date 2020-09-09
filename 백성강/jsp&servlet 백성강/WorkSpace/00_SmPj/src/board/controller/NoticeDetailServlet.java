@@ -28,7 +28,9 @@ public class NoticeDetailServlet extends HttpServlet {
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		
 		NoticeService service = new NoticeService();
+		
 		Board board = service.selectBoard(bId);
+		
 		ArrayList<FileVO> fileList = service.selectThumbnail(bId);
 		
 		String page = null;

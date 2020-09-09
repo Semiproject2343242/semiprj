@@ -21,6 +21,14 @@ public class Member {
 	
 	
 	
+	public Member(String memberId, String memberName, String memberPhone, String memberEmail) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+	} //아이디 찾기를 위해 추가
+
 	public Member(String memberId, String memberPw) {
 		super();
 		this.memberId = memberId;
@@ -97,6 +105,7 @@ public class Member {
 		this.memberAddress = memberAddress;
 	}
 
+	
 	public int getMemberNo() {
 		return memberNo;
 	}
