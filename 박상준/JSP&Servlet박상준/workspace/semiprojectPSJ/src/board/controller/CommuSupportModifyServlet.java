@@ -48,7 +48,7 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "exteranl_uploadFiles/";
+	         String savePath = root + "/UploadFolder/support_uploadFiles/";
 	         
 	         System.out.println("savePath : "+savePath);
 	         
@@ -91,13 +91,25 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	         String titleImage = multiRequest.getFilesystemName("sp_title_image");
 	         String mainfile = multiRequest.getFilesystemName("titleImage");
 	         String category = multiRequest.getParameter("sp_category");
+	         String[] emStatearr = multiRequest.getParameterValues("ck_sp_em");
 	         String[] agearr = multiRequest.getParameterValues("ck_sp_age");
 	         String[] localarr = multiRequest.getParameterValues("ck_lc");
 	         String title = multiRequest.getParameter("sp_title");
 	         String content = multiRequest.getParameter("sp_text_contents");
 	         String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
 	         int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-	 		 String age = "";
+			 String emState = "";
+	 		 if(emStatearr != null) {
+	 			for (int i = 0; i< emStatearr.length; i++) {
+	 				if(i == emStatearr.length -1) {
+	 					emState += emStatearr[i];
+	 				}else
+	 					emState += emStatearr[i] + ",";
+	 				System.out.print("타냐5");
+	 			}
+	 		 }
+	         
+	         String age = "";
 	 		 if(agearr != null) {
 	 			for (int i = 0; i< agearr.length; i++) {
 	 				if(i == agearr.length -1)
@@ -116,16 +128,18 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	 					local += localarr[i] + ",";
 	 			}
 	 		 }
+	 		 
+
 	 		String strsp_res_date = multiRequest.getParameter("sp_res_date"); 
 	 		Date sp_res_date = null;
 	 		if(strsp_res_date != "") {
-	 			String[] datsprr = strsp_res_date.split("-");
+	 			String[] dateArr = strsp_res_date.split("-");
 	 			
-	 			int yspr = Integer.parseInt(datsprr[0]);
-	 			int month = Integer.parseInt(datsprr[1]) - 1;
-	 			int day = Integer.parseInt(datsprr[2]);
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
 	 			
-	 			sp_res_date = new Date(new GregorianCalendar(yspr, month, day).getTimeInMillis());
+	 			sp_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
 	 		}else {
 	 			sp_res_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
@@ -133,43 +147,15 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	 		String strsp_ree_date = multiRequest.getParameter("sp_ree_date"); 
 	 		Date sp_ree_date = null;
 	 		if(strsp_ree_date != "") {
-	 			String[] datsprr = strsp_ree_date.split("-");
+	 			String[] dateArr = strsp_ree_date.split("-");
 	 			
-	 			int yspr = Integer.parseInt(datsprr[0]);
-	 			int month = Integer.parseInt(datsprr[1]) - 1;
-	 			int day = Integer.parseInt(datsprr[2]);
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
 	 			
-	 			sp_ree_date = new Date(new GregorianCalendar(yspr, month, day).getTimeInMillis());
+	 			sp_ree_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
 	 		}else {
 	 			sp_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
-	 		} 
-	 		
-	 		String strsp_acs_date = multiRequest.getParameter("sp_acs_date"); 
-	 		Date sp_acs_date = null;
-	 		if(strsp_acs_date != "") {
-	 			String[] datsprr = strsp_acs_date.split("-");
-	 			
-	 			int yspr = Integer.parseInt(datsprr[0]);
-	 			int month = Integer.parseInt(datsprr[1]) - 1;
-	 			int day = Integer.parseInt(datsprr[2]);
-	 			
-	 			sp_acs_date = new Date(new GregorianCalendar(yspr, month, day).getTimeInMillis());
-	 		}else {
-	 			sp_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
-	 		} 
-	 		
-	 		String strsp_ace_date = multiRequest.getParameter("sp_ace_date"); 
-	 		Date sp_ace_date = null;
-	 		if(strsp_ace_date != "") {
-	 			String[] datsprr = strsp_ace_date.split("-");
-	 			
-	 			int yspr = Integer.parseInt(datsprr[0]);
-	 			int month = Integer.parseInt(datsprr[1]) - 1;
-	 			int day = Integer.parseInt(datsprr[2]);
-	 			
-	 			sp_ace_date = new Date(new GregorianCalendar(yspr, month, day).getTimeInMillis());
-	 		}else {
-	 			sp_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
 	 		} 
 	 		
 	         Board b = new Board();
@@ -179,13 +165,11 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	         b.setBoardWriter(bWriter);
 	         b.setBoardWriterNo(userId);
 	         b.setCgName(category);
+	         b.setEmState(emState);
 	         b.setTcName(age);
 	         b.setLcName(local);
 	         b.setReStratDate(sp_res_date);
 	         b.setReEndDate(sp_ree_date);
-	         b.setAcStartDate(sp_acs_date);
-	         b.setAcEndDate(sp_ace_date);
-//	         System.out.println(b);
 	         System.out.println("originFiles : "+originFiles);
 	         System.out.println("saveFiles : "+saveFiles);
 	         System.out.println("mainfile : "+mainfile);

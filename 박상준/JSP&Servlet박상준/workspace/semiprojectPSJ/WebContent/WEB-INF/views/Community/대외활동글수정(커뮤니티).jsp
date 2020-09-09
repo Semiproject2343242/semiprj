@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	Board b = (Board)request.getAttribute("board"); 
+
 // 	System.out.println("대외활동커뮤_글수정 에서의 Board : " + b);	
 	
 	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");

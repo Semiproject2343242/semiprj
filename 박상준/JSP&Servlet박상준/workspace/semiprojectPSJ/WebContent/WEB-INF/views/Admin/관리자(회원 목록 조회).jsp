@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>관리자(회원 상세 조회)</title>
+    <title>정부 지원금 바로 지금</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
 </head>

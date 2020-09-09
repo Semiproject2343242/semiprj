@@ -2,8 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
+    
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
+	System.out.println(pi);
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -15,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>정부 지원금 바로 지금</title>
 <style>
     .pagingArea button{background: white; border: 0; outline: 0; margin: 1px;}
 	button:hover{cursor: pointer;}

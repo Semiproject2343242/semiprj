@@ -139,7 +139,6 @@ public class MemberDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
-									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -270,12 +269,11 @@ public class MemberDAO {
 						 rset.getString("AC_STATE"),
 						 rset.getString("LC_NAME"),
 						 rset.getString("ENROLL_STATE"),
+						 rset.getString("EM_STATE"),
 						 rset.getString("TC_NAME"),
 						 rset.getString("CG_NAME"),
 						 rset.getDate("RECRUIT_STARTDATE"),
-						 rset.getDate("RECRUIT_ENDDATE"),
-						 rset.getDate("ACTIVITY_STARTDATE"),
-						 rset.getDate("ACTIVITY_ENDDATE"));
+						 rset.getDate("RECRUIT_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -384,7 +382,7 @@ public class MemberDAO {
 			pstmt.setInt(1, loginMemberNo);
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Board>();
-			//자유게시판 테이블 다시 만들었죠? 연우씨가준거아 없구나
+			
 			while(rset.next()) {
 				Board bo = new Board(rset.getInt("B_NO"),
 									 rset.getString("B_TITLE"),
@@ -392,7 +390,6 @@ public class MemberDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
-									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -473,7 +470,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, 0, DEFAULT, DEFAULT, NULL, ?)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, 0, DEFAULT, DEFAULT, NULL, ?,NULL)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);

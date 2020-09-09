@@ -17,7 +17,7 @@ import board.model.vo.*;
 /**
  * Servlet implementation class ExternalSearch
  */
-@WebServlet("/eaSearchIeage.cm")
+@WebServlet("/eaSearchImage.cm")
 public class CommuExternalSearchImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

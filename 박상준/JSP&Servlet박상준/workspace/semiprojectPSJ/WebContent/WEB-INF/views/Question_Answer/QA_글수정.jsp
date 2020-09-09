@@ -27,7 +27,6 @@
     <title>정부지원금 바로지금</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/게시글수정.css"/>
   </head>
   <style>
   #filetext{
@@ -38,22 +37,22 @@
     <%@ include file="../Common/header.jsp" %>
     <section>
       <aside>
-        <h2>Q/A</h2>
+        <h2>묻고답하기</h2>
         <hr />
-			<div class=baside><h2>제목</h2></div>
-	        <div class=baside><h2>카테고리</h2></div>
-	        <div class=baside><h2 id="content">내용</h2></div>
+        <h2>제목</h2>
+        <h2>카테고리</h2>
+        <h2>내용</h2>
       </aside>
       <div id="main_section">
 	      <form action="<%= request.getContextPath() %>/modify.qa" method="post">
-			<h2 class=cgname>게시글 수정</h2>
+			<h2>질문하기</h2>
 			<input type="hidden" size="50" name="no" value="<%= b.getBoardNo() %>">
 			<hr />
 			<h2>
 			<input type="text" size="50" name="title" value="<%= b.getBoardTitle() %>">
 			</h2>
 			<h2>
-			 <select name="category" id="bcategory">
+			  <select name="category">
 				<option value="이용관련" <%= category[0] %>>이용관련</option>
 				<option value="회원관련" <%= category[1] %>>회원관련</option>
 				<option value="게시글등록" <%= category[2] %>>게시글</option>
