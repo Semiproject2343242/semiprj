@@ -86,7 +86,8 @@ public class Member {
 		this.memberGrade = memberGrade;
 		this.memberBoard = memberBoard;
 	}
-
+	
+	
 	public Member(String memberId, String memberPw, String memberName, String memberNickName, String memberGender,
 			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress) {
 		super();
