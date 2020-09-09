@@ -42,21 +42,25 @@ public class SearchPwdServlet2 extends HttpServlet {
 		String page = null;
 		Member m = new Member(id,pwd1);
 		
-		if(pwd1.equals(pwd2)) {
-			int result = new MemberService().modifyPwdMember(m);
-			
-			if(result > 0) {
-				request.setAttribute("msg", "비밀번호가 재설정 되었습니다.");
-				page = "WEB-INF/views/Member/비밀번호찾기_성공_알림창.jsp";
+		if(pwd1.length() >= 6) {
+			if(pwd1.equals(pwd2)) {
+				int result = new MemberService().modifyPwdMember(m);
+				
+				if(result > 0) {
+					request.setAttribute("msg", "비밀번호가 재설정 되었습니다.");
+					page = "WEB-INF/views/Member/비밀번호찾기_성공_알림창.jsp";
+				} else {
+					request.setAttribute("msg", "비밀번호가 재설정에 실패하였습니다.");
+					page = "WEB-INF/views/Common/errorPage.jsp";
+				}
 			} else {
-				request.setAttribute("msg", "비밀번호가 재설정에 실패하였습니다.");
+				request.setAttribute("msg", "비밀번호가 일치하지않습니다.");
 				page = "WEB-INF/views/Common/errorPage.jsp";
 			}
 		} else {
-			request.setAttribute("msg", "비밀번호가 일치하지않습니다.");
+			request.setAttribute("msg", "비밀번호는 6자 이상이여야합니다.");
 			page = "WEB-INF/views/Common/errorPage.jsp";
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
