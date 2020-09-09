@@ -67,14 +67,6 @@
             </h2>
             <hr>
             <div id="bottomContent">
-                <div id="searchDiv">
-                    <select id="selectedOption">
-                        <option>승인 대기</option>
-                        <option>승인 완료</option>
-                    </select>
-                    <input id="search" type="search">
-                    <button type="submit">검색</button>
-                </div>
                 <div id="tableDiv">
                 	<table class="contentsTable" width="800px" align="center">
 	                	<thead>
@@ -104,7 +96,7 @@
 									<%=b.getBoardWriter()%></td>
 								<td><%=b.getBoardCreateDate()%></td>
 								<td><%=b.getBoardViewCount()%></td>
-								<td><input type="hidden" value="<%=b.getEnrollState()%>">
+								<td><input id="enroll" type="hidden" value="<%=b.getEnrollState()%>">
 									<%=b.getEnrollState()%></td>
 							</tr>
 						<%		} %>
@@ -126,8 +118,13 @@
 	            	$(this).parent().css('background', 'none');
 	            }).click(function(){
 	                var bId = $(this).parent().children().children('input').val();
+	                var enroll = $(this).parent().children().children('#enroll').val();
 	            <% if(loginUser != null){%>
-	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	            		if(enroll == 'N'){
+	            			location.href = '<%= request.getContextPath() %>/eaDetail.cm?bId=' + bId;
+	            		} else {
+	            			location.href = '<%= request.getContextPath() %>/detail.ea?bId=' + bId;
+	            		}       
 	            <% }else{ %>
 	            		alert('회원만 이용할 수 있는 서비스입니다.')
 	            <% } %>

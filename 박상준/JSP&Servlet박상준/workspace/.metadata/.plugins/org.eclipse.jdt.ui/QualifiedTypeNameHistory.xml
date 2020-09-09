@@ -2,4 +2,5 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="member.model.vo.Member"/>
 <fullyQualifiedTypeName name="board.model.service.CommunityService"/>
+<fullyQualifiedTypeName name="board.model.dao.SupportDAO"/>
 </qualifiedTypeNameHistroy>

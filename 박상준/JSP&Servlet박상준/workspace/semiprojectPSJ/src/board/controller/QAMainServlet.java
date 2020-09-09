@@ -11,17 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.vo.Board;
 import board.model.vo.PageInfo;
+import board.model.service.BoardService;
 import board.model.service.QuestionService;
 
+/**
+ * Servlet implementation class QAMainServlet
+ */
 @WebServlet("/main.qa")
 public class QAMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public QAMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QuestionService qServuce = new QuestionService();
 		
@@ -49,7 +59,11 @@ public class QAMainServlet extends HttpServlet {
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>자유게시판</title>
+    <title>정부 지원금 바로 지금</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
 </head>
@@ -20,7 +20,7 @@
    <%@ include file="../Common/header.jsp" %>
     <section>
          <aside>
-           <h2 ><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</h2></a>
+           <h2 ><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</h2></a>
             <hr>
             <div>
             <dl>

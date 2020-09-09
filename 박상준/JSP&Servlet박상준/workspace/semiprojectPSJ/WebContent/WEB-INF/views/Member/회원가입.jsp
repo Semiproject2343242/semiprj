@@ -568,8 +568,8 @@
                               </tr>
                               <tr>
                                <td><label class="must">*</label>성별</td>
-                              <td> <input type="radio" name="gender" value="남자" >남자
-                                  <input type="radio"  name="gender" value="여자" >여자</td>	
+                              <td> <input type="radio" name="gender" value="M" >남자
+                                  <input type="radio"  name="gender" value="W" >여자</td>	
                               </tr>
                              
                                   <tr>
@@ -595,9 +595,6 @@
                               </tr>
                              
                            </table>
-                           
-                        
-                           
                            <div class="btns" id="signUpBtns">
                               <input id="signUpBtn" type="submit" value="가입하기">
                               <input type="button" id="goMain" onclick="goMain();" value="메인으로">

@@ -541,7 +541,7 @@
       	});
 		function getAdoptImage(boardNo,length,i){//리스트에 맞게 이미지 가져오기
 	         $.ajax({
-	            url: 'eaSearchIeage.cm',
+	            url: 'eaSearchImage.cm',
 	            success: function(data){
 	            	  var input=""; 
 	                  for (var j = 0; j < data.length; j++) {

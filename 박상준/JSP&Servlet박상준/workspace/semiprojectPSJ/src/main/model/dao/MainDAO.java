@@ -33,6 +33,7 @@ public class MainDAO {
 						 rset.getString("MEMBER_NICKNAME"),	// 게시판 글쓴이 회원	
 						 rset.getInt("B_REPLY_COUNT"),		// 게시판 댓글
 						 rset.getString("CG_NAME"));		// 카테고리 이름
+				System.out.println(bo);
 				list.add(bo); 
 			}
 		} catch (SQLException e) {

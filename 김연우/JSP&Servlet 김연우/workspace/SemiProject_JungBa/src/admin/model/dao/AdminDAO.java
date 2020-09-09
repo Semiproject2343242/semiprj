@@ -93,7 +93,7 @@ public class AdminDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM SUPPORTLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM MAINSUPPORTLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -135,7 +135,7 @@ public class AdminDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM MAINEXTERNALLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -171,6 +171,7 @@ public class AdminDAO {
 		}
 		return list;
 	}
+	
 	public ArrayList<Board> selectRecentCommuList(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
