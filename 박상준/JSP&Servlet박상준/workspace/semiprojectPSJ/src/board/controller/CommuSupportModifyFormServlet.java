@@ -132,7 +132,7 @@ public class CommuSupportModifyFormServlet extends HttpServlet {
 //		System.out.println("tcName : " +tcName);
 //		System.out.println("lcName : " +lcName);
 		
-		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null,tcName,emState, category,sp_res_date,sp_ree_date);
+		Board b = new Board(no,title,content, null,null, viewCount,reCommend, userId,writer, 0, acState, lcName, null, emState, tcName, category,sp_res_date,sp_ree_date);
 		String page = null;
 //		System.out.println("Board,Board : " +b);
 		page ="WEB-INF/views/Community/지원정책글수정(커뮤니티).jsp";

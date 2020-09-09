@@ -49,20 +49,3 @@ public class CommuSupportMainServlet extends HttpServlet {
 	}
 
 }
-/*
- * CommunityService service = new CommunityService();
- * 
- * 
- * //페이징 int currentPage = 1; if(request.getParameter("currentPage") != null) {
- * currentPage = Integer.parseInt(request.getParameter("currentPage")); }
- * PageInfo pi = Page.PageInfo("지원", currentPage, "/spMain.cm"); //페이징
- * 
- * //게시판 리스트 가져오기
- * 
- * ArrayList<Board> bList = service.selectSpList(1); // 게시판 리스트 가져오기
- * ArrayList<FileVO> fList = service.selectSpList(2); //파일 리스트 가져오기
- * System.out.println(fList);
- * 
- * 
- * 
- */

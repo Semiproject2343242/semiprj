@@ -123,7 +123,7 @@
 						%>
 						<%if (b.getBoardNo() == f.getBoardNo()) {%>
 						<img
-							src="<%=request.getContextPath()%>/exteranl_uploadFiles/<%=f.getChangeName()%>"
+							src="<%=request.getContextPath()%>/UploadFolder/exteranl_uploadFiles/<%=f.getChangeName()%>"
 							width="150px" height="100%">
 						<%}%>
 						<%}%>

@@ -116,7 +116,6 @@ public class CommuSupportInsertServlet extends HttpServlet {
  			}
  		 }
  		 
- 		 
 	 		String strsp_res_date = multiRequest.getParameter("sp_res_date"); 
 	 		Date sp_res_date = null;
 	 		if(strsp_res_date != "") {
@@ -129,8 +128,9 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	 			sp_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
 	 		}else {
 	 			sp_res_date =new Date(new GregorianCalendar().getTimeInMillis());
-	 		} 
-	 		String strsp_ree_date = multiRequest.getParameter("sp_res_date"); 
+	 		}  
+	 		
+	 		String strsp_ree_date = multiRequest.getParameter("sp_ree_date"); 
 	 		Date sp_ree_date = null;
 	 		if(strsp_ree_date != "") {
 	 			String[] dateArr = strsp_ree_date.split("-");

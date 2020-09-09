@@ -7,8 +7,8 @@
 	Board b = (Board)request.getAttribute("board");
 	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
 	FileVO titleImg = fList.get(0);
-// 	System.out.println("대외커뮤.jsp에서의 board : " + b);
-// 	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
+	System.out.println("대외커뮤.jsp에서의 board : " + b);
+	System.out.println("대외커뮤.jsp에서의 fList : " + fList);
 %>
 <!DOCTYPE html>
 <html>
@@ -90,22 +90,26 @@
     <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
     <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
     <input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
-	<input type="hidden" name=category value="<%= b.getCgName() %>" />
-	<input type="hidden" name=acState value="<%= b.getAcState() %>" />
-	<input type="hidden" name=tcName value="<%= b.getTcName() %>" />
-	<input type="hidden" name=lcName value="<%= b.getLcName() %>" />
-	<input type="hidden" name=viewCount value="<%= b.getBoardViewCount() %>" />
-	<input type="hidden" name=reCommend value="<%= b.getBoardReCommend() %>" />
-	<input type="hidden" name=writer value="<%= b.getBoardWriter() %>" />
-    
+	<input type="hidden" name="category" value="<%= b.getCgName() %>" />
+	<input type="hidden" name="acState" value="<%= b.getAcState() %>" />
+	<input type="hidden" name="tcName" value="<%= b.getTcName() %>" />
+	<input type="hidden" name="lcName" value="<%= b.getLcName() %>" />
+	<input type="hidden" name="viewCount" value="<%= b.getBoardViewCount() %>" />
+	<input type="hidden" name="reCommend" value="<%= b.getBoardReCommend() %>" />
+	<input type="hidden" name="writer" value="<%= b.getBoardWriter() %>" />
+	<input type="hidden" name="ea_res_date" value="<%= b.getReStratDate() %>" />
+	<input type="hidden" name="ea_ree_date" value="<%= b.getReEndDate() %>" />
+	<input type="hidden" name="ea_acs_date" value="<%= b.getAcStartDate() %>" />
+	<input type="hidden" name="ea_ace_date" value="<%= b.getAcEndDate() %>" />
+    <% System.out.println(b.getReEndDate()); %>
     <h4>대외활동 -<%=b.getCgName()%></h4>
     <hr>
     <h3><%=b.getBoardNo()%>.<%= b.getBoardTitle() %></h3>
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
-				<a href="<%= request.getContextPath() %>/exteranl_uploadFiles/<%= titleImg.getChangeName() %>">
-					<img id="titleImg" src="<%= request.getContextPath() %>/exteranl_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				<a href="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
 				</a>
 			</div>
 			<div class="textArea">
@@ -141,7 +145,7 @@
                     	첨부파일 없음.
                     <% } else { %>
                     	<%for(int i=1; i < fList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/notice_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
+							<a href="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
 								[ <%=i%><%=fList.get(i).getOriginName()%> ]
 							</a>
 						<% } %>

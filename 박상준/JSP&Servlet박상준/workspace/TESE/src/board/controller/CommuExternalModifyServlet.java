@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +49,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "exteranl_uploadFiles/";
+	         String savePath = root + "/UploadFolder/exteranl_uploadFiles/";
 	         
 	         System.out.println("savePath : "+savePath);
 	         
@@ -96,6 +97,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         String title = multiRequest.getParameter("ea_title");
 	         String content = multiRequest.getParameter("ea_text_contents");
 	         String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
+	         System.out.println(titleImage);
 	         int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 	 		 String age = "";
 	 		 if(agearr != null) {
@@ -117,6 +119,63 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	 			}
 	 		 }
 	 		
+	 		 
+	 		String strea_res_date = multiRequest.getParameter("ea_res_date"); 
+	 		Date ea_res_date = null;
+	 		if(strea_res_date != "") {
+	 			String[] dateArr = strea_res_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_res_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_res_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ree_date = multiRequest.getParameter("ea_ree_date"); 
+	 		Date ea_ree_date = null;
+	 		if(strea_ree_date != "") {
+	 			String[] dateArr = strea_ree_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_ree_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_ree_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_acs_date = multiRequest.getParameter("ea_acs_date"); 
+	 		Date ea_acs_date = null;
+	 		if(strea_acs_date != "") {
+	 			String[] dateArr = strea_acs_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_acs_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_acs_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
+	 		String strea_ace_date = multiRequest.getParameter("ea_ace_date"); 
+	 		Date ea_ace_date = null;
+	 		if(strea_ace_date != "") {
+	 			String[] dateArr = strea_ace_date.split("-");
+	 			
+	 			int year = Integer.parseInt(dateArr[0]);
+	 			int month = Integer.parseInt(dateArr[1]) - 1;
+	 			int day = Integer.parseInt(dateArr[2]);
+	 			
+	 			ea_ace_date = new Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+	 		}else {
+	 			ea_ace_date =new Date(new GregorianCalendar().getTimeInMillis());
+	 		} 
+	 		
 	         Board b = new Board();
 	         b.setBoardNo(no);
 	         b.setBoardTitle(title);
@@ -126,6 +185,10 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
+	         b.setReStratDate(ea_res_date);
+	         b.setReEndDate(ea_ree_date);
+	         b.setAcStartDate(ea_acs_date);
+	         b.setAcEndDate(ea_ace_date);
 //	         System.out.println(b);
 	         System.out.println("originFiles : "+originFiles);
 	         System.out.println("saveFiles : "+saveFiles);
@@ -146,7 +209,6 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	        			 fileList.add(af);
 	        		 }
 	        	 }else{
-	        		 System.out.println(originFiles.size());
 	        		 for(int i  = originFiles.size() - 1; i>=0; i--) {
 	        			 FileVO af = new FileVO();
 	        			 af.setFilePath(savePath);

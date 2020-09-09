@@ -219,6 +219,33 @@ public class Board {
 	}
 
 	
+	//지원정책 커뮤니티
+	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount, int boardReCommend, int boardWriterNo, String boardWriter,
+			int boardReply, String acState, String lcName, String enrollState, String emState, String tcName,
+			String cgName, Date reStratDate, Date reEndDate, Date acStartDate, Date acEndDate) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardReCommend = boardReCommend;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+		this.acState = acState;
+		this.lcName = lcName;
+		this.enrollState = enrollState;
+		this.emState = emState;
+		this.tcName = tcName;
+		this.cgName = cgName;
+		this.reStratDate = reStratDate;
+		this.reEndDate = reEndDate;
+		this.acStartDate = acStartDate;
+		this.acEndDate = acEndDate;
+	}
 
 	public int getBoardNo() {
 		return boardNo;

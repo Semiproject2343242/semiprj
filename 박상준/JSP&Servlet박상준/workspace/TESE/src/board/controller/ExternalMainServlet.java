@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ExternalMainServlet
+ * Servlet implementation class CommuExternalMainServlet
  */
 @WebServlet("/main.ea")
 public class ExternalMainServlet extends HttpServlet {
@@ -26,8 +27,11 @@ public class ExternalMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/External_Activities/대외활동검색메인.jsp").forward(request, response);
+	      String page = null;
+          page = "WEB-INF/views/External_Activities/대외활동검색메인.jsp";
+	      request.getRequestDispatcher(page).forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
