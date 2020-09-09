@@ -27,7 +27,7 @@ public class MemberInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("WEB-INF/views/Member/회원정보수정2.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Member/회원정보.jsp").forward(request, response);
 	}
 
 	/**

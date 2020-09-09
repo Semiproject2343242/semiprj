@@ -17,13 +17,16 @@
       
     }
     .box{
-    	width:50%;
+    	width:80%;
    		text-align: center;
    		background-color: rgb(248, 248, 248); ;
    		border:1px solid black
    	}
     #topic{
         border-bottom:1.5px solid black;
+    }
+    td{
+    	widht:250px;
     }
   
   
@@ -69,7 +72,6 @@
 		
         <div id="main_section" align="center">
             <div class="outer" >
-                <br>
                 <div class="box">
                 <h2 align="center">회원정보 수정</h2>
                 
@@ -87,7 +89,7 @@
                             <td><label id="nameResult"></label></td>
                         </tr>
                         <tr>
-                        	<td colspan=2><span class="info">이름은 한글로 된 2글자 이상으로 입력하셔야합니다.</span></td>S
+                        	<td colspan=2><span class="info">이름은 한글로 된 2글자 이상으로 입력하셔야합니다.</span></td>
                         </tr>
                         <tr>
                         	<td><label class="must">*</label>닉네임</td>
@@ -101,37 +103,26 @@
                         </tr>
                         <tr>
                             <td><label class="must">*</label>생년월일</td>
-                            <td class="middletable"><input type="date" name="userBirthday" id="userDate" value="<%=loginUser.getMemberBirthDay()%>" required></td>
+                            <td class="middletable"><input type="date" name="myBirthDay" id="myBirthDay" value="<%=loginUser.getMemberBirthDay()%>" required></td>
                         </tr>
                         <tr>
                             <td>연락처</td>
                             <td class="middletable">
-                            	<input type="tel" maxlength="3" name="phone1" value="<%=loginUser.getMemberPhone().substring(0,3) %>" class="phone">
-                                <input type="tel" maxlength="4" name="phone2" value="<%=loginUser.getMemberPhone().substring(4,8) %>" class="phone">
-                                <input type="tel" maxlength="4" name="phone3" value="<%=loginUser.getMemberPhone().substring(9,13) %>" class="phone">
+                            	<input type="tel" maxlength="11" id="myPhone" name="myPhone" value="<%=loginUser.getMemberPhone()%>" class="phone">
                             </td>
                             <td><label id="phoneResult"></label></td>
                         </tr>
                         <tr>
                             <td>이메일</td>
-                            <td><input type="email" name="myEmail" value="<%= loginUser.getMemberEmail() %>" ></td>
+                            <td><input type="email" id="myEmail" name="myEmail" value="<%= loginUser.getMemberEmail() %>" ></td>
                         </tr>
-                        <tr>
-                           	<td>주소</td>
-                            <td><input type="text" id="sample6_postcode" placeholder="우편번호"></td>
-							<td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
-						</tr>
 						<tr>
-							<td></td>	
-							<td><input type="text" id="sample6_address" name="address1" placeholder="주소"></td>
-							<td><input type="text" id="sample6_detailAddress" name="address2" placeholder="상세주소"></td>
+							<td>주소</td>	
+							<td><input type="text" style="widht:100px; height:50px" id="myAddress" name="myAddress" value="<%=loginUser.getMemberAddress()%>" ></td>
 						</tr>
-                        </tr>
                     
                     </table>
-                    
-                    <br>
-
+					
                     <div class="btns" align="center">
 						<input type="submit" style="width: 60pt; height: 30pt" value="수정">
 		            	<input type="button" style="width: 60pt; height: 30pt" onclick="location.href='javascript:history.go(-1);'" value="취소">

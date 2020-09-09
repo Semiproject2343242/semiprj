@@ -20,7 +20,6 @@
    		text-align: center;
    		background-color: rgb(248, 248, 248); ;
    		border:1px solid black;
-   		margin-left:30%
    	}
     #topic{
         border-bottom:1.5px solid black;
@@ -68,34 +67,42 @@
 		</aside>
 		
         <div id="main_section" align="center">
-            <div class="outer" align="center" >
-                <br>
                 <div class="box">
                 <h2 align="center">회원정보</h2>
                 
-                <form action="<%= request.getContextPath() %>/update.me" method="post" id="updateForm" name="updateForm">
+                <form action="<%= request.getContextPath() %>/updateForm.me" method="post" id="updateForm" name="updateForm">
                     <table align="center">
                         <tr>
-                            <td width="200px"><label class="must">*</label> 아이디</td>
-                            <td width="200px"><input type="text" name="myId" style="background:lightgray;" readonly></td>
+                            <td >아이디</td>
+                            <td><%= loginUser.getMemberId() %></td>
                         </tr>
                         <tr>
-                            <td><label class="must">*</label> 이름</td>
-                            <td><input type="text" name="myName" required></td>
+                            <td> 이름 </td>
+                            <td><%= loginUser.getMemberName() %></td>
                         </tr>
                         <tr>
-                            <td>연락처</td>
-                            <td>
-                                <input type="tel" maxlength="11" name="myPhone" placeholder="(-없이)01012345678">
-                            </td>
+                        	<td> 닉네임 </td>
+                            <td><%= loginUser.getMemberNickName() %></td>
                         </tr>
                         <tr>
-                            <td>이메일</td>
-                            <td><input type="email" name="myEmail"></td>
+                        	<td> 성별 </td>
+                        	<td><%= loginUser.getMemberGender() %> </td>
                         </tr>
                         <tr>
-                            <td>주소</td>
-                            <td><input type="text" name="myAddress"></td>
+                            <td> 생년월일 </td>
+                            <td><%= loginUser.getMemberBirthDay() %> </td>
+                        </tr>
+                        <tr>
+                        	<td> 연락처 </td>
+                        	<td><%= loginUser.getMemberPhone() %> </td>
+                        </tr>
+                        <tr>
+                            <td> 이메일 </td>
+                            <td><%= loginUser.getMemberEmail() %> </td>
+                        </tr>
+                        <tr>
+                            <td> 주소 </td>
+                            <td><%= loginUser.getMemberAddress() %> </td>
                         </tr>
                     
                     </table>
@@ -110,7 +117,6 @@
                 </form>
             	</div>
         	</div>
-    	</div>
     </section>
    <%@ include file="../Common/footer.jsp" %>
 </body>
