@@ -112,8 +112,8 @@
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
-				<a href="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%= titleImg.getChangeName() %>">
-					<img id="titleImg" src="<%= request.getContextPath() %>/UploadFolder/exteranl_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				<a href="<%= request.getContextPath() %>/UploadFolder/external_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/UploadFolder/external_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
 				</a>
 			</div>
 			<div class="textArea">

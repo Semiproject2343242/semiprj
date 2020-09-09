@@ -9,21 +9,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
+import board.model.service.NoticeService;
+import board.model.service.QuestionService;
+import board.model.vo.Board;
 
+/**
+ * Servlet implementation class NoticeDeleteServlet
+ */
 @WebServlet("/delete.no")
 public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public NoticeDeleteServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		int result = new BoardService().deleteBoard(no);
+		Board board = new Board(no);
+		int result = new NoticeService().deliteBoard(board);
 		
 		if(result > 0) {
 			response.sendRedirect("main.no");
@@ -35,7 +48,11 @@ public class NoticeDeleteServlet extends HttpServlet {
 		
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

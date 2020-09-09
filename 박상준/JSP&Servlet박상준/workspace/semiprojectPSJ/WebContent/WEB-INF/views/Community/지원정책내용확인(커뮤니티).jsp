@@ -15,7 +15,6 @@
     <title>Layout01</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/게시판내용확인.css" />
 
     <style>  
     section{
@@ -172,7 +171,7 @@
 					var wno = <%= b.getBoardWriterNo()%>;
 					console.log(wno);
 				    if(result){
-				    	location.href="<%= request.getContextPath() %>/eaDelete.cm?no="+num;
+				    	location.href="<%= request.getContextPath() %>/spDelete.cm?no="+num;
 				    }
 				    else{
 				        alert('취소하셨습니다.');
@@ -194,19 +193,7 @@
 			</div>
   </form>
   </div>
-  
-  <br clear="all"><br>
-                        
-            <form action="replyInsert.re">
-	            <div>
-	                <textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
-	                <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
-	                <input type="hidden" name="bName" value="자유">
-	                <input type="submit" class= replySubmit value="등록" style="float:right;" >
-	            </div>
-            </form>
 </section>  
     <%@ include file="../Common/footer.jsp" %>
 </body>
-</html>
 

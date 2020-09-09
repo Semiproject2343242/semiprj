@@ -56,7 +56,7 @@
     height: 30px;
   }
 
-  .ea_button{
+  .sp_button{
     margin: 0 auto; 
     text-align: center;
   }
@@ -88,7 +88,7 @@
       <div class="select_box">
           <h3>
               <select class="categoty_select" id="sp_category">
-                  <option value="" selected disabled hidden >선택해주세요.</option>
+                  <option value="선택" selected disabled hidden >선택해주세요.</option>
                   <option value="1">재직지원</option>
                   <option value="2">취업지원</option>
                   <option value="3">기업지원</option>
@@ -126,8 +126,7 @@
                    	 $(this).css('background', 'RGB(221,228,236)');
                     }
                  });
-          	})
-          	system.out.print("타냐?");
+          	});
           </script>
           <h3>
               <div>
@@ -426,12 +425,16 @@
             <th>내용</th>
             <td><textarea class="form-control" name="sp_text_contents" id="sp_text_Contents" placeholder="내용을 입력해 주세요" ></textarea></td>
           </tr>
+          <tr>
+            <th>참고자료</th>
+            <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
+          </tr>
         </table>
 
     </div>
     <div class = "sp_button">
-        <button id = sp_submit class="result_btn">등록</button>
-        <button id = sp_cancle class="result_btn">취소</button>
+      <input type="submit" id="insertBtn" value="작성완료">
+      <input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/eaMain.cm'" value="취소하기">
     </div>
   <!-- </from> -->
 </section>  
