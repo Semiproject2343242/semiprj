@@ -40,13 +40,18 @@
 							<h1> 새로운 비밀번호를 입력해주세요.</h1>
 							<table align="center" >	
 								<tr>
-									<td> 비밀번호 :</td>
-									<td><input type="password" id="userPwd1" name="userPwd1" placeholder="비밀번호를 입력해주세요"></td>
-									<td>
+									<td>비밀번호 : </td>
+									<td align="left" ><input style="width:200px" type="password"  id="userPwd1" name="userPwd1" placeholder="비밀번호를 입력해주세요"></td>
+									<td><label id="pwd1Result"></label></td>
 								</tr>
 								<tr>
-									<td>비밀번호 확인: </td>
-									<td><input type="password" id="userPwd2" name="userPwd2" placeholder="비밀번호를 다시 입력해주세요"></td>
+									<td></td>
+									<td colspan=2><span class="info">6~12자로 영어와 숫자, !*$만 가능합니다.(영어로 시작)</span></td>
+							  	</tr>
+								<tr>
+									<td>비밀번호 확인:</td>
+									<td align="left"><input style="width:200px" type="password" width="200px" id="userPwd2" name="userPwd2" placeholder="비밀번호를 다시 입력해주세요"></td>
+									<td><label id="pwd2Result"></label></td>
 								</tr>
 							</table>
 							<p>
@@ -56,6 +61,32 @@
 		                    <br>
 						</div>
 					</form>
+						
+					<script>
+						$("#userPwd1").change(function(){
+							var regExp = /^[a-zA-Z]([a-zA-Z0-9\!\*\$]){5,11}$/;
+							
+							if(!regExp.test($(this).val())){
+								$("#pwd1Result").text("알맞은 비밀번호를 입력하세요").css("color","red");
+								$(this).focus().css("background","red");
+								isPw = false;
+							}else{
+								$("#pwd1Result").text("비밀번호가 일치합니다.").css("color","green");
+								$(this).css("background","initial");
+								isPw = true;
+							}
+						});
+						
+						$("#userPwd2").keyup(function(){
+							if($("#userPwd1").val() != $(this).val()){
+								$("#pwd2Result").text("비밀번호 불일치").css("color","red");
+								isPw2 = false;
+							}else{
+								$("#pwd2Result").html("비밀번호가 일치합니다.").css("color","green");
+								isPw2 = true;
+							}
+						});
+					</script>
 	            </section>
         	</div>
     	</section>

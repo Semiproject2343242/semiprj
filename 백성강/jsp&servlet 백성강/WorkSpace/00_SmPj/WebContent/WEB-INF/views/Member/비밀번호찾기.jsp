@@ -49,7 +49,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td style = text-align:right><input type=radio value="phone" name=pwsearchradio>휴대폰 번호 :</td>
+                                <td style = text-align:right><input type=radio value="phone" name=pwsearchradio checked>휴대폰 번호 :</td>
                                 <td><input type="phone" id="userPhone" name="userPhone" placeholder="'-' 없이 입력해주세요"></td>
                             </tr>
                             <tr>

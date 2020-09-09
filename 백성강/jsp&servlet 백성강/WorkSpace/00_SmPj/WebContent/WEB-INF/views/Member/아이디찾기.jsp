@@ -43,7 +43,7 @@
 	                                	<input type="text" name ="userName" id="userName" placeholder="이름을 입력해주세요">
 	                                </td>
 	                            <tr>
-	                                <td style = text-align:right><input type=radio name=idsearchradio value="phone">휴대폰번호 :</td>
+	                                <td style = text-align:right><input type=radio name=idsearchradio value="phone" checked>휴대폰번호 :</td>
 	                                <td>
 	                                	<input type="phone" name="userPhone" id="userPhone" placeholder="'-' 없이 입력해주세요">
 	                                </td>
