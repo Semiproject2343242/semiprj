@@ -54,7 +54,33 @@ public class MemberService {
 		return member;
 		
 	}
+	
+	
+	public Member selectMember(int memberNo) {
+		
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().selectMember(conn, memberNo);
+				
+		close(conn);
 
+		return member;
+		
+	}
+	
+
+	public int getListCount(String boardName, int mNo) {
+		
+		Connection conn = getConnection();
+			
+		int result = new MemberDAO().getListCount(conn,boardName,mNo);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 	public ArrayList<Board> selectMyCommuFreeList(int loginMemberNo, PageInfo pi) {
 		
 		Connection conn = getConnection();

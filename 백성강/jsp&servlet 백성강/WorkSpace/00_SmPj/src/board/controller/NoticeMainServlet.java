@@ -54,7 +54,7 @@ public class NoticeMainServlet extends HttpServlet {
 			request.setAttribute("pi", pi);//페이징	
 		}else {
 			page = "WEB-INF/views/Common/errorPage.jsp";
-			request.setAttribute("msg", "Q/A 게시판 조회에 실패하였습니다.");
+			request.setAttribute("msg", "공지사항 게시판 조회에 실패하였습니다.");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}

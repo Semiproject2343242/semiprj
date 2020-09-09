@@ -47,6 +47,7 @@ public class NoticeModifyServlet extends HttpServlet {
 		
 		if(result > 0) {
 			Board board = new NoticeService().selectBoard(b.getBoardNo());
+			
 			if(board != null) {
 				page = "WEB-INF/views/Notice/공지사항내용확인.jsp";
 				request.setAttribute("board", board);

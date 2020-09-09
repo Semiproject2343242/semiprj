@@ -566,7 +566,8 @@
                                  <td><label class="must">*</label>닉네임</td>
                                  <td class="middletable"><input type="text" name="nickName" id="nickName" required></td>
                                  <td width="200px">
-                                 	<input style=" margin-left:-30%;background-color:skyblue; color:white; font-size:15px;" type="button" id="nickNameCheck" value="중복확인" >
+                                 	<input style=" margin-left:-30%;background-color:skyblue; color:white; 
+                                 	font-size:15px;" type="button" id="nickNameCheck" value="중복확인" >
                                  </td>
                               </tr>
                               <tr>
@@ -600,7 +601,7 @@
                            </table>
                            <div class="btns" id="signUpBtns">
                               <input id="signUpBtn" type="submit" value="가입하기">
-                              <input type="button" id="goMain" onclick="goMain();" value="메인으로">
+                              <input type="button" id="goMain" onclick="location.href='javascript:history.go(-1);'" value="메인으로">
                            </div>
                         </form>         
                      </div>

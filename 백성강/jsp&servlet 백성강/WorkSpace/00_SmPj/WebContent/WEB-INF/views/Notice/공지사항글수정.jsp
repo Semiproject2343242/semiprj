@@ -18,6 +18,7 @@
 		case "공지" : category[1] = "selected"; break; 
 	}
 } 
+	
 %>
 <!DOCTYPE html>
 <html>
