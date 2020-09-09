@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 <style>
 
@@ -36,7 +37,6 @@ table{
 </head>
 <body>
 <%@ include file="../Common/header.jsp" %>
-
    <section id=loginSection>
       <div>
          <form action="<%=request.getContextPath()%>/login.me" method="post">
@@ -57,6 +57,47 @@ table{
          </div>
          </form>
       </div>
+<a id="login-form-btn" href="javascript:loginFormWithKakao()">
+  <img
+    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+    width="222"
+  />
+</a>
+<p id="login-form-result"></p>
+<script type="text/javascript">
+	// SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('d1a381394433d1a528af9cc55303a286');
+	
+	// SDK 초기화 여부를 판단합니다.
+	console.log(Kakao.isInitialized());
+  function loginFormWithKakao() {
+    Kakao.Auth.loginForm({
+      success: function(authObj) {
+        showResult(JSON.stringify(authObj))
+        Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(response) {
+                console.log(response);
+//                 console.log(response.kakao_account.email);
+                kakaoLogin(response.kakao_account.email);
+            },
+            fail: function(error) {
+                console.log(error);
+            }
+        });},
+      fail: function(err) {
+        showResult(JSON.stringify(err))
+      },
+    })
+  }
+  function showResult(result) {
+    document.getElementById('login-form-result').innerText = result
+  }
+  
+  function kakaoLogin(email){
+	  console.log(email);
+  }
+</script>
    </section>
 
    <hr>
