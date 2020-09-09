@@ -135,7 +135,7 @@ public class QuestionDAO {
 		return result;
 		
 	}
-
+	//qa글수정하기
 	public int modifyBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
