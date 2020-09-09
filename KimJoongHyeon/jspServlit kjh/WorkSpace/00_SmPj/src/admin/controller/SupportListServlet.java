@@ -18,10 +18,10 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 @WebServlet("/spList.ad")
-public class SuportListServlet extends HttpServlet {
+public class SupportListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SuportListServlet() {
+    public SupportListServlet() {
         super();
     }
 

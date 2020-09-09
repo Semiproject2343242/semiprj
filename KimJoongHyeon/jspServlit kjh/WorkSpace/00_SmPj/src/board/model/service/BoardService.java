@@ -15,7 +15,7 @@ import board.model.vo.FileVO;
 import board.model.vo.Reply;
 
 public class BoardService {
-	
+
 	// 게시판 별 게시글 갯수
 	public int getListCount(String boardName) {
 		
@@ -42,7 +42,7 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
-	}
+	}	
 	
 	
 	// 댓글 목록
@@ -95,8 +95,7 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
-	}	
-	
+	}		
 	
 	// 썸네일 가져오기
 	public ArrayList<FileVO> selectThumbnail(int bId) {
@@ -114,7 +113,7 @@ public class BoardService {
 		close(conn);
 		
 		return list;
-	}
+	}	
 	
 	
 	// 이미지 목록

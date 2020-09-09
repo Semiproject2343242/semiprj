@@ -239,52 +239,80 @@
 						<div class="box_title">
 							<a href="#"><h3>지원정책</h3></a>
 						</div>
-						<ol>
+						<ol id="sp_title">
 						<% if(supportList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else if(supportList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = supportList.get(i); %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>
 						<% } else { %>
 							<% for (Board b : supportList) { %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>
 						<% } %>
 						</ol>
+							<script>
+			        		$(function(){
+				            $('#sp_title .area_list').mouseenter(function(){
+				               $(this).css({'cursor':'pointer'});
+				            }).mouseout(function(){
+				               $(this).css('none');
+				            }).click(function(){
+				            	var bId = $(this).parent().children('input').val();
+			 	                  location.href = '<%=request.getContextPath()%>/detail.sp?bId='+ bId;
+							});
+							});
+						</script>
 					</div>
 
 					<div class="board_box">
 						<div class="box_title">
 							<a href="#"><h3>대외활동</h3></a>
 						</div>
-						<ol>
+						<ol id="ea_title">
 						<% if(externalList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else if(externalList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = externalList.get(i); %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>
 						<% } else { %>
 							<% for (Board b : externalList) { %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>						
 						<% } %>
 						</ol>
+							<script>
+					        $(function(){
+					            $('#ea_title .area_list').mouseenter(function(){
+					               $(this).css({'cursor':'pointer'});
+					            }).mouseout(function(){
+					               $(this).css('none');
+					            }).click(function(){
+					            	 var bId = $(this).parent().children('input').val();
+					                  location.href = '<%=request.getContextPath()%>/detail.ea?bId='+ bId;
+								});
+								});
+						</script>
 					</div>
 				</div>
 				
@@ -293,52 +321,91 @@
 						<div class="box_title">
 							<a href="#"><h3>자유게시판</h3></a>
 						</div>
-						<ol>
+						<ol id="coomu_title">
 						<% if(commuFreeList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else if(commuFreeList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = commuFreeList.get(i); %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">									
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>							
 						<% } else { %>
 							<% for (Board b : commuFreeList) { %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">								
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>						
 						<% } %>
 						</ol>
+						<script>
+					        $(function(){
+					            $('#coomu_title .area_list').mouseenter(function(){
+					               $(this).css({'cursor':'pointer'});
+					            }).mouseout(function(){
+					               $(this).css('none');
+					           	}).click(function(){
+					           	 	var bId = $(this).parent().children('.area_list_no').val();
+						       	 	var bName = $(this).parent().children('.area_list_title').val();
+						       	 	switch(bName){
+						       	 	case "자유":
+						       	 	location.href = '<%=request.getContextPath()%>/fDetail.cm?bId='+bId;
+						       	 	break;
+						       	 	case "지원":
+						       	 		location.href = '<%=request.getContextPath()%>/spDetail.cm?bId='+bId;
+						       	 	break;
+						       	 	case "대외":
+						       	 		location.href = '<%=request.getContextPath()%>/eaDetail.cm?bId='+bId;
+						       	 	break;
+						       	 	}
+								});
+							});
+						</script>
 					</div>
 
 					<div class="board_box">
 						<div class="box_title">
 							<a href="#"><h3>Q / A</h3></a>
 						</div>
-						<ol>
+						<ol id="qa_title">
 						<% if(qaList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
 						<% } else if(qaList.size() >= 3) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = qaList.get(i); %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">								
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>						
 						<% } else { %>
 							<% for (Board b : qaList) { %>
 								<li>
-									<a href="#" class="area_title"><%= b.getBoardTitle() %></a>
+									<input type="hidden" value="<%=b.getBoardNo()%>">								
+									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>						
 						<% } %>
 						</ol>
+							<script>
+        					$(function(){
+					            $('#qa_title .area_list').mouseenter(function(){
+					               $(this).css({'cursor':'pointer'});
+					            }).mouseout(function(){
+					               $(this).css('none');
+					            }).click(function(){
+					            	var bId = $(this).parent().children('input').val();
+					                  location.href = '<%=request.getContextPath()%>/detail.qa?bId='+ bId;
+							});
+							});
+						</script>
 					</div>
 				</div>
 			</div>

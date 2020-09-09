@@ -82,7 +82,8 @@ public class Member {
 		this.memberRegDate = memberRegDate;
 		this.memberEnable = memberEnable;
 		this.memberGrade = memberGrade;
-	}
+	}	
+
 
 	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberNickName,
 			String memberGender, Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress,

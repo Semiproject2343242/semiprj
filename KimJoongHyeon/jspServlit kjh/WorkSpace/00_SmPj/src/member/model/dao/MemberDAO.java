@@ -114,7 +114,7 @@ public class MemberDAO {
 
 		return member;
 	}
-	
+
 
 	public Member selectMember(Connection conn, int memberNo) {
 		
@@ -148,8 +148,8 @@ public class MemberDAO {
 
 		return member;
 	}
-	
-	
+
+
 	// 게시판 별 게시글 갯수
 	public int getListCount(Connection conn, String boardName, int mNo) {
 		PreparedStatement pstmt = null;
@@ -176,8 +176,7 @@ public class MemberDAO {
 		return result;
 	}
 	
-	
-	
+
 	public ArrayList<Board> selectMyCommuFreeList(Connection conn, int loginMemberNo, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

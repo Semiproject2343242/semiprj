@@ -95,7 +95,6 @@ table{
   }
   
   function kakaoLogin(email){
-	  console.log(email);
   }
 </script>
    </section>

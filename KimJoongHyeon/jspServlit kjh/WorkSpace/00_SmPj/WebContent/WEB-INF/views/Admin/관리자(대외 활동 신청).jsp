@@ -129,15 +129,11 @@
 	            }).click(function(){
 	                var bId = $(this).parent().children().children('input').val();
 	                var enroll = $(this).parent().children().children('#enroll').val();
-	            <% if(loginUser != null){%>
 	            		if(enroll == 'N'){
 	            			location.href = '<%= request.getContextPath() %>/eaDetail.cm?bId=' + bId;
 	            		} else {
 	            			location.href = '<%= request.getContextPath() %>/detail.ea?bId=' + bId;
 	            		}        		
-	            <% }else{ %>
-	            		alert('회원만 이용할 수 있는 서비스입니다.')
-	            <% } %>
 	         });
 	         <% } %>
 		});

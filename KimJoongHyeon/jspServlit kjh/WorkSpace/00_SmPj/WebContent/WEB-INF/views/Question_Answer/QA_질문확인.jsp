@@ -51,7 +51,7 @@
 	        <hr>
 	        <div id="div1">
 	            <div style="text-align: center">
-	            <%if(imageList.isEmpty()) {%>
+	            <%if(imageList==null || imageList.isEmpty()) {%>
 	               	이미지 자료 없음.
 	           	<% } else { %>
 	           		<%for(int i=0; i < imageList.size(); i++) { %>

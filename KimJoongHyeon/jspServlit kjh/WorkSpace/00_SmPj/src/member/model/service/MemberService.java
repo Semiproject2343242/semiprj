@@ -54,8 +54,7 @@ public class MemberService {
 		return member;
 		
 	}
-	
-	
+
 	public Member selectMember(int memberNo) {
 		
 		Connection conn = getConnection();
@@ -67,7 +66,7 @@ public class MemberService {
 		return member;
 		
 	}
-	
+
 
 	public int getListCount(String boardName, int mNo) {
 		
@@ -79,8 +78,8 @@ public class MemberService {
 		
 		return result;
 	}
-	
-	
+
+
 	public ArrayList<Board> selectMyCommuFreeList(int loginMemberNo, PageInfo pi) {
 		
 		Connection conn = getConnection();
