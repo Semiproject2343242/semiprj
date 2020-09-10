@@ -111,29 +111,7 @@
 <body>
 	<%@ include file="../Common/header.jsp"%>
 	<section>
-		<aside>
-			<h2>
-				<a href="<%=request.getContextPath()%>/main.cm">커뮤니티
-			</h2>
-			</a>
-			<hr>
-			<div>
-				<dl>
-					<dt>
-						<a href="<%=request.getContextPath()%>/fMain.cm"><h3>자유게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/spMain.cm"><h3>지원정책
-								게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/eaMain.cm"><h3>대외활동
-								게시판</h3></a>
-					</dt>
-
-				</dl>
-			</div>
-		</aside>
+	
 		<div id="main_section">
 		<h2 align="center">지원 정책</h2>
 		<div class="serach_box">
@@ -195,13 +173,13 @@
                    <button class = "select_btn" id="noWork">구직중</button>
                    <button class = "select_btn" id="working">재직중</button>
                </div>
-               <div id="ck_emSate">
+               <div id="ck_emState">
 				<input type="checkbox" name="ck_emState" id="ck_noWork" value="구직중">
 				<input type="checkbox" name="ck_emState" id="ck_working" value="재직중">
             	</div>
             	<script>
                $(function(){
-                  $("#ck_emSate").hide();
+                  $("#ck_emState").hide();
                   $("#noWork").click(function(){
                      $("#ck_noWork").click();
                      if($("#ck_noWork").is(":checked") == true){
@@ -499,7 +477,7 @@
 	</div>
 	  <div class = "sp_button">
 		<%if (loginUser != null) {%>
-		<input type="button" class="result_btn" onclick="location.href='spInsertForm.cm'"id="insertBtn" value="작성하기">
+		<input type="button" class="result_btn" onclick="location.href='insertForm.sp'"id="insertBtn" value="작성하기">
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
@@ -515,7 +493,7 @@
 		<script>
 		$(function(){//페이지 생성될때 리스트 불러오기
 			$.ajax({
-	            url:'SearchList.sp',
+	            url:'searchList.sp',
 	            data: {
 				},
 	            success: function(data){
@@ -577,7 +555,7 @@
               	}
           	}
    			$.ajax({
-   				url: 'spSearchList.cm',
+   				url: 'searchList.sp',
     			data: {cate:$('#sp_category').val(),
     					acState:checkAcState,
     					emState:checkEmState,
@@ -622,13 +600,13 @@
       	});
 		function getAdoptImage(boardNo,length,i){//리스트에 맞게 이미지 가져오기
 	         $.ajax({
-	            url: 'spSearchImage.cm',
+	            url: 'searchImage.sp',
 	            success: function(data){
 	            	  var input=""; 
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='/UploadFolder/exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }

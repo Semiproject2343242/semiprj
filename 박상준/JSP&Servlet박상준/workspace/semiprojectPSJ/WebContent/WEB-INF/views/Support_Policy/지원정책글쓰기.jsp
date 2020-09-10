@@ -72,7 +72,7 @@
  <!----------------------------------------header------------------------------------------->
      <section>
   <!-- <from> -->
-  <form action="<%= request.getContextPath() %>/spInsert.cm" method="post" encType="multipart/form-data">
+  <form action="<%= request.getContextPath() %>/insert.sp" method="post" encType="multipart/form-data">
     <h1 align="center">지원정책 글쓰기</h1>
     <div class="writerinformanion_box">
       <ul class="writertext">
@@ -98,19 +98,28 @@
               </select>
           </h3>
           <h3>
+          	
           	<div>
-          		 <button class="select_btn" id="sp_em">재직중</button>
-                  <button class="select_btn" id="sp_nem">구직중</button>
+                  <button type="button" class="select_btn" id="sp_nem">구직중</button>
+                  <button type="button" class="select_btn" id="sp_em">재직중</button>
            	</div>
            	<div id="ck_sp_emState">
-				<input type="checkbox" name="ck_sp_em" id="ck_sp_em" value="재직중">
 				<input type="checkbox" name="ck_sp_em" id="ck_sp_nem" value="구직중">
+				<input type="checkbox" name="ck_sp_em" id="ck_sp_em" value="재직중">
             </div>
           </h3>
           <script>
           	$(function(){
           		$("#ck_sp_emState").hide();
-                 $("#sp_em").click(function(){
+          		 $("#sp_nem").click(function(){
+                     $("#ck_sp_nem").click();
+                     if($("#ck_sp_nem").is(":checked") == true){
+                    	 $(this).css({'background':'darkgray'});
+                     }else{
+                    	 $(this).css('background', 'RGB(221,228,236)');
+                     }
+                  }); 
+          		$("#sp_em").click(function(){
                     $("#ck_sp_em").click();
                     if($("#ck_sp_em").is(":checked") == true){
                    	 $(this).css({'background':'darkgray'});
@@ -118,22 +127,15 @@
                    	 $(this).css('background', 'RGB(221,228,236)');
                     }
                  });
-                 $("#sp_nem").click(function(){
-                    $("#ck_sp_nem").click();
-                    if($("#ck_sp_nem").is(":checked") == true){
-                   	 $(this).css({'background':'darkgray'});
-                    }else{
-                   	 $(this).css('background', 'RGB(221,228,236)');
-                    }
-                 });
+                
           	});
           </script>
           <h3>
               <div>
-                  <button class="select_btn" id="sp_age_18">청년<br>(18~34세) </button>
-                  <button class="select_btn" id="sp_age_35">중년<br>(35~49세) </button>
-                  <button class="select_btn" id="sp_age_50">장년<br>(50~64세) </button>
-                  <button class="select_btn" id="sp_age_65">어르신<br>(65세 이상) </button>
+                  <button type= "button" class="select_btn" id="sp_age_18">청년<br>(18~34세) </button>
+                  <button type= "button" class="select_btn" id="sp_age_35">중년<br>(35~49세) </button>
+                  <button type= "button" class="select_btn" id="sp_age_50">장년<br>(50~64세) </button>
+                  <button type= "button" class="select_btn" id="sp_age_65">어르신<br>(65세 이상) </button>
               </div>
                <div id="ck_sp_age">
 				<input type="checkbox" name="ck_sp_age" id="ck_sp_age_18" value="청년"">
@@ -427,14 +429,14 @@
           </tr>
           <tr>
             <th>참고자료</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" laceholder="자료첨부" class=textline2></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" placeholder="자료첨부" class=textline2></td>
           </tr>
         </table>
 
     </div>
     <div class = "sp_button">
       <input type="submit" id="insertBtn" value="작성완료">
-      <input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/eaMain.cm'" value="취소하기">
+      <input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/main.sp'" value="취소하기">
     </div>
   <!-- </from> -->
 </section>  

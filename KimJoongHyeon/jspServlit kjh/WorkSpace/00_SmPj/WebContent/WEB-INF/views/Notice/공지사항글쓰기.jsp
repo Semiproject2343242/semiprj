@@ -7,7 +7,6 @@
     <title>정부지원금 바로지금1</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
- 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/side.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항글쓰기.css"/>
 

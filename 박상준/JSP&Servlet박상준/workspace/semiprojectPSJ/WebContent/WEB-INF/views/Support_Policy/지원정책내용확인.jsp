@@ -87,7 +87,7 @@
     <%@ include file="../Common/header.jsp" %>
     <section>
     <div id="main_section">
-    <form action="<%= request.getContextPath() %>/spModifyForm.cm" method="post" encType="multipart/form-data">
+    <form action="<%= request.getContextPath() %>/modifyForm.sp" method="post" encType="multipart/form-data">
     <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
     <input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
     <input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
@@ -99,7 +99,7 @@
 	<input type="hidden" name="viewCount" value="<%= b.getBoardViewCount() %>" />
 	<input type="hidden" name="reCommend" value="<%= b.getBoardReCommend() %>" />
 	<input type="hidden" name="writer" value="<%= b.getBoardWriter() %>" />
-	<input type="hidden" name="sp_res_date" value="<%= b.getReStratDate() %>" />
+	<input type="hidden" name="sp_res_date" value="<%= b.getReStartDate() %>" />
 	<input type="hidden" name="sp_ree_date" value="<%= b.getReEndDate() %>" />
     <% System.out.println(b.getReEndDate()); %>
     <h4>지원정책 -<%=b.getCgName()%></h4>
@@ -127,7 +127,7 @@
 					<%=b.getLcName()%></p>
 				<p>
 					<b>모집 일정 </b>
-					<%=b.getReStratDate()%>~<%=b.getReEndDate()%></p>
+					<%=b.getReStartDate()%>~<%=b.getReEndDate()%></p>
 			</div>
 		</li>
 	</ul>
@@ -160,7 +160,7 @@
 		</table>
     </div>
     <div align="right">
-				<input type="button" onclick="location.href='<%= request.getContextPath() %>/spMain.cm'" id="menuBtn" value="메뉴로">
+				<input type="button" onclick="location.href='<%= request.getContextPath() %>/main.sp'" id="menuBtn" value="메뉴로">
 				<% if(loginUser != null) { %>
 					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
 						<input type="submit" id="updateBtn" value="수정">
@@ -174,7 +174,7 @@
 					var wno = <%= b.getBoardWriterNo()%>;
 					console.log(wno);
 				    if(result){
-				    	location.href="<%= request.getContextPath() %>/spDelete.cm?no="+num;
+				    	location.href="<%= request.getContextPath() %>/delete.sp?no="+num;
 				    }
 				    else{
 				        alert('취소하셨습니다.');
@@ -186,7 +186,7 @@
 					var result = window.confirm(num+'등록하시겠습니까?');
 					var wno = <%= b.getBoardWriterNo()%>;
 				    if(result){
-				    	location.href="<%= request.getContextPath() %>/enroll.bo?no="+num;
+				    	location.href="<%= request.getContextPath() %>/enroll.sp?no="+num;
 				    }
 				    else{
 				        alert('취소하셨습니다.');
@@ -229,7 +229,7 @@
 					var boardNo = <%= b.getBoardNo() %>
 		
 	    			if(result){
-	    				location.href="<%= request.getContextPath() %>/replyDelete.re?replyNo="+replyNo+"&boardNo="+boardNo+"&bName=지원커뮤";
+	    				location.href="<%= request.getContextPath() %>/replyDelete.re?replyNo="+replyNo+"&boardNo="+boardNo+"&bName=지원";
 	    			} else{
 	        			alert('취소하셨습니다.');
 	    			}
@@ -248,7 +248,7 @@
            		<div>
 	            	<textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
 	              	<input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
-	         		<input type="hidden" name="bName" value="지원커뮤">	
+	         		<input type="hidden" name="bName" value="지원">	
 	                <input type="submit" class= replySubmit value="등록" style="float:right;" >
            		</div>
           </form>

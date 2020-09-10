@@ -83,7 +83,18 @@ public class CommuSupportInsertServlet extends HttpServlet {
          String content = multiRequest.getParameter("sp_text_contents");
          String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
          int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
- 		 String age = "";
+		 String emState = "";
+ 		 if(emStatearr != null) {
+ 			for (int i = 0; i< emStatearr.length; i++) {
+ 				if(i == emStatearr.length -1) {
+ 					emState += emStatearr[i];
+ 				}else
+ 					emState += emStatearr[i] + ",";
+ 				System.out.print("타냐5");
+ 			}
+ 		 }
+         
+         String age = "";
  		 if(agearr != null) {
  			for (int i = 0; i< agearr.length; i++) {
  				if(i == agearr.length -1) {
@@ -105,17 +116,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
 			}
 		 }
 		 
-		 String emState = "";
- 		 if(emStatearr != null) {
- 			for (int i = 0; i< emStatearr.length; i++) {
- 				if(i == emStatearr.length -1) {
- 					emState += emStatearr[i];
- 				}else
- 					emState += emStatearr[i] + ",";
- 				System.out.print("타냐5");
- 			}
- 		 }
- 		 
+
 	 		String strsp_res_date = multiRequest.getParameter("sp_res_date"); 
 	 		Date sp_res_date = null;
 	 		if(strsp_res_date != "") {
@@ -155,7 +156,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
          b.setEmState(emState);
          b.setTcName(age);
          b.setLcName(local);
-         b.setReStratDate(sp_res_date);
+         b.setReStartDate(sp_res_date);
          b.setReEndDate(sp_ree_date);
          
          ArrayList<FileVO> fileList = new ArrayList<FileVO>();

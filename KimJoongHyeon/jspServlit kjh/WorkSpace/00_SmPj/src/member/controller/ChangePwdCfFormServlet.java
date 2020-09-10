@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ChangePwdCfServlet
  */
 @WebServlet("/changePwdCf.me")
-public class ChangePwdCfServlet extends HttpServlet {
+public class ChangePwdCfFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePwdCfServlet() {
+    public ChangePwdCfFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

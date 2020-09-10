@@ -628,7 +628,7 @@
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='/UploadFolder/support_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }

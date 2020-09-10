@@ -33,7 +33,18 @@ public class SupportDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		int no = Integer.parseInt(request.getParameter("no"));
 
+		int result = new BoardService().deleteBoard(no);
+		
+		if(result > 0) {
+			response.sendRedirect("main.sp");
+		} else {
+			request.setAttribute("msg", "삭제에 실패하였습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 		
 	}
 

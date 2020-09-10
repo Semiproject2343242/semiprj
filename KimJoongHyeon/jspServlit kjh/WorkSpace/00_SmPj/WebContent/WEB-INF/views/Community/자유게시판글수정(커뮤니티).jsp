@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>정부지원금 바로지금1</title>
+    <title>정부지원금 바로지금</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
  	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/게시글수정.css"/>

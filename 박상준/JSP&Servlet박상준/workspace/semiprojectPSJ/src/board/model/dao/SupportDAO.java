@@ -16,6 +16,54 @@ import board.model.vo.PageInfo;
 
 public class SupportDAO {
 	
+	
+	public Board selectBoard(Connection conn, int bId, String bName) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board board = null;
+		
+		String query = "SELECT * FROM COMMULIST WHERE B_NO = ? AND B_NAME = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bId);
+			pstmt.setString(2, bName);
+			
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board(rset.getInt("B_NO"),
+						   rset.getString("B_TITLE"),
+						   rset.getString("B_CONTENT"),
+						   rset.getDate("B_DATE"),
+						   rset.getDate("B_RDATE"),
+						   rset.getInt("B_VIEW_COUNT"),
+						   rset.getInt("B_RECOMMEND"),
+						   rset.getInt("B_WRITER"),
+						   rset.getString("MEMBER_NICKNAME"),
+						   rset.getInt("B_REPLY_COUNT"),
+						   rset.getString("AC_STATE"),
+						   rset.getString("LC_NAME"),
+						   rset.getString("ENROLL_STATE"),
+						   rset.getString("EM_STATE"),
+						   rset.getString("TC_NAME"),
+						   rset.getString("CG_NAME"),
+						   rset.getDate("RECRUIT_STARTDATE"),
+						   rset.getDate("RECRUIT_ENDDATE"),
+						   rset.getDate("ACTIVITY_STARTDATE"),
+						   rset.getDate("ACTIVITY_ENDDATE"));
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return board;
+	}
+	
 	public int updateCount(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -40,7 +88,7 @@ public class SupportDAO {
 		ResultSet rset = null;
 		Board board = null;
 		
-		String query = "SELECT * FROM SUPPORTLIST WHERE B_NO = ? AND B_NAME = ?";
+		String query = "SELECT * FROM SUPPORTLIST WHERE B_NO = ?" ;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -278,7 +326,7 @@ public class SupportDAO {
 			pstmt.setString(3, b.getLcName());
 			pstmt.setString(4, b.getTcName());
 			pstmt.setString(5, b.getCgName());
-			pstmt.setDate(6, b.getReStratDate());
+			pstmt.setDate(6, b.getReStartDate());
 			pstmt.setDate(7, b.getReEndDate());
 			pstmt.setDate(8, b.getAcStartDate());
 			pstmt.setDate(9, b.getAcEndDate());
@@ -375,7 +423,7 @@ public class SupportDAO {
 	public int insertSpBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'지원',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,?,?,?,?,?,NULL,NULL)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'지원',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,'Y',?,?,?,?,?,NULL,NULL)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -386,7 +434,7 @@ public class SupportDAO {
 			pstmt.setString(5, b.getEmState());
 			pstmt.setString(6, b.getTcName());
 			pstmt.setString(7, b.getCgName());
-			pstmt.setDate(8, b.getReStratDate());
+			pstmt.setDate(8, b.getReStartDate());
 			pstmt.setDate(9, b.getReEndDate());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -398,7 +446,7 @@ public class SupportDAO {
 		return result;
 	}
 
-	public ArrayList selectSpSearchList(Connection conn, String[] acarr, String[] emarr, String category,
+	public ArrayList selectSearchSpList(Connection conn, String[] acarr, String[] emarr, String category,
 			String[] agearr, String[] localarr) {
 		
 		PreparedStatement pstmt = null;
