@@ -118,8 +118,8 @@ public class BoardDAO {
 		}
 		return list;
 	}
-
 	
+
 	// 댓글 작성
 	public int insertReply(Connection conn, Reply r) {
 
@@ -227,8 +227,8 @@ public class BoardDAO {
 		
 		return result;
 	}
-	
-	
+
+
 	// 썸네일 가져오기
 	public ArrayList<FileVO> selectThumbnail(Connection conn, int bId) {
 		
@@ -337,11 +337,10 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return list;
-	}
-
-
+	}	
 	
-		public ArrayList<FileVO> selectFile(Connection conn, int bId) {
+	
+	public ArrayList<FileVO> selectFile(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<FileVO> list = null;
@@ -374,8 +373,10 @@ public class BoardDAO {
 		}
 		
 		return list;
-	}
-
+	}	
+	
+	
+	
 	public int boardEnroll(Connection conn, Board board) {
 		PreparedStatement pstmt = null;
 		int result = 0;

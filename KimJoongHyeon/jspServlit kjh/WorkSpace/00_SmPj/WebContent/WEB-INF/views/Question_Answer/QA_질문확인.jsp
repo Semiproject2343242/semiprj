@@ -73,9 +73,11 @@
 					<% } %>
 				<% } %>
 				<div align="right" style="background-color:skyblue;">
-					<% if(loginUser != null && b.getBoardWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
-						<input type="submit" class="udlbtn" id="updateBtn" value="수정">
-						<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">	
+					<% if(loginUser != null){ %>
+						<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+							<input type="submit" class="udlbtn" id="updateBtn" value="수정">
+							<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">	
+						<% } %>
 					<% } %>
 					<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
 					
@@ -126,8 +128,10 @@
 	               		<td class="replyDU" style="width:200px; float:right;">
 	               			<div><p style="float:right; margin:0px;">게시일 : <%= replyList.get(i).getCreateDate() %></p></div> <!-- 게시 날짜 -->
 	               			<div><p style="float:right; margin:0px;">수정일 : <%= replyList.get(i).getModifyDate() %></p></div> <!-- 수정 날짜 -->
-	               			<% if(loginUser != null && replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
-								<p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)">	
+	               			<% if(loginUser != null){ %>
+		               			<% if(replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+									<p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)"></p>	
+								<% } %>
 							<% } %>
 						<script>
 							function deleteReply(replyNo){

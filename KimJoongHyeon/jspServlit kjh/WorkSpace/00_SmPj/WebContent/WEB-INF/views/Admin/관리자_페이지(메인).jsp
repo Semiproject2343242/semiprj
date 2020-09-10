@@ -237,14 +237,14 @@
 						</ol>
 						<script>
 			        		$(function(){
-				            $('#sp_title .area_list').mouseenter(function(){
-				               $(this).css({'cursor':'pointer'});
-				            }).mouseout(function(){
-				               $(this).css('none');
-				            }).click(function(){
-				            	var bId = $(this).parent().children('input').val();
-			 	                  location.href = '<%=request.getContextPath()%>/detail.sp?bId='+ bId;
-							});
+					            $('#sp_title .area_list').mouseenter(function(){
+					               $(this).css({'cursor':'pointer'});
+					            }).mouseout(function(){
+					               $(this).css('none');
+					            }).click(function(){
+					            	var bId = $(this).parent().children('input').val();
+				 	                  location.href = '<%=request.getContextPath()%>/detail.sp?bId='+ bId;
+								});
 							});
 						</script>
 					</div>
@@ -276,7 +276,7 @@
 					            	 var bId = $(this).parent().children('input').val();
 					                  location.href = '<%=request.getContextPath()%>/detail.ea?bId='+ bId;
 								});
-								});
+							});
 						</script>
 					</div>
 				</div>
@@ -284,7 +284,7 @@
 				<div class="board_area">
 					<div class="board_box">
 						<div class="box_title">
-							<a href="#"><h3>자유게시판</h3></a>
+							<a href="#"><h3>커뮤니티</h3></a>
 						</div>
 						<ol id="coomu_title">
 						<% if(commuFreeList.isEmpty()) { %>
@@ -295,7 +295,7 @@
 									<input type="hidden" class="area_list_no" value="<%=b.getBoardNo()%>">
 									<input type="hidden"  class="area_list_title" value="<%=b.getBoardName()%>">
 									<input type="hidden" value="<%=b.getBoardWriterNo()%>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
+									<a href="#" class="area_list">[<%= b.getBoardName() %>] <%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>
@@ -351,8 +351,8 @@
 					               $(this).css('none');
 					            }).click(function(){
 					            	var bId = $(this).parent().children('input').val();
-					                  location.href = '<%=request.getContextPath()%>/detail.qa?bId='+ bId;
-							});
+					                  location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId;
+								});
 							});
 						</script>
 					</div>

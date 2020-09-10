@@ -10,7 +10,7 @@ public class Member {
 	private String memberName;
 	private String memberNickName;
 	private String memberGender;
-	private Date memberBirthDay;             
+	private Date memberBirthDay;
 	private String memberPhone;
 	private String memberEmail;
 	private String memberAddress;
@@ -26,7 +26,8 @@ public class Member {
 		this.memberId = memberId;
 		this.memberPw = memberPw;
 	}
-
+	
+	
 	// selectMemberList
 	public Member(int memberNo, String memberId, String memberName, String memberNickName, String memberGender,
 			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress, Date memberRegDate, 
@@ -104,6 +105,7 @@ public class Member {
 		this.memberBoard = memberBoard;
 	}
 
+
 	public Member(String memberId, String memberPw, String memberName, String memberNickName, String memberGender,
 			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress) {
 		super();
@@ -117,7 +119,6 @@ public class Member {
 		this.memberEmail = memberEmail;
 		this.memberAddress = memberAddress;
 	}
-
 
 	public int getMemberNo() {
 		return memberNo;

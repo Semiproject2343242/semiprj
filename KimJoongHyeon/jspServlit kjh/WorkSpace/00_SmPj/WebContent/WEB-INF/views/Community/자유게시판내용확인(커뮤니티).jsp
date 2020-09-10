@@ -73,7 +73,7 @@
 					</a><br>
 				<% } %>
 			<% } %>
-           <div align="right" style="background-color:skyblue;">
+           <div align="right">
 				<% if(loginUser != null && b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
 					<input type="submit" class="udlbtn" id="updateBtn" value="수정">
 					<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">
@@ -150,7 +150,7 @@
                 </div>             
         			
             <br clear="all"><br>
-                        
+            <% if(loginUser != null){%>                   
             <form action="replyInsert.re">
 	            <div>
 	                <textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
@@ -159,6 +159,7 @@
 	                <input type="submit" class= replySubmit value="등록" style="float:right;" >
 	            </div>
             </form>
+            <%} %>
         </div>				
        </section>
         <%@ include file="../Common/footer.jsp" %>

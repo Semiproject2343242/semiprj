@@ -1,6 +1,5 @@
 package board.controller;
 
-import admin.model.service.AdminService;
 import board.model.service.BoardService;
 import board.model.vo.PageInfo;
 

@@ -179,6 +179,7 @@
 								<% Board b = supportList.get(i); %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
 									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
@@ -187,22 +188,28 @@
 							<% for (Board b : supportList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
 									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>
 						<% } %>
 						</ol>
-							<script>
+						<script>
 			        		$(function(){
-				            $('#sp_title .area_list').mouseenter(function(){
-				               $(this).css({'cursor':'pointer'});
-				            }).mouseout(function(){
-				               $(this).css('none');
-				            }).click(function(){
-				            	var bId = $(this).parent().children('input').val();
-			 	                  location.href = '<%=request.getContextPath()%>/detail.sp?bId='+ bId;
-							});
+					            $('#sp_title .area_list').mouseenter(function(){
+					               $(this).css({'cursor':'pointer'});
+					            }).mouseout(function(){
+					               $(this).css('none');
+					            }).click(function(){
+					            	var bId = $(this).parent().children('input').val();
+					            	var enroll = $(this).parent().children('#enroll').val();
+				            		if(enroll == 'N'){
+					            		location.href = '<%= request.getContextPath() %>/spDetail.cm?bId=' + bId;
+				            		} else {
+				            			location.href = '<%= request.getContextPath() %>/detail.sp?bId=' + bId;
+				            		}
+				            	});
 							});
 						</script>
                     </div>
@@ -219,6 +226,7 @@
 								<% Board b = externalList.get(i); %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
 									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
@@ -227,23 +235,29 @@
 							<% for (Board b : externalList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
+									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
 									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
 									<div><%= b.getBoardCreateDate() %></div>
 								</li>
 							<% } %>						
 						<% } %>
 						</ol>
-							<script>
+						<script>
 					        $(function(){
 					            $('#ea_title .area_list').mouseenter(function(){
 					               $(this).css({'cursor':'pointer'});
 					            }).mouseout(function(){
 					               $(this).css('none');
 					            }).click(function(){
-					            	 var bId = $(this).parent().children('input').val();
-					                  location.href = '<%=request.getContextPath()%>/detail.ea?bId='+ bId;
+					            	var bId = $(this).parent().children('input').val();
+					                var enroll = $(this).parent().children('#enroll').val();
+									if(enroll == 'N'){
+					            		location.href = '<%=request.getContextPath()%>/eaDetail.cm?bId=' + bId;
+					            	} else {
+					            		location.href = '<%=request.getContextPath()%>/detail.ea?bId='+ bId;
+									}
 								});
-								});
+							});
 						</script>
 		            </div>
                 </div>
@@ -282,20 +296,9 @@
 					            }).mouseout(function(){
 					               $(this).css('none');
 					           	}).click(function(){
-					           	 	var bId = $(this).parent().children('.area_list_no').val();
-						       	 	var bName = $(this).parent().children('.area_list_title').val();
-						       	 	switch(bName){
-						       	 	case "자유":
+					           	 	var bId = $(this).parent().children('input').val();
 						       	 	location.href = '<%=request.getContextPath()%>/fDetail.cm?bId='+bId;
-						       	 	break;
-						       	 	case "지원":
-						       	 		location.href = '<%=request.getContextPath()%>/spDetail.cm?bId='+bId;
-						       	 	break;
-						       	 	case "대외":
-						       	 		location.href = '<%=request.getContextPath()%>/eaDetail.cm?bId='+bId;
-						       	 	break;
-						       	 	}
-								});
+					           	});
 							});
 						</script>
 					</div>
@@ -326,7 +329,7 @@
 							<% } %>						
 						<% } %>
 						</ol>
-							<script>
+						<script>
         					$(function(){
 					            $('#qa_title .area_list').mouseenter(function(){
 					               $(this).css({'cursor':'pointer'});
@@ -334,8 +337,8 @@
 					               $(this).css('none');
 					            }).click(function(){
 					            	var bId = $(this).parent().children('input').val();
-					                  location.href = '<%=request.getContextPath()%>/detail.qa?bId='+ bId;
-							});
+					                  location.href = '<%=request.getContextPath()%>/q_detail.qa?bId='+ bId;
+								});
 							});
 						</script>
                     </div>
