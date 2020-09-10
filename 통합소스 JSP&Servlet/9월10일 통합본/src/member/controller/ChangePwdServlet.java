@@ -1,0 +1,113 @@
+package member.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import board.model.vo.Board;
+import board.model.vo.FileVO;
+import member.model.service.MemberService;
+import member.model.vo.Member;
+
+/**
+ * Servlet implementation class ChangePwdServlet
+ */
+@WebServlet("/changePwd.me")
+public class ChangePwdServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ChangePwdServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginUser");
+		
+		String id = request.getParameter("id");
+		String pwd1 = request.getParameter("userPwd1");
+		String pwd2 = request.getParameter("userPwd2");
+		
+		System.out.println("pwd1"+pwd1);
+		System.out.println("pwd2"+pwd2);
+		
+		String page = null;
+		Member m = new Member(id,pwd1);
+		System.out.println("로그인멤버 : " + loginMember);
+		
+		Member member = new Member(loginMember.getMemberId(), loginMember.getMemberPw()); 
+		Member loginUser = new MemberService().loginMember(member);
+		
+		//마이 페이지로 가기 위해 정의
+		int loginMemberNo = loginMember.getMemberNo();
+		
+		MemberService memberService = new MemberService();
+		
+		ArrayList<Board> supportList = memberService.selectMyRecentSupportList(loginMemberNo);
+		ArrayList<Board> externalList = memberService.selectMyRecentExternalList(loginMemberNo);
+		ArrayList<Board> commuFreeList = memberService.selectMyRecentCommuFreeList(loginMemberNo);
+		ArrayList<Board> qaList = memberService.selectMyRecentQAList(loginMemberNo);
+		// 여기까지
+		
+		FileVO profile = memberService.selectProfile(loginMemberNo);
+		if(pwd1.length() >= 6) {
+			if(pwd1.equals(pwd2)) {
+				int result = new MemberService().modifyPwdMember(m);
+				
+				if(result > 0) {
+					System.out.println("login" + member);
+					System.out.println("login" + loginUser);
+					session.setMaxInactiveInterval(600);
+					session.setAttribute("loginUser", loginUser);
+					
+					//마이  페이지로 가기 위해 정의
+		    		request.setAttribute("member", member);
+		    		request.setAttribute("supportList", supportList);
+		    		request.setAttribute("externalList", externalList);
+		    		request.setAttribute("commuFreeList", commuFreeList);
+		    		request.setAttribute("qaList", qaList);
+		    		request.setAttribute("profile", profile);
+		    		//여기까지
+		    		
+					request.getRequestDispatcher("WEB-INF/views/Member/마이_페이지(메인).jsp").forward(request, response);
+				} else {
+					request.setAttribute("msg", "비밀번호가 재설정에 실패하였습니다.");
+					page = "WEB-INF/views/Common/errorPage.jsp";
+				}
+			} else {
+				request.setAttribute("msg", "비밀번호가 일치하지않습니다.");
+				page = "WEB-INF/views/Common/errorPage.jsp";
+			}
+		} else {
+			request.setAttribute("msg", "비밀번호는 6자 이상이여야합니다.");
+			page = "WEB-INF/views/Common/errorPage.jsp";
+		}
+		
+	}
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

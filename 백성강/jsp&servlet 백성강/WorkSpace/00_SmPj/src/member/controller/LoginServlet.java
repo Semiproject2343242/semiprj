@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(600);
+			System.out.println("login"+ loginUser);
 			session.setAttribute("loginUser", loginUser);
 			response.sendRedirect(request.getContextPath());
 			

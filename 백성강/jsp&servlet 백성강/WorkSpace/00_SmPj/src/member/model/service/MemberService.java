@@ -5,6 +5,9 @@ import static common.JDBCTemplate.rollback;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
@@ -336,5 +339,47 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public Member overlapCheck(Connection conn, String userId, String userNickName) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String query="";
+		
+		if(userNickName=="") {
+			query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+		}else {
+			query = "SELECT * FROM MEMBER WHERE MEMBER_NICKNAME = ?";
+		}
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			if(userNickName=="") {
+				pstmt.setString(1, userId);
+			}else {
+				pstmt.setString(1, userNickName);
+			}
+			
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				member = new Member(rset.getInt("MEMBER_NO"), rset.getString("MEMBER_ID"),
+						rset.getString("MEMBER_PW"), rset.getString("MEMBER_NAME"), rset.getString("MEMBER_NICKNAME"),
+						rset.getString("MEMBER_GENDER"), rset.getDate("MEMBER_BIRTHDAY"), rset.getString("MEMBER_PHONE"),
+						rset.getString("MEMBER_EMAIL"),rset.getString("MEMBER_ADDRESS"),rset.getDate("MEMBER_REGDATE"), 
+						rset.getString("MEMBER_ENABLE"), rset.getString("MEMBER_GRADE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return member;
+	}
+
 	
 }
