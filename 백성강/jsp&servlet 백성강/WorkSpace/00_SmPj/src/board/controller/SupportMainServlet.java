@@ -1,6 +1,7 @@
 package board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,9 @@ public class SupportMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/Support_Policy/지원정책검색메인.jsp").forward(request, response);
+		String page = null;
+		page = "WEB-INF/views/Support_Policy/지원정책검색메인.jsp";
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

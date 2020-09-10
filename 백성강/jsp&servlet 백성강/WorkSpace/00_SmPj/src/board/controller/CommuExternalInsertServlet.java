@@ -48,7 +48,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "exteranl_uploadFiles/";
+	         String savePath = root + "/UploadFolder/external_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         
@@ -175,7 +175,7 @@ public class CommuExternalInsertServlet extends HttpServlet {
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
-	         b.setReStratDate(ea_res_date);
+	         b.setReStartDate(ea_res_date);
 	         b.setReEndDate(ea_ree_date);
 	         b.setAcStartDate(ea_acs_date);
 	         b.setAcEndDate(ea_ace_date);
