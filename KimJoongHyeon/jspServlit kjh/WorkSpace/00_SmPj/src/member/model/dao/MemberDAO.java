@@ -604,6 +604,197 @@ public class MemberDAO {
 		return result;
 	}
 
+	//아이디 중복처리
+	public int checkId(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rset= null;
+		int result = 0;
+		
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return result; // result 즉 있느지없는지만 판단하기 위해 result를 통해 알수있다
+	}
+	//닉네임 중복처리
+	public int checkNickName(Connection conn, String nickName) {
+		PreparedStatement pstmt=null;
+		ResultSet rset= null;
+		int result = 0;
+		
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_NICKNAME = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  nickName);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return result;
+	}
+	//회원 탈퇴
+	public int deleteMember(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE MEMBER SET MEMBER.MEMBER_ENABLE='N' WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+//			pstmt.setString(2, memberId.getMemberPw());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	//아이디 찾기
+	public ArrayList<Member> searchId(Connection conn, String name) {
+		PreparedStatement pstmt = null;
+		ResultSet rset= null;
+		ArrayList<Member> list = null;
+			
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Member>();
+			while(rset.next()) {
+				Member mb = new Member(rset.getString("MEMBER_ID"),
+									   rset.getString("MEMBER_NAME"),
+									   rset.getString("MEMBER_PHONE"),
+									   rset.getString("MEMBER_EMAIL"));
+				list.add(mb);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+
+		return list;
+	}
+	
+	//비밀번호찾기
+	public ArrayList<Member> searchPwd(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rset= null;
+		ArrayList<Member> list = null;
+		
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Member>();
+			while(rset.next()) {
+				Member mb = new Member(rset.getString("MEMBER_ID"),
+									   rset.getString("MEMBER_NAME"),
+									   rset.getString("MEMBER_PHONE"),
+									   rset.getString("MEMBER_EMAIL"));
+				list.add(mb);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+
+	public int modifyPwdMember(Connection conn, Member m ) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "UPDATE MEMBER SET MEMBER.MEMBER_PW=? WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPw());
+			pstmt.setString(2, m.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int updateInfo(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+		
+		String query = "UPDATE MEMBER SET MEMBER.MEMBER_NAME=?, MEMBER.MEMBER_NICKNAME=? , MEMBER.MEMBER_GENDER=? , MEMBER.MEMBER_BIRTHDAY=?, MEMBER.MEMBER_PHONE=?, MEMBER.MEMBER_EMAIL=?, MEMBER.MEMBER_ADDRESS = ? WHERE MEMBER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getMemberNickName());
+			pstmt.setString(3, m.getMemberGender());
+			pstmt.setDate(4, (Date) m.getMemberBirthDay());
+			pstmt.setString(5, m.getMemberPhone());
+			pstmt.setString(6, m.getMemberEmail());
+			pstmt.setString(7, m.getMemberAddress());
+			pstmt.setString(8, m.getMemberId());
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
 	public Member overlapCheck(Connection conn, String userId, String userNickName) {
 
 		PreparedStatement pstmt = null;

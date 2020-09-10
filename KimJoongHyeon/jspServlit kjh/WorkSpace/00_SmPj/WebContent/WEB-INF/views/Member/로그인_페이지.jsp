@@ -53,7 +53,7 @@ table{
                </tr>
             </table>
             <p align="center" id="ptag">
-               <a href="<%=request.getContextPath()%>/serchIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/searchPwdForm.me">비밀번호 찾기</a> | <a href="<%=request.getContextPath()%>/insertForm.me">회원가입</a>
+               <a href="<%=request.getContextPath()%>/searchIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/searchPwdForm.me">비밀번호 찾기</a> | <a href="<%=request.getContextPath()%>/insertForm.me">회원가입</a>
             </p>
             <a id="login-form-btn" href="javascript:loginFormWithKakao()">
   <img
@@ -98,7 +98,7 @@ table{
   }
   
   function kakaoLogin(email,name){
-	  location.href = '<%=request.getContextPath()%>/login.me?email='+ email +'&name=' + name;
+	  location.href = '<%=request.getContextPath()%>/kakaoLogin.me?email='+ email +'&name=' + name;
   }
 </script>
    </section>

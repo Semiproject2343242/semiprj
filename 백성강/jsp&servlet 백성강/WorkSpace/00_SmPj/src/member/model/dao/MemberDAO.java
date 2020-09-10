@@ -257,7 +257,7 @@ public class MemberDAO {
 			
 			while(rset.next()) {
 				Board bo = new Board(rset.getInt("B_NO"),
-									 rset.getString("B_TITLE"),
+ 									 rset.getString("B_TITLE"),
 									 rset.getString("B_CONTENT"),
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),

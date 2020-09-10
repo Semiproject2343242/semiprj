@@ -5,6 +5,9 @@ import static common.JDBCTemplate.rollback;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
@@ -238,6 +241,77 @@ public class MemberService {
 		close(conn);
 		
 		return result1;
+	}
+
+	//아이디 중복체크
+	public int checkId(String userId) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().checkId(conn, userId);
+		
+		close(conn);
+		
+		return result;
+	}
+	//닉네임 중복체크
+	public int nickName(String nickName) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().checkNickName(conn, nickName);
+		
+		close(conn);
+		
+		return result;
+	}
+	//아이디 삭제
+	public int deleteMember(String memberId) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().deleteMember(conn, memberId);
+		
+		close(conn);
+		
+		return result;
+	}
+	//아이디 찾기
+	public ArrayList<Member> searchId(String name) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> result = new MemberDAO().searchId(conn, name);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Member> searchPwd(String name) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> result = new MemberDAO().searchPwd(conn, name);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int modifyPwdMember(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().modifyPwdMember(conn, m);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateInfo(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().updateInfo(conn, m);
+		
+		close(conn);
+		
+		return result;
 	}
 
 	public Member overlapCheck(String userId, String userNickName) {
