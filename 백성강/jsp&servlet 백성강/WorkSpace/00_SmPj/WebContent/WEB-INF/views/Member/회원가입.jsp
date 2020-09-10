@@ -6,12 +6,11 @@
         <meta charset="UTF-8">
         <title>회원가입</title>
         <script  src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
     </head>
     <style>
-       
         section {
-            display: flex;
             line-height: 40px;
         }
         #main_section {
@@ -106,57 +105,57 @@
       border-bottom:1px solid black;
       border-right:1px solid black;
     }
+    
+    input[type="tel"]{
+    	width: 50px;
+    }
     </style>
     <body>
         <%@ include file="../Common/header.jsp" %>
         <section>
-            <aside></aside>
             <div id="main_section" align="center">
                 <h2>회원가입</h2>
                 <div id="signup1" class="signup">
                     <input type="checkbox" id="checkall">약관 전체동의
                 </div>
                 <br>
-         
-     
                 <div id="signup2" class="signup">
                     <div id="signup3" class="signup">
-                        이용 약관 및 개인정보 수집과 이용, 위치정보 이용약관에 동의
+                        	이용 약관 및 개인정보 수집과 이용, 위치정보 이용약관에 동의
                         <div id="sign1">
                            <div class="div11">
-                            <input type="checkbox" name="chk" id="chk">이용약관 동의(필수)
+                            <input type="checkbox" name="chk" id="chk1">이용약관 동의(필수)
                             <button id="btn1" class ="btn">▽</button> 
                             <br>
-                     
                            </div>
                            <p id ="ct1" class="contents">
                               1장 총칙
-                              제 1조 (목적)
-                              본 약관은 꽃보다 자바가 운영하는 정바 홈페이지의 모든 서비스를 이용함에 있어 "재단"과 회원간의 이용 조건 및 제반 절차, 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
-                              
-                              제 2조 (용어의 정의)
-                              이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
+				                              제 1조 (목적)
+				                              본 약관은 꽃보다 자바가 운영하는 정바 홈페이지의 모든 서비스를 이용함에 있어 "재단"과 회원간의 이용 조건 및 제반 절차, 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
+				                              
+				                              제 2조 (용어의 정의)
+				                              이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
                               ① "서비스"라 함은 "정바"를 통해 "회원"들이 이용할 수 있는 웹사이트, 앱 등의 서비스를 의미합니다
                               ② "회원"이라 함은 “정바”의 "서비스"에 접속하여 이 약관에 따라 "재단"과 이용계약을 체결하고 "정바"가 제공하는 "서비스"를 이용하는 고객을 말합니다.
                               ③ "아이디(ID)"라 함은 "회원"의 식별과 "서비스" 이용을 위하여 "회원"이 정하고 "재단"이 승인하는 문자와 숫자의 조합을 의미합니다.
                               ④ "비밀번호"라 함은 "회원"이 부여 받은 "아이디와 일치되는 "회원"임을 확인하고 비밀보호를 위해 "회원" 자신이 정한 문자 또는 숫자의 조합을 의미합니다
                               ⑤ "포인트"라 함은 서비스의 효율적 이용을 위해 재단이 임의로 책정 또는 지급, 조정할 수 있는 재산적 가치가 없는 "서비스" 상의 가상 데이터를 의미합니다.
                               
-                              제3조 (약관의 효력 및 변경)
+                              	제3조 (약관의 효력 및 변경)
                               ① 이 약관은 서비스 화면에 게시하거나 기타의 방법으로 공지함으로써 이용자에게 공시하고, 이에 동의한 이용자가 서비스에 가입함으로써 효력이 발생합니다.
                               ② "재단"에서 필요하다고 인정할 경우 이 약관의 내용을 변경할 수 있으며, 변경된 약관은 서비스 화면에 공지함으로써 이용자가 직접 확인할 수 있도록 합니다
                               ③ 이용자는 변경된 약관에 동의하지 않을 경우 서비스 이용을 중단하고 회원 등록을 취소할 수 있습니다. 다만, 이용자가 약관 변경 이후 서비스에 접속하여 별도의 의사표시 없이 계속 서비스를 이용하는 경우에는 약관 변경에 동의한 것으로 간주됩니다.
                               ④ "재단"의 서비스 제공 행위 및 이용자의 서비스 이용 행위에는 이 약관이 우선적으로 적용됩니다. 이 약관에 명시되지 않은 사항에 대해서는 전기통신기본법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 방송통신심의위원회 심의규정, 정보통신 윤리강령 등 과 같은 대한민국의 관련 법령과 일반적인 관습에 의합니다.
                               
-                              제 2 장 회원가입
-                              제4조 (회원가입의 성립)
+					                              제 2 장 회원가입
+					                              제4조 (회원가입의 성립)
                               ① 회원가입은 이용자의 이 약관에 대한 동의와 이용자의 회원가입신청에 대한 "재단"의 승인에 의하여 성립합니다.
                               ② 회원가입에 대한 동의는 이용신청 당시 신청서 상의 "이용 약관에 동의합니다" 버튼을 선택함으로써 약관에 동의하는 것으로 간주됩니다.
                               
-                              제5조 (회원가입신청)
-                              회원가입신청은 이용자가 서비스의 가입신청 양식에 이용자의 인적 사항에 관한 정보와 서비스 회원가입 의사를 등록하는 방식으로 합니다.
-                              
-                              제6조 (회원가입신청의 승인과 거절)
+					                              제5조 (회원가입신청)
+					                              회원가입신청은 이용자가 서비스의 가입신청 양식에 이용자의 인적 사항에 관한 정보와 서비스 회원가입 의사를 등록하는 방식으로 합니다.
+					                              
+					                              제6조 (회원가입신청의 승인과 거절)
                               ① "재단"은 제5조에서 정한 사항을 정확히 기재한 회원가입신청이 있을 경우 특별한 거부 사유가 없는 한 회원가입신청을 승인합니다.
                               ② "재단"은 아래 각 호에 해당하는 경우에는 이용자의 서비스 이용을 일부 또는 전부 제한할 수 있습니다. 서비스 이용을 일부 또는 전부 제한하는 것에는 이용자의 회원자격 박탈, 서비스 접속 차단, 이용자가 올린 게시물의 삭제 등을 포함합니다.
                               1. 이용자가 제공한 자신의 인적 사항에 관한 정보가 허위(예컨대, 이름, 이메일, 전화번호가 실제와 다른 경우 등)인 것으로 판명되거나, 허위라고 의심할만한 합리적인 사유가 발생한 경우
@@ -165,12 +164,12 @@
                               4. 이용자가 서비스를 이용하여 부당한 민원을 제기하였을 경우
                               5. 기타 "재단"이 서비스의 이용제한이 필요하다고 판단하는 경우(예컨대, 이용자가 특정 후보 또는 정당에 대한 지지의사를 밝히는 게시물을 올리는 등의 행위를 하여 서비스 내에서 의견대립이나 논쟁이 발생하는 경우 등 포함)
                               
-                              제7조 (회원정보의 변경)
+                             	 제7조 (회원정보의 변경)
                               ① 회원은 서비스 내 마이페이지 > 내정보관리를 통하여 언제든지 자신의 가입 정보를 열람할 수 있습니다.
                               ② 회원은 회원가입신청 시 기재한 회원정보가 변경되었을 때에는 수정이 가능하며, 회원이 회원정보를 수정하지 아니하여 발생하는 일체의 문제에 관한 책임은 회원에게 있습니다.
                               
-                              제 3장 서비스 제공 및 이용
-                              제8조 (서비스 이용)
+                              	제 3장 서비스 제공 및 이용
+                           	   제8조 (서비스 이용)
                               ① "재단"이 제공하는 서비스는 다음과 같습니다.
                               1. 취업지원 프로그램 정보제공 및 온라인 신청
                               2. 공유공간 및 행사정보에 관련된 제반 서비스
@@ -186,7 +185,7 @@
                               ⑧ "재단"이 회원에 대한 통지를 하는 경우 이 약관에 별도 규정이 없는 한 전자우편을 통하여 할 수 있습니다.
                               ⑨ "재단"은 회원 전체에 대한 통지의 경우 7일 이상 서비스의 게시판에 게시함으로써 제8항의 통지에 갈음할 수 있습니다.
                               
-                              제9조 (서비스의 변경, 중지 및 정보의 저장과 사용)
+                              	제9조 (서비스의 변경, 중지 및 정보의 저장과 사용)
                               ① 회원은 본 서비스에 보관되거나 전송된 게시물 및 기타 통신 메시지(쪽지 등) 등의 내용이 국가의 비상사태, 정전, "재단"의 관리범위 외의 서비스 설비 장애 및 기타 불가항력에 의하여 보관되지 못하였거나 삭제된 경우, 전송되지 못한 경우 및 기타 통신 데이터의 손실이 발생한 경우, "재단"이 이에 대하여 아무런 책임을 지지 않는다는 것에 동의합니다.
                               ② "재단"이 정상적인 서비스 제공의 어려움으로 인하여 일시적으로 서비스를 중지하여야 할 경우에는, 서비스 중지 1주일 전에 고지한 후 서비스를 중지할 수 있으며, 이 경우 "재단"은 책임을 부담하지 아니합니다. 상당한 이유가 있을 경우 위 사전 고지기간은 "재단"의 판단에 따라 감축되거나 생략될 수 있습니다.
                               ③ 제2항과 같은 서비스 중지에 의하여 본 서비스에 보관되거나 전 전송된 게시물 및 기타 통신 메시지(쪽지 등) 등의 내용이 보관되지 못하였거나 삭제된 경우, 전송되지 못한 경우 및 기타 통신 데이터의 손실이 발생한 경우에도 "재단"은 책임을 부담하지 아니합니다.
@@ -198,11 +197,11 @@
                               2. 이후 12개월 동안(연속하여 24개월 동안) 서비스를 이용하기 위해 로그인을 하지 않은 경우 서비스 이용계약이 해지될 수 있으며, 이 경우 회원이 이용한 서비스 데이터가 삭제 처리됩니다.
                               3. 이용계약의 해지로 인해 발생한 데이터 손실에 대한 모든 책임은 회원이 부담합니다.
                               
-                              제10조 (정보의 제공 및 광고의 게재)
+                  			           제10조 (정보의 제공 및 광고의 게재)
                               ① "재단"은 회원에게 필요하다고 인정되는 다양한 정보 및 광고를 전자우편이나, SMS(휴대폰 문자메시지), SNS(트위터, Facebook), 카카오톡, 앱 푸시 등의 방법으로 회원에게 제공할 수 있으며, 만약 원치 않는 정보를 수신한 경우 회원은 이를 수신거부 할 수 있습니다.
                               ② "재단"은 서비스의 운용과 관련하여 서비스화면, 홈페이지, 전자우편 등에 광고 등을 게재할 수 있으며, "재단"은 서비스를 이용하고자 하는 이용자가 광고 등의 게재에 대하여 동의하는 것으로 간주합니다.
                               
-                              제11조 (게시물 또는 내용물의 삭제)
+                       		       제11조 (게시물 또는 내용물의 삭제)
                               ① "재단"은 이용자가 게시하거나 등록하는 서비스 내의 모든 게시물이 아래 각 호의 경우에 해당하는 경우 이용자에 대한 사전 통지 없이 게시물을 삭제할 수 있으며, 게시물의 삭제에 관하여 "재단"은 어떠한 책임도 지지 않습니다.
                               1. "재단", 다른 회원 또는 제3자를 비방하거나 중상 모략으로 명예를 손상시키는 내용인 경우
                               2. 공공질서 및 미풍양속에 위반되는 내용인 경우
@@ -213,29 +212,29 @@
                               ② "재단"은 사전 통지한 후 게시물을 편집, 이동, 삭제할 수 있는 권리를 보유하며, 게시물이 이 약관 및 관계법령에 위배되거나 해지된 회원이 게시한 게시물일 경우 사전통보 없이 이를 삭제할 수 있습니다.
                               ③ "재단"은 게시물이 게시일로부터 상당한 기간이 경과되어 게시물로서의 효력이나 의미를 상실하게 된 경우 1주일간의 통지기간을 거쳐 해당 게시물을 삭제할 수 있습니다.
                               
-                              제12조 (게시물의 저작권)
+                           	   제12조 (게시물의 저작권)
                               ① 이용자가 서비스에 접속하여 게시한 게시물의 저작권은 해당 게시물의 저작권자에게 있으며, "재단"은 법령에 위배되지 않는 범위 내에서 이를 활용할 수 있습니다.
                               ② 이용자의 게시물이 타인의 저작권, 프로그램 저작권 등을 침해함으로써 발생하는 민, 형사상의 책임은 전적으로 이용자가 부담하여야 합니다.
                               ③ 이용자는 서비스를 이용하여 얻은 정보를 가공, 판매하는 행위 등 서비스에 게재된 자료를 상업적으로 사용할 수 없습니다.
                               
-                              제13조 ("재단"의 서비스에 관한 권리)
+                             	 제13조 ("재단"의 서비스에 관한 권리)
                               ① "재단"이 제공하는 서비스, 그에 필요한 소프트웨어, 이미지, 마크, 로고, 디자인, 서비스명칭, 정보 및 상표 등과 관련된 지적재산권 및 기타권리는 "재단"에게 있습니다.
                               ② 이용자는 "재단"이 명시적으로 사전에 승인한 경우를 제외하고는 제1항 소정의 각 권리에 대한 전부 또는 일부의 수정, 대여, 대출, 판매, 배포, 제작, 양도, 재 라이선스, 담보권 설정행위, 상업적 이용행위를 할 수 없으며, 제3자로 하여금 이와 같은 행위를 하도록 허락할 수도 없습니다.
                               
-                              제14조 (회원의 의무 및 정보보안)
+                             	 제14조 (회원의 의무 및 정보보안)
                               ① 회원은 서비스 이용을 위해 가입할 경우 가입 당시의 사실과 일치하는 정보(이하 "가입정보")를 제공하여야 합니다. 또한, 회원은 가입정보에 변경이 발생할 경우 이를 즉시 갱신하여야 하며, 이를 갱신하지 아니하여 발생하는 회원의 손해에 대하여 "재단"은 어떠한 책임도 부담하지 아니합니다.
                               ② 회원은 회원가입신청을 통하여 서비스 사용을 위한 가입절차를 완료하면 아이디와 비밀번호 사용이 가능합니다. 회원은 아이디, 비밀번호 관리를 위해 아래 각 호의 사항을 준수하여야 하며, 이를 위반하여 발생한 손해에 관하여 "재단"은 어떠한 책임도 부담하지 않습니다.
                               1. 회원은 본인의 아이디와 비밀번호를 제3자에게 이용하게 하여서는 안됩니다.
                               2. 회원은 제3자가 회원의 동의 없이 회원의 아이디와 비밀번호를 사용하는 사실을 알게 될 경우 즉시 "재단"에 신고하여야 합니다.
                               3. 회원은 서비스의 이용을 마칠 때에는 로그아웃을 통하여 확실히 접속을 종료하여야 합니다
                               ③ 회원은 서비스를 이용하면서 아래 각 호와 같은 행위를 하여서는 안됩니다.
-                              1. 타인에게 위해를 가하는 행위 또는 기타 아래 각 목의 행위
-                              가. 타인의 아이디, 패스워드 도용 및 타인으로 가장하는 행위
-                              나. 타인과의 관계를 허위로 명시하는 행위
-                              다. 타인을 비방할 목적으로 사실 또는 허위의 사실을 적시하여 명예를 훼손하는 행위
-                              라. 자기 또는 타인에게 재산상의 이익을 주거나 타인에게 손해를 가할 목적으로 허위의 정보를 유통시키는 행위
-                              마. 수치심이나 혐오감 또는 공포심을 일으키는 말이나 음향, 글이나 화상 또는 영상을 2회 이상 상대방에게 도달하게 하여 상대방의 일상적 생활을 방해하는 행위
-                              바. 서비스를 이용한 "재단"의 사전 승인 없는 영리행위
+	                              1. 타인에게 위해를 가하는 행위 또는 기타 아래 각 목의 행위
+					                              가. 타인의 아이디, 패스워드 도용 및 타인으로 가장하는 행위
+					                              나. 타인과의 관계를 허위로 명시하는 행위
+					                              다. 타인을 비방할 목적으로 사실 또는 허위의 사실을 적시하여 명예를 훼손하는 행위
+					                              라. 자기 또는 타인에게 재산상의 이익을 주거나 타인에게 손해를 가할 목적으로 허위의 정보를 유통시키는 행위
+					                              마. 수치심이나 혐오감 또는 공포심을 일으키는 말이나 음향, 글이나 화상 또는 영상을 2회 이상 상대방에게 도달하게 하여 상대방의 일상적 생활을 방해하는 행위
+					                              바. 서비스를 이용한 "재단"의 사전 승인 없는 영리행위
                               2. 불필요하거나 승인되지 않은 광고, 판촉물을 게재하거나, "정크 메일(junk mail)", "스팸(spam)", "행운의 편지(chain letters)", "도배글", "피라미드 조직" 등을 권유하거나 게시, 게재 또는 전자우편으로 보내는 행위
                               3. 저속 또는 음란한 데이터, 텍스트, 소프트웨어, 음악, 사진, 그래픽, 비디오 메시지 등(이하 "콘텐츠")을 게시, 게재 또는 전자우편으로 보내는 행위
                               4. 이용자 자신에게 권리(지적재산권을 포함한 모든 권리)가 없는 콘텐츠를 게시, 게재 또는 전자우편으로 보내는 행위
@@ -302,7 +301,7 @@
                           <br>
 
                            <div class="div11">
-                            <input type="checkbox" name="chk" id="chk">개인정보 수집 및 이용 동의(필수)
+                            <input type="checkbox" name="chk" id="chk2">개인정보 수집 및 이용 동의(필수)
                             <button id="btn2" class ="btn">▽</button>      
                             <br>
                            </div>
@@ -440,7 +439,7 @@
                            <br>
 
                            <div class="div11">
-                            <input type="checkbox"  name="chk" id="chk">위치정보 이용약관 동의(선택)
+                            <input type="checkbox"  name="chk" id="chk3">위치정보 이용약관 동의(선택)
                             <button id="btn3" class ="btn">▽</button> 
                             <br>
                            </div>
@@ -493,23 +492,6 @@
                              $('#btn3').click(function(){   
                                  $('#ct3').slideToggle();
                                  });   
-                                 
-                             $(document).ready(function(){
-                             //최상단 체크박스 클릭
-                                 $("#checkall").click(function(){
-                            //클릭되었으면
-                                   if($("#checkall").prop("checked")){
-                           //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-                                      $("input[id=chk]").prop("checked",true);
-                           //클릭이 안되있으면
-                                   }else{
-                           //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-                                       $("input[name=chk]").prop("checked",false);
-                                     }
-                                  });
-                                });
-
-                          
                            </script>
                         </div>
                         <div>
@@ -530,8 +512,8 @@
                                         <td>지원정책 안내, 지원정책 신청현황 및 선발여부 안내, 고객문의 진행 상태 및 답변, 이벤트 안내 등 서비스 운영에 필요한 내용</td>
                                     </tr>
                                 </table>
-                                <input type="radio" name="marketing" value="agree" id="chk">동의함
-                                <input type="radio"  name="marketing" value="deagree" >동의하지 않음
+                                <input type="radio" name="chk" value="agree" id="chk4">동의함
+                                <input type="radio"  name="chk1" value="deagree" id="chk5" >동의하지 않음
                             </div>
                         </div>
                     </div>
@@ -545,47 +527,57 @@
                         <form action="<%= request.getContextPath() %>/insert.me" method="post" id="joinForm" name="joinForm">
                            <table>
                               <tr>
-                                 <td width="200px"><label class="must">*</label> 아이디</td>
-                                 <td class="middletable"><input type="text" maxlength="13"  name="joinUserId"  id="joinUserId" required></td>
-                                 <td width="200px"><label id="idResult"></label></td>
+                                 <td width="200px" rowspan=2><label class="must">*</label> 아이디</td>
+                                 <td class="middletable"><input type="text" maxlength="13" name="joinUserId" id="userId"required></td>
+                                 <td><label id="idResult"></label></td>
                               </tr>
                               <tr>
-                                 <td><label class="must">*</label> 비밀번호</td>
-                                 <td><input type="password" maxlength="13" name="joinUserPwd" required></td>
+								<td colspan=2><span class="info">3~12자로 영어와 숫자만 가능합니다.(영어로 시작)</span></td>
+							  </tr>
+                              <tr>
+                                 <td rowspan=2><label class="must">*</label> 비밀번호</td>
+                                 <td><input type="password" maxlength="13" name="joinUserPwd" id="pwd1" required></td>
+                                 <td><label id="pwd1Result"></label></td>
                               </tr>
+                              <tr>
+								<td colspan=2><span class="info">6~12자로 영어와 숫자, !*$만 가능합니다.(영어로 시작)</span></td>
+							  </tr>
                               <tr>
                                  <td><label class="must">*</label> 비밀번호 확인</td>
-                                 <td class="middletable"><input type="password" maxlength="13" name="joinUserPwd2" required></td>
-                                 <td><label id="pwdResult"></label></td>
+                                 <td class="middletable"><input type="password" maxlength="13" name="joinUserPwd2" id="pwd2" required></td>
+                                 <td><label id="pwd2Result"></label></td>
                               </tr>
                               <tr>
-                                 <td><label class="must">*</label> 이름</td>
-                                 <td class="middletable"><input type="text" name="userName" required></td>
+                                 <td rowspan=2><label class="must" >*</label> 이름</td>
+                                 <td class="middletable"><input type="text" name="userName" id="name" required></td>
+                                 <td><label id="nameResult"></label></td>
                               </tr>
-                                  <tr>
+                              <tr>
+								<td colspan=2><span class="info">이름은 한글로 된 2글자 이상으로 입력하셔야합니다.</span></td>
+							  </tr>
+                              <tr>
                                  <td><label class="must">*</label>닉네임</td>
                                  <td class="middletable"><input type="text" name="nickName" id="nickName" required></td>
-                                 <td width="200px">
-                                 	<input style=" margin-left:-30%;background-color:skyblue; color:white; 
-                                 	font-size:15px;" type="button" id="nickNameCheck" value="중복확인" >
-                                 </td>
+                                   <td><label id="nickNameResult"></label></td>
                               </tr>
                               <tr>
                                <td><label class="must">*</label>성별</td>
-                              <td> <input type="radio" name="gender" value="M" >남자
-                                  <input type="radio"  name="gender" value="W" >여자</td>	
+                              <td> <input type="radio" name="gender" id="genderM" value="M" >남자
+                                  <input type="radio"  name="gender" id="genderW" value="W" >여자</td>	
                               </tr>
-                             
-                                  <tr>
+                              <tr>
                                  <td><label class="must">*</label>생년월일</td>
-                                 <td class="middletable"><input type="date" name="userBirthday" required></td>
+                                 <td class="middletable"><input type="date" name="userBirthday" id="userDate" required></td>
                               </tr>
                               
                               <tr>
                                  <td>연락처</td>
                                  <td class="middletable">
-                                    <input type="tel" maxlength="11" name="phone" placeholder="(-없이)01012345678">
+                                    <input type="tel" maxlength="3" name="phone1" class="phone">-
+                                    <input type="tel" maxlength="4" name="phone2" class="phone">-
+                                    <input type="tel" maxlength="4" name="phone3" class="phone">
                                  </td>
+                                  <td><label id="phoneResult"></label></td>
                               </tr>
                               <tr>
                                  <td>이메일</td>
@@ -593,89 +585,236 @@
                                  <td></td>
                               </tr>
                               <tr>
-                                 <td>주소</td>
-                                 <td class="middletable"><input type="text" name="address"></td>
-                                 <td></td>
-                              </tr>
-                             
+                                <td>주소</td>
+                              	<td><input type="text" id="sample6_postcode" placeholder="우편번호"></td>
+								<td><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
+								</tr>
+								<tr>
+								<td></td>	
+								<td><input type="text" id="sample6_address" name="address1" placeholder="주소"></td>
+								<td><input type="text" id="sample6_detailAddress" name="address2" placeholder="상세주소"></td>
+								</tr>
                            </table>
+								<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
+							<script>
+							$(function(){
+							$("#name").change(function(){
+								var regExp = /[가-힣]{2,}/;
+								if(!regExp.test($(this).val())){
+									$("#nameResult").text("알맞은 이름을 입력하세요").css("color","red");
+									$(this).focus().css("background","red");
+									isName = false;
+								}else{
+									$("#nameResult").text("정상입력").css("color","green");
+									$(this).css("background","initial");
+									isName = true;
+								}
+							});
+							
+							$("#userId").change(function(){
+								var regExp = /^[a-zA-Z][a-zA-Z0-9]{2,11}$/;
+								if(!regExp.test($(this).val())){
+									$("#idResult").text("알맞은 아이디를 입력하세요").css("color","red");
+									$(this).focus().css("background","red");
+									isId = false;
+								}else{
+									var result = overlapCheck($(this).val(),"");
+									console.log("result : " + result);
+									if(result==false){
+										$("#idResult").text("아이디 중복입니다.").css("color","red");
+										$(this).focus().css("background","red");
+										isId = false;	
+									}else{
+										$("#idResult").text("사용 가능한 아이디 입니다").css("color","green");
+										$(this).css("background","initial");
+										isId = true;
+									}
+								}
+							});
+							$("#nickName").change(function(){
+								var result = overlapCheck("",$(this).val());
+								if(result==false){
+									$("#nickNameResult").text("닉네임 중복입니다.").css("color","red");
+									$(this).focus().css("background","red");
+									isId = false;	
+								}else{
+									$("#nickNameResult").text("사용 가능한 닉네임 입니다").css("color","green");
+									$(this).css("background","initial");
+									isId = true;
+								}
+							});
+							
+							$("#pwd1").change(function(){
+								var regExp = /^[a-zA-Z]([a-zA-Z0-9\!\*\$]){5,11}$/;
+								
+								if(!regExp.test($(this).val())){
+									$("#pwd1Result").text("알맞은 비밀번호를 입력하세요").css("color","red");
+									$(this).focus().css("background","red");
+									isPw = false;
+								}else{
+									$("#pwd1Result").text("비밀번호가 일치합니다.").css("color","green");
+									$(this).css("background","initial");
+									isPw = true;
+								}
+							});
+							
+							$("#pwd2").keyup(function(){
+								if($("#pwd1").val() != $(this).val()){
+									$("#pwd2Result").text("비밀번호 불일치").css("color","red");
+									isPw2 = false;
+								}else{
+									$("#pwd2Result").html("비밀번호가 일치합니다.").css("color","green");
+									isPw2 = true;
+								}
+							});
+							
+							$(".phone").change(function(){
+								var regExp = /[0-9]/;
+								if(!regExp.test($(this).val())){
+									$("#phoneResult").text("숫자를 입력하세요").css("color","red");
+									$(this).focus().css("background","red");
+									isPhone = false;
+								}else{
+									$("#phoneResult").text("정상 입력").css("color","green");
+									$(this).css("background","initial");
+									isPhone = true;
+								}
+							});
+							$('form').submit(function(){
+								if(($("#chk1").is(":checked") == true) && ($("#chk2").is(":checked") == true)){
+									  if($("#chk4").is(":checked") == "" && $("#chk5").is(":checked") == ""){
+										  alert("약관을 확인해주세요");
+										  return false;
+									  }else{
+										  if(isName && isId && isPw && isPw2 && isPhone){
+											  if($("#genderM").is(":checked") == "" && $("#genderW").is(":checked") == ""){
+												alert('성별을 선택해주세요.');
+												return false;
+											  }
+										  	return true;
+											} else{
+											alert('회원가입 폼에 맞춰주세요.');
+											if(!isName) $('#name').focus();
+											else if(!isId) $('#userId').focus();
+											else if(!isPw) $('#pwd1').focus();
+											else if(!isPw2) $('#pwd2').focus();
+											else if(!isPhone) $('#phone1').focus();
+											return false;
+										}
+									  }
+								  }else{
+									  alert("약관을 확인해주세요");
+									  return false;
+								  }
+							});
+							//최상단 체크박스 클릭
+	                           $("#checkall").click(function(){
+	                      		//클릭되었으면
+	                             if($("#checkall").prop("checked")){
+	                     				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+	                                $("input[name=chk]").prop("checked",true);
+	                                $("input[name=chk1]").prop("checked",false);
+	                     			//클릭이 안되있으면
+	                             }else{
+	                    				 //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+	                                 $("input[name=chk]").prop("checked",false);
+	                                $("input[name=chk1]").prop("checked",true);
+	                               }
+	                            });
+							
+							});
+							function overlapCheck(userId,userNickName){
+								console.log("userId : "+userId);
+								console.log("userNickName : "+userNickName);
+								var result=false;
+								 $.ajax({
+							            url: 'overlapCheck.me',
+							            async: false,
+							            data: {
+					    					userId:userId,
+					    					userNickName:userNickName,
+					   						},
+							            success: function(data){
+							            	if(data==null){
+							            		result=true;
+							            		console.log("null : " + result);
+							            	}else{
+							            	 console.log(data);
+							            	 if(data.memberId==userId || data.memberNickName==userNickName){
+							            	 console.log(false);
+							            	 }else{
+								             console.log(true);
+								             result=true;
+							            	 }
+							            		
+							            	}
+							            },
+							            error: function(data){
+							               alert("ajax 중복체크 에러 발생");
+							            }
+							         });
+								 console.log("result0 : "+ result);
+								 return result;
+							}	
+							
+								//주소에 대한 함수
+							    function sample6_execDaumPostcode() {
+							        new daum.Postcode({
+							            oncomplete: function(data) {
+							                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+							
+							                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+							                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							                var addr = ''; // 주소 변수
+							                var extraAddr = ''; // 참고항목 변수
+							
+							                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+							                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							                    addr = data.roadAddress;
+							                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+							                    addr = data.jibunAddress;
+							                }
+							
+							                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+							                if(data.userSelectedType === 'R'){
+							                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+							                        extraAddr += data.bname;
+							                    }
+							                    // 건물명이 있고, 공동주택일 경우 추가한다.
+							                    if(data.buildingName !== '' && data.apartment === 'Y'){
+							                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+							                    }
+							                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							                    if(extraAddr !== ''){
+							                        extraAddr = ' (' + extraAddr + ')';
+							                    }
+							                    // 조합된 참고항목을 해당 필드에 넣는다.
+							                    document.getElementById("sample6_extraAddress").value = extraAddr;
+							                
+							                } else {
+							                    document.getElementById("sample6_extraAddress").value = '';
+							                }
+							
+							                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+							                document.getElementById('sample6_postcode').value = data.zonecode;
+							                document.getElementById("sample6_address").value = addr;
+							                // 커서를 상세주소 필드로 이동한다.
+							                document.getElementById("sample6_detailAddress").focus();
+							            }
+							        }).open();
+							    }
+							</script>
                            <div class="btns" id="signUpBtns">
                               <input id="signUpBtn" type="submit" value="가입하기">
-                              <input type="button" id="goMain" onclick="location.href='javascript:history.go(-1);'" value="메인으로">
+                              <input type="button" id="goMain" onclick="goMain();" value="메인으로">
                            </div>
-                        </form>         
+                        </form>
                      </div>
-                     
-                     <script>
-/*              		 	var isUsable = false;
-            		 	var isIdChecked = false;
-            		 	
-            			$('#joinUserId').on('change paste keyup', function(){ //change paste keyup은 키 변경시
-            				isIdChecked = false;
-            			}); */
-            			
-            			$('#joinUserId').change(function(){
-            				var userId = $('#joinUserId');
-            				
-            				if(!userId || userId.val().length <4 ){
-            					alert('아이디는 최소 4자리 이상이어야 합니다.');
-            					userId.focus();
-            				}else{
-            					$.ajax({
-            						url: "<%= request.getContextPath() %>/checkId.me",
-            						type: 'post', 
-            						data: {userId:userId.val()},
-            						success: function(data){
-            							console.log(data);
-            							
-            							if(data =="success"){
-            								$('#idResult').text('사용가능합니다.');
-            								$('#idResult').css({'color':'green', 'float':'left','display':'inline-block'});
-/*             								isUsable = true;
-            								isIdCheck=true; */
-            							}else{
-            								$('#idResult').text(' 사용 불 가능합니다.');
-            								$('#idResult').css({'color':'red', 'float':'left','display':'inline-block'});
-            								userId.focus();
-/*             								isUsable = true;
-            								isIdCheck=true; */
-            							}
-            							
-            						}
-            					});
-            					
-            				}
-            			});
-            			</script>
-            			<script>	
-	            		 	$('#nickNameCheck').click(function(){
-	            				var nickName = $('#nickName');
-	            				console.log(nickName);
-	            				
-	            				if(!nickName || nickName.val().length <3 ){
-	            					alert('닉네임는 최소 3자리 이상이어야 합니다.');
-	            					nickName.focus();
-	            				}else{  
-	            					$.ajax({
-	            						url: "<%= request.getContextPath() %>/checkNickName.me",
-	            						type: 'post', 
-	            						data: {nickName:nickName.val()},
-	            						success: function(data){
-	            							console.log(data);
-	            							
-	            							if(data =="success"){
-	            								alert(' 사용가능합니다.');
-	            							}else{
-	            								alert(' 사용 불 가능합니다.');
-	            								nickName.focus();
-	            							}
-	            							
-	            						}
-	            					});		
-	            				  }  
-	            			})
-            			</script>
-                 _       </div>
+                  
+
+                        </div>
 
                     </div>
 

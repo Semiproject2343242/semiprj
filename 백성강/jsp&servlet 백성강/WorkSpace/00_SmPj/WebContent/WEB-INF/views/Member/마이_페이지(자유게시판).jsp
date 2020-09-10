@@ -68,14 +68,6 @@
             </h2>
             <hr>
             <div id="bottomContent">
-                <div id="searchDiv">
-                    <select id="selectedOption">
-                        <option>승인 대기</option>
-                        <option>승인 완료</option>
-                    </select>
-                    <input id="search" type="search">
-                    <button type="submit">검색</button>
-                </div>
                 <div id="tableDiv">
                 	<table class="contentsTable" width="800px" align="center">
 	                	<thead>
@@ -123,7 +115,7 @@
 	            }).click(function(){
 	                var bId = $(this).parent().children().children('input').val();
 	            <% if(loginUser != null){%>
-	            		location.href = '<%= request.getContextPath() %>/q_detail.qa?bId=' + bId;
+	            		location.href = '<%= request.getContextPath() %>/fDetail.cm?bId=' + bId;
 	            <% }else{ %>
 	            		alert('회원만 이용할 수 있는 서비스입니다.')
 	            <% } %>

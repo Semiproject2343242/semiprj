@@ -15,8 +15,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --><!-- The contents of this file will be loaded for each web application -->
-<!-- JSP -> Java JSP를 Java문으로 JSP를 자바로 -->
-<!-- <Context workDir="C:\Users\jhkim6\Documents\GitHub\semiprj\KimJoongHyeon\jspServlit kjh\WorkSpace\00_SmPj\WebContent\META-INF\jspwork"> -->
     <!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>

@@ -8,8 +8,9 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import board.model.dao.BoardDAO;
 import board.model.dao.CommunityDAO;
-import board.model.dao.QuestionDAO;
+import board.model.dao.SupportDAO;
 import board.model.vo.*;
 
 public class CommunityService {
@@ -62,15 +63,15 @@ public class CommunityService {
 		
 		return result;
 	}
-
-	public ArrayList selectExList(int i, PageInfo pi) {
+	//대외리스트
+	public ArrayList selectExList(int i) {
 		Connection conn = getConnection();
 		
 		ArrayList list = null;
 		
 		CommunityDAO dao = new CommunityDAO();	
 		if(i == 1) {
-			list = dao.selectBList(conn,pi);
+			list = dao.selectBList(conn);
 		} else {
 			list = dao.selectFList(conn);
 		}
@@ -80,6 +81,7 @@ public class CommunityService {
 		return list;
 	}
 
+	
 	public int insertAddFile(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -99,12 +101,12 @@ public class CommunityService {
 		
 		return result1;
 	}
-
+	// 파일선택
 	public ArrayList<FileVO> selectFile(int bId) {
 		Connection conn = getConnection();
 		
 		ArrayList<FileVO> list = null;
-		list  = new CommunityDAO().selectFile(conn, bId);
+		list  = new BoardDAO().selectFile(conn, bId);
 		
 		if(list != null) {
 			commit(conn);
@@ -117,7 +119,7 @@ public class CommunityService {
 		
 		return list;
 	}
-
+	//수정
 	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -146,12 +148,11 @@ public class CommunityService {
 		
 		return result1;
 	}
-
+	//add file
 	public int AddFile(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
 		CommunityDAO dao = new CommunityDAO();
-		System.out.println("왔다감");
 		int result = dao.AddFile(conn, fileList);
 		
 		if(result>0) {
@@ -165,15 +166,15 @@ public class CommunityService {
 		
 		return result;
 	}
-
-	public ArrayList selectSpList(int i, PageInfo pi) {
-	Connection conn = getConnection();
+	//지원정책 리스트
+	public ArrayList selectSpList(int i) {
+		Connection conn = getConnection();
 		
 		ArrayList list = null;
 		
 		CommunityDAO dao = new CommunityDAO();	
 		if(i == 1) {
-			list = dao.selectBListS(conn,pi);
+			list = dao.selectSpList(conn);
 		} else {
 			list = dao.selectFList(conn);
 		}
@@ -182,4 +183,70 @@ public class CommunityService {
 		
 		return list;
 	}
+	//대외활동 게시판검색
+	public ArrayList<Board> selectExSearchList(int i, String category, String[] agearr, String[] localarr) {
+Connection conn = getConnection();
+		
+		ArrayList list = null;
+		
+		CommunityDAO dao = new CommunityDAO();	
+		if(i == 1) {
+			System.out.println("리스트 가져오기 실행");
+			list = dao.selectSearchBList(conn,category,agearr,localarr);
+		} else {
+			System.out.println("파일 가져오기 실행");
+			list = dao.selectFList(conn);
+		}
+		
+		close(conn);
+		
+		return list;
+	}
+	//지원정책 게시판 등록
+	public int insertSpAddFile(Board b, ArrayList<FileVO> fileList) {
+		Connection conn = getConnection();
+		
+		CommunityDAO dao = new CommunityDAO();
+		
+		int result1 = dao.insertSpBoard(conn,b);
+		int result2 = dao.insertAddFile(conn, fileList);
+		
+		if(result1 > 0 && result2 >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			System.out.println("insertAddFile Rollback!!!!!!!!!!!!!!!");
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+  // 지원정책 게시판 검색
+	public ArrayList<Board> selectSpSearchList(int i, String[] acarr, String[] emarr, String category, String[] agearr,  String[] localarr) {
+		Connection conn = getConnection();
+				
+				ArrayList list = null;
+				
+				CommunityDAO dao = new CommunityDAO();
+				System.out.println("서비스");
+				 System.out.println("category : " + category);
+				 System.out.println("age : " + agearr);
+				 System.out.println("local : " +localarr );
+				 System.out.println("acarr : " +acarr );
+				 System.out.println("emarr : " +emarr );
+		        
+				if(i == 1) {
+					System.out.println("리스트 가져오기 실행");
+					list = dao.selectSearchSpList(conn,acarr,emarr,category,agearr,localarr);
+				} else {
+					System.out.println("파일 가져오기 실행");
+					list = dao.selectFList(conn);
+				}
+				
+				close(conn);
+				
+				return list;
+			}
+
 }

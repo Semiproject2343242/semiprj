@@ -13,7 +13,8 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class ChangePwdFormServlet
  */
-@WebServlet("/changePwdForm.me")
+//@WebServlet("/changePwdForm.me")
+@WebServlet(urlPatterns = "/changePwdForm.me", name="MemberUpdatePwdServlet2")
 public class ChangePwdFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,30 +34,22 @@ public class ChangePwdFormServlet extends HttpServlet {
 		
 		String id = request.getParameter("id");
 		String pwd1 = request.getParameter("userPwd1");
-		String pwd2 = request.getParameter("userPwd2");
 		
 		System.out.println("pwd1"+pwd1);
-		System.out.println("pwd2"+pwd2);
 		
 		String page = null;
-		Member m = new Member(id,pwd1);
+		Member m = new MemberService().selectMember(id);
 		
-		if(pwd1.length() >= 6) {
-			if(pwd1.equals(pwd2)) {
-				int result = new MemberService().modifyPwdMember(m);
-				
-				if(result > 0) {
-					page = "WEB-INF/views/Member/비밀번호변경.jsp";
-				} else {
-					request.setAttribute("msg", "비밀번호가 재설정에 실패하였습니다.");
-					page = "WEB-INF/views/Common/errorPage.jsp";
-				}
+		System.out.println("m.getMemberPw()"+m.getMemberPw());
+		if(pwd1 !=null) {
+			if(pwd1.equals(m.getMemberPw())) {
+				page = "WEB-INF/views/Member/비밀번호변경.jsp";
 			} else {
 				request.setAttribute("msg", "비밀번호가 일치하지않습니다.");
 				page = "WEB-INF/views/Common/errorPage.jsp";
 			}
 		} else {
-			request.setAttribute("msg", "비밀번호는 6자 이상이여야합니다.");
+			request.setAttribute("msg", "비밀번호값이 존재하지않습니다.");
 			page = "WEB-INF/views/Common/errorPage.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);

@@ -16,7 +16,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class DeleteServlet
  */
-@WebServlet("/Delete.me")
+@WebServlet(urlPatterns = "/Delete.me", name="DeleteServlet")
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,24 +33,39 @@ public class DeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-//		String memberPw = request.getParameter("userPwd");
-		String memberId = request.getParameter("Id");
+		String Id = request.getParameter("userId");
+		String Pwd = request.getParameter("userPwd");
+		System.out.println("Pwd"+ Pwd);
+		System.out.println("Id"+ Id);
 		
-//		Member member = new Member(memberId, memberPw);
-		int result = new MemberService().deleteMember(memberId);
-		System.out.println("memberId: "+memberId);
-		System.out.println("result:"+result);
-		 if(result > 0) { 
-			HttpSession session = request.getSession();
-			session.invalidate(); // 세션 무효화
-//			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Main/메인페이지.jsp");  //왜 안들어가지지?
-//			view.forward(request, response);
-			response.sendRedirect("main.no"); // 추후에 수정예정
+		Member m = new MemberService().selectMember(Id);
+		System.out.println("get"+m.getMemberPw());
+		String page = null;
+		
+		if(!Pwd.equals(null)) {
+			if(Pwd.equals(m.getMemberPw())) {
+				int result = new MemberService().deleteMember(Id);
+				System.out.println("memberId: "+Id);
+				System.out.println("result:"+result);
+				
+				if(result > 0) { 
+					HttpSession session = request.getSession();
+					session.invalidate(); 
+					page = "WEB-INF/views/Member/비밀번호찾기_성공_알림창.jsp";
+					request.setAttribute("msg", "탈퇴에 성공하셨습니다.");
+				} else {
+					page = "WEB-INF/views/Common/errorPage.jsp";
+					request.setAttribute("msg", "삭제에 실패하였습니다.");
+				}
+			} else {
+				page = "WEB-INF/views/Common/errorPage.jsp";
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			}
 		} else {
-			request.setAttribute("msg", "삭제에 실패하였습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
-			view.forward(request, response);
+			page = "WEB-INF/views/Common/errorPage.jsp";
+			request.setAttribute("msg", "비밀번호가 존재하지않습니다.");
 		}
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
