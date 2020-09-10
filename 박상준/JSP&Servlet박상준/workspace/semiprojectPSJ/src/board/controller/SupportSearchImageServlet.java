@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import board.model.service.SupportService;
+import board.model.vo.Board;
 import board.model.vo.FileVO;
 
 /**
  * Servlet implementation class ExternalSearch
  */
-@WebServlet("/SearchImage.sp")
+@WebServlet("/searchImage.sp")
 public class SupportSearchImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,6 +34,13 @@ public class SupportSearchImageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SupportService service = new SupportService();
+        ArrayList<FileVO> fList = new ArrayList<FileVO>(); //파일 리스트 가져오기
+     	
+        fList = service.selectSpList(2); //파일 리스트 가져오기
+     	
+     	response.setContentType("application/json; charset=UTF-8");
+     	new Gson().toJson(fList, response.getWriter());
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

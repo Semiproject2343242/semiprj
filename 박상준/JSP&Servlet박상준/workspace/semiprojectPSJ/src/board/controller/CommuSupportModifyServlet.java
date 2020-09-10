@@ -169,7 +169,7 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	         b.setEmState(emState);
 	         b.setTcName(age);
 	         b.setLcName(local);
-	         b.setReStratDate(sp_res_date);
+	         b.setReStartDate(sp_res_date);
 	         b.setReEndDate(sp_ree_date);
 	         System.out.println("originFiles : "+originFiles);
 	         System.out.println("saveFiles : "+saveFiles);

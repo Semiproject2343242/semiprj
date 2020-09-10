@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 
+import board.model.service.CommunityService;
 import board.model.service.ExternalService;
 import board.model.service.SupportService;
 import board.model.vo.Board;
@@ -23,7 +24,7 @@ import board.model.vo.PageInfo;
 /**
  * Servlet implementation class ExternalSearch
  */
-@WebServlet("/SearchList.sp")
+@WebServlet("/searchList.sp")
 public class SupportSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,28 +40,28 @@ public class SupportSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	/*
-	 * SupportService service = new SupportService();
-	 * 
-	 * String[] acarr = request.getParameterValues("acState[]"); String[] emarr =
-	 * request.getParameterValues("emState[]"); String[] agearr =
-	 * request.getParameterValues("age[]"); String[] localarr =
-	 * request.getParameterValues("local[]"); ArrayList<Board> bList = new
-	 * ArrayList<Board>(); // 게시판 리스트 가져오기 String category =
-	 * request.getParameter("cate");
-	 * 
-	 * System.out.println("category : " + category); System.out.println("age : " +
-	 * agearr); System.out.println("local : " +localarr );
-	 * System.out.println("acarr : " +acarr ); System.out.println("emarr : " +emarr
-	 * );
-	 * 
-	 * if(acarr == null && emarr == null &&agearr == null && localarr==null &&
-	 * (category==null || category.equals("선택"))) { bList = service.selectSpList(1);
-	 * // 게시판 리스트 가져오기 }else { bList =
-	 * service.selectSpSearchList(1,acarr,emarr,category,agearr,localarr); // 게시판
-	 * 리스트 가져오기 } response.setContentType("application/json; charset=UTF-8"); new
-	 * Gson().toJson(bList, response.getWriter()); }
-	 */
+		SupportService service = new SupportService();
+
+		String[] acarr = request.getParameterValues("acState[]");
+		String[] emarr = request.getParameterValues("emState[]");
+		String[] agearr = request.getParameterValues("age[]");
+        String[] localarr = request.getParameterValues("local[]");
+        ArrayList<Board> bList = new ArrayList<Board>(); // 게시판 리스트 가져오기
+        String category = request.getParameter("cate");
+        
+        System.out.println("category : " + category);
+		 System.out.println("age : " + agearr);
+		 System.out.println("local : " +localarr );
+		 System.out.println("acarr : " +acarr );
+		 System.out.println("emarr : " +emarr );
+        
+        if(acarr == null && emarr == null &&agearr == null && localarr==null && (category==null || category.equals("선택"))) {
+        	bList = service.selectSpList(1); // 게시판 리스트 가져오기
+        }else {
+		 bList = service.selectSpSearchList(1,acarr,emarr,category,agearr,localarr); // 게시판 리스트 가져오기
+        }
+        response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(bList, response.getWriter());
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

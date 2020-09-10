@@ -225,12 +225,19 @@ Connection conn = getConnection();
 		return result1;
 	}
   // 지원정책 게시판 검색
-	public ArrayList<Board> selectSpSearchList(int i, String[] acarr, String[] agearr, String category,  String[] localarr, String[] emarr) {
+	public ArrayList<Board> selectSpSearchList(int i, String[] acarr, String[] emarr, String category, String[] agearr,  String[] localarr) {
 		Connection conn = getConnection();
 				
 				ArrayList list = null;
 				
-				CommunityDAO dao = new CommunityDAO();	
+				CommunityDAO dao = new CommunityDAO();
+				System.out.println("서비스");
+				 System.out.println("category : " + category);
+				 System.out.println("age : " + agearr);
+				 System.out.println("local : " +localarr );
+				 System.out.println("acarr : " +acarr );
+				 System.out.println("emarr : " +emarr );
+		        
 				if(i == 1) {
 					System.out.println("리스트 가져오기 실행");
 					list = dao.selectSearchSpList(conn,acarr,emarr,category,agearr,localarr);
