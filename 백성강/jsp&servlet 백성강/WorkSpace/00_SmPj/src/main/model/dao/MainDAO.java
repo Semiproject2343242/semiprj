@@ -49,7 +49,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM SUPPORTLIST WHERE RNUM BETWEEN 1 AND 4 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM SUPPORTLIST WHERE ROWNUM <= 4 AND ENROLL_STATE = 'Y' ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -69,12 +69,11 @@ public class MainDAO {
 									 rset.getString("AC_STATE"),
 									 rset.getString("LC_NAME"),
 									 rset.getString("ENROLL_STATE"),
+									 rset.getString("EM_STATE"),
 									 rset.getString("TC_NAME"),
 									 rset.getString("CG_NAME"),
 									 rset.getDate("RECRUIT_STARTDATE"),
-									 rset.getDate("RECRUIT_ENDDATE"),
-									 rset.getDate("ACTIVITY_STARTDATE"),
-									 rset.getDate("ACTIVITY_ENDDATE"));
+									 rset.getDate("RECRUIT_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -91,7 +90,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM EXTERNALLIST WHERE ROWNUM <= 6 AND ENROLL_STATE = 'Y' ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();

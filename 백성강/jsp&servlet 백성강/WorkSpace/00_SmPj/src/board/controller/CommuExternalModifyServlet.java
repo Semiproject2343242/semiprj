@@ -49,7 +49,7 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "exteranl_uploadFiles/";
+	         String savePath = root + "/UploadFolder/external_uploadFiles/";
 	         
 	         System.out.println("savePath : "+savePath);
 	         
@@ -97,11 +97,9 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         String title = multiRequest.getParameter("ea_title");
 	         String content = multiRequest.getParameter("ea_text_contents");
 	         String bWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNickName();
+	         System.out.println(titleImage);
 	         int userId = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
-	         System.out.println("age"+category);
-	         System.out.println("local"+localarr);
 	 		 String age = "";
-	 		 
 	 		 if(agearr != null) {
 	 			for (int i = 0; i< agearr.length; i++) {
 	 				if(i == agearr.length -1)
@@ -187,14 +185,11 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	         b.setCgName(category);
 	         b.setTcName(age);
 	         b.setLcName(local);
-	         b.setReStratDate(ea_res_date);
+	         b.setReStartDate(ea_res_date);
 	         b.setReEndDate(ea_ree_date);
 	         b.setAcStartDate(ea_acs_date);
 	         b.setAcEndDate(ea_ace_date);
-	         System.out.println("b는" +b);
-	         System.out.println("age:"+agearr[1]);
-	         System.out.println("age:"+age);
-	         System.out.println("age는" + b.getTcName());
+//	         System.out.println(b);
 	         System.out.println("originFiles : "+originFiles);
 	         System.out.println("saveFiles : "+saveFiles);
 	         System.out.println("mainfile : "+mainfile);
@@ -214,7 +209,6 @@ public class CommuExternalModifyServlet extends HttpServlet {
 	        			 fileList.add(af);
 	        		 }
 	        	 }else{
-	        		 System.out.println(originFiles.size());
 	        		 for(int i  = originFiles.size() - 1; i>=0; i--) {
 	        			 FileVO af = new FileVO();
 	        			 af.setFilePath(savePath);

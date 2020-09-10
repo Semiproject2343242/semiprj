@@ -78,12 +78,6 @@
 								<tr>
 									<td>비밀번호 : </td>
 									<td align="left" ><input style="width:200px" type="password"  id="userPwd1" name="userPwd1" placeholder="비밀번호를 입력해주세요"></td>
-									<td style="width:180px"><label   id="pwd1Result"></label></td>
-								</tr>
-								<tr>
-									<td>비밀번호 확인:</td>
-									<td align="left"><input style="width:200px" type="password" width="200px" id="userPwd2" name="userPwd2" placeholder="비밀번호를 다시 입력해주세요"></td>
-									<td ><label   id="pwd2Result"></label></td>
 								</tr>
 							</table>
 							<p>
@@ -93,17 +87,6 @@
 		                    <br>
 						</div>
 					</form>			
-					<script>				
-						$("#userPwd2").keyup(function(){
-							if($("#userPwd1").val() != $(this).val()){
-								$("#pwd2Result").text("비밀번호 불일치").css("color","red");
-								isPw2 = false;
-							}else{
-								$("#pwd2Result").html("비밀번호가 일치합니다.").css("color","green");
-								isPw2 = true;
-							}
-						});
-					</script>
 	            </section>
         	</div>
     	</section>

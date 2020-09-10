@@ -1,4 +1,4 @@
- <%@page import="board.model.vo.Board"%>
+<%@page import="board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -54,10 +54,27 @@
                 </tbody>
                 <tfoot>
 	                <tr>
-	                <td colspan="5"></td>
+	                <td colspan="2"></td>
+	                <td>
+	                <form action = "<%= request.getContextPath() %>/search.no">
+	                	<select name="opt"> <!-- 검색 컬럼 -->
+	                		<option value="all">전체 목록</option>
+	                		<option value="writer">작성자</option>
+	                		<option value="title">제목</option>
+	                		<option value="content">내용</option>
+	                		<option value="title_content">제목+내용</option>
+	                		<option value="category">카테고리</option>
+	                	</select>
+	                	<input type="text" name="word" value="" placeholder="검색어를 입력하세요">
+	           			<button type="submit">검색</button>
+	           		</form>
+	           		</td>
+	           		<td colspan="2"></td>
 	                <td>
 	                	<% if(loginUser != null){ %>
-	                    <button onclick="location.href='<%= request.getContextPath()  %>/insertForm.no'">글쓰기</button>
+		                	<% if(loginUser.getMemberNickName().equals("운영자")){ %>
+			                    <button onclick="location.href='<%= request.getContextPath()  %>/insertForm.no'">글쓰기</button>
+		                    <% } %>
 	                    <% } %>
 	                </td>
 	                </tr>
@@ -73,15 +90,11 @@
 	            }).mouseout(function(){
 	               $(this).parent().css('background', 'none'); //벗어나면
 	            }).click(function(){
-	               var bId = $(this).parent().children().children('input').val(); // 버튼을 누르면 bId에 데이터 값 저장-> 값을 /q_detail.no에 보내줌
-	               <% if(loginUser != null){%> //로그인 시 가능
-	                  location.href = '<%= request.getContextPath() %>/detail.no?bId=' + bId; 
-	               <% }else{ %>
-	                  alert('회원만 이용할 수 있는 서비스입니다.')
-	               <% } %>
-	            })
+	              var bId = $(this).parent().children().children('input').val(); // 버튼을 누르면 bId에 데이터 값 저장-> 값을 /q_detail.no에 보내줌
+                  location.href = '<%= request.getContextPath() %>/detail.no?bId=' + bId; 
+	            });
 	        <% } %>
-         })
+         });
       </script>
     </section>
 	<%@ include file="../Common/footer.jsp" %>

@@ -45,7 +45,7 @@ public class MemberOverlapServlet extends HttpServlet {
         System.out.println("userId : " + userId);
 		System.out.println("userNickName : " + userNickName);
         
-		Member member  = service.overlapCheck(null, userId,userNickName);
+		Member member  = service.overlapCheck(userId,userNickName);
 		response.setContentType("application/json; charset=UTF-8");
 		
 		System.out.println("member : " + member);

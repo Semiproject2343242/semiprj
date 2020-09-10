@@ -58,6 +58,31 @@ public class MemberService {
 		
 	}
 
+	public Member selectMember(int memberNo) {
+		
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().selectMember(conn, memberNo);
+				
+		close(conn);
+
+		return member;
+		
+	}
+
+
+	public int getListCount(String boardName, int mNo) {
+		
+		Connection conn = getConnection();
+			
+		int result = new MemberDAO().getListCount(conn,boardName,mNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
 	public ArrayList<Board> selectMyCommuFreeList(int loginMemberNo, PageInfo pi) {
 		
 		Connection conn = getConnection();
@@ -178,29 +203,6 @@ public class MemberService {
 	}
 	
 	
-	//////////////////////// Ï∂îÌõÑ ÏàòÏ†ï ÏòàÏ†ï /////////////////////////////
-	public int deleteProfile(int fileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result = dao.deleteProfile(conn, fileNo, loginMemberNo);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-
-		return result;
-	}
-	///////////////////////////////////////////////////////////////
-	
-	
-	
 	public int deleteProfile(int loginMemberNo) {
 		
 		Connection conn = getConnection();
@@ -219,35 +221,6 @@ public class MemberService {
 
 		return result;
 	}
-	
-	
-	
-	
-	//////////////////////// Ï∂îÌõÑ ÏàòÏ†ï ÏòàÏ†ï /////////////////////////////
-	public int updateProfile(FileVO profile, int originalFileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result1 = dao.deleteProfile(conn, originalFileNo, loginMemberNo);
-		int result2 = dao.insertProfile(conn, profile, loginMemberNo);
-		
-		if(result1 > 0 && result2 > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result1;
-	}
-	////////////////////////////////////////////////////////////////
-	
-
-	
-		
 	
 	
 	public int updateProfile(FileVO profile, int loginMemberNo) {
@@ -269,7 +242,8 @@ public class MemberService {
 		
 		return result1;
 	}
-	//ÏïÑÏù¥Îîî Ï§ëÎ≥µÏ≤¥ÌÅ¨
+
+	//æ∆¿Ãµ ¡ﬂ∫π√º≈©
 	public int checkId(String userId) {
 		Connection conn = getConnection();
 		
@@ -279,7 +253,7 @@ public class MemberService {
 		
 		return result;
 	}
-	//ÎãâÎÑ§ÏûÑ Ï§ëÎ≥µÏ≤¥ÌÅ¨
+	//¥–≥◊¿” ¡ﬂ∫π√º≈©
 	public int nickName(String nickName) {
 		Connection conn = getConnection();
 		
@@ -289,7 +263,7 @@ public class MemberService {
 		
 		return result;
 	}
-	//ÏïÑÏù¥Îîî ÏÇ≠Ï†ú
+	//æ∆¿Ãµ ªË¡¶
 	public int deleteMember(String memberId) {
 		Connection conn = getConnection();
 		
@@ -299,7 +273,7 @@ public class MemberService {
 		
 		return result;
 	}
-	//ÏïÑÏù¥Îîî Ï∞æÍ∏∞
+	//æ∆¿Ãµ √£±‚
 	public ArrayList<Member> searchId(String name) {
 		Connection conn = getConnection();
 		
@@ -339,47 +313,24 @@ public class MemberService {
 		
 		return result;
 	}
-	
-	public Member overlapCheck(Connection conn, String userId, String userNickName) {
 
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		Member member = null;
-		String query="";
+	public Member overlapCheck(String userId, String userNickName) {
+		Connection conn = getConnection();
 		
-		if(userNickName=="") {
-			query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
-		}else {
-			query = "SELECT * FROM MEMBER WHERE MEMBER_NICKNAME = ?";
-		}
-
-		try {
-			pstmt = conn.prepareStatement(query);
-			if(userNickName=="") {
-				pstmt.setString(1, userId);
-			}else {
-				pstmt.setString(1, userNickName);
-			}
-			
-			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				member = new Member(rset.getInt("MEMBER_NO"), rset.getString("MEMBER_ID"),
-						rset.getString("MEMBER_PW"), rset.getString("MEMBER_NAME"), rset.getString("MEMBER_NICKNAME"),
-						rset.getString("MEMBER_GENDER"), rset.getDate("MEMBER_BIRTHDAY"), rset.getString("MEMBER_PHONE"),
-						rset.getString("MEMBER_EMAIL"),rset.getString("MEMBER_ADDRESS"),rset.getDate("MEMBER_REGDATE"), 
-						rset.getString("MEMBER_ENABLE"), rset.getString("MEMBER_GRADE"));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-
+		Member member = new MemberDAO().overlapCheck(conn, userId,userNickName);
+		
+		close(conn);
+		
 		return member;
 	}
 
+	public Member kakoLogin(Member member) {
+			Connection conn = getConnection();
+
+			Member loginUser = new MemberDAO().kakaoLogin(conn, member);
+			close(conn);
+
+			return loginUser;
+	}
 	
 }

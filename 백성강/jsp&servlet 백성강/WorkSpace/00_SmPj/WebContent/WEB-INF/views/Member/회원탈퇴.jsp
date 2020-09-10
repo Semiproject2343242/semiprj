@@ -69,7 +69,7 @@
 			</a>
         </aside>
         <div id="main_section">
-          
+          	<form action="<%=request.getContextPath()%>/Delete.me" method="post">
             <table align = center>
                 <tr>
                     <th><%= loginUser.getMemberName() %>.님</th>
@@ -79,32 +79,11 @@
                         <h3>탈퇴를 진행하시려면 비밀번호를 입력해주세요</h3>
                         <input type="hidden" name="userId" value="<%= loginUser.getMemberId() %>">
                         <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요." size="30">
-                        <input type="button" name="subPwd" value="탈퇴" onclick="dlt();" >
-                              <script>
-                               		function dlt(){
-                               			console.log(pw);
-                               			var Id = '<%= loginUser.getMemberId() %>';
-                               			var pw = '<%= loginUser.getMemberPw() %>';
-                               			var pw2 = document.getElementById("userPwd").value;
-                                   		var result=window.confirm(Id+"정말로 탈퇴하시겠습니까?");
-                                       	if(result){
-                                       		console.log(pw);
-                                       		console.log(pw2);
-                                       		if(pw == pw2){
-                                        	location.href="<%= request.getContextPath() %>/Delete.me?Id="+Id;
-                                       		}
-                                       		else{
-                                       			window.confirm("비밀번호 틀림");
-                                       		}
-                                       	}else{
-                                        	window.alert("탈퇴가 취소되었습니다.");
-                                       	} 
-                               		}
-                              </script>
+                        <input type="submit" name="subPwd" value="탈퇴" >
                 	</td>
                 </tr>
-                </table>
-               
+            </table>
+            </form>
         </div>
         
     </section>
