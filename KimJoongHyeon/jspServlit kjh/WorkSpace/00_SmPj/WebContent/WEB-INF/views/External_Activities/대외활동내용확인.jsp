@@ -100,7 +100,7 @@
 	<input type="hidden" name="viewCount" value="<%= b.getBoardViewCount() %>" />
 	<input type="hidden" name="reCommend" value="<%= b.getBoardReCommend() %>" />
 	<input type="hidden" name="writer" value="<%= b.getBoardWriter() %>" />
-	<input type="hidden" name="ea_res_date" value="<%= b.getReStratDate() %>" />
+	<input type="hidden" name="ea_res_date" value="<%= b.getReStartDate() %>" />
 	<input type="hidden" name="ea_ree_date" value="<%= b.getReEndDate() %>" />
 	<input type="hidden" name="ea_acs_date" value="<%= b.getAcStartDate() %>" />
 	<input type="hidden" name="ea_ace_date" value="<%= b.getAcEndDate() %>" />
@@ -128,7 +128,7 @@
 					<%=b.getLcName()%></p>
 				<p>
 					<b>모집 일정 </b>
-					<%=b.getReStratDate()%>~<%=b.getReEndDate()%></p>
+					<%=b.getReStartDate()%>~<%=b.getReEndDate()%></p>
 				<p>
 					<b>활동 일정 </b>
 					<%=b.getAcStartDate()%>~<%=b.getAcEndDate()%></p>

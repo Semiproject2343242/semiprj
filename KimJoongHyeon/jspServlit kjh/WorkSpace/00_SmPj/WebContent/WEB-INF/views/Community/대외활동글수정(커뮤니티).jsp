@@ -531,7 +531,7 @@ section{
           </tr>
           <tr>
             <th>모집 일정</th>
-            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1 value="<%=b.getReStratDate() %>">
+            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1 value="<%=b.getReStartDate() %>">
               ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1 value="<%=b.getReEndDate() %>"> 까지</td>
           </tr>
           <tr>
