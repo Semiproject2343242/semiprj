@@ -5,6 +5,9 @@ import static common.JDBCTemplate.rollback;
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import board.model.vo.Board;
@@ -54,6 +57,31 @@ public class MemberService {
 		return member;
 		
 	}
+
+	public Member selectMember(int memberNo) {
+		
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().selectMember(conn, memberNo);
+				
+		close(conn);
+
+		return member;
+		
+	}
+
+
+	public int getListCount(String boardName, int mNo) {
+		
+		Connection conn = getConnection();
+			
+		int result = new MemberDAO().getListCount(conn,boardName,mNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 	public ArrayList<Board> selectMyCommuFreeList(int loginMemberNo, PageInfo pi) {
 		
@@ -175,29 +203,6 @@ public class MemberService {
 	}
 	
 	
-	//////////////////////// ì¶”í›„ ìˆ˜ì • ì˜ˆì • /////////////////////////////
-	public int deleteProfile(int fileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result = dao.deleteProfile(conn, fileNo, loginMemberNo);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-
-		return result;
-	}
-	///////////////////////////////////////////////////////////////
-	
-	
-	
 	public int deleteProfile(int loginMemberNo) {
 		
 		Connection conn = getConnection();
@@ -218,33 +223,6 @@ public class MemberService {
 	}
 	
 	
-	
-	
-	//////////////////////// ì¶”í›„ ìˆ˜ì • ì˜ˆì • /////////////////////////////
-	public int updateProfile(FileVO profile, int originalFileNo, int loginMemberNo) {
-		
-		Connection conn = getConnection();
-		
-		MemberDAO dao = new MemberDAO();
-		
-		int result1 = dao.deleteProfile(conn, originalFileNo, loginMemberNo);
-		int result2 = dao.insertProfile(conn, profile, loginMemberNo);
-		
-		if(result1 > 0 && result2 > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result1;
-	}
-	////////////////////////////////////////////////////////////////
-	
-
-	
-	
 	public int updateProfile(FileVO profile, int loginMemberNo) {
 		
 		Connection conn = getConnection();
@@ -263,6 +241,96 @@ public class MemberService {
 		close(conn);
 		
 		return result1;
+	}
+
+	//¾ÆÀÌµð Áßº¹Ã¼Å©
+	public int checkId(String userId) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().checkId(conn, userId);
+		
+		close(conn);
+		
+		return result;
+	}
+	//´Ð³×ÀÓ Áßº¹Ã¼Å©
+	public int nickName(String nickName) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().checkNickName(conn, nickName);
+		
+		close(conn);
+		
+		return result;
+	}
+	//¾ÆÀÌµð »èÁ¦
+	public int deleteMember(String memberId) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().deleteMember(conn, memberId);
+		
+		close(conn);
+		
+		return result;
+	}
+	//¾ÆÀÌµð Ã£±â
+	public ArrayList<Member> searchId(String name) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> result = new MemberDAO().searchId(conn, name);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Member> searchPwd(String name) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> result = new MemberDAO().searchPwd(conn, name);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int modifyPwdMember(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().modifyPwdMember(conn, m);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateInfo(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDAO().updateInfo(conn, m);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public Member overlapCheck(String userId, String userNickName) {
+		Connection conn = getConnection();
+		
+		Member member = new MemberDAO().overlapCheck(conn, userId,userNickName);
+		
+		close(conn);
+		
+		return member;
+	}
+
+	public Member kakoLogin(Member member) {
+			Connection conn = getConnection();
+
+			Member loginUser = new MemberDAO().kakaoLogin(conn, member);
+			close(conn);
+
+			return loginUser;
 	}
 	
 }

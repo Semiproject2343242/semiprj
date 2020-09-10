@@ -4,7 +4,7 @@
     <% 
     
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	System.out.println(pi);
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();

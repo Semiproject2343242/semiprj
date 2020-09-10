@@ -49,7 +49,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "support_uploadFiles/";
+	         String savePath = root + "/UploadFolder/support_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         
@@ -173,6 +173,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
             }
             fileList.add(af);
          }
+         System.out.println("fileList : " + fileList);
          System.out.println("b : " + b);
          int result = new CommunityService().insertSpAddFile(b, fileList);
          

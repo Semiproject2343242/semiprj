@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>정부 지원금 바로 지금</title>
+    <title>자유게시판</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
 </head>
@@ -20,7 +20,7 @@
    <%@ include file="../Common/header.jsp" %>
     <section>
          <aside>
-           <h2 ><a href="<%= request.getContextPath() %>/main.cm">커뮤니티</h2></a>
+           <h2 ><a href="<%= request.getContextPath() %>/fMain.cm">커뮤니티</h2></a>
             <hr>
             <div>
             <dl>
@@ -65,9 +65,26 @@
                 </tbody>
                 <tfoot>
 	                <tr>
-	                <td colspan="5"></td>
+	                <td></td>
+	                <td colspan="2">
+	                <form action = "<%= request.getContextPath() %>/fsearch.cm">
+	                	<select name="opt"> <!-- 검색 컬럼 -->
+	                		<option value="all">전체 목록</option>
+	                		<option value="writer">작성자</option>
+	                		<option value="title">제목</option>
+	                		<option value="content">내용</option>
+	                		<option value="title_content">제목+내용</option>
+	                		<option value="category">카테고리</option>
+	                	</select>
+	                	<input type="text" name="word" value="" placeholder="검색어를 입력하세요">
+	           			<button type="submit">검색</button>
+	           		</form>
+	           		</td>
+	           		<td></td>
 	                <td>
+	                	<% if(loginUser != null){ %>
 	                    <button onclick="location.href='<%= request.getContextPath()  %>/fInsertForm.cm'">글쓰기</button>
+	                    <% } %>
 	                </td>
 	                </tr>
                 </tfoot>
@@ -83,11 +100,7 @@
 	               $(this).parent().css('background', 'none');
 	            }).click(function(){
 	               var bId = $(this).parent().children().children('input').val();
-	               <% if(loginUser != null){%>
 	                  location.href = '<%= request.getContextPath() %>/fDetail.cm?bId=' + bId;
-	               <% }else{ %>
-	                  alert('회원만 이용할 수 있는 서비스입니다.')
-	               <% } %>
 	            })
 	        <% } %>
          })

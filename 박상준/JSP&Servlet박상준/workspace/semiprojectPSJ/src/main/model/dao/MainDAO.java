@@ -33,7 +33,6 @@ public class MainDAO {
 						 rset.getString("MEMBER_NICKNAME"),	// 게시판 글쓴이 회원	
 						 rset.getInt("B_REPLY_COUNT"),		// 게시판 댓글
 						 rset.getString("CG_NAME"));		// 카테고리 이름
-				System.out.println(bo);
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -50,7 +49,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM SUPPORTLIST WHERE RNUM BETWEEN 1 AND 4 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM SUPPORTLIST WHERE ROWNUM <= 4 AND ENROLL_STATE = 'Y' ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -91,7 +90,7 @@ public class MainDAO {
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
 				
-		String query = "SELECT * FROM EXTERNALLIST WHERE RNUM BETWEEN 1 AND 6 ORDER BY B_NO DESC";
+		String query = "SELECT * FROM EXTERNALLIST WHERE ROWNUM <= 6 AND ENROLL_STATE = 'Y' ORDER BY B_NO DESC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();

@@ -20,11 +20,39 @@ public class Member {
 	private int memberBoard;
 	
 	
+		public Member(String memberId, String memberName, String memberPhone, String memberEmail) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+	} //아이디 찾기를 위해 추가
 	
 	public Member(String memberId, String memberPw) {
 		super();
 		this.memberId = memberId;
 		this.memberPw = memberPw;
+	}
+	
+	
+	// selectMemberList
+	public Member(int memberNo, String memberId, String memberName, String memberNickName, String memberGender,
+			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress, Date memberRegDate, 
+			String memberEnable, String memberGrade, int memberBoard) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberNickName = memberNickName;
+		this.memberGender = memberGender;
+		this.memberBirthDay = memberBirthDay;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+		this.memberRegDate = memberRegDate;
+		this.memberEnable = memberEnable;
+		this.memberGrade = memberGrade;
+		this.memberBoard = memberBoard;
 	}
 	
 	public Member(int memberNo, String memberId, String memberName, String memberNickName, String memberGender,
@@ -61,7 +89,8 @@ public class Member {
 		this.memberRegDate = memberRegDate;
 		this.memberEnable = memberEnable;
 		this.memberGrade = memberGrade;
-	}
+	}	
+
 
 	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberNickName,
 			String memberGender, Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress,
@@ -83,6 +112,7 @@ public class Member {
 		this.memberBoard = memberBoard;
 	}
 
+
 	public Member(String memberId, String memberPw, String memberName, String memberNickName, String memberGender,
 			Date memberBirthDay, String memberPhone, String memberEmail, String memberAddress) {
 		super();
@@ -97,6 +127,19 @@ public class Member {
 		this.memberAddress = memberAddress;
 	}
 
+	// 회원수정을 위해 사용
+	public Member(String memberId, String memberName, String memberNickName, String memberGender, Date memberBirthDay,
+			String memberPhone, String memberEmail, String memberAddress) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberNickName = memberNickName;
+		this.memberGender = memberGender;
+		this.memberBirthDay = memberBirthDay;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}

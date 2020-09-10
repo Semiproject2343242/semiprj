@@ -476,7 +476,7 @@
       </div>
 	</div>
 	  <div class = "sp_button">
-		<%if (loginUser != null) {%>
+		<%if(loginUser!=null && loginUser.getMemberNickName().equals("운영자")) {%>
 		<input type="button" class="result_btn" onclick="location.href='insertForm.sp'"id="insertBtn" value="작성하기">
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">

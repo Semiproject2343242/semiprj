@@ -36,11 +36,13 @@ public class MyPageQAServlet extends HttpServlet {
 		
 		MemberService memberService = new MemberService();
 		
+		int listCount = memberService.getListCount("QA", loginMemberNo);
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageInfo pi = Page.PageInfo("QA", currentPage, "/myPageQA.me");
+		PageInfo pi = Page.pageInfo2(listCount, currentPage, "/myPageQA.me");
 		
 		ArrayList<Board> list = memberService.selectMyQAList(loginMemberNo, pi);
 		

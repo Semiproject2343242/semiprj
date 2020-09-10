@@ -237,7 +237,7 @@ li:hover {
 			</div>
 			<script>
         $(function(){
-	            $('#notice_title .area_list_title').mouseenter(function(){
+	            $('#notice_title .area_list').mouseenter(function(){
 	               $(this).css({'cursor':'pointer'});
 	            }).mouseout(function(){
 	               $(this).css('none');

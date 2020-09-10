@@ -541,13 +541,13 @@
       	});
 		function getAdoptImage(boardNo,length,i){//리스트에 맞게 이미지 가져오기
 	         $.ajax({
-	            url: 'eaSearchImage.cm',
+	            url: 'eaSearchIeage.cm',
 	            success: function(data){
 	            	  var input=""; 
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='/UploadFolder/exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='<%= request.getContextPath() %>/UploadFolder/external_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }

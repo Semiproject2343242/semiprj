@@ -16,7 +16,6 @@ import board.model.vo.PageInfo;
 
 public class CommunityDAO {
 
-	
 	public ArrayList selectSpList(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -59,7 +58,6 @@ public class CommunityDAO {
 		}
 		return list;
 	}
-	
 	public int updateCount(Connection conn, int bId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -148,6 +146,7 @@ public class CommunityDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));

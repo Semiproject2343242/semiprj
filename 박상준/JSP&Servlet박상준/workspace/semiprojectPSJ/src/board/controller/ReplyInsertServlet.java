@@ -49,10 +49,6 @@ public class ReplyInsertServlet extends HttpServlet {
 				response.sendRedirect("detail.ea?bId="+bId);
 			}else if(bName.equals("대외커뮤")) {
 				response.sendRedirect("eaDetail.cm?bId="+bId);
-			} else if(bName.equals("지원")) {
-				response.sendRedirect("detail.sp?bId="+bId);
-			}else if(bName.equals("지원커뮤")) {
-				response.sendRedirect("spDetail.cm?bId="+bId);
 			}
 
 		} else {			
