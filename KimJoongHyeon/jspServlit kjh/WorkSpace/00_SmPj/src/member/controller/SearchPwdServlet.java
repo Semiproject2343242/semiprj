@@ -82,7 +82,7 @@ public class SearchPwdServlet extends HttpServlet {
 	      	for(Member m : list) {
 	      		if(phone1.equals(m.getMemberPhone()) && id.equals(m.getMemberId()) ){
 	      	      	if(list != null ) {
-		      	    	page = "WEB-INF/views/Member/비밀번호찾기2.jsp"; //비밀번호 jsp 하나더 생성
+		      	    	page = "WEB-INF/views/Member/비밀번호찾기후_변경.jsp"; //비밀번호 jsp 하나더 생성
 		      	    	request.setAttribute("m", m);  	
 	      	      	} else {
 		    			page = "WEB-INF/views/Common/errorPage.jsp";
