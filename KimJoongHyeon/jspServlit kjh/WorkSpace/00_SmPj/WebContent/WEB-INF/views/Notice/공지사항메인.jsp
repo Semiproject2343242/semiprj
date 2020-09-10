@@ -72,7 +72,9 @@
 	           		<td colspan="2"></td>
 	                <td>
 	                	<% if(loginUser != null){ %>
-	                    <button onclick="location.href='<%= request.getContextPath()  %>/insertForm.no'">글쓰기</button>
+		                	<% if(loginUser.getMemberNickName().equals("운영자")){ %>
+			                    <button onclick="location.href='<%= request.getContextPath()  %>/insertForm.no'">글쓰기</button>
+		                    <% } %>
 	                    <% } %>
 	                </td>
 	                </tr>

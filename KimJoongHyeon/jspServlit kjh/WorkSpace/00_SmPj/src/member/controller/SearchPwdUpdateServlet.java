@@ -16,13 +16,13 @@ import member.model.vo.Member;
  */
 //@WebServlet("/SearchPwdServlet2.me")
 @WebServlet(urlPatterns = "/SearchPwd2.me", name="MemberUpdatePwdServlet")
-public class SearchPwdServlet2 extends HttpServlet {
+public class SearchPwdUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPwdServlet2() {
+    public SearchPwdUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
