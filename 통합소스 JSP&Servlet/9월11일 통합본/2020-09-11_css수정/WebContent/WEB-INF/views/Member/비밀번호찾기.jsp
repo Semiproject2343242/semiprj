@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
-    html, body {
+html, body {
 	margin: 0px;
 	height: 100%;
 	min-width: 505px;
@@ -75,20 +75,6 @@ hr {
   		margin : 10px 2px;
   		padding: 10px;
   	}
-.contentsTable{text-align:center; font-size:12pt;}
-.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
-.contentsTable tbody{background-color:#F7F7F7}
-#tablename{align-self:center;}
-#게시판이름{text-align:center;}
-
-    
-	section {
-      display: block;
-      line-height: 40px;
-    }
-    #main_section {
-      width: 100%;
-    }
     #pwsearchbutton{background-color:darkgray; border-radius: 3px; border:none;}
     .box{
   	 width: 80%;
@@ -103,9 +89,8 @@ hr {
     <section>
     
         <div id="main_section">
-            <section id=pw_serch_Section>
+            <div class="box">
                 <form action="<%=request.getContextPath()%>/searchPwd.me" method="post">
-                    <div class="box">
                         <h1 align="center">비밀번호 찾기</h1>
                         
                         <table align="center">	
@@ -134,9 +119,8 @@ hr {
                         	<input type="submit" id="pwsearchbutton" style="width: 60pt; height: 30pt" value="확인"	>
                         	<input type="button" style="width: 60pt; height: 30pt" onclick="location.href='javascript:history.go(-1);'" value="취소">
                         </p>                    
-                    </div>
                 </form>
-            </section>
+			</div>
         </div>
     </section>
     <%@ include file="../Common/footer.jsp" %>

@@ -515,7 +515,7 @@ public class ExternalDAO {
 			pstmt.setString(3, b.getLcName());
 			pstmt.setString(4, b.getTcName());
 			pstmt.setString(5, b.getCgName());
-			pstmt.setDate(6, b.getReStratDate());
+			pstmt.setDate(6, b.getReStartDate());
 			pstmt.setDate(7, b.getReEndDate());
 			pstmt.setDate(8, b.getAcStartDate());
 			pstmt.setDate(9, b.getAcEndDate());
@@ -568,7 +568,7 @@ public class ExternalDAO {
 			pstmt.setString(4, b.getLcName());
 			pstmt.setString(5, b.getTcName());
 			pstmt.setString(6, b.getCgName());
-			pstmt.setDate(7, b.getReStratDate());
+			pstmt.setDate(7, b.getReStartDate());
 			pstmt.setDate(8, b.getReEndDate());
 			pstmt.setDate(9, b.getAcStartDate());
 			pstmt.setDate(10, b.getAcEndDate());
