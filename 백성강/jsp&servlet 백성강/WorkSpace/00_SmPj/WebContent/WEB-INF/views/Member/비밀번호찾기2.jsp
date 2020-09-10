@@ -32,7 +32,7 @@
 	    <section>
         	<div id="main_section">
             	<section id=pw_serch_Section>
-	            	<form action="<%=request.getContextPath()%>/SearchPwdServlet2" method="post">
+	            	<form action="<%=request.getContextPath()%>/SearchPwdServlet2.me" method="post">
 		            	<div class="box">
 		            		<br>
 							<h1><%= m.getMemberId() %>님</h1>
@@ -67,16 +67,15 @@
 							var regExp = /^[a-zA-Z]([a-zA-Z0-9\!\*\$]){5,11}$/;
 							
 							if(!regExp.test($(this).val())){
-								$("#pwd1Result").text("알맞은 비밀번호를 입력하세요").css("color","red");
-								$(this).focus().css("background","red");
+								$("#pwd1Result").text("불가능한 비밀번호 입니다.").css("color","red");
 								isPw = false;
 							}else{
-								$("#pwd1Result").text("비밀번호가 일치합니다.").css("color","green");
+								$("#pwd1Result").text("가능한 비밀번호 입니다.").css("color","green");
 								$(this).css("background","initial");
 								isPw = true;
 							}
 						});
-						
+
 						$("#userPwd2").keyup(function(){
 							if($("#userPwd1").val() != $(this).val()){
 								$("#pwd2Result").text("비밀번호 불일치").css("color","red");

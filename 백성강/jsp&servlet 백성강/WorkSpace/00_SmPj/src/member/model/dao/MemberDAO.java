@@ -728,5 +728,10 @@ public class MemberDAO {
 		return result;
 	}
 
+	public Member overlapCheck(Connection conn, String userId, String userNickName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

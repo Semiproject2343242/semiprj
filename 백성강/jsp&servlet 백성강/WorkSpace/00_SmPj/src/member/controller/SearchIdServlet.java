@@ -36,15 +36,11 @@ public class SearchIdServlet extends HttpServlet {
 		
 		String name = request.getParameter("name");
 		String phoneA = request.getParameter("phone");
-		String phone1=phoneA.substring(0,3);
-		String phone2=phoneA.substring(3,7);
-		String phone3=phoneA.substring(7,11);
-		phone1 += ("-"); phone1 += phone2; phone1 += ("-"); phone1 += phone3;
 		String email = request.getParameter("email");
 		String radio = request.getParameter("radio");
 		
 		System.out.println("name: " +name);
-		System.out.println("phone:" +phone1);
+		System.out.println("phone:" +phoneA);
 		System.out.println("email:" +email);
 		System.out.println("radio:" + radio);
 		
@@ -63,6 +59,10 @@ public class SearchIdServlet extends HttpServlet {
 		      	}
 	      	}
      	} else if(radio.equals("phone")) {
+    		String phone1=phoneA.substring(0,3);
+    		String phone2=phoneA.substring(3,7);
+    		String phone3=phoneA.substring(7,11);
+    		phone1 += ("-"); phone1 += phone2; phone1 += ("-"); phone1 += phone3;
 	      	for(Member m : list) {
 	      		if(phone1.equals(m.getMemberPhone())){
 	      	      	if(list != null ) {

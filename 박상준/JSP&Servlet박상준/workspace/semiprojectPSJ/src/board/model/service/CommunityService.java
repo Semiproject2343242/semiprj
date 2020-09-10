@@ -10,7 +10,10 @@ import java.util.ArrayList;
 
 import board.model.dao.BoardDAO;
 import board.model.dao.CommunityDAO;
-import board.model.vo.*;
+import board.model.dao.SupportDAO;
+import board.model.vo.Board;
+import board.model.vo.FileVO;
+import board.model.vo.PageInfo;
 
 public class CommunityService {
 
@@ -62,7 +65,7 @@ public class CommunityService {
 		
 		return result;
 	}
-
+	//대외리스트
 	public ArrayList selectExList(int i) {
 		Connection conn = getConnection();
 		
@@ -80,7 +83,7 @@ public class CommunityService {
 		return list;
 	}
 
-
+	
 	public int insertAddFile(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -100,7 +103,7 @@ public class CommunityService {
 		
 		return result1;
 	}
-
+	// 파일선택
 	public ArrayList<FileVO> selectFile(int bId) {
 		Connection conn = getConnection();
 		
@@ -118,7 +121,7 @@ public class CommunityService {
 		
 		return list;
 	}
-
+	//수정
 	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -147,7 +150,7 @@ public class CommunityService {
 		
 		return result1;
 	}
-
+	//add file
 	public int AddFile(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -165,15 +168,15 @@ public class CommunityService {
 		
 		return result;
 	}
-
+	//지원정책 리스트
 	public ArrayList selectSpList(int i) {
-	Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		ArrayList list = null;
 		
 		CommunityDAO dao = new CommunityDAO();	
 		if(i == 1) {
-			list = dao.selectBListS(conn);
+			list = dao.selectSpList(conn);
 		} else {
 			list = dao.selectFList(conn);
 		}
@@ -182,7 +185,7 @@ public class CommunityService {
 		
 		return list;
 	}
-
+	//대외활동 게시판검색
 	public ArrayList<Board> selectExSearchList(int i, String category, String[] agearr, String[] localarr) {
 Connection conn = getConnection();
 		
@@ -201,7 +204,7 @@ Connection conn = getConnection();
 		
 		return list;
 	}
-
+	//지원정책 게시판 등록
 	public int insertSpAddFile(Board b, ArrayList<FileVO> fileList) {
 		Connection conn = getConnection();
 		
@@ -221,5 +224,24 @@ Connection conn = getConnection();
 		
 		return result1;
 	}
+  // 지원정책 게시판 검색
+	public ArrayList<Board> selectSpSearchList(int i, String[] acarr, String[] agearr, String category,  String[] localarr, String[] emarr) {
+		Connection conn = getConnection();
+				
+				ArrayList list = null;
+				
+				CommunityDAO dao = new CommunityDAO();	
+				if(i == 1) {
+					System.out.println("리스트 가져오기 실행");
+					list = dao.selectSearchSpList(conn,acarr,emarr,category,agearr,localarr);
+				} else {
+					System.out.println("파일 가져오기 실행");
+					list = dao.selectFList(conn);
+				}
+				
+				close(conn);
+				
+				return list;
+			}
 
 }

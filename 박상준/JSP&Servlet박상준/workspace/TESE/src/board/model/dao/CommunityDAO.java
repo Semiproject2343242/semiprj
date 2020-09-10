@@ -63,7 +63,11 @@ public class CommunityDAO {
 						   rset.getString("LC_NAME"),
 						   rset.getString("ENROLL_STATE"),
 						   rset.getString("TC_NAME"),
-						   rset.getString("CG_NAME"));
+						   rset.getString("CG_NAME"),
+						   rset.getDate("RECRUIT_STARTDATE"),
+						   rset.getDate("RECRUIT_ENDDATE"),
+						   rset.getDate("ACTIVITY_STARTDATE"),
+						   rset.getDate("ACTIVITY_ENDDATE"));
 			}
 				
 		} catch (SQLException e) {
@@ -98,6 +102,7 @@ public class CommunityDAO {
 									 rset.getDate("B_DATE"),
 									 rset.getDate("B_RDATE"),
 									 rset.getInt("B_VIEW_COUNT"),
+									 rset.getInt("B_RECOMMEND"),
 									 rset.getInt("B_WRITER"),
 									 rset.getString("MEMBER_NICKNAME"),
 									 rset.getInt("B_REPLY_COUNT"));
@@ -135,7 +140,51 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public ArrayList selectBList(Connection conn, PageInfo pi) {
+	public ArrayList selectBList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+
+		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' ORDER BY B_NO DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Board>();
+			
+			while(rset.next()) {
+				list.add(new Board(rset.getInt("B_NO"),
+						   rset.getString("B_TITLE"),
+						   rset.getString("B_CONTENT"),
+						   rset.getDate("B_DATE"),
+						   rset.getDate("B_RDATE"),
+						   rset.getInt("B_VIEW_COUNT"),
+						   rset.getInt("B_RECOMMEND"),
+						   rset.getInt("B_WRITER"),
+						   rset.getString("MEMBER_NICKNAME"),
+						   rset.getInt("B_REPLY_COUNT"),
+						   rset.getString("AC_STATE"),
+						   rset.getString("LC_NAME"),
+						   rset.getString("ENROLL_STATE"),
+						   rset.getString("TC_NAME"),
+						   rset.getString("CG_NAME"),
+						   rset.getDate("RECRUIT_STARTDATE"),
+						   rset.getDate("RECRUIT_ENDDATE"),
+						   rset.getDate("ACTIVITY_STARTDATE"),
+						   rset.getDate("ACTIVITY_ENDDATE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList selectBListS(Connection conn, PageInfo pi) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
@@ -143,7 +192,7 @@ public class CommunityDAO {
 		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 		int endRow = startRow + pi.getBoardLimit() - 1;
 		
-		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
+		String query = "SELECT * FROM SUPPORTLIST WHERE ENROLL_STATE='N' AND RNUM BETWEEN ? AND ? ORDER BY B_NO DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -170,7 +219,11 @@ public class CommunityDAO {
 								   rset.getString("LC_NAME"),
 								   rset.getString("ENROLL_STATE"),
 								   rset.getString("TC_NAME"),
-								   rset.getString("CG_NAME")));
+								   rset.getString("CG_NAME"),
+								   rset.getDate("RECRUIT_STARTDATE"),
+								   rset.getDate("RECRUIT_ENDDATE"),
+								   rset.getDate("ACTIVITY_STARTDATE"),
+								   rset.getDate("ACTIVITY_ENDDATE")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,7 +233,6 @@ public class CommunityDAO {
 		}
 		return list;
 	}
-
 	public ArrayList selectFList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -210,8 +262,7 @@ public class CommunityDAO {
 	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-//		String query = "INSERT INTO BOARD VALUES(SEQ_NNO.NEXTVAL, 게시판이름, 제목, 내용, 생성날짜,  수정날짜,   조회수,    추천수,    삭제여부,  글쓴이번호, 댓글수,    AC_SATA,   LC_NAME, ENROLL_STATE, EM_STATE, TC_NAME, CG_NAME)";
-		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'대외',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,NULL,?,?)";
+		String query = "INSERT INTO BOARD VALUES(SEQ_BNO.NEXTVAL,'대외',?,?,SYSDATE,SYSDATE,DEFAULT,DEFAULT,DEFAULT,?,DEFAULT,'접수중',?,DEFAULT,NULL,?,?,?,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -221,7 +272,10 @@ public class CommunityDAO {
 			pstmt.setString(4, b.getLcName());
 			pstmt.setString(5, b.getTcName());
 			pstmt.setString(6, b.getCgName());
-			
+			pstmt.setDate(7, b.getReStratDate());
+			pstmt.setDate(8, b.getReEndDate());
+			pstmt.setDate(9, b.getAcStartDate());
+			pstmt.setDate(10, b.getAcEndDate());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -236,7 +290,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,SEQ_BNO.CURRVAL)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,SEQ_BNO.CURRVAL,NULL)";
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 			FileVO af = fileList.get(i);
@@ -257,46 +311,46 @@ public class CommunityDAO {
 		return result;
 	}
 
-	public ArrayList<FileVO> selectFile(Connection conn, int bId) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<FileVO> list = null;
-		
-		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1,  bId);
-			
-			rset = pstmt.executeQuery();
-			
-			list = new ArrayList<FileVO>();
-			
-			while(rset.next()) {
-				FileVO af = new FileVO();
-				af.setFileNo(rset.getInt("file_no"));
-				af.setOriginName(rset.getString("origin_name"));
-				af.setChangeName(rset.getString("change_name"));
-				af.setFilePath(rset.getString("file_path"));
-				af.setUploadDate(rset.getDate("upload_date"));
-				
-				list.add(af);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	}
+//	public ArrayList<FileVO> selectFile(Connection conn, int bId) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		ArrayList<FileVO> list = null;
+//		
+//		String query = "SELECT * FROM FILES WHERE B_NO=? AND STATUS='Y' ORDER BY FILE_NO";
+//		
+//		try {
+//			pstmt = conn.prepareStatement(query);
+//			pstmt.setInt(1,  bId);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			list = new ArrayList<FileVO>();
+//			
+//			while(rset.next()) {
+//				FileVO af = new FileVO();
+//				af.setFileNo(rset.getInt("file_no"));
+//				af.setOriginName(rset.getString("origin_name"));
+//				af.setChangeName(rset.getString("change_name"));
+//				af.setFilePath(rset.getString("file_path"));
+//				af.setUploadDate(rset.getDate("upload_date"));
+//				
+//				list.add(af);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return list;
+//	}
 
 	public int modifyBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=? WHERE B_NO = ?";
+		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=?, RECRUIT_STARTDATE = ?,RECRUIT_ENDDATE=?,ACTIVITY_STARTDATE=?,ACTIVITY_ENDDATE=?  WHERE B_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
@@ -304,7 +358,11 @@ public class CommunityDAO {
 			pstmt.setString(3, b.getLcName());
 			pstmt.setString(4, b.getTcName());
 			pstmt.setString(5, b.getCgName());
-			pstmt.setInt(6, b.getBoardNo());
+			pstmt.setDate(6, b.getReStratDate());
+			pstmt.setDate(7, b.getReEndDate());
+			pstmt.setDate(8, b.getAcStartDate());
+			pstmt.setDate(9, b.getAcEndDate());
+			pstmt.setInt(10, b.getBoardNo());
 			
 			result += pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -323,7 +381,6 @@ public class CommunityDAO {
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 				FileVO af = fileList.get(i);
-				System.out.println("af"+i+" : " + af);
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1,  af.getOriginName());
 				pstmt.setString(2,  af.getChangeName());
@@ -345,7 +402,7 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,?)";
+		String query = "INSERT INTO FILES VALUES(SEQ_FNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, DEFAULT, DEFAULT,?,NULL)";
 		try {
 			for(int i = 0; i < fileList.size(); i++) {
 			FileVO af = fileList.get(i);
@@ -365,5 +422,294 @@ public class CommunityDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList selectSearchBList(Connection conn, String category, String[] agearr, String[] localarr) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = null;
+		
+		String local = "";
+		
+//		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' ORDER BY B_NO DESC";
+		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' ";
+
+		//1.지역만 선택 됐을경우
+		if(category.equals("선택") && agearr==null && localarr != null) {//카테고리 대상선택 null 지역만 선택했을경우!
+			System.out.println("1.지역만 선택 됐을경우");
+			if(localarr.length == 1) {//하나밖에 없을때
+				query += " AND LC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (LC_NAME ";
+				for (int i = 0; i< localarr.length; i++) {
+					if(i == localarr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR LC_NAME";
+				}
+			}
+			query += " ORDER BY B_NO DESC ";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				for (int i = 0; i< localarr.length; i++) {
+					pstmt.setString(1+i, localarr[i]);
+				}
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}
+		else if(category.equals("선택") && localarr==null && agearr!=null){//2.대상만 선택 됐을경우
+			System.out.println("2.대상만 선택 됐을경우");
+			if(agearr.length == 1) {//하나밖에 없을때
+				query += " AND TC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (TC_NAME ";
+				for (int i = 0; i< agearr.length; i++) {
+					if(i == agearr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR TC_NAME";
+				}
+			}
+			query += " ORDER BY B_NO DESC ";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				for (int i = 0; i< agearr.length; i++) {
+					pstmt.setString(1+i, agearr[i]);
+				}
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}else if(agearr==null && localarr==null && !(category.equals("선택"))) {//3.카테고리만 선택했을경우
+			System.out.println("3.카테고리만 선택 됐을경우");
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)  ORDER BY B_NO DESC";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, category);
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}else if(agearr != null && localarr != null && category.equals("선택")) {//4.지역과 대상이 선택됐을경우
+			System.out.println("4.지역과 대상이 선택 됐을경우");
+			if(agearr.length == 1) {//하나밖에 없을때
+				query += " AND TC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (TC_NAME ";
+				for (int i = 0; i< agearr.length; i++) {
+					if(i == agearr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR TC_NAME";
+				}
+			}
+			
+			if(localarr.length == 1) {//하나밖에 없을때
+				query += " AND LC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (LC_NAME ";
+				for (int i = 0; i< localarr.length; i++) {
+					if(i == localarr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR LC_NAME";
+				}
+			}
+			query += " ORDER BY B_NO DESC ";
+			System.out.println(query);
+			try {
+				pstmt = conn.prepareStatement(query);
+				for (int i = 0; i< agearr.length; i++) {
+					pstmt.setString(1+i, agearr[i]);
+				}
+				
+				for (int i = 0; i< localarr.length; i++) {
+					pstmt.setString(1+i+agearr.length, localarr[i]);
+				}
+				
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}else if(agearr == null && localarr != null && !(category.equals("선택"))) {//5.지역과 카테고리가 선택됐을경우
+			System.out.println("5.지역과 카테고리가 선택됐을경우");
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)";
+			if(localarr.length == 1) {//하나밖에 없을때
+				query += " AND LC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (LC_NAME ";
+				for (int i = 0; i< localarr.length; i++) {
+					if(i == localarr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR LC_NAME";
+				}
+			}
+			query += " ORDER BY B_NO DESC ";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, category);
+				for (int i = 0; i< localarr.length; i++) {
+					pstmt.setString(2+i, localarr[i]);
+				}
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}else if(agearr != null && localarr == null && !(category.equals("선택"))) {//6.대상과 카테고리가 선택됐을경우
+			System.out.println("6.대상과 카테고리가 선택됐을경우");
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)";
+			if(agearr.length == 1) {//하나밖에 없을때
+				query += " AND TC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (TC_NAME ";
+				for (int i = 0; i< agearr.length; i++) {
+					if(i == agearr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR TC_NAME";
+				}
+			}
+			query += " ORDER BY B_NO DESC ";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, category);
+				for (int i = 0; i< agearr.length; i++) {
+					pstmt.setString(2+i, agearr[i]);
+				}
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}else {//7.전부 선택했을경우
+			System.out.println("7.전부 선택됐을경우");
+			query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='N' AND CG_NAME IN (?)";
+			if(agearr.length == 1) {//하나밖에 없을때
+				query += " AND TC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (TC_NAME ";
+				for (int i = 0; i< agearr.length; i++) {
+					if(i == agearr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR TC_NAME";
+				}
+			}
+			if(localarr.length == 1) {//하나밖에 없을때
+				query += " AND LC_NAME LIKE('%'||?||'%')";
+			}else{
+				query += " AND (LC_NAME ";
+				for (int i = 0; i< localarr.length; i++) {
+					if(i == localarr.length -1)//마지막일때
+						query += " LIKE('%'||?||'%'))";
+					else
+						query += " LIKE('%'||?||'%') OR LC_NAME";
+				}
+			}
+			query += " ORDER BY B_NO DESC ";
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, category);
+				for (int i = 0; i< agearr.length; i++) {
+					pstmt.setString(2+i, agearr[i]);
+				}
+				
+				for (int i = 0; i< localarr.length; i++) {
+					pstmt.setString(2+i+agearr.length, localarr[i]);
+				}
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<Board>();
+				list =  addList(rset,list);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+		}
+		return list;
+	}
+
+	private ArrayList<Board> addList(ResultSet rset, ArrayList<Board> list) {
+		try {
+			while(rset.next()) {
+				list.add(new Board(rset.getInt("B_NO"),
+						   rset.getString("B_TITLE"),
+						   rset.getString("B_CONTENT"),
+						   rset.getDate("B_DATE"),
+						   rset.getDate("B_RDATE"),
+						   rset.getInt("B_VIEW_COUNT"),
+						   rset.getInt("B_RECOMMEND"),
+						   rset.getInt("B_WRITER"),
+						   rset.getString("MEMBER_NICKNAME"),
+						   rset.getInt("B_REPLY_COUNT"),
+						   rset.getString("AC_STATE"),
+						   rset.getString("LC_NAME"),
+						   rset.getString("ENROLL_STATE"),
+						   rset.getString("TC_NAME"),
+						   rset.getString("CG_NAME"),
+						   rset.getDate("RECRUIT_STARTDATE"),
+						   rset.getDate("RECRUIT_ENDDATE"),
+						   rset.getDate("ACTIVITY_STARTDATE"),
+						   rset.getDate("ACTIVITY_ENDDATE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

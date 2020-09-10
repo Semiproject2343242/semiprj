@@ -31,13 +31,19 @@ public class CheckNickNameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nickName= request.getParameter("nickName");
-		
+		String no = request.getParameter("no");
 		int result = new MemberService().nickName(nickName);
 		
       	PrintWriter out = response.getWriter();
       	System.out.println("여긴 서브릿");
-      	if(result >0) {
-      		out.append("fail");
+      	System.out.println("nickName:" +nickName);
+      	System.out.println("no:" +no);
+      	if(!nickName.equals(no)){
+	      	if(result >0) {
+	      		out.append("fail");
+	      	}else {
+	      		out.append("success");
+	      	}
       	}else {
       		out.append("success");
       	}

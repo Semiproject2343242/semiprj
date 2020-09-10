@@ -1,11 +1,18 @@
 package board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import board.model.service.CommunityService;
+import board.model.vo.FileVO;
 
 /**
  * Servlet implementation class CommuSupportSearchImageServlet
@@ -26,8 +33,13 @@ public class CommuSupportSearchImageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		CommunityService service = new CommunityService();
+        ArrayList<FileVO> fList = new ArrayList<FileVO>(); //파일 리스트 가져오기
+     	
+        fList = service.selectSpList(2); //파일 리스트 가져오기
+     	
+     	response.setContentType("application/json; charset=UTF-8");
+     	new Gson().toJson(fList, response.getWriter());
 	}
 
 	/**
