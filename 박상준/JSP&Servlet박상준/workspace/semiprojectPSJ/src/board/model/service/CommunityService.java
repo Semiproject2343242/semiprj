@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import board.model.dao.BoardDAO;
 import board.model.dao.CommunityDAO;
 import board.model.dao.SupportDAO;
-import board.model.vo.Board;
-import board.model.vo.FileVO;
-import board.model.vo.PageInfo;
+import board.model.vo.*;
 
 public class CommunityService {
 

@@ -101,4 +101,71 @@ Connection conn = getConnection();
 		return list;
 	}
 
+	public int AddFile(Board b, ArrayList<FileVO> fileList) {
+Connection conn = getConnection();
+		
+ExternalDAO dao = new ExternalDAO();
+		int result = dao.AddFile(conn, fileList);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			System.out.println("AddFile Rollback!!!!!!!!!!!!!!!");
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int modifyBoard(Board b, ArrayList<FileVO> fileList) {
+Connection conn = getConnection();
+		
+ExternalDAO dao = new ExternalDAO();
+		int result2 = 0; 
+		System.out.println("b : " + b);
+		int result1 = dao.modifyBoard(conn,b);
+		
+		System.out.println("fileList : " + fileList.size());
+		System.out.println("result1 : " + result1);
+		result2 = result1;
+		if(fileList.size()==0 && result1 > 0) {
+			result2 = result1;
+		}else {
+			result2 = dao.modifyFile(conn, fileList);
+		}
+		
+		if(result1 >0 && result2 >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			System.out.println("modifyBoard Rollback!!!!!!!!!!!!!!!");
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+
+	public int insertAddFile(Board b, ArrayList<FileVO> fileList) {
+		Connection conn = getConnection();
+				
+		ExternalDAO dao = new ExternalDAO();
+		
+		int result1 = dao.insertBoard(conn,b);
+		int result2 = dao.insertAddFile(conn, fileList);
+		
+		if(result1 > 0 && result2 >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+			System.out.println("insertAddFile Rollback!!!!!!!!!!!!!!!");
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+
 }

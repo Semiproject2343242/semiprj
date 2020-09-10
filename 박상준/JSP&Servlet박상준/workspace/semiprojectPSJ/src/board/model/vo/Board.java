@@ -80,8 +80,8 @@ public class Board {
 	
 	
 	//자유게시판
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
-			Date boardModifyDate, int boardViewCount,int boardWriterNo,String boardWriter, int boardReply) {
+	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate, Date boardModifyDate,
+			int boardViewCount, int boardReCommend, int boardWriterNo,String boardWriter, int boardReply) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -89,6 +89,7 @@ public class Board {
 		this.boardCreateDate = boardCreateDate;
 		this.boardModifyDate = boardModifyDate;
 		this.boardViewCount = boardViewCount;
+		this.boardReCommend = boardReCommend;
 		this.boardWriterNo = boardWriterNo;
 		this.boardWriter = boardWriter;
 		this.boardReply = boardReply;
@@ -164,6 +165,34 @@ public class Board {
 	}
 	
 	
+	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
+			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
+			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
+			String tcName, String cgName, Date reStratDate, Date reEndDate, Date acStartDate, Date acEndDate) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCreateDate = boardCreateDate;
+		this.boardModifyDate = boardModifyDate;
+		this.boardViewCount = boardViewCount;
+		this.boardReCommend = boardReCommend;
+		this.boardEnable = boardEnable;
+		this.boardWriterNo = boardWriterNo;
+		this.boardWriter = boardWriter;
+		this.boardReply = boardReply;
+		this.acState = acState;
+		this.lcName = lcName;
+		this.enrollState = enrollState;
+		this.emState = emState;
+		this.tcName = tcName;
+		this.cgName = cgName;
+		this.reStartDate = reStratDate;
+		this.reEndDate = reEndDate;
+		this.acStartDate = acStartDate;
+		this.acEndDate = acEndDate;
+	}
+	
 	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
@@ -192,7 +221,7 @@ public class Board {
 	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
-			String tcName, String cgName, Date reStartDate, Date reEndDate, Date acStartDate, Date acEndDate) {
+			String tcName, String cgName, Date reStratDate, Date reEndDate) {
 		super();
 		this.boardNo = boardNo;
 		this.boardName = boardName;
@@ -212,12 +241,9 @@ public class Board {
 		this.emState = emState;
 		this.tcName = tcName;
 		this.cgName = cgName;
-		this.reStartDate = reStartDate;
+		this.reStartDate = reStratDate;
 		this.reEndDate = reEndDate;
-		this.acStartDate = acStartDate;
-		this.acEndDate = acEndDate;
 	}
-
 	
 	//지원정책 커뮤니티
 	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,

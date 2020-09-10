@@ -12,6 +12,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
+#main_section{
+	margin: 0px;
+}
 .writertext{
       line-height: 70px;
       list-style: none;
@@ -77,18 +80,14 @@
 	float: right;
 }
  #btnBack{
-	 position: absolute;
-	 top: 1050px;
-	 left: 260px;
-	 cursor: pointer;
-	 z-index: 1;
+	cursor: pointer;
+	padding: 10px;
+	margin: 1200px 20px; 
 }
 #btnNext{
-  position: absolute;
-  top: 1050px;
-  right: 120px;
-  cursor: pointer;
-  z-index: 1;
+ 	cursor: pointer;
+	padding: 10px;
+	margin: 1200px 0px; 
 }
 .imageArea{
 	height: 80%;
@@ -134,6 +133,9 @@
 				</dl>
 			</div>
 		</aside>
+		<div>
+			<input type="button" id="btnBack" value="<<">
+		</div>
 		<div id="main_section">
 		<h2 align="center">대외 활동</h2>
 		<div class="serach_box">
@@ -434,20 +436,18 @@
       </div>
 	</div>
 	  <div class = "sp_button">
-		<%if (loginUser != null) {%>
-		<input type="button" class="result_btn" onclick="location.href='eaInsertForm.cm'"id="insertBtn" value="작성하기">
+		<%if(loginUser!=null && loginUser.getMemberNickName().equals("운영자")) {%>
+		<input type="button" class="result_btn" onclick="location.href='insertForm.ea'"id="insertBtn" value="작성하기">
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
 		</div>
 		<br clear="all">
-			<input type="button" id="btnBack" value="<<">
 		<div class="serachList" align="center">
 			<ul class="thumbnailArea" id=boardArea>
 				
 			</ul>
 		</div>
-			<input type="button" id="btnNext" value=">>">
 		<script>
 		$(function(){//페이지 생성될때 리스트 불러오기
 			$.ajax({
@@ -471,7 +471,7 @@
 						+data[i].boardReCommend+"</p></div></li>";
 						boardArea.append(input);
 	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	                  	$('#board_list'+i).attr("onclick","location.href='detail.ea?bId="+data[i].boardNo+"'");
 	                  }
 						getlistCount();
 	               }else{
@@ -526,7 +526,7 @@
 	  						+data[i].boardReCommend+"</p></div></li>"
 	  						boardArea.append(input);
 	  	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	  	                  	$('#board_list'+i).attr("onclick","location.href='Detail.ea?bId="+data[i].boardNo+"'");
+	  	                  	$('#board_list'+i).attr("onclick","location.href='detail.ea?bId="+data[i].boardNo+"'");
 	  	                  }
 	  	                getlistCount();
 	  	               }else{
@@ -548,7 +548,7 @@
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='/UploadFolder/exteranl_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='<%= request.getContextPath() %>/UploadFolder/external_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }
@@ -604,7 +604,9 @@
 		
       </script>
 	</div>		
-			
+	<div>
+			<input type="button" id="btnNext" value=">>">
+	</div>		
 	</section>
 	<%@ include file="../Common/footer.jsp"%>
 </body>

@@ -7,11 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>정부 지원금 바로 지금</title>
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css" 
 	href="${pageContext.request.contextPath}/resources/css/body.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
 </head>
 <style>
+
 .writertext{
       line-height: 70px;
       list-style: none;

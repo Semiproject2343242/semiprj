@@ -36,7 +36,7 @@ public class BoardDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		int result = new BoardService().deleteBoard(no);
+		int result = new BoardService().deliteBoard(no);
 		
 		if(result > 0) {
 			response.sendRedirect("main.qa");

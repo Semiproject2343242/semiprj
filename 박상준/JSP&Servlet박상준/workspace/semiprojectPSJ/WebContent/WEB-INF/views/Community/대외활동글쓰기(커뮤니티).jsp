@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>정부 지원금 바로 지금</title>
-<%--     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/EA_writer.css"> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
@@ -378,7 +377,7 @@ section{
         <table class="writer_table">
           <tr>
             <th width="15%">제목</th>
-            <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1></td>
+            <td width="50%" colspan="3"><input type ="text" name = "ea_title" placeholder="제목을 입력하세요." class=textline1 required></td>
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
@@ -386,17 +385,17 @@ section{
           </tr>
           <tr>
             <th>모집 일정</th>
-            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1>
-              ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1> 까지</td>
+            <td colspan="3"><input type ="date" id="ea_res_date"name = "ea_res_date"  class=dateline1 required>
+              ~ <input type ="date" id="ea_ree_date"name = "ea_ree_date"  class=dateline1 required> 까지</td>
           </tr>
           <tr>
             <th>활동 기간</th>
-            <td colspan="3"><input type ="date" id="ea_acs_date"name = "ea_acs_date"  class=dateline1>
-              ~ <input type ="date" id="ea_ace_date"name = "ea_ace_date"  class=dateline1> 까지</td>
+            <td colspan="3"><input type ="date" id="ea_acs_date"name = "ea_acs_date"  class=dateline1 required>
+              ~ <input type ="date" id="ea_ace_date"name = "ea_ace_date"  class=dateline1 required> 까지</td>
           </tr>
           <tr>
             <th>내용</th>
-            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" ></textarea></td>
+            <td colspan="3"><textarea class="form-control" name="ea_text_contents" id="ea_text_contents" placeholder="내용을 입력해 주세요" required></textarea></td>
           </tr>
           <tr>
             <th>참고자료</th>

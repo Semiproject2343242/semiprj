@@ -17,7 +17,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.model.service.NoticeService;
-import board.model.service.QuestionService;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
 import common.MyFileRenamePolicy;
@@ -38,7 +37,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10; // 10MByte로 전송파일 용량을 제한
 			String root = request.getSession().getServletContext().getRealPath("/"); // 웹 서버 컨테이너 경로 추출
-			String savePath = root + "/UploadFolder/notice_uploadFiles/";
+			String savePath = root + "UploadFolder/notice_uploadFiles/";
 			
 			File f = new File(savePath);
 			if(!f.exists()) {
@@ -56,7 +55,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				System.out.println("files.nextElement : "+name);
-				System.out.println("multiRequest,getFilesystemName(name) : "+multiRequest.getFilesystemName(name));
+				System.out.println("multiRequest.getFilesystemName(name) : "+multiRequest.getFilesystemName(name));
 				// multiRequest.getFilesystemName() : MyRenameFilePolicy의 rename메소드에서 작성한대로 rename된 파일 명
 				if(multiRequest.getFilesystemName(name) != null) {
 					saveFiles.add(multiRequest.getFilesystemName(name));
@@ -83,10 +82,28 @@ public class NoticeInsertServlet extends HttpServlet {
 				file.setOriginName(originFiles.get(i));
 				file.setChangeName(saveFiles.get(i));
 				
-				if(i == originFiles.size() - 1) {
+				String extension3 = file.getOriginName().substring(file.getOriginName().length()-3);
+				String extension4 = file.getOriginName().substring(file.getOriginName().length()-4);
+				
+				// 파일 하나일때
+				if(i == originFiles.size() - 1 && (extension3.equals("jpg") || extension3.equals("JPG") 
+						|| extension4.equals("jpeg") || extension4.equals("JPEG") || extension3.equals("png") 
+						|| extension3.equals("PNG") || extension3.equals("gif") || extension3.equals("GIF")
+						|| extension3.equals("bmp") || extension3.equals("BMP"))) {
+					file.setFileLevel(0);
+					System.out.println("file.getOriginName : "+file.getOriginName());
+					System.out.println("file.getOriginName().substring(file.getOriginName().length()-3) : "+file.getOriginName().substring(file.getOriginName().length()-3));
+				
+				// 파일 여러개 일때
+				}else if(extension3.equals("jpg") || extension3.equals("JPG") || extension4.equals("jpeg") 
+						|| extension4.equals("JPEG") || extension3.equals("png") || extension3.equals("PNG") 
+						|| extension3.equals("gif") || extension3.equals("GIF") || extension3.equals("bmp") 
+						|| extension3.equals("BMP")) {
 					file.setFileLevel(0);
 				}else {
 					file.setFileLevel(1);
+					System.out.println("file.getOriginName : "+file.getOriginName());
+					System.out.println("file.getOriginName().substring(file.getOriginName().length()-3) : "+file.getOriginName().substring(file.getOriginName().length()-3));
 				}
 				
 				fileList.add(file);

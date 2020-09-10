@@ -108,8 +108,8 @@
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
-				<a href="<%= request.getContextPath() %>/support_uploadFiles/<%= titleImg.getChangeName() %>">
-					<img id="titleImg" src="<%= request.getContextPath() %>/support_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				<a href="<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
 				</a>
 			</div>
 			<div class="textArea">
@@ -145,7 +145,7 @@
                     	첨부파일 없음.
                     <% } else { %>
                     	<%for(int i=1; i < fList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/support_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
+							<a href="<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
 								[ <%=i%><%=fList.get(i).getOriginName()%> ]
 							</a>
 						<% } %>

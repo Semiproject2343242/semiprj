@@ -1,3 +1,4 @@
+<%@page import="board.model.vo.Reply"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="board.model.vo.FileVO"%>
 <%@page import="board.model.vo.Board"%>
@@ -6,7 +7,9 @@
 <%
  	Board b = (Board)request.getAttribute("board");
 	System.out.println("공지사항내용확인.jsp에서의 board : " + b);
+	ArrayList<FileVO> imageList = (ArrayList<FileVO>)request.getAttribute("imageList");
 	ArrayList<FileVO> fileList = (ArrayList<FileVO>)request.getAttribute("fileList");
+	ArrayList<Reply> replyList = (ArrayList<Reply>)request.getAttribute("replyList");
 %>
 <!DOCTYPE html>
 <html>
@@ -15,50 +18,76 @@
     <title>정부지원금 바로지금</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
  	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/공지사항내용확인.css">
+ 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/게시판내용확인.css" />
+    
 
-    <style>
+    <style>  
     </style>
 </head>
 <body>
     <%@ include file="../Common/header.jsp" %>
+    <section>
+    	<aside>
+	    	<h2><%= b.getBoardNo() %></h2>
+	        <hr />
+	       <div class=baside><h2>제목</h2></div>
+	        <div class=baside><h2>카테고리</h2></div>
+	        <div class=baside><h2 id="content">내용</h2></div>
+	    </aside>
         <div id="main_section">
-			<form action="modifyForm.no" id="detailForm" name="detailForm">
-			
-			<input type="hidden" name="no" value="<%= b.getBoardNo() %>">
-	        <input type="hidden" name="WriterNo" value="<%= b.getBoardWriterNo()%>">
-	        <input type="hidden" name="category" value="<%= b.getCgName() %>" />
-	        <input type="hidden" name="title"  value="<%= b.getBoardTitle() %>" />
+			<form action="modifyForm.no" id="detailForm" name="detailForm" method="post">	        
 	        
-            <div id="contents">
-                <!-- <h2 id="h21" >NO.01</h1> -->
-                <!-- 넘버  -->
-                <h2 id="h21"> NO. <%= b.getBoardNo() %> </h2>
-                <h2 id="h22">공지사항</h2>
-                <hr>
-                <!--카테고리  -->
-                <h1 style= "text-align: center" > 
-                	<span id="span1">[<%= b.getCgName() %>]</span>  	
-                	<span> <%= b.getBoardTitle() %></span> 	
-                </h1>
-                <br>
-                <!--사용자이름 -->	
-                <text style="float:left">
-	                	<h3> <%= b.getBoardWriter() %> </h3>
-	                	<h3> <%= b.getBoardModifyDate() %> </h3>
-                </text>
-                <br>
-                <div id="buttons">
-                	<br><br>
-                	<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) && loginUser != null) { %>
-						<input type="submit" style="font-size:130%" id="updateBtn" value="수정">
-						<input type="button" style="font-size:130%" id="deleteBtn" value="삭제" onclick="deleteBoard();">
+	        <input type="hidden" name="no" value="<%= b.getBoardNo() %>">
+    		<input type="hidden" name="title" value="<%= b.getBoardTitle() %>" />
+    		<input type="hidden" name="content" value="<%= b.getBoardContent() %>" />
+			<input type="hidden" name="category" value="<%= b.getCgName() %>" />
+             <h2 align="center">공지사항</h2>
+	        <hr>
+       		<div class="sub1"><h4><%= b.getBoardTitle() %></h4></div><div class="sub2"><h4> 작성자 : <%= b.getBoardWriter()%></h4></div>
+
+	        <div class="sub3"><h4><%= b.getCgName() %></h4></div><div class="sub4"><h4> 등록 날짜 : <%= b.getBoardModifyDate()%></h4></div><div class="sub4"><h4> 수정 날짜 : <%= b.getBoardModifyDate() %></h4></div><br>
+
+		    <textarea cols="100" rows="15" name="content" style="resize:none;" readonly><%= b.getBoardContent() %></textarea>            
+	        
+	        <br clear="all"> 
+	        <br>   
+	        <hr>
+	        <div id="div1">
+	            <div style="text-align: center">
+	            <%if(imageList.isEmpty()) {%>
+	               	이미지 자료 없음.
+	           	<% } else { %>
+	           		<%for(int i=0; i < imageList.size(); i++) { %>
+	           			<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=imageList.get(i).getChangeName()%>">
+						<img src="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%= imageList.get(i).getChangeName() %>" width="300px" height="80%">
+						</a><br>
 					<% } %>
-					<input type="button" style="font-size:130%" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
+				<% } %>
+	           	</div>
+	            <br>            
+	            <h4> 참고자료 (<%= fileList.size() %>) </h4>
+	            <%if(fileList.isEmpty()) { %>
+	              	첨부파일 없음.
+	            <% } else { %>
+	               	<%for(int i=0; i < fileList.size(); i++){ %>
+						<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
+							<%=fileList.get(i).getOriginName()%>
+						</a><br>
+					<% } %>
+				<% } %>
+				<div align="right" style="background-color:skyblue;">
+					<% if(loginUser != null){ %>
+					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+						<input type="submit" class="udlbtn" id="updateBtn" value="수정">
+						<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">	
+					<% } %>
+					<% } %>
+					<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
+					
 					<script>
 						function deleteBoard(){
-							var num = <%= b.getBoardNo() %>; 
-							var result = window.confirm(num+' 을/를 삭제하시겠습니까?');
+							var num = <%= b.getBoardNo() %>;
+							var result = window.confirm(num+'게시글을 삭제하시겠습니까?');
 							var wno = <%= b.getBoardWriterNo()%>;
 							console.log(wno);
 						    if(result){
@@ -69,56 +98,77 @@
 						    }
 						}
 					</script>
-                </div>
-                <br clear="all"> 
-                <br>   
-                <hr>
-                <div id="div1">
-                    <br>
-                    	<textarea cols="125" rows="40" name="content" style="resize:none; font-size:130%; border:none " readonly><%= b.getBoardContent() %></textarea>
-                    	<div style="text-align: center">
-                        	<img src="img/1.PNG" id="img" ><!-- contents 부분의 크기를 조정하자-->
-                    	</div>
-                    <br>
+				</div>
+			</div>
+			</form>
+			<br><br>            
+            <!-- 댓글 --> 
 
-                    <h2> 참고자료 (<%= fileList.size() %>) </h2> <!-- 참고자료 링크를 어떻게 넣어야할지..-->
-                    <%if(fileList.isEmpty()) { %>
-                    	첨부파일 없음.
-                    <% } else { %>
-                    	<%for(int i=0; i < fileList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/UploadFolder/notice_uploadFiles/<%=fileList.get(i).getChangeName()%>" download="<%= fileList.get(i).getOriginName() %>">
-								<%=fileList.get(i).getOriginName()%>
-							</a><br>
-						<% } %>
-					<% } %>
-                    <!-- 댓글 --> 
+            <div> <h2>댓글</h2> </div>
+            <hr><br>
 
-                    <div> <h2>댓글</h2> </div>
-                    <hr><br>
-
-                    <div id="comment">
-                        <img src="example/1.PNG" id="img1">
-                        <text id="text3"> 백성강 <p id="p1">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.
-                            댓글입니다.댓글입니다.댓글입니다.댓글입니다.</p>
-                        </text>
-                        <text id="text4">
-                            <a href> 답글 </a> <a href> 삭제 </a> <a href> 수정 </a>
-                            <!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
-                            <br><%= b.getBoardModifyDate() %> <!-- 날짜 -->
-                        </text>
-                    </div>
-        
-                    <br clear="all"><br>    
-                    <div>
-                        <textarea id="textarea" placeholder="댓글을 입력하세요."></textarea><br>
-                        <button id=button4>등록</button>
-                    </div>
-                </div>
+            <div id="comment" 	style="line-height:20px; margin: 0px; padding:0px;">
+            <% if(replyList.isEmpty()){ %>
+               	<text class="text3"><p class="p1">댓글이 없습니다.</p></text>
+            <% } else { %>
+               	<% for(int i = 0; i < replyList.size(); i++) { %>
+              	<table>
+              	<% if(replyList.get(i).getProfileImageName() == null) { %>
+	              	<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/profileDefault.png"  width="80" height="80"  id="profile" style="float:top;")></td>
+	            <% } else { %>  	
+	              	<td><img src="<%= request.getContextPath() %>/UploadFolder/member_profile/<%= replyList.get(i).getProfileImageName() %>"  width="80" height="80"  id="profile" style="float:top;")></td>
+	            <% } %>   	
+	               	<text class="text3">
+	               		<td style="margin:0px; vartical-align:top;">
+	               			<p class="replyIWC"><h3><%= replyList.get(i).getReplyWriter() %></h3></p>
+	               			<p class="replyIWC"><%= replyList.get(i).getReplyContent() %></p>
+	               		</td>
+	               	</text>
+	              	<text class="text4">
+	                  		
+	               		<!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
+	               		<td class="replyDU" style="width:200px; float:right;">
+	               			<div><p style="float:right; margin:0px;">게시일 : <%= replyList.get(i).getCreateDate() %></p></div> <!-- 게시 날짜 -->
+	               			<div><p style="float:right; margin:0px;">수정일 : <%= replyList.get(i).getModifyDate() %></p></div> <!-- 수정 날짜 -->
+	               			<%if(loginUser != null){ %>
+		               			<% if(replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+									<div><p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)"></p></div>
+								<% } %>
+							<% } %>
+						<script>
+							function deleteReply(replyNo){
+								var result = window.confirm(replyNo+' 댓글을 삭제하시겠습니까?');
+								var boardNo = <%= b.getBoardNo() %>
+								
+							    if(result){
+							    	location.href="<%= request.getContextPath() %>/replyDelete.re?replyNo="+replyNo+"&boardNo="+boardNo+"&bName=공지사항";
+							    } else{
+							        alert('취소하셨습니다.');
+							    }
+							}
+						</script>   							
+	               		</td>
+	               	</text>
+                </table>
+                    <% } %>
+               	<% } %>
+                </div>             
+                          
+                <br clear="all"><br>
+                        
+                <form action="replyInsert.re">
+	                <div>
+	                    <textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
+	                   	<input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
+			            <input type="hidden" name="bName" value="공지사항">	
+	                    <input type="submit" class= replySubmit value="등록" style="float:right;" >
+	                </div>
+                </form>
             </div>
-          </form>
-        </div>
+		</section>            
         <br clear="all"><br>
         <%@ include file="../Common/footer.jsp" %>
+        
 </body>
 </html>
 

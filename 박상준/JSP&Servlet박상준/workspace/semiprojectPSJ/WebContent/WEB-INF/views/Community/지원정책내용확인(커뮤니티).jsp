@@ -20,9 +20,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 
     <style>  
-    section{
+/*     section{
       display: block;
-  	}
+  	} */
 	.thumbnailArea {
 		width: 80%;
 		height: auto;
@@ -99,7 +99,7 @@
 	<input type="hidden" name="viewCount" value="<%= b.getBoardViewCount() %>" />
 	<input type="hidden" name="reCommend" value="<%= b.getBoardReCommend() %>" />
 	<input type="hidden" name="writer" value="<%= b.getBoardWriter() %>" />
-	<input type="hidden" name="sp_res_date" value="<%= b.getReStratDate() %>" />
+	<input type="hidden" name="sp_res_date" value="<%= b.getReStartDate() %>" />
 	<input type="hidden" name="sp_ree_date" value="<%= b.getReEndDate() %>" />
     <% System.out.println(b.getReEndDate()); %>
     <h4>지원정책 -<%=b.getCgName()%></h4>
@@ -108,8 +108,8 @@
     <ul class="thumbnailArea">
 		<li class="thumb-list">
 			<div id="titldImgArea" align="center">
-				<a href="<%= request.getContextPath() %>/support_uploadFiles/<%= titleImg.getChangeName() %>">
-					<img id="titleImg" src="<%= request.getContextPath() %>/support_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
+				<a href="<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/<%= titleImg.getChangeName() %>">
+					<img id="titleImg" src="<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/<%= titleImg.getChangeName() %>" width="300px" height="80%">
 				</a>
 			</div>
 			<div class="textArea">
@@ -127,7 +127,7 @@
 					<%=b.getLcName()%></p>
 				<p>
 					<b>모집 일정 </b>
-					<%=b.getReStratDate()%>~<%=b.getReEndDate()%></p>
+					<%=b.getReStartDate()%>~<%=b.getReEndDate()%></p>
 			</div>
 		</li>
 	</ul>
@@ -145,7 +145,7 @@
                     	첨부파일 없음.
                     <% } else { %>
                     	<%for(int i=1; i < fList.size(); i++){ %>
-							<a href="<%= request.getContextPath() %>/support_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
+							<a href="<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/<%=fList.get(i).getChangeName()%>" download="<%= fList.get(i).getOriginName() %>">
 								[ <%=i%><%=fList.get(i).getOriginName()%> ]
 							</a>
 						<% } %>
