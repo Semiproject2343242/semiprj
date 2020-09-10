@@ -148,7 +148,7 @@ section{
  <!----------------------------------------header------------------------------------------->
  <section>
  <div id="main_section">
-  <form action="<%= request.getContextPath() %>/spModify.cm" method="post" encType="multipart/form-data">
+  <form action="<%= request.getContextPath() %>/modify.sp" method="post" encType="multipart/form-data">
     <h1 align="center">지원정책 수정</h1>
     <div class="writerinformanion_box">
       <ul class="writertext">
@@ -607,7 +607,7 @@ section{
     </div>
     <div class = "sp_button">
       <input type="submit" id="insertBtn" value="작성완료">
-      <input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/spMain.cm'" value="취소하기">
+      <input type="button" id="cancelBtn" onclick="location.href='<%= request.getContextPath() %>/main.sp'" value="취소하기">
     </div>
 	</script>
   </form>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
+import board.model.service.CommunityService;
 import board.model.service.SupportService;
 import board.model.vo.Board;
 import board.model.vo.FileVO;
@@ -34,9 +35,24 @@ public class SupportDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		SupportService service = new SupportService();
+		Board board = service.selectBoard(bId);
+		ArrayList<FileVO> fileList = service.selectFile(bId);
+		ArrayList<Reply> replyList = new BoardService().selectReplyList(bId);
 		
-}
-
+		String page = null;
+		if(board != null) {
+			page = "WEB-INF/views/Support_Policy/지원정책내용확인.jsp";
+			request.setAttribute("board", board);
+			request.setAttribute("fileList", fileList);
+			request.setAttribute("replyList", replyList);
+		} else {
+			page = "WEB-INF/views/Common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 상세조회에 실패하였습니다.");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

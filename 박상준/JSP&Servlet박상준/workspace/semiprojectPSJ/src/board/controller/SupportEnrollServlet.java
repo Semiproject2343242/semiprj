@@ -15,16 +15,16 @@ import board.model.service.QuestionService;
 import board.model.vo.Board;
 
 /**
- * Servlet implementation class QADeleteServlet
+ * Servlet implementation class SupportEnrollServlet
  */
-@WebServlet("/delete.sp")
-public class SupportDeleteServlet extends HttpServlet {
+@WebServlet("/enroll.sp")
+public class SupportEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupportDeleteServlet() {
+    public SupportEnrollServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,8 @@ public class SupportDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int no = Integer.parseInt(request.getParameter("no"));
 
-		int result = new BoardService().deleteBoard(no);
+		Board board = new Board(no);
+		int result = new BoardService().enrollBoard(board);
 		
 		if(result > 0) {
 			response.sendRedirect("main.sp");
@@ -47,7 +48,6 @@ public class SupportDeleteServlet extends HttpServlet {
 		}
 		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

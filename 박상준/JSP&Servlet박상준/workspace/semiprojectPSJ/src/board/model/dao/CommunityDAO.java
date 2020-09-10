@@ -295,7 +295,7 @@ public class CommunityDAO {
 			pstmt.setString(4, b.getLcName());
 			pstmt.setString(5, b.getTcName());
 			pstmt.setString(6, b.getCgName());
-			pstmt.setDate(7, b.getReStratDate());
+			pstmt.setDate(7, b.getReStartDate());
 			pstmt.setDate(8, b.getReEndDate());
 			pstmt.setDate(9, b.getAcStartDate());
 			pstmt.setDate(10, b.getAcEndDate());
@@ -381,7 +381,7 @@ public class CommunityDAO {
 			pstmt.setString(3, b.getLcName());
 			pstmt.setString(4, b.getTcName());
 			pstmt.setString(5, b.getCgName());
-			pstmt.setDate(6, b.getReStratDate());
+			pstmt.setDate(6, b.getReStartDate());
 			pstmt.setDate(7, b.getReEndDate());
 			pstmt.setDate(8, b.getAcStartDate());
 			pstmt.setDate(9, b.getAcEndDate());
@@ -777,7 +777,7 @@ public class CommunityDAO {
 			pstmt.setString(5, b.getEmState());
 			pstmt.setString(6, b.getTcName());
 			pstmt.setString(7, b.getCgName());
-			pstmt.setDate(8, b.getReStratDate());
+			pstmt.setDate(8, b.getReStartDate());
 			pstmt.setDate(9, b.getReEndDate());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -1053,10 +1053,8 @@ public class CommunityDAO {
 	
 	
 	
-	
-	public ArrayList selectSearchSpList(Connection conn, String[] acarr,String[] emarr, String category, String[] agearr, 
-			String[] localarr) {
-		
+	public ArrayList selectSearchSpList(Connection conn, String[] acarr, String[] emarr, String category,
+			String[] agearr, String[] localarr) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Board> list = null;
@@ -1065,7 +1063,13 @@ public class CommunityDAO {
 		
 //		String query = "SELECT * FROM EXTERNALLIST WHERE ENROLL_STATE='Y' ORDER BY B_NO DESC";
 		String query = "SELECT * FROM SUPPORTLIST WHERE ENROLL_STATE='N' ";
-
+		System.out.println("DAO");
+		 System.out.println("category : " + category);
+		 System.out.println("age : " + agearr);
+		 System.out.println("local : " +localarr );
+		 System.out.println("acarr : " +acarr );
+		 System.out.println("emarr : " +emarr );
+        
 		// 1. 카테고리만 선택했을 경우
 		if(!category.equals("선택") && acarr==null  && emarr==null && agearr==null && localarr == null) {
 			System.out.println("1.카테고리만 선택 됐을경우");
@@ -2596,5 +2600,6 @@ public class CommunityDAO {
 		}
 		return list;
 	}
+
 
 }
