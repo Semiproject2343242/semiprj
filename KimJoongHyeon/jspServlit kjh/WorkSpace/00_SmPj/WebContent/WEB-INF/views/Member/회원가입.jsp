@@ -812,17 +812,9 @@
                            </div>
                         </form>
                      </div>
-                  
-
                         </div>
-
                     </div>
-
                 </div>
-            </div>
-            </div>
-
-        </div>
     </section>
 <%@ include file="../Common/footer.jsp" %>
 </body>

@@ -110,29 +110,6 @@
 <body>
 	<%@ include file="../Common/header.jsp"%>
 	<section>
-		<aside>
-			<h2>
-				<a href="<%=request.getContextPath()%>/main.cm">커뮤니티
-			</h2>
-			</a>
-			<hr>
-			<div>
-				<dl>
-					<dt>
-						<a href="<%=request.getContextPath()%>/fMain.cm"><h3>자유게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/spMain.cm"><h3>지원정책
-								게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/eaMain.cm"><h3>대외활동
-								게시판</h3></a>
-					</dt>
-
-				</dl>
-			</div>
-		</aside>
 		<div>
 			<input type="button" id="btnBack" value="<<">
 		</div>

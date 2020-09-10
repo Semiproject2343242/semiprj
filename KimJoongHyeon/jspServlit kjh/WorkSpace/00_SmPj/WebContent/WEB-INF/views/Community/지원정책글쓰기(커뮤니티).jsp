@@ -415,7 +415,7 @@
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="sp_title_image" name = "sp_title_image" class=textline2 required></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="esp_title_image" name = "esp_title_image" class=textline2 required></td>
           </tr>
           <tr>
             <th>모집 일정</th>

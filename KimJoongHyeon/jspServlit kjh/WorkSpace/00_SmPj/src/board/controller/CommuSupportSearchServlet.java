@@ -49,10 +49,12 @@ public class CommuSupportSearchServlet extends HttpServlet {
 		 System.out.println("emarr : " +emarr );
         
         if(acarr == null && emarr == null &&agearr == null && localarr==null && (category==null || category.equals("선택"))) {
+        	System.out.println("전체 리스트 가져오기");
         	bList = service.selectSpList(1); // 게시판 리스트 가져오기
         }else {
 		 bList = service.selectSpSearchList(1,acarr,emarr,category,agearr,localarr); // 게시판 리스트 가져오기
         }
+        System.out.println("bList" + bList);
         response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(bList, response.getWriter());
 	}

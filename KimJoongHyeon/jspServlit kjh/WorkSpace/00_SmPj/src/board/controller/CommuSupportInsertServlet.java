@@ -90,7 +90,6 @@ public class CommuSupportInsertServlet extends HttpServlet {
  					emState += emStatearr[i];
  				}else
  					emState += emStatearr[i] + ",";
- 				System.out.print("타냐5");
  			}
  		 }
          
@@ -101,7 +100,6 @@ public class CommuSupportInsertServlet extends HttpServlet {
  					age += agearr[i];
  				}else
  					age += agearr[i] + ",";
- 				System.out.print("타냐3");
  			}
  		 }
  		 
@@ -112,7 +110,6 @@ public class CommuSupportInsertServlet extends HttpServlet {
 					local += localarr[i];
 				}else
 					local += localarr[i] + ",";
-				System.out.print("타냐4");
 			}
 		 }
 		 

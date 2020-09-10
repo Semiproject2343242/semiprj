@@ -156,6 +156,22 @@
 	width: 100% \9;
 	height: auto;
 }
+
+li{
+ 	display: flex;
+ }
+ .area_list{
+ white-space: nowrap; 
+  width: 70%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+	text-align: left;
+}
+.area_date {
+	width: 30%;
+	text-align: center;
+}
+
 </style>
 
 <body>
@@ -229,8 +245,8 @@
 							<% for (Board b : supportList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } %>
@@ -260,8 +276,8 @@
 							<% for (Board b : externalList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } %>
@@ -295,8 +311,8 @@
 									<input type="hidden" class="area_list_no" value="<%=b.getBoardNo()%>">
 									<input type="hidden"  class="area_list_title" value="<%=b.getBoardName()%>">
 									<input type="hidden" value="<%=b.getBoardWriterNo()%>">
-									<a href="#" class="area_list">[<%= b.getBoardName() %>] <%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list">[<%= b.getBoardName() %>] <%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } %>
@@ -337,8 +353,8 @@
 							<% for (Board b : qaList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } %>

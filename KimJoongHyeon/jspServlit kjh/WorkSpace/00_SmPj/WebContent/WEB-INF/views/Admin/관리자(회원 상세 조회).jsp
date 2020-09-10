@@ -93,6 +93,21 @@
     .box_title h3 {
         color: white;
     }
+    
+    li{
+ 	display: flex;
+ }
+ .area_list{
+ white-space: nowrap; 
+  width: 70%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+	text-align: left;
+}
+.area_date {
+	width: 30%;
+	text-align: center;
+}
 </style>
 
 <body>
@@ -180,8 +195,8 @@
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
 									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } else { %>
@@ -189,8 +204,8 @@
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
 									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } %>
@@ -227,8 +242,8 @@
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
 									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>
 						<% } else { %>
@@ -236,8 +251,8 @@
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">
 									<input id="enroll" type="hidden" value="<%=b.getEnrollState() %>">
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>						
 						<% } %>
@@ -275,16 +290,16 @@
 								<% Board b = commuFreeList.get(i); %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">									
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>							
 						<% } else { %>
 							<% for (Board b : commuFreeList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">								
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>						
 						<% } %>
@@ -315,16 +330,16 @@
 								<% Board b = qaList.get(i); %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">								
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+								<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>						
 						<% } else { %>
 							<% for (Board b : qaList) { %>
 								<li>
 									<input type="hidden" value="<%=b.getBoardNo()%>">								
-									<a href="#" class="area_list"><%= b.getBoardTitle() %></a>
-									<div><%= b.getBoardCreateDate() %></div>
+									<div class="area_list"><%=b.getBoardTitle()%></div>
+									<div class="area_date"><%=b.getBoardCreateDate()%></div>
 								</li>
 							<% } %>						
 						<% } %>
