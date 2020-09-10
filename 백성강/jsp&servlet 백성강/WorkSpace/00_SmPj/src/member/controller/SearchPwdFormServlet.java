@@ -1,4 +1,4 @@
-package board.controller;
+package member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UpdateFormServlet
+ * Servlet implementation class SearchPwdFormServlet
  */
-@WebServlet("/updateForm.me")
-public class UpdateFormServlet extends HttpServlet {
+@WebServlet("/searchPwdForm.me")
+public class SearchPwdFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateFormServlet() {
+    public SearchPwdFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class UpdateFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("WEB-INF/views/Member/회원정보수정2.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/Member/비밀번호찾기.jsp").forward(request, response);
 	}
 
 	/**
