@@ -174,6 +174,7 @@ public class CommunityService {
 		
 		CommunityDAO dao = new CommunityDAO();	
 		if(i == 1) {
+			System.out.println("리스트 가져오기");
 			list = dao.selectSpList(conn);
 		} else {
 			list = dao.selectFList(conn);
@@ -207,7 +208,7 @@ Connection conn = getConnection();
 		Connection conn = getConnection();
 		
 		CommunityDAO dao = new CommunityDAO();
-		
+		System.out.println("지원정책 게시판 등록 : " + b );
 		int result1 = dao.insertSpBoard(conn,b);
 		int result2 = dao.insertAddFile(conn, fileList);
 		
