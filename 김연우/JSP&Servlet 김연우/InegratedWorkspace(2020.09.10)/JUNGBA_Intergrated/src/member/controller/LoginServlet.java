@@ -33,8 +33,6 @@ public class LoginServlet extends HttpServlet {
 		member = new Member(memberId, memberPw);
 		loginUser = new MemberService().loginMember(member);
 
-		System.out.println("로그인한 아이디 : " + loginUser.getMemberId());
-		System.out.println("로그인한 비밀번호 : " + loginUser.getMemberPw());
 		
 		if(loginUser != null) {
 		HttpSession session = request.getSession();

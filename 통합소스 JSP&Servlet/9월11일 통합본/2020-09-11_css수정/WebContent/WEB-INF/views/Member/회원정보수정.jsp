@@ -76,21 +76,6 @@ hr {
   		margin : 10px 2px;
   		padding: 10px;
   	}
-.contentsTable{text-align:center; font-size:12pt;}
-.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
-.contentsTable tbody{background-color:#F7F7F7}
-#tablename{align-self:center;}
-#게시판이름{text-align:center;}
-
-
-	section {
-      display: flex;
-      line-height: 40px;
-    }
-    #main_section {
-      width: 100%;
-      
-    }
     .box{
     	width:80%;
    		text-align: center;
@@ -158,6 +143,9 @@ hr {
 			<a href="${pageContext.request.contextPath}/memberInfo.me">
 				<h2>회원정보</h2>
 			</a>
+			<a href="${pageContext.request.contextPath}/changePwdForm.me">
+				<h2>비밀번호 변경</h2>
+			</a>			
 			<a href="${pageContext.request.contextPath}/deleteForm.me">
 				<h2>회원탈퇴</h2>
 			</a>

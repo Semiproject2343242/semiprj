@@ -14,6 +14,11 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
+
+    #topic{
+        border-bottom:1.5px solid black;
+    }
+  
 html, body {
 	margin: 0px;
 	height: 100%;
@@ -81,26 +86,6 @@ hr {
   		margin : 10px 2px;
   		padding: 10px;
   	}
-.contentsTable{text-align:center; font-size:12pt;}
-.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
-.contentsTable tbody{background-color:#F7F7F7}
-#tablename{align-self:center;}
-#게시판이름{text-align:center;}
-
-
-    #topic{
-        border-bottom:1.5px solid black;
-    }
-  
-    section {
-      display: flex;
-      line-height: 40px;
-    }
-    #main_section {
-      width: 100%;
-      padding-top:10%;
-      padding-left:10%;
-    }
   
 </style>
 <body>
@@ -137,12 +122,15 @@ hr {
 			<a href="${pageContext.request.contextPath}/memberInfo.me">
 				<h2>회원정보</h2>
 			</a>
+			<a href="${pageContext.request.contextPath}/changePwdForm.me">
+				<h2>비밀번호 변경</h2>
+			</a>			
 			<a href="${pageContext.request.contextPath}/deleteForm.me">
 				<h2>회원탈퇴</h2>
 			</a>
         </aside>
         <div id="main_section">
-          
+          	<form action="<%=request.getContextPath()%>/Delete.me" method="post">
             <table align = center>
                 <tr>
                     <th><%= loginUser.getMemberName() %>.님</th>
@@ -152,32 +140,11 @@ hr {
                         <h3>탈퇴를 진행하시려면 비밀번호를 입력해주세요</h3>
                         <input type="hidden" name="userId" value="<%= loginUser.getMemberId() %>">
                         <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력해주세요." size="30">
-                        <input type="button" name="subPwd" value="탈퇴" onclick="dlt();" >
-                              <script>
-                               		function dlt(){
-                               			console.log(pw);
-                               			var Id = '<%= loginUser.getMemberId() %>';
-                               			var pw = '<%= loginUser.getMemberPw() %>';
-                               			var pw2 = document.getElementById("userPwd").value;
-                                   		var result=window.confirm(Id+"정말로 탈퇴하시겠습니까?");
-                                       	if(result){
-                                       		console.log(pw);
-                                       		console.log(pw2);
-                                       		if(pw == pw2){
-                                        	location.href="<%= request.getContextPath() %>/Delete.me?Id="+Id;
-                                       		}
-                                       		else{
-                                       			window.confirm("비밀번호 틀림");
-                                       		}
-                                       	}else{
-                                        	window.alert("탈퇴가 취소되었습니다.");
-                                       	} 
-                               		}
-                              </script>
+                        <input type="submit" name="subPwd" value="탈퇴" >
                 	</td>
                 </tr>
-                </table>
-               
+            </table>
+            </form>
         </div>
         
     </section>

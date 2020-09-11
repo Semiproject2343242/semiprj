@@ -16,7 +16,7 @@ import board.model.vo.Reply;
 
 public class BoardService {
 
-	// °Ô½ÃÆÇ º° °Ô½Ã±Û °¹¼ö
+	// ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int getListCount(String boardName) {
 		
 		Connection conn = getConnection();
@@ -29,7 +29,7 @@ public class BoardService {
 	}
 	
 	
-	// °Ô½Ã±Û »èÁ¦
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteBoard(int bId) {
 		Connection conn = getConnection();
 		BoardDAO dao = new BoardDAO();
@@ -45,7 +45,7 @@ public class BoardService {
 	}	
 	
 	
-	// ´ñ±Û ¸ñ·Ï
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public ArrayList<Reply> selectReplyList(int bId) {
 		
 		Connection conn = getConnection();
@@ -58,7 +58,7 @@ public class BoardService {
 	}
 	
 	
-	// ´ñ±Û µî·Ï
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int insertReply(Reply r) {
 		
 		Connection conn = getConnection();
@@ -79,7 +79,7 @@ public class BoardService {
 	}
 	
 	
-	// ´ñ±Û »èÁ¦
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteReply(int replyNo) {
 		
 		Connection conn = getConnection();
@@ -97,7 +97,7 @@ public class BoardService {
 		return result;
 	}		
 	
-	// ½æ³×ÀÏ °¡Á®¿À±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<FileVO> selectThumbnail(int bId) {
 		Connection conn = getConnection();
 		
@@ -116,7 +116,7 @@ public class BoardService {
 	}	
 	
 	
-	// ÀÌ¹ÌÁö ¸ñ·Ï
+	// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public ArrayList<FileVO> selectImageList(int bId) {
 		Connection conn = getConnection();
 				
@@ -135,7 +135,7 @@ public class BoardService {
 	}
 	
 	
-	// ÆÄÀÏ ¸ñ·Ï
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public ArrayList<FileVO> selectFileList(int bId) {
 		Connection conn = getConnection();
 				
@@ -181,5 +181,4 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
-
 }

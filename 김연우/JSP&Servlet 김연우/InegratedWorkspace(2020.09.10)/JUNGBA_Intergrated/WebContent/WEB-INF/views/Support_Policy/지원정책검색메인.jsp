@@ -12,6 +12,80 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
+html, body {
+	margin: 0px;
+	height: 100%;
+	min-width: 505px;
+}
+
+.lagefont {
+	color: rgb(15, 76, 130);
+}
+
+section {
+	display: flex;
+	margin: 0 auto;
+	width: 80%;
+	font-family: "fantasy";
+	position: relative;
+	min-height: 80%;
+	line-height: 40px;
+}
+
+aside {
+	min-height: 100%;
+	float: left;
+	display: block;
+	width: 200px;
+	line-height: 40px;
+	margin-left: 5px;
+}
+
+#main_section {
+	width: 100%;
+	min-height: 100%;
+	margin: 0px 50px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+hr {
+	color: black;
+	background-color: black;
+	height: 1px;
+	margin: 0px;
+	border: 1px;
+}
+
+.pagination a{
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid black;
+    color: black;
+    border-radius : 3px;
+}    
+.pagination a:hover:not(.action){
+    background-color: gray;
+}
+
+/* pagination 설정부  */
+.com{text-indent : 20px;}
+
+ 	.btn{
+  		background-color : #E3F2FD;
+  		margin : 10px 2px;
+  		padding: 10px;
+  	}
+.contentsTable{text-align:center; font-size:12pt;}
+.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
+.contentsTable tbody{background-color:#F7F7F7}
+#tablename{align-self:center;}
+#게시판이름{text-align:center;}
+
+
 .writertext{
       line-height: 70px;
       list-style: none;
@@ -111,29 +185,7 @@
 <body>
 	<%@ include file="../Common/header.jsp"%>
 	<section>
-		<aside>
-			<h2>
-				<a href="<%=request.getContextPath()%>/main.cm">커뮤니티
-			</h2>
-			</a>
-			<hr>
-			<div>
-				<dl>
-					<dt>
-						<a href="<%=request.getContextPath()%>/fMain.cm"><h3>자유게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/spMain.cm"><h3>지원정책
-								게시판</h3></a>
-					</dt>
-					<dt>
-						<a href="<%=request.getContextPath()%>/eaMain.cm"><h3>대외활동
-								게시판</h3></a>
-					</dt>
-
-				</dl>
-			</div>
-		</aside>
+	
 		<div id="main_section">
 		<h2 align="center">지원 정책</h2>
 		<div class="serach_box">
@@ -149,7 +201,7 @@
       <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
       <div class="select_box">
           <h3>
-              <select class="categoty_select" name="ea_category" id="ea_category">
+              <select class="categoty_select" name="sp_category" id="sp_category">
                   <option value="선택" selected>선택</option>
                   <option value="재직지원">재직지원</option>
                   <option value="취업지원">취업지원</option>
@@ -164,13 +216,13 @@
                    <button class = "select_btn" id="receipt" >접수중</button>
                    <button class = "select_btn" id="receiptEnd">마감</button>
                </div>
-               <div id="ck_rcState">
-				<input type="checkbox" name="ck_rcState" id="ck_receipt" value="접수중"">
-				<input type="checkbox" name="ck_rcState" id="ck_receiptEnd" value="마감">
+               <div id="ck_acState">
+				<input type="checkbox" name="ck_acState" id="ck_receipt" value="접수중"">
+				<input type="checkbox" name="ck_acState" id="ck_receiptEnd" value="마감">
             	</div>
             	<script>
                $(function(){
-                  $("#ck_rcState").hide();
+                  $("#ck_acState").hide();
                   $("#receipt").click(function(){
                      $("#ck_receipt").click();
                      if($("#ck_receipt").is(":checked") == true){
@@ -195,13 +247,13 @@
                    <button class = "select_btn" id="noWork">구직중</button>
                    <button class = "select_btn" id="working">재직중</button>
                </div>
-               <div id="ck_emSate">
+               <div id="ck_emState">
 				<input type="checkbox" name="ck_emState" id="ck_noWork" value="구직중">
 				<input type="checkbox" name="ck_emState" id="ck_working" value="재직중">
             	</div>
             	<script>
                $(function(){
-                  $("#ck_emSate").hide();
+                  $("#ck_emState").hide();
                   $("#noWork").click(function(){
                      $("#ck_noWork").click();
                      if($("#ck_noWork").is(":checked") == true){
@@ -223,47 +275,47 @@
            </h3>
            <h3>
               <div>
-                  <button type="button"class="select_btn" id="ea_age_18">청년<br>(18~34세) </button>
-                  <button type="button"class="select_btn" id="ea_age_35">중년<br>(35~49세) </button>
-                  <button type="button"class="select_btn" id="ea_age_50">장년<br>(50~64세) </button>
-                  <button type="button"class="select_btn" id="ea_age_65">어르신<br>(65세 이상) </button>
+                  <button type="button"class="select_btn" id="sp_age_18">청년<br>(18~34세) </button>
+                  <button type="button"class="select_btn" id="sp_age_35">중년<br>(35~49세) </button>
+                  <button type="button"class="select_btn" id="sp_age_50">장년<br>(50~64세) </button>
+                  <button type="button"class="select_btn" id="sp_age_65">어르신<br>(65세 이상) </button>
               </div>
-              <div id="ck_ea_age">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_18" value="청년"">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_35" value="중년">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_50" value="장년">
-				<input type="checkbox" name="ck_ea_age" id="ck_ea_age_65" value="어르신">
+              <div id="ck_sp_age">
+				<input type="checkbox" name="ck_sp_age" id="ck_sp_age_18" value="청년"">
+				<input type="checkbox" name="ck_sp_age" id="ck_sp_age_35" value="중년">
+				<input type="checkbox" name="ck_sp_age" id="ck_sp_age_50" value="장년">
+				<input type="checkbox" name="ck_sp_age" id="ck_sp_age_65" value="어르신">
             </div>
             <script>
                $(function(){
-                  $("#ck_ea_age").hide();
-                  $("#ea_age_18").click(function(){
-                     $("#ck_ea_age_18").click();
-                     if($("#ck_ea_age_18").is(":checked") == true){
+                  $("#ck_sp_age").hide();
+                  $("#sp_age_18").click(function(){
+                     $("#ck_sp_age_18").click();
+                     if($("#ck_sp_age_18").is(":checked") == true){
                     	 $(this).css({'background':'darkgray'});
                      }else{
                     	 $(this).css('background', 'RGB(221,228,236)');
                      }
                   });
-                  $("#ea_age_35").click(function(){
-                     $("#ck_ea_age_35").click();
-                     if($("#ck_ea_age_35").is(":checked") == true){
+                  $("#sp_age_35").click(function(){
+                     $("#ck_sp_age_35").click();
+                     if($("#ck_sp_age_35").is(":checked") == true){
                     	 $(this).css({'background':'darkgray'});
                      }else{
                     	 $(this).css('background', 'RGB(221,228,236)');
                      }
                   });
-                  $("#ea_age_50").click(function(){
-                     $("#ck_ea_age_50").click();
-                     if($("#ck_ea_age_50").is(":checked") == true){
+                  $("#sp_age_50").click(function(){
+                     $("#ck_sp_age_50").click();
+                     if($("#ck_sp_age_50").is(":checked") == true){
                     	 $(this).css({'background':'darkgray'});
                      }else{
                     	 $(this).css('background', 'RGB(221,228,236)');
                      }
                   });
-                  $("#ea_age_65").click(function(){
-                     $("#ck_ea_age_65").click();
-                     if($("#ck_ea_age_65").is(":checked") == true){
+                  $("#sp_age_65").click(function(){
+                     $("#ck_sp_age_65").click();
+                     if($("#ck_sp_age_65").is(":checked") == true){
                     	 $(this).css({'background':'darkgray'});
                      }else{
                     	 $(this).css('background', 'RGB(221,228,236)');
@@ -272,8 +324,8 @@
                });
            </script>
           </h3>
-          <h3 id = "ea_areatable_div">
-              <div id= "ea_areatable">
+          <h3 id = "sp_areatable_div">
+              <div id= "sp_areatable">
 	              <button type="button" class = "select_btn" id= "GP">가평군</button>
 	              <button type="button" class = "select_btn" id= "GY">고양시</button>
 	              <button type="button" class = "select_btn" id= "GC">과천시</button>
@@ -298,7 +350,7 @@
 	              <button type="button" class = "select_btn" id= "HN">하남시</button>
 	              <button type="button" class = "select_btn" id= "HS">화성시</button>
               </div>
-              <div id="ck_ea_areatable">
+              <div id="ck_sp_areatable">
              	<input type="checkbox" name="ck_lc" id="ck_GP" value="가평군">
 				<input type="checkbox" name="ck_lc" id="ck_GY" value="고양시">
 				<input type="checkbox" name="ck_lc" id="ck_GC" value="과천시">
@@ -323,7 +375,7 @@
             </div>
              <script>
                $(function(){
-                  $("#ck_ea_areatable").hide();
+                  $("#ck_sp_areatable").hide();
                   $("#GP").click(function(){
                      $("#ck_GP").click();
                      if($("#ck_GP").is(":checked") == true){
@@ -499,7 +551,9 @@
 	</div>
 	  <div class = "sp_button">
 		<%if (loginUser != null) {%>
-		<input type="button" class="result_btn" onclick="location.href='eaInsertForm.cm'"id="insertBtn" value="작성하기">
+			<%if(loginUser!=null && loginUser.getMemberNickName().equals("운영자")) {%> 
+				<input type="button" class="result_btn" onclick="location.href='insertForm.sp'"id="insertBtn" value="작성하기">
+			<%}%>
 		<%}%>
 		<input type='button' class='result_btn' name='btn' value='초기화' style="float: right;" id="btnReset">
 		<input type='button' class='result_btn' id='btnSearch' name='btn' value='검색' style="float: right;" id="p_sp_search_submit">
@@ -515,7 +569,7 @@
 		<script>
 		$(function(){//페이지 생성될때 리스트 불러오기
 			$.ajax({
-	            url:'SearchList.sp',
+	            url:'searchList.sp',
 	            data: {
 				},
 	            success: function(data){
@@ -535,7 +589,7 @@
 						+data[i].boardReCommend+"</p></div></li>";
 						boardArea.append(input);
 	                  	getAdoptImage(data[i].boardNo,data.length,i);
-	                  	$('#board_list'+i).attr("onclick","location.href='detail.ea?bId="+data[i].boardNo+"'");
+	                  	$('#board_list'+i).attr("onclick","location.href='detail.sp?bId="+data[i].boardNo+"'");
 	                  }
 						getlistCount();
 	               }else{
@@ -548,11 +602,11 @@
 			});
 		});
 		$('#btnSearch').click(function(){// 검색 눌렀을때 리스트 불러오기
-			var rcState = document.getElementsByName("ck_rcState");
-          	var checkRcState = [];
-          	for(var i = 0; i < rcState.length; i++){
-             	if(rcState[i].checked == true){
-             		checkRcState.push(rcState[i].value);
+			var acState = document.getElementsByName("ck_acState");
+          	var checkAcState = [];
+          	for(var i = 0; i < acState.length; i++){
+             	if(acState[i].checked == true){
+             		checkAcState.push(acState[i].value);
               	}
           	}
           	var emState = document.getElementsByName("ck_emState");
@@ -562,7 +616,7 @@
              		checkEmState.push(emState[i].value);
               	}
           	}
-   			var age = document.getElementsByName("ck_ea_age");
+   			var age = document.getElementsByName("ck_sp_age");
           	var checkAge = [];
           	for(var i = 0; i < age.length; i++){
              	if(age[i].checked == true){
@@ -577,9 +631,9 @@
               	}
           	}
    			$.ajax({
-   				url: 'SearchList.sp',
-    			data: {cate:$('#ea_category').val(),
-    					rcState:checkRcState,
+   				url: 'searchList.sp',
+    			data: {cate:$('#sp_category').val(),
+    					acState:checkAcState,
     					emState:checkEmState,
 						age: checkAge,
     					local:checkLocal
@@ -622,13 +676,13 @@
       	});
 		function getAdoptImage(boardNo,length,i){//리스트에 맞게 이미지 가져오기
 	         $.ajax({
-	            url: 'SearchIeage.ea',
+	            url: 'searchImage.sp',
 	            success: function(data){
 	            	  var input=""; 
 	                  for (var j = 0; j < data.length; j++) {
 	                  var imageArea = $("#imageArea"+i);
 		                  if(boardNo == data[j].boardNo){
-		                  	input="<img src='<%= request.getContextPath() %>/UploadFolder/external_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
+		                  	input="<img src='<%= request.getContextPath() %>/UploadFolder/support_uploadFiles/"+data[j].changeName+"' width='150px' height='100%'>";
 		                  	imageArea.prepend(input);
 	                  }
 	                  }
@@ -641,7 +695,7 @@
 		$('#btnReset').click(function(){//초기화 버튼
 			$("input[type=checkbox]").prop("checked",false);
 			$(".select_btn").css('background', 'RGB(221,228,236)');
-			$('#ea_category').val('선택');
+			$('#sp_category').val('선택');
 		});
 		
 		function getlistCount(){
