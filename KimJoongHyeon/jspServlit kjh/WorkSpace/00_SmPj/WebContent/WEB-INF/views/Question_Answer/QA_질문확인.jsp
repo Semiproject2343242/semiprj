@@ -190,7 +190,7 @@ hr {
 							<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">	
 						<% } %>
 					<% } %>
-					<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.no'" id="menuBtn" value="메뉴로">
+					<input type="button" class="udlbtn" onclick="location.href='<%= request.getContextPath() %>/main.qa'" id="menuBtn" value="메뉴로">
 					
 					<script>
 						function deleteBoard(){
@@ -264,16 +264,18 @@ hr {
                 </div>
         			
             <br clear="all"><br>
-             <% if(loginUser.getMemberNickName().equals("운영자")){ %>           
-            <form action="replyInsert.re">
-	            <div>
-	               	<textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
-	                <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
-	                <input type="hidden" name="bName" value="QA">
-	                <input type="submit" class= replySubmit value="등록" style="float:right;" >
-	            </div>
-            </form>
-            <%	} %>
+            <% if(loginUser != null){ %>
+	             <% if(loginUser.getMemberNickName().equals("운영자")){ %>           
+	            <form action="replyInsert.re">
+		            <div>
+		               	<textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
+		                <input type="hidden" name="boardNo" value="<%= b.getBoardNo() %>">
+		                <input type="hidden" name="bName" value="QA">
+		                <input type="submit" class= replySubmit value="등록" style="float:right;" >
+		            </div>
+	            </form>
+	            <%	} %>
+            <% } %>
         </div>		
     </section>
     <br clear="all"><br>

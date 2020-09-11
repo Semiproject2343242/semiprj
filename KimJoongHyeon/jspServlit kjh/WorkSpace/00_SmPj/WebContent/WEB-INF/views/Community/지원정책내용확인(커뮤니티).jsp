@@ -298,8 +298,10 @@ hr {
 			<!-- 관리자랑 사용자랑 나눠서 사용해야한다. -->
          	<td class="replyDU" style="width:200px; float:right;">
           		<div><p style="float:right; margin:0px;">게시일 : <%= replyList.get(i).getCreateDate() %></p></div> <!-- 게시 날짜 -->
-          		<% if(replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) && loginUser != null || loginUser.getMemberNickName().equals("운영자")) { %>
-					<div><p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)">	
+          		<%if(loginUser != null ){ %>
+	          		<% if(replyList.get(i).getReplyWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
+						<div><p style="float:right; margin:0px;"><input type="button" class="udlbtn" id="deleteBtn" value="댓글 삭제" onclick="deleteReply(<%= replyList.get(i).getReplyNo() %>)">	
+					<% } %>
 				<% } %>
 				<script>
 				function deleteReply(replyNo){
