@@ -176,7 +176,11 @@ hr {
 	<input type="hidden" name="sp_res_date" value="<%= b.getReStartDate() %>" />
 	<input type="hidden" name="sp_ree_date" value="<%= b.getReEndDate() %>" />
     <% System.out.println(b.getReEndDate()); %>
-    <h4>지원정책 -<%=b.getCgName()%></h4>
+    <h4>지원정책 -<%=b.getCgName()%>
+    	<% if(loginUser != null && loginUser.getMemberNickName().equals("운영자")) { %>
+			<input type="button" style="float:right" value="등록하기" onclick="enrollBoard();">
+		<%} %>
+    </h4>
     <hr>
     <h3><%=b.getBoardNo()%>.<%= b.getBoardTitle() %></h3>
     <ul class="thumbnailArea">
