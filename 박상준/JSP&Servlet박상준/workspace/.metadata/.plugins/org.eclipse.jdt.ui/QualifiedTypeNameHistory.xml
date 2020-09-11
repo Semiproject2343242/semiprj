@@ -3,4 +3,5 @@
 <fullyQualifiedTypeName name="member.model.vo.Member"/>
 <fullyQualifiedTypeName name="board.model.service.CommunityService"/>
 <fullyQualifiedTypeName name="board.model.dao.SupportDAO"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
