@@ -17,7 +17,6 @@
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지(메인)</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script> 
 </head>
 <style>
@@ -26,11 +25,6 @@ html, body {
 	height: 100%;
 	min-width: 505px;
 }
-
-.lagefont {
-	color: rgb(15, 76, 130);
-}
-
 section {
 	display: flex;
 	margin: 0 auto;
@@ -40,7 +34,6 @@ section {
 	min-height: 80%;
 	line-height: 40px;
 }
-
 aside {
 	min-height: 100%;
 	float: left;
@@ -49,18 +42,15 @@ aside {
 	line-height: 40px;
 	margin-left: 5px;
 }
-
 #main_section {
 	width: 100%;
 	min-height: 100%;
 	margin: 0px 50px;
 }
-
 a {
 	text-decoration: none;
 	color: black;
 }
-
 hr {
 	color: black;
 	background-color: black;
@@ -68,7 +58,6 @@ hr {
 	margin: 0px;
 	border: 1px;
 }
-
 .pagination a{
     padding: 8px 16px;
     text-decoration: none;
@@ -93,7 +82,6 @@ hr {
 .contentsTable tbody{background-color:#F7F7F7}
 #tablename{align-self:center;}
 #게시판이름{text-align:center;}
-
 
 .box {
 	width: 200px;

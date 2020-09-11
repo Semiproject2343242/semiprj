@@ -334,7 +334,7 @@ li{
 						<ol id="sp_title">
 						<% if(supportList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else if(supportList.size() >= 3) { %>
+						<% } else if(supportList.size() >= 4) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = supportList.get(i); %>
 								<li>
@@ -381,7 +381,7 @@ li{
 						<ol id="ea_title">
 						<% if(externalList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else if(externalList.size() >= 3) { %>
+						<% } else if(externalList.size() >= 4) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = externalList.get(i); %>
 								<li>
@@ -430,7 +430,7 @@ li{
 						<ol id="coomu_title">
 						<% if(commuFreeList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else if(commuFreeList.size() >= 3) { %>
+						<% } else if(commuFreeList.size() >= 4) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = commuFreeList.get(i); %>
 								<li>
@@ -470,7 +470,7 @@ li{
 						<ol id="qa_title">
 						<% if(qaList.isEmpty()) { %>
 							<li><a href="#" class="area_title">조회된 리스트가 없습니다.</a></li>
-						<% } else if(qaList.size() >= 3) { %>
+						<% } else if(qaList.size() >= 4) { %>
 							<% for (int i = 0; i < 4; i++) { %>
 								<% Board b = qaList.get(i); %>
 								<li>
