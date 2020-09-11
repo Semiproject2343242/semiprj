@@ -266,7 +266,7 @@ hr {
                 </div>             
                           
                 <br clear="all"><br>
-                        
+                 <% if(loginUser != null){ %>       
                 <form action="replyInsert.re">
 	                <div>
 	                    <textarea id="replytextarea" name="replyContent" placeholder="댓글을 입력하세요." style="width: 100%; height: 100px; resize: none;"></textarea><br>
@@ -275,6 +275,7 @@ hr {
 	                    <input type="submit" class= replySubmit value="등록" style="float:right;" >
 	                </div>
                 </form>
+                <% } %>
             </div>
 		</section>            
         <br clear="all"><br>

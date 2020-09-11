@@ -131,6 +131,9 @@ hr {
 			<a href="${pageContext.request.contextPath}/memberInfo.me">
 				<h2>회원정보</h2>
 			</a>
+			<a href="${pageContext.request.contextPath}/changePwdCf.me">
+				<h2>비밀번호 변경</h2>
+			</a>
 			<a href="${pageContext.request.contextPath}/deleteForm.me">
 				<h2>회원탈퇴</h2>
 			</a>
