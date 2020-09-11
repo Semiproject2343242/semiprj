@@ -13,6 +13,34 @@ import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
 public class FreeDAO {
+	
+	// 자유게시판 게시글 갯수
+	public int getListCount(Connection conn) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "SELECT COUNT(*) FROM BOARD WHERE B_NAME = '자유' AND B_ENABLE = 'Y'";
+
+		try {
+			stmt= conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()){
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rset);
+			close(stmt);
+		}
+		
+		return result;
+	}
+	
 
 	// 공지사항 검색 게시글 갯수
 	public int getSearchListCount(Connection conn, String opt, String word) {

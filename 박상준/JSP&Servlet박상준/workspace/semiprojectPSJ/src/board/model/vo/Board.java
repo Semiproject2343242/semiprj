@@ -218,12 +218,13 @@ public class Board {
 		this.cgName = cgName;
 	}
 
-	public Board(int boardNo, String boardTitle, String boardContent, Date boardCreateDate,
+	public Board(int boardNo, String boardName, String boardTitle, String boardContent, Date boardCreateDate,
 			Date boardModifyDate, int boardViewCount, int boardReCommend, char boardEnable, int boardWriterNo,
 			String boardWriter, int boardReply, String acState, String lcName, String enrollState, String emState,
 			String tcName, String cgName, Date reStratDate, Date reEndDate) {
 		super();
 		this.boardNo = boardNo;
+		this.boardName = boardName;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardCreateDate = boardCreateDate;

@@ -22,7 +22,7 @@ public class FreeService {
 		
 		Connection conn = getConnection();
 		
-		int result = new BoardDAO().getListCount(conn,"자유");
+		int result = new FreeDAO().getListCount(conn);
 		
 		close(conn);
 		

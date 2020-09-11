@@ -23,7 +23,7 @@ public class QuestionService {
 		
 	Connection conn = getConnection();
 		
-		int result = new BoardDAO().getListCount(conn,"QA");
+		int result = new QuestionDAO().getListCount(conn);
 		
 		close(conn);
 		

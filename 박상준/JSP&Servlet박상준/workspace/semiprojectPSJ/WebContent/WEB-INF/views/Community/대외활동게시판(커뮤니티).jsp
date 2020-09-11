@@ -1,109 +1,37 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>정부 지원금 바로 지금</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/body.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style>
-html, body {
-	margin: 0px;
-	height: 100%;
-	min-width: 505px;
-}
-
-.lagefont {
-	color: rgb(15, 76, 130);
-}
-
-section {
-	display: flex;
-	margin: 0 auto;
-	width: 80%;
-	font-family: "fantasy";
-	position: relative;
-	min-height: 80%;
-	line-height: 40px;
-}
-
-aside {
-	min-height: 100%;
-	float: left;
-	display: block;
-	width: 200px;
-	line-height: 40px;
-	margin-left: 5px;
-}
-
-#main_section {
-	width: 100%;
-	min-height: 100%;
-	margin: 0px 50px;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-hr {
-	color: black;
-	background-color: black;
-	height: 1px;
-	margin: 0px;
-	border: 1px;
-}
-
-.pagination a{
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 1px solid black;
-    color: black;
-    border-radius : 3px;
-}    
-.pagination a:hover:not(.action){
-    background-color: gray;
-}
-
-/* pagination 설정부  */
-.com{text-indent : 20px;}
-
- 	.btn{
-  		background-color : #E3F2FD;
-  		margin : 10px 2px;
-  		padding: 10px;
-  	}
-.contentsTable{text-align:center; font-size:12pt;}
-.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
-.contentsTable tbody{background-color:#F7F7F7}
-#tablename{align-self:center;}
-#게시판이름{text-align:center;}
-
-
 .writertext{
       line-height: 70px;
       list-style: none;
   }
-    .serach_box{
-        background-color: RGB(248,248,248);
-        display: flex;
-    }
-    .select_box{
-        margin: 16px;
-        line-height: 70px;
-    }
-    .select_btn{
-        height: 40px;
-        width: 100px;
-        background-color:  RGB(221,228,236);
-    }
-    .categoty_select{
-        height: 30px;
-    }
+ .serach_box{
+     background-color: RGB(248,248,248);
+     display: flex;
+ }
+ .select_box{
+     margin: 16px;
+     line-height: 70px;
+ }
+ .select_btn{
+     height: 40px;
+     width: 100px;
+     background-color:  RGB(221,228,236);
+ }
+ .categoty_select{
+     height: 30px;
+ }
  .result_btn{
 	padding: 15px 15px; 
 	border-radius : 3px; 
@@ -112,7 +40,6 @@ hr {
 	margin: 0px 5px;
  }
  .result_btn:hover{background-color:  rgb(194, 194, 194);}
-
 
 .serachList{
 	width: 610px;
@@ -138,7 +65,6 @@ hr {
 	line-height:20px; 
 	border-bottom: 1px solid silver;
 	border-radius: 5px;
-	overflow:hidden;
 }
 
 .thumb-list:hover {
@@ -212,9 +138,9 @@ hr {
 		<div class="serach_box">
 	      <ul class="writertext">
 	          <th>
-	              <li><h3>카테고리</h3></li>
-	              <li><h3>대상</h3></li>
-	              <li><h3>지역</h3></li>
+	              <li><h6>카테고리</h6></li>
+	              <li><h6>대상</h6></li>
+	              <li><h6>지역</h6></li>
 	          </th>
 	      </ul>
       <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->

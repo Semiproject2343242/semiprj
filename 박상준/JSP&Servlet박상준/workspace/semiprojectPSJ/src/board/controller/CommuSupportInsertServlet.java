@@ -49,7 +49,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
 	      if(ServletFileUpload.isMultipartContent(request)) {
 	         int maxSize = 1024 * 1024 * 10;
 	         String root = request.getSession().getServletContext().getRealPath("/");
-	         String savePath = root + "support_uploadFiles/";
+	         String savePath = root + "/UploadFolder/support_uploadFiles/";
 	         
 	         System.out.println(savePath);
 	         
@@ -90,6 +90,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
  					emState += emStatearr[i];
  				}else
  					emState += emStatearr[i] + ",";
+ 				System.out.print("타냐5");
  			}
  		 }
          
@@ -100,6 +101,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
  					age += agearr[i];
  				}else
  					age += agearr[i] + ",";
+ 				System.out.print("타냐3");
  			}
  		 }
  		 
@@ -110,6 +112,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
 					local += localarr[i];
 				}else
 					local += localarr[i] + ",";
+				System.out.print("타냐4");
 			}
 		 }
 		 
@@ -170,6 +173,7 @@ public class CommuSupportInsertServlet extends HttpServlet {
             }
             fileList.add(af);
          }
+         System.out.println("fileList : " + fileList);
          System.out.println("b : " + b);
          int result = new CommunityService().insertSpAddFile(b, fileList);
          
