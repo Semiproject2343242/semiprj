@@ -183,7 +183,7 @@ hr {
 				<% } %>
 			<% } %>
            <div align="right">
-				<% if(loginUser != null && b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
+				<% if(loginUser != null && b.getBoardWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
 					<input type="submit" class="udlbtn" id="updateBtn" value="수정">
 					<input type="button" class="udlbtn" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 				<% } %>

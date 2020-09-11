@@ -372,19 +372,20 @@ public class CommunityDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, TC_NAME = ?, CG_NAME=?, RECRUIT_STARTDATE = ?,RECRUIT_ENDDATE=?,ACTIVITY_STARTDATE=?,ACTIVITY_ENDDATE=?  WHERE B_NO = ?";
+		String query = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ?, B_RDATE=SYSDATE, LC_NAME = ?, EM_STATE = ?, TC_NAME = ?, CG_NAME=?, RECRUIT_STARTDATE = ?,RECRUIT_ENDDATE=?,ACTIVITY_STARTDATE=?,ACTIVITY_ENDDATE=?  WHERE B_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardTitle());
 			pstmt.setString(2, b.getBoardContent());
 			pstmt.setString(3, b.getLcName());
-			pstmt.setString(4, b.getTcName());
-			pstmt.setString(5, b.getCgName());
-			pstmt.setDate(6, b.getReStartDate());
-			pstmt.setDate(7, b.getReEndDate());
-			pstmt.setDate(8, b.getAcStartDate());
-			pstmt.setDate(9, b.getAcEndDate());
-			pstmt.setInt(10, b.getBoardNo());
+			pstmt.setString(4, b.getEmState());
+			pstmt.setString(5, b.getTcName());
+			pstmt.setString(6, b.getCgName());
+			pstmt.setDate(7, b.getReStartDate());
+			pstmt.setDate(8, b.getReEndDate());
+			pstmt.setDate(9, b.getAcStartDate());
+			pstmt.setDate(10, b.getAcEndDate());
+			pstmt.setInt(11, b.getBoardNo());
 			
 			result += pstmt.executeUpdate();
 		} catch (SQLException e) {

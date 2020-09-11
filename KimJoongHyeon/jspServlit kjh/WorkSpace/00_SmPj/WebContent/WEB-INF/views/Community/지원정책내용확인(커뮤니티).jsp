@@ -9,7 +9,7 @@
 	ArrayList<FileVO> fList = (ArrayList<FileVO>)request.getAttribute("fileList");
 	ArrayList<Reply> replyList = (ArrayList<Reply>)request.getAttribute("replyList");
 	FileVO titleImg = fList.get(0);
-	System.out.println("Board : " + b);
+	System.out.println("지원정책 내용확인 에서의 Board : " + b);
 %>
 <!DOCTYPE html>
 <html>
@@ -240,7 +240,7 @@ hr {
     <div align="right">
 				<input type="button" onclick="location.href='<%= request.getContextPath() %>/spMain.cm'" id="menuBtn" value="메뉴로">
 				<% if(loginUser != null) { %>
-					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName())) { %>
+					<% if(b.getBoardWriter().equals(loginUser.getMemberNickName()) || loginUser.getMemberNickName().equals("운영자")) { %>
 						<input type="submit" id="updateBtn" value="수정">
 						<input type="button" id="deleteBtn" value="삭제" onclick="deleteBoard();">
 					<% } %>
