@@ -106,7 +106,6 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	 					emState += emStatearr[i];
 	 				}else
 	 					emState += emStatearr[i] + ",";
-	 				System.out.print("타냐5");
 	 			}
 	 		 }
 	         
@@ -174,7 +173,7 @@ public class CommuSupportModifyServlet extends HttpServlet {
 	         System.out.println("originFiles : "+originFiles);
 	         System.out.println("saveFiles : "+saveFiles);
 	         System.out.println("mainfile : "+mainfile);
-	         
+	         System.out.println("수정한 b : " + b);
 	         ArrayList<FileVO> fileList = new ArrayList<FileVO>();
 	         int result = 0;
 	         
