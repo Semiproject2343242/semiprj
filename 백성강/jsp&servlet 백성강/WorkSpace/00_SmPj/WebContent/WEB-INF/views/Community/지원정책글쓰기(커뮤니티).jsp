@@ -9,6 +9,152 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
+html, body {
+	margin: 0px;
+	height: 100%;
+	min-width: 505px;
+}
+
+.lagefont {
+	color: rgb(15, 76, 130);
+}
+
+section {
+	display: flex;
+	margin: 0 auto;
+	width: 80%;
+	font-family: "fantasy";
+	position: relative;
+	min-height: 80%;
+	line-height: 40px;
+}
+
+aside {
+	min-height: 100%;
+	float: left;
+	display: block;
+	width: 200px;
+	line-height: 40px;
+	margin-left: 5px;
+}
+
+#main_section {
+	width: 100%;
+	min-height: 100%;
+	margin: 0px 50px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+hr {
+	color: black;
+	background-color: black;
+	height: 1px;
+	margin: 0px;
+	border: 1px;
+}
+
+.pagination a{
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid black;
+    color: black;
+    border-radius : 3px;
+}    
+.pagination a:hover:not(.action){
+    background-color: gray;
+}
+
+/* pagination 설정부  */
+.com{text-indent : 20px;}
+
+ 	.btn{
+  		background-color : #E3F2FD;
+  		margin : 10px 2px;
+  		padding: 10px;
+  	}
+.contentsTable{text-align:center; font-size:12pt;}
+.contentsTable thead{background-color:rgb(15, 76, 130); color:white;}
+.contentsTable tbody{background-color:#F7F7F7}
+#tablename{align-self:center;}
+#게시판이름{text-align:center;}
+
+form{width:1000px; margin: 0 auto;}
+#bbox>div{margin :0 auto;}
+#textline{font-size: large;}
+
+#writing_maintext{
+  text-align: center;
+  font-size :25pt;
+}
+ .container {
+  width: 800px;
+  margin : 0 auto;
+  border-top: 100px;
+}
+
+.writertext {
+float: left;
+width: 90px;
+margin-right: 10px;
+border-right: 0.2mm solid black;
+}
+
+.writerinformanion-list {
+list-style: none;
+margin: 0px;
+padding: 10px;
+line-height: 300%
+}
+
+.writertext-item {
+margin: 0px; /* 카테고리 대상별 지역별 간격 */
+}
+
+.writertext-answer {
+float: left;
+width: 150px;
+margin-right: 50px;
+}
+ .ea_areabutton{text-align:center; 
+             font-size: 12px; 
+            padding: 5px; 
+           width:90px; 
+            border:1px;
+            background-color: rgb(240, 240, 240); 
+            border-radius: 3px;
+             margin-left: 3px; 
+            margin-top: 5px; 
+            margin-right: 5px;}
+  #ea_areatable{margin-top: 5px;}
+
+.ea_age {
+border: 1px solid rgb(255, 255, 255);
+background-color: rgb(240, 240, 240);
+width:100px;
+box-sizing: border-box;
+margin-right:10px;
+border-radius : 3px;
+
+}
+
+.categoty-select{width:200px;height:30px; margin-top: 22px; margin-left:7px; }
+
+.ea_table_age{margin-left: 0px; margin-top: 10px; border-radius : 3px;}
+
+#ea_button{text-align: center; margin-bottom:100px;}
+#ea_submit{background-color: darkgray; border:none; padding: 15px 30px; border-radius : 3px;}
+#ea_cancle{background-color: lightgray; border:none; padding: 15px 30px;  border-radius:3px;}
+
+.textline1{font-size: 17px; width:100%}
+.textline2{font-size: 17px;}
+.writer-textbox{width:100%; }
+.form-control{width:100%}
+.dateline1{width:20%}
+
  section{
       display: block;
   }
@@ -415,7 +561,7 @@
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="sp_title_image" name = "sp_title_image" class=textline2 required></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="esp_title_image" name = "esp_title_image" class=textline2 required></td>
           </tr>
           <tr>
             <th>모집 일정</th>

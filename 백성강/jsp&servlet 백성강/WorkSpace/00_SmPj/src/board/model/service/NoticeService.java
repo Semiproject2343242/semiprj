@@ -22,7 +22,7 @@ public class NoticeService {
 		
 		Connection conn = getConnection();
 		
-		int result = new NoticeDAO().getListCount(conn);
+		int result = new BoardDAO().getListCount(conn,"공지사항");
 		
 		close(conn);
 		

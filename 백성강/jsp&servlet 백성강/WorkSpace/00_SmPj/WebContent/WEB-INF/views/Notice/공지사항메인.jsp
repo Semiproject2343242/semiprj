@@ -10,11 +10,10 @@
     <meta charset="UTF-8">
     <title>Layout01</title>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
- 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css" />
-
+ 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
-html, body {
+    html, body {
 	margin: 0px;
 	height: 100%;
 	min-width: 505px;
@@ -86,6 +85,7 @@ hr {
 .contentsTable tbody{background-color:#F7F7F7}
 #tablename{align-self:center;}
 #게시판이름{text-align:center;}
+
     
 </style>
 <body>

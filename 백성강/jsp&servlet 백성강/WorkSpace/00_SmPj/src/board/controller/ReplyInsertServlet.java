@@ -49,8 +49,11 @@ public class ReplyInsertServlet extends HttpServlet {
 				response.sendRedirect("detail.ea?bId="+bId);
 			}else if(bName.equals("대외커뮤")) {
 				response.sendRedirect("eaDetail.cm?bId="+bId);
+			} else if(bName.equals("지원")) {
+				response.sendRedirect("detail.sp?bId="+bId);
+			}else if(bName.equals("지원커뮤")) {
+				response.sendRedirect("spDetail.cm?bId="+bId);
 			}
-
 		} else {			
 			request.setAttribute("msg", "댓글 등록에 실패하였습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/Common/errorPage.jsp");
