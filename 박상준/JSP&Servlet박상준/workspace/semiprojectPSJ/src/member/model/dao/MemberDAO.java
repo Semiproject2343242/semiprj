@@ -26,7 +26,7 @@ public class MemberDAO {
 		ResultSet rset = null;
 		Member loginUser = null;
 
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ? AND MEMBER_ENABLE = 'Y' ";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -375,12 +375,11 @@ public class MemberDAO {
 									 rset.getString("AC_STATE"),
 									 rset.getString("LC_NAME"),
 									 rset.getString("ENROLL_STATE"),
+									 rset.getString("EM_STATE"),
 									 rset.getString("TC_NAME"),
 									 rset.getString("CG_NAME"),
 									 rset.getDate("RECRUIT_STARTDATE"),
-									 rset.getDate("RECRUIT_ENDDATE"),
-									 rset.getDate("ACTIVITY_STARTDATE"),
-									 rset.getDate("ACTIVITY_ENDDATE"));
+									 rset.getDate("RECRUIT_ENDDATE"));
 				list.add(bo); 
 			}
 		} catch (SQLException e) {
@@ -684,7 +683,7 @@ public class MemberDAO {
 		ResultSet rset= null;
 		ArrayList<Member> list = null;
 			
-		String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ?";
+		String query = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ? AND MEMBER_ENABLE = 'Y' ";
 		
 		try {
 			pstmt = conn.prepareStatement(query);

@@ -8,14 +8,73 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 </head>
 <style>
-    
-	section {
-      display: block;
-      line-height: 40px;
-    }
-    #main_section {
-      width: 100%;
-    }
+html, body {
+	margin: 0px;
+	height: 100%;
+	min-width: 505px;
+}
+
+.lagefont {
+	color: rgb(15, 76, 130);
+}
+
+section {
+	display: flex;
+	margin: 0 auto;
+	width: 80%;
+	font-family: "fantasy";
+	position: relative;
+	min-height: 80%;
+	line-height: 40px;
+}
+
+aside {
+	min-height: 100%;
+	float: left;
+	display: block;
+	width: 200px;
+	line-height: 40px;
+	margin-left: 5px;
+}
+
+#main_section {
+	width: 100%;
+	min-height: 100%;
+	margin: 0px 50px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+hr {
+	color: black;
+	background-color: black;
+	height: 1px;
+	margin: 0px;
+	border: 1px;
+}
+
+.pagination a{
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid black;
+    color: black;
+    border-radius : 3px;
+}    
+.pagination a:hover:not(.action){
+    background-color: gray;
+}
+
+/* pagination 설정부  */
+.com{text-indent : 20px;}
+
+ 	.btn{
+  		background-color : #E3F2FD;
+  		margin : 10px 2px;
+  		padding: 10px;
+  	}
     #pwsearchbutton{background-color:darkgray; border-radius: 3px; border:none;}
     .box{
   	 width: 80%;
@@ -30,9 +89,8 @@
     <section>
     
         <div id="main_section">
-            <section id=pw_serch_Section>
+            <div class="box">
                 <form action="<%=request.getContextPath()%>/searchPwd.me" method="post">
-                    <div class="box">
                         <h1 align="center">비밀번호 찾기</h1>
                         
                         <table align="center">	
@@ -61,9 +119,8 @@
                         	<input type="submit" id="pwsearchbutton" style="width: 60pt; height: 30pt" value="확인"	>
                         	<input type="button" style="width: 60pt; height: 30pt" onclick="location.href='javascript:history.go(-1);'" value="취소">
                         </p>                    
-                    </div>
                 </form>
-            </section>
+			</div>
         </div>
     </section>
     <%@ include file="../Common/footer.jsp" %>
