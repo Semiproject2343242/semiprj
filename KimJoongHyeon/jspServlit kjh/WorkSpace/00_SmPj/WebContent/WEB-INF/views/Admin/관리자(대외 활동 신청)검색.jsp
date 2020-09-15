@@ -147,8 +147,8 @@ hr {
 
         <div id="main_section" align="center">
             <h2>
-                <div id="subTitle"><b>대외 활동 신청</b></div>
-                <p><%= opt %> 목록</p>
+                <div id="subTitle"><b>대외 활동 신청</b> - <%= opt %> 목록</div>
+                
             </h2>
             <hr>
             <div id="bottomContent">
