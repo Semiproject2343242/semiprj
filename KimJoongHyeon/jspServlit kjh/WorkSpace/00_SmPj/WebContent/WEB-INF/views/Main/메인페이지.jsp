@@ -3,14 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	ArrayList<Board> noticeList = (ArrayList<Board>)request.getAttribute("noticeList");
+ 	ArrayList<Board> noticeList = (ArrayList<Board>)request.getAttribute("noticeList");
 	ArrayList<Board> supportList = (ArrayList<Board>)request.getAttribute("supportList");
 	ArrayList<Board> externalList = (ArrayList<Board>)request.getAttribute("externalList");
 	ArrayList<Board> commuList = (ArrayList<Board>)request.getAttribute("commuList");
 	ArrayList<Board> qaList = (ArrayList<Board>)request.getAttribute("qaList");
-	
 %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -296,17 +296,23 @@ li:hover {
 					<a href="<%= request.getContextPath() %>/main.no"><h3>공지사항</h3></a>
 				</div>
 				<ul id="notice_title">
-					<% if(noticeList.isEmpty()) { %>
+<%-- 					<% if(noticeList.isEmpty()) { %> --%>
+					<c:if test="${ fn:length(noticeList)==0 }">
 					<li><a href="#" class="area_list">조회된 리스트가 없습니다.</a></li>
-					<% } else { %>
-					<% for (Board b : noticeList) { %>
-					<li class="area_list">
-						<input type="hidden" value="<%=b.getBoardNo()%>">
-							<div class="area_list_title"><%=b.getBoardTitle()%></div>
-							<div class="area_date"><%=b.getBoardCreateDate()%></div>
+					</c:if>
+					<c:if test="${ fn:length(noticeList)!=0 }">
+<%-- 					<% for (Board b : noticeList) { %> --%>
+					<c:forEach items="${ noticeList }" var="f">
+						<li class="area_list">
+<%-- 						<input type="hidden" value="<%=b.getBoardNo()%>"> --%>
+<%-- 							<div class="area_list_title"><%=b.getBoardTitle()%></div> --%>
+<%-- 							<div class="area_date"><%=b.getBoardCreateDate()%></div> --%>
+							<input type="hidden" value="${ f.boardNo }">
+							<div class="area_list_title">${ f.boardTitle }</div>
+							<div class="area_date">${ f.boardCreateDate }</div>
 						</li>
-					<% } %>
-					<% } %>
+					</c:forEach>	
+					</c:if>
 				</ul>
 			</div>
 			<script>

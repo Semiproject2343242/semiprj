@@ -237,7 +237,7 @@ hr {
                         </tr>
                         <tr>
                             <td>성별(Gender) : </td>
-                            <td>여성</td>
+                            <td><%= member.getMemberGender() %></td>
                         </tr>
                         <tr>
                             <td>주소(Address) : </td>

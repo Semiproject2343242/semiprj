@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/body.css">
 <style>
 html, body {
 	margin: 0px;
@@ -129,11 +128,8 @@ table{
                <a href="<%=request.getContextPath()%>/searchIdForm.me">아이디 찾기</a> | <a href="<%=request.getContextPath()%>/searchPwdForm.me">비밀번호 찾기</a> | <a href="<%=request.getContextPath()%>/insertForm.me">회원가입</a>
             </p>
             <a id="login-form-btn" href="javascript:loginFormWithKakao()">
-  <img
-    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-    width="222"
-  />
-</a>
+  				<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/>
+			</a>
          </div>
          </form>
       </div>

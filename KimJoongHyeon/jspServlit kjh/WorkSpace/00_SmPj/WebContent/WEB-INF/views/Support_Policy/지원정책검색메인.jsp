@@ -134,7 +134,7 @@ hr {
 }
 .board_list {
 	width: 600px;
-	height: 170px;
+	height: auto;
 	margin-bottom: 20px;
 	display: flex;
 	line-height:20px; 

@@ -164,7 +164,7 @@ section{
                   <option value="공모전">공모전</option>
                   <option value="채용박람회/취업박람회">채용박람회/취업박람회</option>
                   <option value="경진대회">경진대회</option>
-                  <option value="봉사활동">봉사활동</option>
+                  <option  value="봉사활동">봉사활동</option>
                   <option value="서포터즈">서포터즈</option>
                   <option value="관람/전시/체험">관람/전시/체험</option>
               </select>
