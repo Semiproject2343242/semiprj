@@ -236,7 +236,7 @@ section{
       <!-- 대외활동 글쓰기 카테고리,대상,지역별 선택 -->
  <div class="select_box">
           <h3>
-              <select class="categoty_select" id="sp_category">
+              <select class="categoty_select" id="sp_category" name="sp_category">
                   <option value="선택" <%= categoryarr[0] %>  selected disabled hidden >선택해주세요.</option>
                   <option value="재직지원" <%= categoryarr[1] %> >재직지원</option>
                   <option value="취업지원" <%= categoryarr[2] %> >취업지원</option>

@@ -631,7 +631,12 @@ hr {
           	}
           	var emState = document.getElementsByName("ck_emState");
           	var checkEmState = [];
-          	for(var i = 0; i < emState.length; i++){ 
+          	for(var i = 0; i < emState.length; i++){
+             	if(emState[i].checked == true){
+             		checkEmState.push(emState[i].value);
+              	}
+          	}
+   			var age = document.getElementsByName("ck_sp_age");
           	var checkAge = [];
           	for(var i = 0; i < age.length; i++){
              	if(age[i].checked == true){

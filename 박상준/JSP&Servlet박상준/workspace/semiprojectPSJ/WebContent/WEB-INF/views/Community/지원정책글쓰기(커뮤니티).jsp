@@ -561,7 +561,7 @@ border-radius : 3px;
           </tr>
           <tr>
             <th>메인 이미지 첨부</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="esp_title_image" name = "esp_title_image" class=textline2 required></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="file1" name = "file1" class=textline2 required></td>
           </tr>
           <tr>
             <th>모집 일정</th>
@@ -574,7 +574,7 @@ border-radius : 3px;
           </tr>
           <tr>
             <th>참고자료</th>
-            <td colspan="3"><input type ="file" multiple="multiple" id="file" name = "file" placeholder="자료첨부" class=textline2></td>
+            <td colspan="3"><input type ="file" multiple="multiple" id="file2" name = "file2" placeholder="자료첨부" class=textline2></td>
           </tr>
         </table>
 
